@@ -1,4 +1,8 @@
 ---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
 interface Props {
   title: string;
   description?: string;
@@ -14,10 +18,27 @@ const { title, description = "Dein Best Interest Advisor für digitale Marktplä
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts: self-hosted, preloaded for performance -->
+    <link rel="preload" href="/fonts/satoshi-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/satoshi-medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin />
+
     <title>{title} | Telos</title>
   </head>
   <body>
-    <slot />
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-background focus:px-4 focus:py-2 focus:rounded-button focus:text-sm focus:font-medium">
+      Zum Inhalt springen
+    </a>
+
+    <Nav />
+
+    <main id="main" class="pt-16 md:pt-20">
+      <slot />
+    </main>
+
+    <Footer />
+
     <script>
       import Lenis from "lenis";
 
@@ -36,7 +57,3 @@ const { title, description = "Dein Best Interest Advisor für digitale Marktplä
     </script>
   </body>
 </html>
-
-<style>
-  @import "../styles/global.css";
-</style>

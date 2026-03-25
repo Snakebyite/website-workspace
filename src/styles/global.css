@@ -1,5 +1,38 @@
 @import "tailwindcss";
 
+/* Font Face — Self-hosted for performance */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Colors — Base */
   --color-background: #0A0A0A;
@@ -24,8 +57,8 @@
   --radius-badge: 0.5rem; /* 8px */
 
   /* Fonts */
-  --font-heading: "Domaine Display", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-heading: "Instrument Serif", Georgia, serif;
+  --font-body: "Satoshi", system-ui, sans-serif;
 }
 
 /* Base Styles */

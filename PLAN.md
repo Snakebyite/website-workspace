@@ -6,8 +6,8 @@
 |---|---|---|
 | 1 | Plan erstellen | ✅ Done |
 | 2 | Tech-Stack festlegen | ✅ Done |
-| 3 | Spec & Seitenstruktur | 🔄 In Progress |
-| 4 | Projekt-Setup (Astro, Tailwind, GSAP, Lenis) | ⬜ |
+| 3 | Spec & Seitenstruktur | ✅ Done (Home) |
+| 4 | Projekt-Setup (Astro, Tailwind, GSAP, Lenis) | ✅ Done |
 | 5 | Layout-Skeleton (Nav, Footer, Base-Layout) | ⬜ |
 | 6 | Sections umsetzen (pro Section) | ⬜ |
 | 7 | Animationen pro Section | ⬜ |
@@ -22,7 +22,7 @@
 ### 3.0 Website-Ziel & Nutzerkontext
 > Warum existiert die Website? Woher kommen die Besucher? Was sollen sie tun?
 
-**Status:** ✅ Done → `website-ziel.md`
+**Status:** ✅ Done → siehe CLAUDE.md (Website-Ziel Section)
 
 ### 3.1 Seitenstruktur & Navigation
 > Welche Seiten gibt es? Wie ist die Navigation aufgebaut?
@@ -32,7 +32,7 @@
 ### 3.2 Seitenaufbau pro Seite (Wireframe-Level)
 > Welche Sections hat jede Seite, in welcher Reihenfolge?
 
-**Status:** 🔄 In Progress
+**Status:** ✅ Done (Home), ⬜ Unterseiten (nach Home-Umsetzung)
 
 #### Home (✅ Done)
 1. **Hero** — Positionierung schärfen

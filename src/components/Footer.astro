@@ -1,0 +1,90 @@
+---
+const navLinks = [
+  { label: "Leistungen", href: "/leistungen" },
+  { label: "Über uns", href: "/ueber-uns" },
+  { label: "Referenzen", href: "/referenzen" },
+  { label: "Kontakt", href: "/kontakt" },
+];
+
+const legalLinks = [
+  { label: "Impressum", href: "/impressum" },
+  { label: "Datenschutz", href: "/datenschutz" },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/5">
+  <div class="mx-auto max-w-7xl px-4 md:px-8 py-16 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+      <!-- Brand -->
+      <div class="md:col-span-5">
+        <a href="/" class="font-heading text-xl tracking-tight text-text-primary">
+          Telos
+        </a>
+        <p class="mt-4 text-text-secondary text-sm leading-relaxed max-w-sm">
+          Dein Best Interest Advisor für digitale Marktplätze.
+          Gründergeführt, strategisch, hands-on.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div class="md:col-span-3">
+        <p class="text-xs font-medium text-text-muted uppercase tracking-wider mb-4">
+          Navigation
+        </p>
+        <ul class="flex flex-col gap-3">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="md:col-span-2">
+        <p class="text-xs font-medium text-text-muted uppercase tracking-wider mb-4">
+          Rechtliches
+        </p>
+        <ul class="flex flex-col gap-3">
+          {legalLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="md:col-span-2">
+        <p class="text-xs font-medium text-text-muted uppercase tracking-wider mb-4">
+          Loslegen
+        </p>
+        <a
+          href="/kontakt"
+          class="inline-block bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-2.5 rounded-button transition-colors duration-200"
+        >
+          Lern uns kennen
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="mt-16 pt-8 border-t border-white/5">
+      <p class="text-text-muted text-xs">
+        &copy; {currentYear} Telos GmbH. Alle Rechte vorbehalten.
+      </p>
+    </div>
+  </div>
+</footer>

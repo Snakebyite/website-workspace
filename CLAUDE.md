@@ -25,18 +25,18 @@ Besucher bucht einen Termin über **eigenes Booking-Tool** (Custom-Built, kein C
 3. **Social Proof hat hohes Gewicht** — Bestätigung für den ersten Eindruck
 4. **Personen früh zeigen** — Luca & Kevin sichtbar machen ("people game")
 5. **Substanz vor Verkauf** — überzeugen durch Kompetenz, nicht durch Druck
-6. **Jede Seite braucht einen Weg zum Calendly** — aber niedrigschwellig
+6. **Jede Seite braucht einen Weg zum Booking-Tool** — aber niedrigschwellig
 
 ## Design-System
 Vor jedem UI-Element `design.md` lesen. Nur dort definierte Werte für Farben, Fonts, Spacing und Components verwenden. Keine eigenen Werte erfinden.
+
+**IMPORTANT: `design.md` hat immer Vorrang vor Skill-Defaults.** Wenn ein installierter Skill (z.B. frontend-design) andere Fonts, Farben oder Patterns vorschlägt — `design.md` gewinnt. Skills liefern Technik und Best Practices, nicht Design-Entscheidungen.
 
 ## Brand-Kontext
 Alle Brand-Dokumente liegen in `/Context/`. Vor jeder inhaltlichen Arbeit (Texte, Tonalität, Messaging) die relevanten Dateien lesen.
 
 ## Tech-Stack
 
-| Bereich | Technologie |
-|---|---|
 | Bereich | Technologie | Version |
 |---|---|---|
 | Framework | Astro 5 LTS | 5.18.1 |
@@ -52,6 +52,7 @@ Alle Brand-Dokumente liegen in `/Context/`. Vor jeder inhaltlichen Arbeit (Texte
 - **Tailwind v4:** `@astrojs/tailwind` unterstützt nur v3. Stattdessen `@tailwindcss/vite` als Vite-Plugin nutzen. Config ist CSS-basiert (`@theme`), kein `tailwind.config.js`.
 - **GSAP:** Alle Plugins (ScrollTrigger, SplitText, Flip) seit 2024 kostenlos.
 - **Lenis:** Industriestandard für Smooth Scroll, paart sich perfekt mit GSAP ScrollTrigger.
+- **Lenis + ScrollTrigger Integration:** Kein `scrollerProxy()` nötig mit modernem Lenis. Stattdessen: `lenis.on('scroll', ScrollTrigger.update)` aufrufen. Lenis im BaseLayout einmal initialisieren, ScrollTrigger bekommt die Scroll-Updates automatisch.
 - **Kein React/Next.js:** Overkill für eine Marketing-Site ohne App-Features.
 
 ## Entwicklungs-Workflow

@@ -1,0 +1,103 @@
+---
+import { Menu, X } from "@lucide/astro";
+
+const navLinks = [
+  { label: "Leistungen", href: "/leistungen" },
+  { label: "Über uns", href: "/ueber-uns" },
+  { label: "Referenzen", href: "/referenzen" },
+  { label: "Kontakt", href: "/kontakt" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/5">
+  <nav class="mx-auto max-w-7xl px-4 md:px-8" aria-label="Hauptnavigation">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="/" class="font-heading text-xl tracking-tight text-text-primary">
+        Telos
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-colors duration-200",
+              currentPath === link.href
+                ? "text-text-primary"
+                : "text-text-secondary hover:text-text-primary",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="/kontakt"
+          class="bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-2.5 rounded-button transition-colors duration-200"
+        >
+          Lern uns kennen
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="md:hidden text-text-primary p-2 -mr-2"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        data-menu-toggle
+      >
+        <Menu class="size-6" data-menu-icon />
+        <X class="size-6 hidden" data-close-icon />
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden pb-6" data-mobile-menu>
+      <div class="flex flex-col gap-1 pt-4 border-t border-white/5">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-base font-medium py-3 transition-colors duration-200",
+              currentPath === link.href
+                ? "text-text-primary"
+                : "text-text-secondary hover:text-text-primary",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="/kontakt"
+          class="bg-accent hover:bg-accent-hover text-background font-medium text-base px-6 py-3 rounded-button transition-colors duration-200 text-center mt-4"
+        >
+          Lern uns kennen
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector(
+    "[data-menu-toggle]"
+  ) as HTMLButtonElement;
+  const menu = document.querySelector("[data-mobile-menu]") as HTMLElement;
+  const menuIcon = document.querySelector("[data-menu-icon]") as HTMLElement;
+  const closeIcon = document.querySelector("[data-close-icon]") as HTMLElement;
+
+  toggle?.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    menu.classList.toggle("hidden");
+    menuIcon.classList.toggle("hidden");
+    closeIcon.classList.toggle("hidden");
+    toggle.setAttribute(
+      "aria-label",
+      expanded ? "Menü öffnen" : "Menü schließen"
+    );
+  });
+</script>
