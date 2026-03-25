@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Dein Best Interest Advisor für digitale Marktplätze." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | Telos</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import Lenis from "lenis";
+
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        touchMultiplier: 2,
+      });
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    </script>
+  </body>
+</html>
+
+<style>
+  @import "../styles/global.css";
+</style>
