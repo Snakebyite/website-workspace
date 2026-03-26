@@ -1,0 +1,189 @@
+---
+// Social Proof Section (Trust B) — Homepage
+// Job: Konkretes Vertrauen durch echte Ergebnisse. Tabs mit Case Studies.
+// Background: default (#0A0A0A) — durchgehend dunkler Hintergrund
+import { Play } from '@lucide/astro';
+
+const caseStudies = [
+  {
+    id: 'sailfish',
+    name: 'Sailfish',
+    branche: 'Triathlon-Equipment',
+    description: 'Strategische Neuausrichtung des Amazon-Auftritts mit Fokus auf organische Sichtbarkeit und Listing-Optimierung.',
+    kpis: [
+      { value: '+250%', label: 'Umsatzwachstum auf Amazon' },
+      { value: '>5', label: 'ROAS' },
+      { value: '>10%', label: 'Spill-Over auf Webshop' },
+    ],
+    testimonial: { name: 'Jan Sibbersen', role: 'CEO, Sailfish' },
+    hasVideo: true,
+  },
+  {
+    id: 'purgruen',
+    name: 'Purgrün',
+    branche: 'Bio-Düngemittel',
+    description: 'Komplette Katalog-Optimierung über 318 Listings mit datengetriebener SEO-Strategie.',
+    kpis: [
+      { value: '+340%', label: 'Umsatzsteigerung' },
+      { value: '318', label: 'Optimierte Listings' },
+      { value: '+8%', label: 'Conversion Rate' },
+    ],
+    testimonial: null,
+    hasVideo: false,
+  },
+  {
+    id: 'heaven-paper',
+    name: 'Heaven+Paper',
+    branche: 'Kalender & Wandplaner',
+    description: 'Schneller Markteintritt auf Amazon mit systematischem Fokus auf organischen Umsatz.',
+    kpis: [
+      { value: '+100%', label: 'Umsatz in 8 Wochen' },
+      { value: '+35%', label: 'Organischer Umsatzanteil' },
+      { value: '70%', label: 'Org. Umsatz bei Top-Artikeln' },
+    ],
+    testimonial: { name: 'Stefanie Eusemann', role: 'CEO, Heaven+Paper' },
+    hasVideo: true,
+  },
+];
+
+---
+
+<section class="py-24 md:py-section">
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <!-- Headline -->
+    <h2 class="max-w-3xl">Was passiert, wenn man es richtig angeht.</h2>
+
+    <!-- Tab Bar -->
+    <div class="mt-16 md:mt-20 flex gap-8 md:gap-12 border-b border-white/5" role="tablist" aria-label="Case Studies">
+      {caseStudies.map((cs, i) => (
+        <button
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-controls={`panel-${cs.id}`}
+          id={`tab-${cs.id}`}
+          data-tab={cs.id}
+          class:list={[
+            'pb-4 text-left transition-colors duration-200 relative cursor-pointer',
+            'hover:text-text-primary',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
+            i === 0 ? 'text-text-primary' : 'text-text-secondary',
+          ]}
+        >
+          <span class="block text-base md:text-lg font-medium">{cs.name}</span>
+          <span class="block text-xs text-text-muted mt-0.5">{cs.branche}</span>
+          <span
+            class:list={[
+              'absolute bottom-0 left-0 right-0 h-[2px] bg-accent transition-opacity duration-200',
+              i === 0 ? 'opacity-100' : 'opacity-0',
+            ]}
+            data-indicator
+            aria-hidden="true"
+          />
+        </button>
+      ))}
+    </div>
+
+    <!-- Tab Panels -->
+    {caseStudies.map((cs, i) => (
+      <div
+        id={`panel-${cs.id}`}
+        role="tabpanel"
+        aria-labelledby={`tab-${cs.id}`}
+        data-panel={cs.id}
+        class:list={[
+          'mt-10 md:mt-14',
+          i !== 0 && 'hidden',
+        ]}
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+          <!-- Left: KPIs + Description + Link -->
+          <div class="lg:col-span-7">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {cs.kpis.map((kpi) => (
+                <div>
+                  <span class="block font-heading text-4xl md:text-5xl tracking-tight text-accent-text">{kpi.value}</span>
+                  <span class="block text-sm text-text-secondary mt-2">{kpi.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <p class="text-text-secondary leading-relaxed mt-8 max-w-lg">{cs.description}</p>
+
+            <a
+              href="/referenzen"
+              class="inline-block text-accent-text hover:underline font-medium transition-colors duration-200 mt-6"
+            >
+              Case Study lesen &rarr;
+            </a>
+          </div>
+
+          <!-- Right: Video / Visual Placeholder -->
+          <div class="lg:col-span-5">
+            <div class:list={['bg-surface-elevated rounded-2xl aspect-video flex items-center justify-center', cs.hasVideo && 'cursor-pointer group']} aria-hidden={cs.hasVideo ? undefined : 'true'}>
+              {cs.hasVideo && (
+                <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors duration-200">
+                  <Play class="w-6 h-6 text-text-primary ml-0.5" />
+                </div>
+              )}
+            </div>
+            <p class:list={['text-sm mt-3 h-5', cs.testimonial ? 'text-text-secondary' : 'invisible']}>
+              {cs.testimonial ? (
+                <>{cs.testimonial.name} <span class="text-text-muted">&middot; {cs.testimonial.role}</span></>
+              ) : '\u00A0'}
+            </p>
+          </div>
+
+        </div>
+      </div>
+    ))}
+
+    <!-- Section CTA -->
+    <div class="mt-16 md:mt-20">
+      <a
+        href="/referenzen"
+        class="text-accent-text hover:underline text-lg font-medium transition-colors duration-200"
+      >
+        Alle Ergebnisse ansehen &rarr;
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function initSocialProofTabs() {
+    const tablist = document.querySelector('[aria-label="Case Studies"]');
+    if (!tablist) return;
+
+    const tabs = tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    const panels = document.querySelectorAll<HTMLElement>('[role="tabpanel"]');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.dataset.tab;
+        if (!targetId) return;
+
+        tabs.forEach((t) => {
+          const isActive = t.dataset.tab === targetId;
+          t.setAttribute('aria-selected', String(isActive));
+          t.classList.toggle('text-text-primary', isActive);
+          t.classList.toggle('text-text-secondary', !isActive);
+
+          const indicator = t.querySelector('[data-indicator]');
+          if (indicator) {
+            indicator.classList.toggle('opacity-100', isActive);
+            indicator.classList.toggle('opacity-0', !isActive);
+          }
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle('hidden', panel.dataset.panel !== targetId);
+        });
+      });
+    });
+  }
+
+  initSocialProofTabs();
+</script>

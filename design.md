@@ -15,7 +15,7 @@
 | Token | Hex | Usage |
 |---|---|---|
 | text-primary | #EFEFEF | Headlines, primary body text |
-| text-secondary | #888888 | Supporting text, labels, captions |
+| text-secondary | #999999 | Supporting text, labels, captions |
 | text-muted | #555555 | Disabled states, metadata |
 
 ### Accent (Telos Green — Dark-Mode-adaptiert)
@@ -28,6 +28,7 @@
 
 ### Regeln
 - Accent nur für interaktive Elemente: Buttons, Links, Hover-States
+- **Ausnahme:** `accent-text` darf als Highlight für Kernbegriffe in Headlines verwendet werden (z.B. Brand-Claim "Best Interest Advisor"). Sparsam — max. 1 Highlight pro Headline.
 - Kein Accent als Hintergrundfarbe für ganze Sections
 - Monochrom ist der Normalzustand, Accent ist der Ausnahmefall
 - Kontrast prüfen: Text auf Background muss min. 4.5:1 WCAG AA erfüllen
@@ -45,7 +46,7 @@
 ### Type Scale
 | Element | Size (Desktop) | Weight | Letter-Spacing | Line-Height |
 |---|---|---|---|---|
-| H1 (Hero) | 64px / 4rem | Medium (500) | -0.04em | 1.1 |
+| H1 (Hero) | 72px / 4.5rem | Medium (500) | 0 (normal) | 1.1 |
 | H2 (Section) | 48px / 3rem | Medium (500) | -0.03em | 1.15 |
 | H3 (Sub-Section) | 32px / 2rem | Medium (500) | -0.02em | 1.2 |
 | H4 | 24px / 1.5rem | Medium (500) | -0.01em | 1.3 |
@@ -57,12 +58,12 @@
 | Pull-Quote | 24px / 1.5rem | Regular (400) | -0.01em | 1.4 |
 
 ### Regeln
-- Headlines: Instrument Serif, tight letter-spacing (negativ)
+- Headlines: Instrument Serif, tight letter-spacing (negativ). Ausnahme H1 Hero: `tracking-normal` (0) — Live-Feedback ergab dass -0.04em zu cramped wirkt bei der Hero-Größe.
 - Body: Satoshi, normales letter-spacing
 - **Label/Overline:** Satoshi, uppercase, weites letter-spacing (0.08em). Für Kategorien, Tags, Section-Identifier (z.B. "STRATEGIE / 2024").
 - **Pull-Quotes & Testimonials:** Instrument Serif darf auch außerhalb von Headlines für kuratorische Texte eingesetzt werden — Zitate, Testimonials, Hero-Sublines. Nicht für Body-Copy.
 - Keine weiteren Fonts. Zwei reichen.
-- Mobile: H1 runter auf 40px, H2 auf 32px, H3 auf 24px
+- Mobile: H1 (Hero) runter auf 44px (2.75rem), H2 auf 32px, H3 auf 24px
 
 ---
 
@@ -344,7 +345,7 @@ CTA              | MITTEL   | Headline + Button
 
 ### Regeln
 - **Dicht und sparsam müssen alternieren.** Nie 2x HOCH oder 2x NIEDRIG hintereinander.
-- **Tonal Shifts zwischen Sections:** Abwechselnd `background` (#0A0A0A) und `surface` (#141414) als Section-Hintergrund. Erzeugt Rhythmus ohne Borders.
+- **Kein pauschales Section-Alternieren.** Alle Sections stehen auf `background` (#0A0A0A). `surface` (#141414) nur als bewusste Ausnahme für eine einzelne hervorgehobene Section (z.B. Ergebnisse/Case Studies). Rhythmus entsteht durch Spacing und Content-Dichte, nicht durch Hintergrundfarbwechsel — auf Dark ist der Shift zu subtil und Cards verlieren ihr Tonal Layering.
 - **Die Seite baut wie ein Gespräch auf:** Hook → Substanz → Beweis → Mensch → Bestätigung → Nächster Schritt.
 - **Keine Section ist optional bei der Komposition.** Auch eine "leere" Section (Social Proof, Testimonial) braucht bewusstes Spacing und Typografie-Hierarchie.
 
