@@ -8,7 +8,7 @@
 | 2 | Tech-Stack festlegen | ✅ Done |
 | 3 | Spec & Seitenstruktur | ✅ Done (Home) |
 | 4 | Projekt-Setup (Astro, Tailwind, GSAP, Lenis) | ✅ Done |
-| 5 | Layout-Skeleton (Nav, Footer, Base-Layout) | ⬜ |
+| 5 | Layout-Skeleton (Nav, Footer, Base-Layout) | ✅ Done |
 | 6 | Sections umsetzen (pro Section) | ⬜ |
 | 7 | Animationen pro Section | ⬜ |
 | 8 | Responsive & Polish | ⬜ |

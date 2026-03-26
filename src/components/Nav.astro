@@ -11,7 +11,7 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/5">
+<header class="fixed top-0 left-0 w-full z-50 bg-[rgba(10,10,10,0.9)]">
   <nav class="mx-auto max-w-7xl px-4 md:px-8" aria-label="Hauptnavigation">
     <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
@@ -55,27 +55,33 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile Menu -->
-    <div class="hidden md:hidden pb-6" data-mobile-menu>
-      <div class="flex flex-col gap-1 pt-4 border-t border-white/5">
-        {navLinks.map((link) => (
+    <div
+      class="md:hidden overflow-hidden transition-[grid-template-rows] duration-300 ease-out grid"
+      style="grid-template-rows: 0fr;"
+      data-mobile-menu
+    >
+      <div class="min-h-0">
+        <div class="flex flex-col gap-1 pt-4 pb-6">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "text-base font-medium py-3 transition-colors duration-200",
+                currentPath === link.href
+                  ? "text-text-primary"
+                  : "text-text-secondary hover:text-text-primary",
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
-            href={link.href}
-            class:list={[
-              "text-base font-medium py-3 transition-colors duration-200",
-              currentPath === link.href
-                ? "text-text-primary"
-                : "text-text-secondary hover:text-text-primary",
-            ]}
+            href="/kontakt"
+            class="bg-accent hover:bg-accent-hover text-background font-medium text-base px-6 py-3 rounded-button transition-colors duration-200 text-center mt-4"
           >
-            {link.label}
+            Lern uns kennen
           </a>
-        ))}
-        <a
-          href="/kontakt"
-          class="bg-accent hover:bg-accent-hover text-background font-medium text-base px-6 py-3 rounded-button transition-colors duration-200 text-center mt-4"
-        >
-          Lern uns kennen
-        </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -91,13 +97,15 @@ const currentPath = Astro.url.pathname;
 
   toggle?.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!expanded));
-    menu.classList.toggle("hidden");
-    menuIcon.classList.toggle("hidden");
-    closeIcon.classList.toggle("hidden");
+    const opening = !expanded;
+
+    toggle.setAttribute("aria-expanded", String(opening));
+    menu.style.gridTemplateRows = opening ? "1fr" : "0fr";
+    menuIcon.classList.toggle("hidden", opening);
+    closeIcon.classList.toggle("hidden", !opening);
     toggle.setAttribute(
       "aria-label",
-      expanded ? "Menü öffnen" : "Menü schließen"
+      opening ? "Menü schließen" : "Menü öffnen"
     );
   });
 </script>

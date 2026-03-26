@@ -6,9 +6,17 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description = "Dein Best Interest Advisor für digitale Marktplätze." } = Astro.props;
+const {
+  title,
+  description = "Dein Best Interest Advisor für digitale Marktplätze.",
+  ogImage = "/og-image.jpg",
+} = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+const fullTitle = `${title} | Telos`;
 ---
 
 <!doctype html>
@@ -16,7 +24,18 @@ const { title, description = "Dein Best Interest Advisor für digitale Marktplä
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
     <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="de_DE" />
+
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Fonts: self-hosted, preloaded for performance -->
@@ -24,9 +43,19 @@ const { title, description = "Dein Best Interest Advisor für digitale Marktplä
     <link rel="preload" href="/fonts/satoshi-medium.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin />
 
-    <title>{title} | Telos</title>
+    <title>{fullTitle}</title>
   </head>
   <body>
+    <!-- Noise overlay — global, subtle grain texture (design.md) -->
+    <div class="pointer-events-none fixed inset-0 z-[100] opacity-[0.035]" aria-hidden="true">
+      <svg width="100%" height="100%">
+        <filter id="noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise)" />
+      </svg>
+    </div>
+
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-background focus:px-4 focus:py-2 focus:rounded-button focus:text-sm focus:font-medium">
       Zum Inhalt springen
     </a>
@@ -41,6 +70,10 @@ const { title, description = "Dein Best Interest Advisor für digitale Marktplä
 
     <script>
       import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
 
       const lenis = new Lenis({
         duration: 1.2,
@@ -48,12 +81,14 @@ const { title, description = "Dein Best Interest Advisor für digitale Marktplä
         touchMultiplier: 2,
       });
 
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
+      // Sync Lenis scroll position with GSAP ScrollTrigger
+      lenis.on("scroll", ScrollTrigger.update);
 
-      requestAnimationFrame(raf);
+      // Use GSAP ticker for Lenis raf loop (more efficient than manual rAF)
+      gsap.ticker.add((time: number) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
     </script>
   </body>
 </html>
