@@ -150,8 +150,8 @@ Tiefe entsteht durch Farbabstufung und Licht, nicht durch Linien.
 - Hover: subtiler Background-Shift zu surface-elevated (#1C1C1C) ODER border rgba(255,255,255, 0.10)
 
 ### Badges
-- Background: rgba(62, 207, 180, 0.10) (accent mit 10% opacity)
-- Text: #3ECFB4
+- Background: rgba(76, 175, 130, 0.12) (accent-subtle)
+- Text: #6BAF96 (accent-text)
 - Border-Radius: 8px
 - Padding: 4px 12px
 

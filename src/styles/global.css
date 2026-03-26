@@ -44,9 +44,11 @@
   --color-text-secondary: #888888;
   --color-text-muted: #555555;
 
-  /* Colors — Accent */
-  --color-accent: #3ECFB4;
-  --color-accent-hover: #32A896;
+  /* Colors — Accent (Telos Green, dark-mode adapted) */
+  --color-accent: #4CAF82;
+  --color-accent-hover: #348066;
+  --color-accent-text: #6BAF96;
+  --color-accent-subtle: rgba(76, 175, 130, 0.12);
 
   /* Spacing */
   --spacing-section: 10rem; /* 160px */
@@ -114,7 +116,7 @@ h4 {
 
 /* Selection */
 ::selection {
-  background-color: rgba(62, 207, 180, 0.2);
+  background-color: rgba(76, 175, 130, 0.2);
   color: var(--color-text-primary);
 }
 
