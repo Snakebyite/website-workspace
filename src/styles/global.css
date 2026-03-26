@@ -69,6 +69,7 @@
     background-color: var(--color-background);
     color: var(--color-text-primary);
     font-family: var(--font-body);
+    scroll-padding-top: 5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
