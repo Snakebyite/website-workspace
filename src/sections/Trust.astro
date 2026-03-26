@@ -1,59 +1,44 @@
 ---
-// Trust A Section — Homepage
+// Trust Section — Homepage
 // Job: Luca & Kevin zeigen. Persönlichkeit, Expertise, Haltung. "People game."
-// Asymmetric grid: Photo left (5col), Text right (7col)
-// Background: #0A0A0A (default) — Tonal Shift nach Leistungen (surface)
-// Stats + Badge am Ende: Unternehmenskennzahlen als Vertrauensbasis
+// Komposition: Foto-dominant, Magazine-Style. Breites Foto als Hero-Element,
+// kurzer Haltungssatz darunter, Stats + Badge als kompakte Zeile.
+// Background: #0A0A0A (default)
 import { ShieldCheck } from '@lucide/astro';
 ---
 
 <section class="py-24 md:py-section">
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <!-- Overline + Headline -->
-    <span class="block text-xs font-medium tracking-[0.08em] uppercase text-text-muted mb-5">Wer wir sind</span>
-    <h2 class="max-w-3xl">Zwei Gründer. Null Fließband.</h2>
+    <!-- Headline -->
+    <h2 class="max-w-3xl">Warum es uns gibt.</h2>
 
-    <!-- Grid: Photo left, Text right -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mt-16 md:mt-20">
-
-      <!-- Photo placeholder — replace with real group photo later -->
-      <div class="lg:col-span-5">
-        <div class="bg-surface rounded-2xl aspect-[4/3] overflow-hidden"></div>
-      </div>
-
-      <!-- Text -->
-      <div class="lg:col-span-7 space-y-6 lg:pt-4">
-        <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
-          Wir sind Luca und Kevin — Gründer und Geschäftsführer von Telos.
-        </p>
-        <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
-          Wir sitzen bei jedem Kunden persönlich mit am Tisch. Nicht aus Pflicht, sondern weil wir uns für deine Produkte und dein Business begeistern. Wir denken mit, bringen eigene Ideen ein und wollen gemeinsam mit dir wachsen.
-        </p>
-      </div>
-
-    </div>
-
-    <!-- Stats Bar -->
-    <div class="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/5">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12">
-        <div>
-          <span class="block font-heading text-3xl md:text-4xl tracking-tight text-accent-text">75+</span>
-          <span class="block text-sm text-text-secondary mt-2">Marken</span>
-        </div>
-        <div>
-          <span class="block font-heading text-3xl md:text-4xl tracking-tight text-accent-text">5.000+</span>
-          <span class="block text-sm text-text-secondary mt-2">Listings</span>
-        </div>
-        <div>
-          <span class="block font-heading text-3xl md:text-4xl tracking-tight text-accent-text">140+</span>
-          <span class="block text-sm text-text-secondary mt-2">Marktplatz-Setups</span>
-        </div>
+    <!-- Foto — breit, cinematisch, das Hero-Element dieser Section -->
+    <div class="mt-12 md:mt-16">
+      <div class="bg-surface rounded-2xl aspect-[21/9] overflow-hidden">
+        <!-- Replace with real candid photo of Luca & Kevin -->
       </div>
     </div>
 
-    <!-- Badge -->
-    <div class="mt-10 md:mt-12">
+    <!-- Origin Story — persönlich, authentisch -->
+    <p class="text-lg md:text-xl text-text-secondary leading-relaxed mt-10 md:mt-14 max-w-2xl">
+      Wir haben zu viele Brands gesehen, die bei Agenturen nur eine Nummer waren. Deshalb gibt es Telos. Nicht als nächste Full Service Agentur, sondern als der Partner, den wir selbst gerne gehabt hätten.
+    </p>
+
+    <!-- Stats + Badge — eine kompakte Zeile -->
+    <div class="mt-12 md:mt-16 flex flex-wrap items-center gap-x-12 gap-y-6">
+      <div>
+        <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">75+</span>
+        <span class="font-body block text-sm text-text-muted mt-1">Marken</span>
+      </div>
+      <div>
+        <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">5.000+</span>
+        <span class="font-body block text-sm text-text-muted mt-1">Listings</span>
+      </div>
+      <div>
+        <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">140+</span>
+        <span class="font-body block text-sm text-text-muted mt-1">Marktplatz-Setups</span>
+      </div>
       <span class="inline-flex items-center gap-2 bg-accent-subtle text-accent-text text-sm font-medium px-4 py-2 rounded-badge">
         <ShieldCheck class="w-4 h-4" />
         Staatlich akkreditierte Berater
