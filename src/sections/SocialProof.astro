@@ -1,7 +1,8 @@
 ---
-// Social Proof Section (Trust B) — Homepage
-// Job: Konkretes Vertrauen durch echte Ergebnisse. Tabs mit Case Studies.
-// Background: default (#0A0A0A) — durchgehend dunkler Hintergrund
+// Social Proof Section — Homepage
+// Job: Konkretes Vertrauen durch echte Ergebnisse. "Proof Stage" — zentrierte Komposition.
+// Layout: Zentriert, symmetrisch. Bewusster Bruch zum linksbündigen Rest der Seite.
+// Background: surface (#141414) — bewusster Tonal Shift.
 import { Play } from '@lucide/astro';
 
 const caseStudies = [
@@ -9,9 +10,9 @@ const caseStudies = [
     id: 'sailfish',
     name: 'Sailfish',
     branche: 'Triathlon-Equipment',
-    description: 'Strategische Neuausrichtung des Amazon-Auftritts mit Fokus auf organische Sichtbarkeit und Listing-Optimierung.',
+    quote: 'Strategische Neuausrichtung des Amazon-Auftritts mit Fokus auf organische Sichtbarkeit und Listing-Optimierung.',
+    heroKpi: { value: '+250%', label: 'Umsatzwachstum auf Amazon' },
     kpis: [
-      { value: '+250%', label: 'Umsatzwachstum auf Amazon' },
       { value: '>5', label: 'ROAS' },
       { value: '>10%', label: 'Spill-Over auf Webshop' },
     ],
@@ -22,9 +23,9 @@ const caseStudies = [
     id: 'purgruen',
     name: 'Purgrün',
     branche: 'Bio-Düngemittel',
-    description: 'Komplette Katalog-Optimierung über 318 Listings mit datengetriebener SEO-Strategie.',
+    quote: 'Komplette Katalog-Optimierung über 318 Listings mit datengetriebener SEO-Strategie.',
+    heroKpi: { value: '+340%', label: 'Umsatzsteigerung' },
     kpis: [
-      { value: '+340%', label: 'Umsatzsteigerung' },
       { value: '318', label: 'Optimierte Listings' },
       { value: '+8%', label: 'Conversion Rate' },
     ],
@@ -35,9 +36,9 @@ const caseStudies = [
     id: 'heaven-paper',
     name: 'Heaven+Paper',
     branche: 'Kalender & Wandplaner',
-    description: 'Schneller Markteintritt auf Amazon mit systematischem Fokus auf organischen Umsatz.',
+    quote: 'Schneller Markteintritt auf Amazon mit systematischem Fokus auf organischen Umsatz.',
+    heroKpi: { value: '+100%', label: 'Umsatz in 8 Wochen' },
     kpis: [
-      { value: '+100%', label: 'Umsatz in 8 Wochen' },
       { value: '+35%', label: 'Organischer Umsatzanteil' },
       { value: '70%', label: 'Org. Umsatz bei Top-Artikeln' },
     ],
@@ -45,17 +46,20 @@ const caseStudies = [
     hasVideo: true,
   },
 ];
-
 ---
 
 <section class="py-24 md:py-section bg-surface">
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <!-- Headline -->
+    <!-- Headline — left-aligned like other sections, grounds the section before the centered stage -->
     <h2 class="max-w-3xl">Was passiert, wenn man es richtig angeht.</h2>
 
-    <!-- Tab Bar -->
-    <div class="mt-16 md:mt-20 flex gap-6 md:gap-12 border-b border-white/5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Case Studies">
+    <!-- Tab Bar — centered, spacious -->
+    <div
+      class="mt-16 md:mt-20 flex justify-center border-b border-white/5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      role="tablist"
+      aria-label="Case Studies"
+    >
       {caseStudies.map((cs, i) => (
         <button
           role="tab"
@@ -65,14 +69,14 @@ const caseStudies = [
           data-tab={cs.id}
           tabindex={i === 0 ? 0 : -1}
           class:list={[
-            'pb-4 text-left transition-colors duration-200 relative cursor-pointer shrink-0',
+            'pb-5 pt-1 px-6 md:px-10 text-center transition-colors duration-200 relative cursor-pointer shrink-0',
             'hover:text-text-primary',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
             i === 0 ? 'text-text-primary' : 'text-text-secondary',
           ]}
         >
-          <span class="block text-base md:text-lg font-medium">{cs.name}</span>
-          <span class="block text-xs text-text-muted mt-0.5">{cs.branche}</span>
+          <span class="block text-sm md:text-base font-medium">{cs.name}</span>
+          <span class="block text-xs text-text-muted mt-1">{cs.branche}</span>
           <span
             class:list={[
               'absolute bottom-0 left-0 right-0 h-[2px] bg-accent transition-opacity duration-200',
@@ -86,65 +90,76 @@ const caseStudies = [
     </div>
 
     <!-- Tab Panels -->
-    {caseStudies.map((cs, i) => (
-      <div
-        id={`panel-${cs.id}`}
-        role="tabpanel"
-        aria-labelledby={`tab-${cs.id}`}
-        data-panel={cs.id}
-        class:list={[
-          'mt-10 md:mt-14',
-          i !== 0 && 'hidden',
-        ]}
-      >
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-
-          <!-- Left: KPIs + Description + Link -->
-          <div class="lg:col-span-7">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {cs.kpis.map((kpi) => (
-                <div>
-                  <span class="block font-heading text-4xl md:text-5xl tracking-tight text-accent-text">{kpi.value}</span>
-                  <span class="block text-sm text-text-secondary mt-2">{kpi.label}</span>
-                </div>
-              ))}
-            </div>
-
-            <p class="text-text-secondary leading-relaxed mt-8 max-w-lg">{cs.description}</p>
-
-            <a
-              href="/referenzen"
-              class="inline-block text-accent-text hover:underline font-medium transition-colors duration-200 mt-6"
+    {caseStudies.map((cs, i) => {
+      const allKpis = [cs.heroKpi, ...cs.kpis];
+      return (
+        <div
+          id={`panel-${cs.id}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${cs.id}`}
+          data-panel={cs.id}
+          class:list={[
+            'mt-14 md:mt-20',
+            i !== 0 && 'hidden',
+          ]}
+        >
+          <!-- Video / Visual — prominent but not oversized -->
+          <div class="max-w-3xl mx-auto">
+            <div
+              class:list={[
+                'bg-surface-elevated rounded-2xl aspect-video flex items-center justify-center',
+                cs.hasVideo && 'cursor-pointer group',
+              ]}
+              aria-hidden={cs.hasVideo ? undefined : 'true'}
             >
-              Case Study lesen &rarr;
-            </a>
-          </div>
-
-          <!-- Right: Video / Visual Placeholder -->
-          <div class="lg:col-span-5">
-            <div class:list={['bg-surface-elevated rounded-2xl aspect-video flex items-center justify-center', cs.hasVideo && 'cursor-pointer group']} aria-hidden={cs.hasVideo ? undefined : 'true'}>
               {cs.hasVideo && (
-                <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors duration-200">
-                  <Play class="w-6 h-6 text-text-primary ml-0.5" />
+                <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors duration-200">
+                  <Play class="w-7 h-7 text-text-primary ml-0.5" />
                 </div>
               )}
             </div>
-            <p class:list={['text-sm mt-3 h-5', cs.testimonial ? 'text-text-secondary' : 'invisible']}>
-              {cs.testimonial ? (
-                <>{cs.testimonial.name} <span class="text-text-muted">&middot; {cs.testimonial.role}</span></>
-              ) : '\u00A0'}
-            </p>
+            {cs.testimonial && (
+              <p class="text-sm text-text-muted mt-3 text-center">
+                {cs.testimonial.name} · {cs.testimonial.role}
+              </p>
+            )}
           </div>
 
-        </div>
-      </div>
-    ))}
+          <!-- All KPIs — equal weight, centered row, Satoshi for values -->
+          <div class="flex justify-center items-baseline gap-10 md:gap-16 mt-12 md:mt-16">
+            {allKpis.map((kpi, kpiIndex) => (
+              <>
+                <div class="text-center">
+                  <span class="block text-3xl md:text-4xl font-medium tracking-tight text-text-primary">{kpi.value}</span>
+                  <span class="block text-sm text-text-secondary mt-2">{kpi.label}</span>
+                </div>
+                {kpiIndex < allKpis.length - 1 && (
+                  <span class="text-text-muted/30 text-2xl select-none" aria-hidden="true">/</span>
+                )}
+              </>
+            ))}
+          </div>
 
-    <!-- Section CTA -->
-    <div class="mt-16 md:mt-20">
+          <!-- Description — centered, body text -->
+          <p class="text-base md:text-lg text-text-secondary leading-relaxed text-center max-w-2xl mx-auto mt-8 md:mt-10">
+            {cs.quote}
+          </p>
+
+        </div>
+      );
+    })}
+
+    <!-- Section CTA — centered, streamlined -->
+    <div class="mt-16 md:mt-20 flex flex-col sm:flex-row justify-center items-center gap-6">
+      <a
+        href="/kontakt"
+        class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+      >
+        Lern uns kennen
+      </a>
       <a
         href="/referenzen"
-        class="text-accent-text hover:underline text-lg font-medium transition-colors duration-200"
+        class="text-accent-text hover:underline font-medium transition-colors duration-200"
       >
         Alle Ergebnisse ansehen &rarr;
       </a>
@@ -161,28 +176,53 @@ const caseStudies = [
     const tabs = tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]');
     const panels = document.querySelectorAll<HTMLElement>('[role="tabpanel"]');
 
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        const targetId = tab.dataset.tab;
-        if (!targetId) return;
+    function activateTab(targetTab: HTMLButtonElement) {
+      const targetId = targetTab.dataset.tab;
+      if (!targetId) return;
 
-        tabs.forEach((t) => {
-          const isActive = t.dataset.tab === targetId;
-          t.setAttribute('aria-selected', String(isActive));
-          t.classList.toggle('text-text-primary', isActive);
-          t.classList.toggle('text-text-secondary', !isActive);
+      tabs.forEach((t) => {
+        const isActive = t.dataset.tab === targetId;
+        t.setAttribute('aria-selected', String(isActive));
+        t.setAttribute('tabindex', isActive ? '0' : '-1');
+        t.classList.toggle('text-text-primary', isActive);
+        t.classList.toggle('text-text-secondary', !isActive);
 
-          const indicator = t.querySelector('[data-indicator]');
-          if (indicator) {
-            indicator.classList.toggle('opacity-100', isActive);
-            indicator.classList.toggle('opacity-0', !isActive);
-          }
-        });
-
-        panels.forEach((panel) => {
-          panel.classList.toggle('hidden', panel.dataset.panel !== targetId);
-        });
+        const indicator = t.querySelector('[data-indicator]');
+        if (indicator) {
+          indicator.classList.toggle('opacity-100', isActive);
+          indicator.classList.toggle('opacity-0', !isActive);
+        }
       });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle('hidden', panel.dataset.panel !== targetId);
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateTab(tab));
+    });
+
+    tablist.addEventListener('keydown', (e) => {
+      const tabArray = Array.from(tabs);
+      const currentIndex = tabArray.findIndex(t => t.getAttribute('aria-selected') === 'true');
+      let newIndex = currentIndex;
+
+      if (e.key === 'ArrowRight') {
+        newIndex = (currentIndex + 1) % tabArray.length;
+      } else if (e.key === 'ArrowLeft') {
+        newIndex = (currentIndex - 1 + tabArray.length) % tabArray.length;
+      } else if (e.key === 'Home') {
+        newIndex = 0;
+      } else if (e.key === 'End') {
+        newIndex = tabArray.length - 1;
+      } else {
+        return;
+      }
+
+      e.preventDefault();
+      activateTab(tabArray[newIndex]);
+      tabArray[newIndex].focus();
     });
   }
 
