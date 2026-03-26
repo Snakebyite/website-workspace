@@ -1,59 +1,69 @@
 ---
 // Leistungen Section — Homepage
 // Job: Direkte Antwort auf Problem-Section. 3 Services als Teaser.
-// Stacked full-width rows, alternating text/visual sides, equal weight.
-// Visuals sind Platzhalter — werden separat befüllt.
+// Komposition: Bento Grid — Marktplatz-Strategie full-width oben (größte Kachel),
+// Organische Sichtbarkeit (7col) + KI & Prozesse (5col, kleinste) unten.
+// Kacheln: border-only (white/5), angedeutet statt gefüllt. Resend-Style.
+// Hierarchie: "Was wir tun." als einziges Serif-Element (H2).
+// Service-Namen in Satoshi medium, Sublines + Body in text-secondary.
 ---
 
 <section id="leistungen" class="py-24 md:py-section">
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <!-- Überleitung -->
-    <h2 class="max-w-2xl">Dafür gibt es uns.</h2>
+    <!-- Section Headline — Instrument Serif, einziges Serif-Element -->
+    <h2 class="max-w-2xl">Was wir tun.</h2>
 
-    <!-- Services -->
-    <div class="mt-16 md:mt-24 space-y-12 md:space-y-16">
+    <!-- Bento Grid -->
+    <div class="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
 
-      <!-- Service 1: Marktplatz-Strategie — Text links, Visual rechts -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div class="lg:col-span-7">
-          <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text mb-5">Marktplatz-Strategie</span>
-          <h3>Marktplatz-Wachstum, das auf Daten steht.</h3>
-          <p class="text-lg md:text-xl text-text-secondary leading-relaxed mt-4 max-w-xl">
-            Wir machen den Einstieg und die Skalierung auf digitalen Marktplätzen planbar. Keine Bauchentscheidungen — Strategie, die auf Daten basiert.
-          </p>
-        </div>
-        <div class="lg:col-span-5">
-          <div class="bg-surface-elevated rounded-2xl aspect-[4/3]" aria-hidden="true"></div>
+      <!-- Kachel 1: Marktplatz-Strategie — full-width, größte Kachel -->
+      <div class="lg:col-span-12 border border-white/5 rounded-2xl p-8 md:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          <div class="lg:col-span-6">
+            <h3 class="font-body text-2xl md:text-[1.75rem] font-medium tracking-[-0.01em]">Marktplatz-Strategie</h3>
+            <p class="font-body text-lg md:text-xl text-text-secondary leading-relaxed mt-3">
+              Marktplatz-Wachstum, das auf Daten steht.
+            </p>
+            <p class="font-body text-base text-text-secondary leading-relaxed mt-3">
+              Wir machen den Einstieg und die Skalierung auf digitalen Marktplätzen <span class="text-accent-text font-medium">planbar.</span> Keine Bauchentscheidungen — Strategie, die auf Daten basiert.
+            </p>
+          </div>
+          <!-- Visual placeholder — rechte Hälfte -->
+          <div class="lg:col-span-6">
+            <div class="bg-surface-elevated rounded-xl aspect-[16/9]" aria-hidden="true"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Service 2: Organische Sichtbarkeit — Visual links, Text rechts -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div class="lg:col-span-5 order-2 lg:order-1">
-          <div class="bg-surface-elevated rounded-2xl aspect-[4/3]" aria-hidden="true"></div>
-        </div>
-        <div class="lg:col-span-7 order-1 lg:order-2">
-          <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text mb-5">Organische Sichtbarkeit</span>
-          <h3>Die Basis, auf der PPC erst richtig skaliert.</h3>
-          <p class="text-lg md:text-xl text-text-secondary leading-relaxed mt-4 max-w-xl">
-            PPC ohne saubere Listings ist wie Werbung für ein Schaufenster, das keiner betreten will. Wir holen das Maximum aus deinen Produktdaten und Listings raus.
+      <!-- Kachel 2: Organische Sichtbarkeit — 7col -->
+      <div class="lg:col-span-7 border border-white/5 rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px] md:min-h-[380px]">
+        <div>
+          <h3 class="font-body text-2xl md:text-[1.75rem] font-medium tracking-[-0.01em]">Organische Sichtbarkeit</h3>
+          <p class="font-body text-lg md:text-xl text-text-secondary leading-relaxed mt-3">
+            Die Basis, auf der PPC erst richtig skaliert.
+          </p>
+          <p class="font-body text-base text-text-secondary leading-relaxed mt-3">
+            Wir holen das <span class="text-accent-text font-medium">Maximum aus deinen Produktdaten</span> und Listings raus.
           </p>
         </div>
+        <!-- Visual placeholder -->
+        <div class="mt-8 bg-surface-elevated rounded-xl aspect-[16/9]" aria-hidden="true"></div>
       </div>
 
-      <!-- Service 3: KI & Prozesse — Text links, Visual rechts -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div class="lg:col-span-7">
-          <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text mb-5">KI & Prozesse</span>
-          <h3>Erst der Prozess, dann die Automatisierung.</h3>
-          <p class="text-lg md:text-xl text-text-secondary leading-relaxed mt-4 max-w-xl">
-            KI auf schlechte Prozesse kippen bringt nichts. Wir identifizieren die Hebel, designen den Prozess sauber und automatisieren dann mit Verstand.
+      <!-- Kachel 3: KI & Prozesse — 5col, kleinste Kachel -->
+      <div class="lg:col-span-5 border border-white/5 rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px] md:min-h-[380px]">
+        <div>
+          <h3 class="font-body text-2xl md:text-[1.75rem] font-medium tracking-[-0.01em]">KI & Prozesse</h3>
+          <p class="font-body text-lg md:text-xl text-text-secondary leading-relaxed mt-3">
+            Erst der Prozess, dann die Automatisierung.
+          </p>
+          <p class="font-body text-base text-text-secondary leading-relaxed mt-3">
+            KI auf schlechte Prozesse kippen bringt nichts. Wir identifizieren die Hebel, <span class="text-accent-text font-medium">designen den Prozess sauber</span> und automatisieren dann mit Verstand.
           </p>
         </div>
-        <div class="lg:col-span-5">
-          <div class="bg-surface-elevated rounded-2xl aspect-[4/3]" aria-hidden="true"></div>
-        </div>
+        <!-- Visual placeholder -->
+        <div class="mt-8 bg-surface-elevated rounded-xl aspect-[3/2] max-w-[180px]" aria-hidden="true"></div>
       </div>
 
     </div>
