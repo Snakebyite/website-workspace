@@ -13,19 +13,19 @@ const currentPath = Astro.url.pathname;
 
 <header class="fixed top-0 left-0 w-full z-50 bg-[rgba(10,10,10,0.9)]">
   <nav class="mx-auto max-w-7xl px-4 md:px-8" aria-label="Hauptnavigation">
-    <div class="flex items-center justify-between h-16 md:h-20">
+    <div class="relative flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
       <a href="/" class="font-heading text-xl tracking-tight text-text-primary">
         Telos
       </a>
 
-      <!-- Desktop Nav -->
-      <div class="hidden md:flex items-center gap-8">
+      <!-- Desktop Nav — true center via absolute positioning -->
+      <div class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
         {navLinks.map((link) => (
           <a
             href={link.href}
             class:list={[
-              "text-sm font-medium transition-colors duration-200",
+              "text-sm font-bold transition-colors duration-200",
               currentPath === link.href
                 ? "text-text-primary"
                 : "text-text-secondary hover:text-text-primary",
@@ -34,13 +34,15 @@ const currentPath = Astro.url.pathname;
             {link.label}
           </a>
         ))}
-        <a
-          href="/kontakt"
-          class="bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-2.5 rounded-button transition-colors duration-200"
-        >
-          Lern uns kennen
-        </a>
       </div>
+
+      <!-- Desktop CTA — isolated right -->
+      <a
+        href="/kontakt"
+        class="hidden md:inline-block bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-2.5 rounded-button transition-colors duration-200"
+      >
+        Lern uns kennen
+      </a>
 
       <!-- Mobile Menu Toggle -->
       <button

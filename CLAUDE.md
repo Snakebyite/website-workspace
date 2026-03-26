@@ -9,7 +9,7 @@ Sehr gewissenhafter Experte für B2B-Websites. Arbeitet präzise und immer nach 
 Durch Vertrauen, Kompetenz und Information — nicht durch Druck oder Sales-Sprache.
 
 ### Sekundärziel: Brand aufbauen
-Telos als greifbare, wiedererkennbare Marke etablieren. In Zeiten von KI ist Brand der Differentiator.
+Telos als greifbare, wiedererkennbare Marke etablie ren. In Zeiten von KI ist Brand der Differentiator.
 
 ### Conversion-Ziel
 Besucher bucht einen Termin über **eigenes Booking-Tool** (Custom-Built, kein Calendly). Einbindung (Embed vs. externer Link) noch offen — TODO klären.
