@@ -1,0 +1,297 @@
+---
+// HeroDashboard.astro — Floating Dashboard Stack v2
+// Multi-layered marketplace analytics visualization with depth,
+// mouse parallax, and choreographed entrance animations.
+// 4 content layers: Revenue Chart (back) → KPI Cards (mid) → Ranking Widget (front-left) → Notification (front-right)
+// Ground Glow underneath for "illuminated surface" effect.
+// No backdrop-blur — solid tonal backgrounds for performance with Lenis + ScrollTrigger.
+---
+
+<div class="hero-dashboard hidden lg:block" aria-hidden="true">
+  <div class="dashboard-scene relative" style="perspective: 800px;">
+
+    <!-- ═══ GROUND GLOW: Illuminated surface beneath the stack ═══ -->
+    <div
+      class="ground-glow absolute -bottom-12 left-1/2 -translate-x-1/2 w-[120%] h-[60%] pointer-events-none"
+      style="background: radial-gradient(ellipse 80% 40% at center bottom, rgba(76,175,130,0.05) 0%, transparent 70%); opacity: 0;"
+    ></div>
+
+    <!-- ═══ BACK LAYER: Revenue Chart ═══ -->
+    <div class="layer-parallax relative will-change-transform" data-depth="0.015">
+      <div class="layer-float">
+        <div class="chart-panel bg-[rgba(20,20,20,0.92)] rounded-2xl border border-white/[0.08] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]" style="opacity:0;">
+          <!-- Header -->
+          <div class="flex items-center justify-between px-4 py-2.5 border-b border-white/[0.04]">
+            <div class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 rounded-full bg-accent"></div>
+              <span class="text-[10px] text-text-muted tracking-wide font-body">Umsatzentwicklung &middot; 12M</span>
+            </div>
+            <span class="text-[9px] text-text-muted/60 font-body tracking-wide">Amazon DE</span>
+          </div>
+          <!-- Chart -->
+          <div class="p-4">
+            <svg class="chart-svg w-full" viewBox="0 0 360 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="30" x2="360" y2="30" stroke="rgba(255,255,255,0.025)" />
+              <line x1="0" y1="60" x2="360" y2="60" stroke="rgba(255,255,255,0.025)" />
+              <line x1="0" y1="90" x2="360" y2="90" stroke="rgba(255,255,255,0.025)" />
+              <defs>
+                <linearGradient id="telos-hero-chart-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(76,175,130,0.12)" />
+                  <stop offset="100%" stop-color="rgba(76,175,130,0)" />
+                </linearGradient>
+              </defs>
+              <!-- Area fill (fades in after line draws) -->
+              <path class="chart-area"
+                d="M0,120 L0,95 C20,93 40,88 60,82 C80,76 100,78 120,70 C140,62 160,66 180,58 C200,51 220,48 240,40 C260,33 280,28 300,22 C320,16 340,12 360,5 L360,120 Z"
+                fill="url(#telos-hero-chart-fill)" opacity="0" />
+              <!-- Revenue growth line -->
+              <path class="chart-line"
+                d="M0,95 C20,93 40,88 60,82 C80,76 100,78 120,70 C140,62 160,66 180,58 C200,51 220,48 240,40 C260,33 280,28 300,22 C320,16 340,12 360,5"
+                stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round" fill="none" />
+              <!-- Endpoint dot + pulse ring -->
+              <circle class="chart-dot" cx="360" cy="5" r="3" fill="#4CAF82" opacity="0" />
+              <circle class="chart-pulse" cx="360" cy="5" r="3" fill="none" stroke="#4CAF82" stroke-width="1" opacity="0" />
+            </svg>
+            <!-- X-axis labels -->
+            <div class="flex justify-between mt-1.5 font-body">
+              <span class="text-[8px] text-text-muted/50">Jan</span>
+              <span class="text-[8px] text-text-muted/50">Apr</span>
+              <span class="text-[8px] text-text-muted/50">Jul</span>
+              <span class="text-[8px] text-text-muted/50">Okt</span>
+              <span class="text-[8px] text-text-muted/50">Dez</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ MIDDLE LAYER: KPI Cards ═══ -->
+    <div class="layer-parallax absolute -bottom-8 -left-5 right-3 z-10 will-change-transform" data-depth="0.035">
+      <div class="layer-float">
+        <div class="grid grid-cols-3 gap-1.5">
+          <div class="kpi-card bg-[rgba(28,28,28,0.92)] rounded-xl p-3 border border-white/[0.08] shadow-[0_16px_40px_rgba(0,0,0,0.4)]" style="opacity:0;">
+            <span class="text-[8px] uppercase tracking-[0.1em] text-text-muted block leading-none font-body">Umsatz</span>
+            <p class="text-[15px] font-medium mt-1.5 leading-none font-body">&euro;<span class="count-up" data-target="47.2" data-decimals="1">0</span>k</p>
+            <span class="text-[8px] text-accent-text font-medium mt-1.5 block leading-none font-body">&uarr; 24%</span>
+          </div>
+          <div class="kpi-card bg-[rgba(28,28,28,0.92)] rounded-xl p-3 border border-white/[0.08] shadow-[0_16px_40px_rgba(0,0,0,0.4)]" style="opacity:0;">
+            <span class="text-[8px] uppercase tracking-[0.1em] text-text-muted block leading-none font-body">Sessions</span>
+            <p class="text-[15px] font-medium mt-1.5 leading-none font-body"><span class="count-up" data-target="12.4" data-decimals="1">0</span>k</p>
+            <span class="text-[8px] text-accent-text font-medium mt-1.5 block leading-none font-body">&uarr; 18%</span>
+          </div>
+          <div class="kpi-card bg-[rgba(28,28,28,0.92)] rounded-xl p-3 border border-white/[0.08] shadow-[0_16px_40px_rgba(0,0,0,0.4)]" style="opacity:0;">
+            <span class="text-[8px] uppercase tracking-[0.1em] text-text-muted block leading-none font-body">CVR</span>
+            <p class="text-[15px] font-medium mt-1.5 leading-none font-body"><span class="count-up" data-target="8.3" data-decimals="1">0</span>%</p>
+            <span class="text-[8px] text-accent-text font-medium mt-1.5 block leading-none font-body">&uarr; 2.1%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FRONT-LEFT LAYER: Ranking Widget ═══ -->
+    <div class="layer-parallax absolute -bottom-16 -left-8 z-20 will-change-transform" data-depth="0.05">
+      <div class="layer-float">
+        <div class="ranking-widget bg-[rgba(28,28,28,0.92)] rounded-xl px-3.5 py-2.5 border border-white/[0.08] shadow-[0_20px_45px_rgba(0,0,0,0.5)]" style="opacity:0;">
+          <span class="text-[8px] uppercase tracking-[0.1em] text-text-muted block leading-none font-body">Keyword Ranking</span>
+          <div class="flex items-center gap-1.5 mt-2">
+            <span class="text-[15px] font-medium leading-none font-body text-text-secondary">#3</span>
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 6L5 2L9 6" stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[15px] font-medium leading-none font-body text-accent">#1</span>
+          </div>
+          <span class="text-[8px] text-text-muted/60 mt-1.5 block leading-none font-body">bluetooth kopfh&ouml;rer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FRONT-RIGHT LAYER: Notification Badge ═══ -->
+    <div class="layer-parallax absolute -top-3 -right-5 z-20 will-change-transform" data-depth="0.07">
+      <div class="layer-float">
+        <div class="notification-badge bg-[rgba(28,28,28,0.92)] border border-white/[0.10] rounded-xl px-3.5 py-2.5 shadow-[0_24px_50px_rgba(0,0,0,0.6)] flex items-center gap-2.5" style="opacity:0;">
+          <div class="w-7 h-7 rounded-lg bg-accent-subtle flex items-center justify-center flex-shrink-0">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8L6.5 11.5L13 5" stroke="#4CAF82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[13px] font-medium leading-none whitespace-nowrap font-body">+&euro;12.4k</p>
+            <p class="text-[9px] text-text-muted mt-0.5 leading-none whitespace-nowrap font-body">Amazon DE &middot; heute</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initHeroDashboard(): void {
+    const dashboard = document.querySelector<HTMLElement>(".hero-dashboard");
+    if (!dashboard) return;
+
+    const ctx = gsap.context(() => {
+      const scene = dashboard.querySelector<HTMLElement>(".dashboard-scene");
+      if (!scene) return;
+
+      const parallaxLayers = dashboard.querySelectorAll<HTMLElement>(".layer-parallax");
+      const floatLayers = dashboard.querySelectorAll<HTMLElement>(".layer-float");
+      const countEls = dashboard.querySelectorAll<HTMLElement>(".count-up");
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // ── Reduced motion: show final state, skip all animation ──
+      if (reduced) {
+        gsap.set(".ground-glow", { opacity: 1 });
+        gsap.set(".chart-panel, .kpi-card, .ranking-widget, .notification-badge", { opacity: 1 });
+        gsap.set(".chart-area", { opacity: 1 });
+        gsap.set(".chart-dot", { opacity: 1 });
+        const chartLine = dashboard.querySelector<SVGPathElement>(".chart-line");
+        if (chartLine) gsap.set(chartLine, { strokeDasharray: "none" });
+        countEls.forEach((el) => {
+          el.textContent = parseFloat(el.dataset.target || "0").toFixed(
+            parseInt(el.dataset.decimals || "0", 10),
+          );
+        });
+        return;
+      }
+
+      // ── ENTRANCE TIMELINE ─────────────────────────────────────
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        delay: 0.4,
+      });
+
+      // 0 — Ground glow fades in (starts first, background effect)
+      tl.to(".ground-glow", { opacity: 1, duration: 1.2, ease: "power2.inOut" });
+
+      // 1 — Chart panel slides up
+      tl.fromTo(
+        ".chart-panel",
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.9 },
+        0.1,
+      );
+
+      // 2 — SVG line draws itself
+      const chartLine = dashboard.querySelector<SVGPathElement>(".chart-line");
+      if (chartLine) {
+        const len = chartLine.getTotalLength();
+        gsap.set(chartLine, { strokeDasharray: len, strokeDashoffset: len });
+        tl.to(chartLine, {
+          strokeDashoffset: 0,
+          duration: 1.4,
+          ease: "power2.inOut",
+        }, "-=0.3");
+      }
+
+      // 3 — Area fill fades in
+      tl.to(".chart-area", { opacity: 1, duration: 0.8 }, "-=0.6");
+
+      // 4 — Endpoint dot appears
+      tl.to(".chart-dot", { opacity: 1, duration: 0.3 }, "-=0.2");
+      tl.to(".chart-pulse", { opacity: 0.4, duration: 0.3 }, "<");
+
+      // 5 — KPI cards stagger in from below
+      tl.fromTo(
+        ".kpi-card",
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, stagger: 0.08, duration: 0.6 },
+        "-=0.4",
+      );
+
+      // 6 — Count-up numbers (all simultaneously)
+      countEls.forEach((el, i) => {
+        const target = parseFloat(el.dataset.target || "0");
+        const decimals = parseInt(el.dataset.decimals || "0", 10);
+        const proxy = { val: 0 };
+        tl.to(
+          proxy,
+          {
+            val: target,
+            duration: 1,
+            ease: "power2.out",
+            onUpdate() {
+              el.textContent = proxy.val.toFixed(decimals);
+            },
+          },
+          i === 0 ? "-=0.5" : "<",
+        );
+      });
+
+      // 7 — Ranking widget slides in from left
+      tl.fromTo(
+        ".ranking-widget",
+        { opacity: 0, x: -20, y: 10 },
+        { opacity: 1, x: 0, y: 0, duration: 0.6 },
+        "-=0.8",
+      );
+
+      // 8 — Notification badge pops in (last)
+      tl.fromTo(
+        ".notification-badge",
+        { opacity: 0, scale: 0.8, y: -10 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" },
+        "-=0.4",
+      );
+
+      // ── FLOATING ANIMATION ────────────────────────────────────
+      // Front layers float more and faster → natural depth
+      floatLayers.forEach((el, i) => {
+        gsap.to(el, {
+          y: 4 + i * 2,
+          duration: 3.2 - i * 0.3,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+          delay: i * 0.3,
+        });
+      });
+
+      // Pulsing ring on chart endpoint
+      gsap.to(".chart-pulse", {
+        attr: { r: 8 },
+        opacity: 0,
+        duration: 1.8,
+        repeat: -1,
+        ease: "power2.out",
+      });
+
+      // ── MOUSE PARALLAX ────────────────────────────────────────
+      const quickSets: Array<{ x: gsap.QuickToFunc; y: gsap.QuickToFunc }> = [];
+      parallaxLayers.forEach((layer) => {
+        quickSets.push({
+          x: gsap.quickTo(layer, "x", { duration: 0.6, ease: "power3.out" }),
+          y: gsap.quickTo(layer, "y", { duration: 0.6, ease: "power3.out" }),
+        });
+      });
+
+      scene.addEventListener("mousemove", (e: MouseEvent) => {
+        const rect = scene.getBoundingClientRect();
+        const nx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+        const ny = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+        parallaxLayers.forEach((layer, i) => {
+          const depth = parseFloat(layer.dataset.depth || "0");
+          quickSets[i].x(nx * depth * 120);
+          quickSets[i].y(ny * depth * 80);
+        });
+      });
+
+      scene.addEventListener("mouseleave", () => {
+        quickSets.forEach((qs) => {
+          qs.x(0);
+          qs.y(0);
+        });
+      });
+    }, dashboard);
+
+    // Cleanup on Astro page transitions
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  // Init on load + on Astro SPA navigation
+  initHeroDashboard();
+  document.addEventListener("astro:after-swap", initHeroDashboard);
+</script>

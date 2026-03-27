@@ -72,8 +72,19 @@ const fullTitle = `${title} | Telos`;
       import Lenis from "lenis";
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import { SplitText } from "gsap/SplitText";
 
-      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger, SplitText);
+
+      // Respect prefers-reduced-motion: skip animations but keep end-state visible
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (prefersReducedMotion) {
+        gsap.defaults({ duration: 0, stagger: 0 });
+        ScrollTrigger.defaults({ animation: undefined });
+      }
 
       const lenis = new Lenis({
         duration: 1.2,
