@@ -1,0 +1,299 @@
+---
+// HeroVisual.astro — "Network Core"
+// Kevin & Luca as dual hubs of a digital marketplace network.
+// Dot grid + curved connection lines + animated pulses + glowing nodes.
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/kevin-luca-hero.webp';
+import { Search, ShoppingCart, TrendingUp, Package, Star, BarChart3 } from '@lucide/astro';
+
+// ── Network Topology ────────────────────────────────────────
+// Two hub nodes (behind Kevin & Luca), icons as outer nodes
+const hubL = { x: 36, y: 42 }; // behind Kevin
+const hubR = { x: 64, y: 42 }; // behind Luca
+
+// Icon node positions (must match CSS positions of .hero-icon-wrap)
+const nodes = {
+  search:    { x: 8,   y: 8   },
+  star:      { x: -10, y: 28  },
+  pkg:       { x: -5,  y: 60  },
+  cart:      { x: 108, y: 5   },
+  trending:  { x: 107, y: 55  },
+  barchart:  { x: 103, y: 68  },
+};
+
+// Edges: [x1, y1, x2, y2, hasPulse]
+const edges: [number, number, number, number, boolean][] = [
+  // Left hub connections
+  [nodes.search.x, nodes.search.y, hubL.x, hubL.y,      true ],
+  [nodes.star.x,   nodes.star.y,   hubL.x, hubL.y,      false],
+  [nodes.pkg.x,    nodes.pkg.y,    hubL.x, hubL.y,      true ],
+  // Right hub connections
+  [nodes.cart.x,    nodes.cart.y,    hubR.x, hubR.y,     true ],
+  [nodes.trending.x,nodes.trending.y,hubR.x, hubR.y,    false],
+  [nodes.barchart.x,nodes.barchart.y,hubR.x, hubR.y,    true ],
+  // Hub-to-hub bridge
+  [hubL.x, hubL.y, hubR.x, hubR.y,                      true ],
+  // Outer ring
+  [nodes.search.x, nodes.search.y, nodes.star.x, nodes.star.y, false],
+  [nodes.cart.x,   nodes.cart.y,   nodes.trending.x, nodes.trending.y, false],
+  [nodes.trending.x,nodes.trending.y,nodes.barchart.x,nodes.barchart.y,true],
+  [nodes.pkg.x,    nodes.pkg.y,    nodes.star.x, nodes.star.y, false],
+];
+
+// All node positions for rendering dots
+const allNodes = [
+  ...Object.values(nodes),
+  hubL, hubR,
+];
+---
+
+<div class="hero-visual hidden lg:block" aria-hidden="true">
+  <div class="visual-scene relative">
+
+    <!-- ═══ LAYER 0: Dot Grid ═══ -->
+    <div class="dot-grid absolute -inset-8 z-0 pointer-events-none" aria-hidden="true"></div>
+
+    <!-- ═══ LAYER 1: Network SVG ═══ -->
+    <svg
+      class="network-svg absolute inset-0 w-full h-full z-[1] pointer-events-none"
+      viewBox="-15 -10 130 115"
+      preserveAspectRatio="xMidYMid meet"
+      fill="none"
+      style="overflow: visible; opacity: 0;"
+    >
+      <defs>
+        {/* Glow filter for hub nodes */}
+        <filter id="hub-glow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+        </filter>
+      </defs>
+
+      {/* ── Base connection lines (straight) ── */}
+      {edges.map(([x1, y1, x2, y2]) => (
+        <line
+          x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke="rgba(255,255,255,0.06)"
+          stroke-width="0.4"
+        />
+      ))}
+
+      {/* ── Pulse lines (on selected edges) ── */}
+      {edges.filter(e => e[4]).map(([x1, y1, x2, y2]) => (
+        <line
+          class="pulse-line"
+          x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke="#4CAF82"
+          stroke-width="0.6"
+          stroke-linecap="round"
+          opacity="0.3"
+        />
+      ))}
+
+      {/* ── Outer nodes (icon endpoints) ── */}
+      {Object.values(nodes).map(({ x, y }) => (
+        <g>
+          <circle cx={x} cy={y} r="3" fill="none" stroke="rgba(76,175,130,0.12)" stroke-width="0.4" />
+          <circle cx={x} cy={y} r="1.2" fill="rgba(255,255,255,0.15)" />
+        </g>
+      ))}
+
+      {/* ── Hub nodes (behind Kevin & Luca) ── */}
+      {[hubL, hubR].map(({ x, y }) => (
+        <g>
+          <circle cx={x} cy={y} r="8" fill="rgba(76,175,130,0.03)" filter="url(#hub-glow)" />
+          <circle cx={x} cy={y} r="4" fill="none" stroke="rgba(76,175,130,0.1)" stroke-width="0.4" />
+          <circle cx={x} cy={y} r="1.8" fill="rgba(76,175,130,0.25)" />
+        </g>
+      ))}
+    </svg>
+
+    <!-- ═══ LAYER 2: Icons behind photo (z-[5]) ═══ -->
+    <div class="hero-icon-wrap absolute top-[2%] left-[2%] z-[5]" data-depth="0.02">
+      <div class="hero-icon text-white/20" data-float-y="4" data-float-dur="5.2" style="opacity:0;">
+        <Search size={18} strokeWidth={1.5} />
+      </div>
+    </div>
+
+    <div class="hero-icon-wrap absolute bottom-[32%] -right-[3%] z-[5]" data-depth="0.025">
+      <div class="hero-icon text-white/15" data-float-y="3" data-float-dur="4.8" style="opacity:0;">
+        <BarChart3 size={16} strokeWidth={1.5} />
+      </div>
+    </div>
+
+    <div class="hero-icon-wrap absolute bottom-[40%] -left-[5%] z-[5]" data-depth="0.02">
+      <div class="hero-icon text-white/[0.18]" data-float-y="5" data-float-dur="5.5" style="opacity:0;">
+        <Package size={16} strokeWidth={1.5} />
+      </div>
+    </div>
+
+    <!-- ═══ LAYER 3: Photo (z-10) ═══ -->
+    <div class="relative z-10">
+      <Image
+        src={heroPhoto}
+        alt=""
+        widths={[400, 600, 800]}
+        sizes="(min-width: 1024px) 38vw, 0"
+        class="hero-photo w-full h-auto select-none"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+
+    <!-- ═══ LAYER 4: Icons in front (z-20) ═══ -->
+    <div class="hero-icon-wrap absolute top-[5%] -right-[8%] z-20" data-depth="0.055">
+      <div class="hero-icon text-white/25" data-float-y="3" data-float-dur="3.6" style="opacity:0;">
+        <ShoppingCart size={20} strokeWidth={1.5} />
+      </div>
+    </div>
+
+    <div class="hero-icon-wrap absolute top-[28%] -left-[10%] z-20" data-depth="0.06">
+      <div class="hero-icon text-white/20" data-float-y="4" data-float-dur="3.9" style="opacity:0;">
+        <Star size={18} strokeWidth={1.5} />
+      </div>
+    </div>
+
+    <div class="hero-icon-wrap absolute top-[55%] -right-[7%] z-20" data-depth="0.04">
+      <div class="hero-icon text-white/[0.18]" data-float-y="3" data-float-dur="4.1" style="opacity:0;">
+        <TrendingUp size={16} strokeWidth={1.5} />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .hero-photo {
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initHeroVisual(): void {
+    const visual = document.querySelector<HTMLElement>(".hero-visual");
+    if (!visual) return;
+
+    const ctx = gsap.context(() => {
+      const scene = visual.querySelector<HTMLElement>(".visual-scene");
+      if (!scene) return;
+
+      const networkSvg = visual.querySelector<SVGElement>(".network-svg");
+      const pulseLines = visual.querySelectorAll<SVGLineElement>(".pulse-line");
+      const iconWraps = visual.querySelectorAll<HTMLElement>(".hero-icon-wrap");
+      const icons = visual.querySelectorAll<HTMLElement>(".hero-icon");
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduced) {
+        gsap.set(networkSvg, { opacity: 1 });
+        gsap.set(".hero-photo", { opacity: 1 });
+        icons.forEach((icon) => gsap.set(icon, { opacity: 1 }));
+        return;
+      }
+
+      // ── ENTRANCE ──────────────────────────────────────────────
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        delay: 0.2,
+      });
+
+      // Network fades in
+      tl.to(networkSvg, { opacity: 1, duration: 1.2, ease: "power2.inOut" });
+
+      // Photo rises in
+      tl.fromTo(
+        ".hero-photo",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.9 },
+        0.3,
+      );
+
+      // Icons pop in
+      icons.forEach((icon, i) => {
+        tl.fromTo(
+          icon,
+          { opacity: 0, scale: 0.4 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" },
+          0.7 + i * 0.1,
+        );
+      });
+
+      // ── PULSE ANIMATIONS ──────────────────────────────────────
+      pulseLines.forEach((line, i) => {
+        const x1 = parseFloat(line.getAttribute("x1") || "0");
+        const y1 = parseFloat(line.getAttribute("y1") || "0");
+        const x2 = parseFloat(line.getAttribute("x2") || "0");
+        const y2 = parseFloat(line.getAttribute("y2") || "0");
+        const len = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        const dashLen = Math.min(8, len * 0.08);
+
+        line.style.strokeDasharray = `${dashLen} ${len + dashLen}`;
+        line.style.strokeDashoffset = `${len + dashLen * 2}`;
+
+        gsap.to(path, {
+          strokeDashoffset: -dashLen,
+          duration: 2.5 + i * 0.4,
+          repeat: -1,
+          ease: "none",
+          delay: 1.5 + i * 0.6,
+        });
+      });
+
+      // ── ICON FLOAT ────────────────────────────────────────────
+      icons.forEach((icon) => {
+        const floatY = parseFloat(icon.dataset.floatY || "4");
+        const floatDur = parseFloat(icon.dataset.floatDur || "4");
+        const rot = (Math.random() - 0.5) * 8;
+
+        gsap.to(icon, {
+          y: floatY,
+          rotation: rot,
+          duration: floatDur,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+          delay: Math.random() * 2,
+        });
+      });
+
+      // ── MOUSE PARALLAX ────────────────────────────────────────
+      const quickSets: Array<{ x: gsap.QuickToFunc; y: gsap.QuickToFunc }> = [];
+      iconWraps.forEach((wrap) => {
+        quickSets.push({
+          x: gsap.quickTo(wrap, "x", { duration: 0.8, ease: "power3.out" }),
+          y: gsap.quickTo(wrap, "y", { duration: 0.8, ease: "power3.out" }),
+        });
+      });
+
+      scene.addEventListener("mousemove", (e: MouseEvent) => {
+        const rect = scene.getBoundingClientRect();
+        const nx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+        const ny = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+        iconWraps.forEach((wrap, i) => {
+          const depth = parseFloat(wrap.dataset.depth || "0");
+          quickSets[i].x(nx * depth * 120);
+          quickSets[i].y(ny * depth * 80);
+        });
+      });
+
+      scene.addEventListener("mouseleave", () => {
+        quickSets.forEach((qs) => {
+          qs.x(0);
+          qs.y(0);
+        });
+      });
+    }, visual);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initHeroVisual();
+  document.addEventListener("astro:after-swap", initHeroVisual);
+</script>

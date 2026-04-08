@@ -1,7 +1,7 @@
 ---
 // Hero Section — Homepage
-// Split layout: H1 left (7col), Floating Dashboard Stack right (5col)
-import HeroDashboard from "../components/HeroDashboard.astro";
+// Split layout: H1 left (7col), Photo + floating data chips right (5col)
+import HeroVisual from "../components/HeroVisual.astro";
 ---
 
 <section class="min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col relative overflow-hidden">
@@ -11,9 +11,9 @@ import HeroDashboard from "../components/HeroDashboard.astro";
     style="background: radial-gradient(ellipse at center, rgba(76, 175, 130, 0.06) 0%, transparent 70%)"
     aria-hidden="true"
   ></div>
-  <!-- Radial glow behind dashboard -->
+  <!-- Radial glow behind photo -->
   <div
-    class="absolute top-1/2 right-[10%] -translate-y-1/2 w-[600px] h-[600px] pointer-events-none hidden lg:block"
+    class="absolute top-[40%] right-[10%] -translate-y-1/2 w-[600px] h-[600px] pointer-events-none hidden lg:block"
     style="background: radial-gradient(ellipse at center, rgba(76, 175, 130, 0.04) 0%, transparent 70%)"
     aria-hidden="true"
   ></div>
@@ -48,9 +48,9 @@ import HeroDashboard from "../components/HeroDashboard.astro";
           </div>
         </div>
 
-        <!-- Right: Floating Dashboard Stack — desktop only -->
-        <div class="hidden lg:block lg:col-span-5">
-          <HeroDashboard />
+        <!-- Right: Photo + floating data chips — desktop only -->
+        <div class="lg:col-span-5">
+          <HeroVisual />
         </div>
       </div>
     </div>
