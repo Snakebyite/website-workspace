@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UeberUnsHero from "../sections/ueber-uns/UeberUnsHero.astro";
+import WarumUns from "../sections/ueber-uns/WarumUns.astro";
+import ProfilKevin from "../sections/ueber-uns/ProfilKevin.astro";
+import ProfilLuca from "../sections/ueber-uns/ProfilLuca.astro";
+import SoArbeitenWir from "../sections/ueber-uns/SoArbeitenWir.astro";
+import UeberUnsCTA from "../sections/ueber-uns/UeberUnsCTA.astro";
+---
+
+<BaseLayout
+  title="Über uns"
+  description="Kevin & Luca — die Gründer von KFL Consulting. Marktplatz-Strategie, KI und ehrliche Beratung für E-Commerce Brands."
+>
+  <div class="grid-bg">
+    <UeberUnsHero />
+    <WarumUns />
+    <ProfilKevin />
+    <ProfilLuca />
+    <SoArbeitenWir />
+    <UeberUnsCTA />
+  </div>
+</BaseLayout>

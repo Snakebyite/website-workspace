@@ -1,0 +1,73 @@
+---
+/**
+ * Cookie Consent + Tracking Scripts
+ *
+ * Cookiebot (Auto-Blocking Mode):
+ * - Must be the FIRST script in <head>
+ * - Automatically detects and blocks GA4 & Meta Pixel until consent is given
+ *
+ */
+
+const GA_MEASUREMENT_ID = "G-SLVB4EXG5C";
+const META_PIXEL_ID = "1267793908896085";
+---
+
+<!-- Cookiebot — must be first script in <head> -->
+<script
+  id="Cookiebot"
+  src="https://consent.cookiebot.com/uc.js"
+  data-cbid="1d803fba-7ce8-44b4-a0a1-cd93eb5261fa"
+  data-blockingmode="auto"
+  type="text/javascript"
+></script>
+
+<!-- Google Analytics (GA4) — auto-blocked by Cookiebot until statistics consent -->
+<script
+  type="text/javascript"
+  src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+  async
+></script>
+<script type="text/javascript" define:vars={{ GA_MEASUREMENT_ID }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID);
+</script>
+
+<!-- Meta Pixel — auto-blocked by Cookiebot until marketing consent -->
+<script type="text/javascript" define:vars={{ META_PIXEL_ID }}>
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = "2.0";
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(
+    window,
+    document,
+    "script",
+    "https://connect.facebook.net/en_US/fbevents.js"
+  );
+  fbq("init", META_PIXEL_ID);
+  fbq("track", "PageView");
+</script>
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display:none"
+    src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+    alt=""
+  />
+</noscript>

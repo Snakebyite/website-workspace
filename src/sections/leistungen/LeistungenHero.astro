@@ -1,0 +1,108 @@
+---
+// LeistungenHero — Service page hero
+// Job: Frame the page. Visitor already knows KFL from homepage/touchpoint.
+// Layout: Full-width H1 left-aligned, subline below, proof stats underneath.
+import StaatlichBadge from "../../components/StaatlichBadge.astro";
+---
+
+<section class="pt-32 md:pt-section pb-12 md:pb-16" data-leistungen-hero>
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <h1 class="text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] tracking-normal max-w-4xl" data-hero-h1>
+      Organisch wachsen, <span class="text-accent-text">bevor</span> du für Klicks zahlst.
+    </h1>
+
+    <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-8 max-w-2xl" data-hero-sub>
+      Vier Hebel, ein Ziel: deine Marke auf digitalen Marktplätzen so aufzustellen, dass Wachstum planbar wird und nicht vom Werbebudget abhängt.
+    </p>
+
+    <!-- Proof Stats -->
+    <div class="mt-12 md:mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 md:gap-x-14" data-hero-stats>
+      <StaatlichBadge />
+      <div>
+        <span class="block text-2xl md:text-3xl font-bold tracking-tight text-text-primary" data-count="30000" data-count-suffix="+" data-count-separator=".">0</span>
+        <span class="block text-sm text-text-muted mt-1">Produkte gelistet</span>
+      </div>
+      <div>
+        <span class="block text-2xl md:text-3xl font-bold tracking-tight text-text-primary" data-count="5000" data-count-suffix="+" data-count-separator=".">0</span>
+        <span class="block text-sm text-text-muted mt-1">Listings optimiert</span>
+      </div>
+      <div>
+        <span class="block text-2xl md:text-3xl font-bold tracking-tight text-text-primary" data-count="140" data-count-suffix="+">0</span>
+        <span class="block text-sm text-text-muted mt-1">Marktplatz-Setups</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  const section = document.querySelector("[data-leistungen-hero]");
+  if (section) {
+    const h1 = section.querySelector("[data-hero-h1]");
+    const sub = section.querySelector("[data-hero-sub]");
+
+    const tl = gsap.timeline({ delay: 0.3 });
+
+    if (h1) {
+      const split = new SplitText(h1, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+      tl.to(split.words, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+
+    if (sub) {
+      gsap.set(sub, { opacity: 0, y: 20 });
+      tl.to(sub, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+
+    const stats = section.querySelector("[data-hero-stats]");
+    if (stats) {
+      const cells = stats.children;
+      gsap.set(cells, { opacity: 0, y: 20 });
+      tl.to(cells, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: "power2.out",
+      }, "-=0.3");
+
+      // Counter-up animation
+      const counters = stats.querySelectorAll<HTMLElement>("[data-count]");
+      counters.forEach((el) => {
+        const target = parseInt(el.dataset.count || "0", 10);
+        const suffix = el.dataset.countSuffix || "";
+        const separator = el.dataset.countSeparator || "";
+
+        const obj = { val: 0 };
+        tl.to(obj, {
+          val: target,
+          duration: 1.8,
+          ease: "power2.out",
+          onUpdate() {
+            const rounded = Math.round(obj.val);
+            let formatted = rounded.toString();
+            if (separator) {
+              formatted = rounded.toLocaleString("de-DE");
+            }
+            el.textContent = formatted + suffix;
+          },
+        }, "-=1.6");
+      });
+    }
+  }
+</script>

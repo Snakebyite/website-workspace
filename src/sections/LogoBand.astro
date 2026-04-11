@@ -1,19 +1,167 @@
 ---
 // Logo Band Section — Homepage
-// Job: Atempause nach Hero. Social Proof durch Kunden-Logos.
-// Kompakt, keine Headline, Logos monochromatisch auf Background.
-// Replace text placeholders with actual SVG logos.
+// Job: Social Proof durch Kunden-Logos als endloser Marquee von rechts nach links.
+// CSS-only Animation (GPU-accelerated), keine JS-Abhängigkeit für den Loop.
+
+// Import all logo SVGs
+import logo1 from "../assets/logos/1.svg";
+import logo2 from "../assets/logos/2.svg";
+import logo3 from "../assets/logos/3.svg";
+import logo4 from "../assets/logos/4.svg";
+import logo5 from "../assets/logos/5.svg";
+import logo6 from "../assets/logos/6.svg";
+import logo7 from "../assets/logos/7.svg";
+import logo8 from "../assets/logos/8.svg";
+import logo9 from "../assets/logos/9.svg";
+import logo10 from "../assets/logos/10.svg";
+import logo11 from "../assets/logos/11.svg";
+import logo12 from "../assets/logos/12.svg";
+import logo13 from "../assets/logos/13.svg";
+import logo14 from "../assets/logos/14.svg";
+import logo15 from "../assets/logos/15.svg";
+import logo16 from "../assets/logos/16.svg";
+import logo17 from "../assets/logos/17.svg";
+import logo18 from "../assets/logos/18.svg";
+import logo19 from "../assets/logos/19.svg";
+import logo20 from "../assets/logos/20.svg";
+import logo21 from "../assets/logos/21.svg";
+import logo22 from "../assets/logos/22.svg";
+import logo23 from "../assets/logos/23.svg";
+import logo24 from "../assets/logos/24.svg";
+import logo25 from "../assets/logos/25.svg";
+import logo26 from "../assets/logos/26.svg";
+import logo27 from "../assets/logos/27.svg";
+import logo28 from "../assets/logos/28.svg";
+import logo29 from "../assets/logos/29.svg";
+import logo30 from "../assets/logos/30.svg";
+import logo31 from "../assets/logos/31.svg";
+import logo32 from "../assets/logos/32.svg";
+import logo33 from "../assets/logos/33.svg";
+import logo34 from "../assets/logos/34.svg";
+import logo35 from "../assets/logos/35.svg";
+import logo36 from "../assets/logos/36.svg";
+import logo37 from "../assets/logos/37.png";
+
+const logos = [
+  logo1, logo2, logo3, logo4, logo5, logo6,
+  logo7, logo8, logo9, logo10, logo11, logo12,
+  logo13, logo14, logo15, logo16, logo17, logo18,
+  logo19, logo20, logo21, logo22, logo23, logo24,
+  logo25, logo26, logo27, logo28, logo29, logo30,
+  logo31, logo32, logo33, logo34, logo35, logo36,
+  logo37,
+];
 ---
 
-<section class="py-12 md:py-16" aria-label="Kunden">
-  <div class="mx-auto max-w-7xl px-4 md:px-8">
-    <div class="flex items-center justify-center lg:justify-between gap-10 md:gap-12 flex-wrap opacity-40">
-      <!-- Placeholder logos — replace with actual SVGs -->
-      <span class="text-sm font-medium text-text-muted tracking-wide">Sailfish</span>
-      <span class="text-sm font-medium text-text-muted tracking-wide">Purgrün</span>
-      <span class="text-sm font-medium text-text-muted tracking-wide">Heaven+Paper</span>
-      <span class="text-sm font-medium text-text-muted tracking-wide hidden sm:block">Brand</span>
-      <span class="text-sm font-medium text-text-muted tracking-wide hidden md:block">Brand</span>
+<section class="pt-20 pb-6 md:pt-28 md:pb-8 overflow-hidden" aria-label="Kunden" data-logoband>
+  <p class="mb-10 text-center text-2xl sm:text-3xl md:text-4xl font-heading font-medium tracking-[-0.02em] leading-[1.2] text-text-primary md:mb-12">
+    80+ Marken, die mit uns gewachsen sind
+  </p>
+  <div class="marquee-container">
+    <!-- Fade edges -->
+    <div class="marquee-fade-left"></div>
+    <div class="marquee-fade-right"></div>
+
+    <div class="marquee-track">
+      {/* First set */}
+      {logos.map((logo, i) => (
+        <div class="marquee-item">
+          <img src={logo.src} alt={`Kundenlogo ${i + 1}`} loading="lazy" width="162" height="54" />
+        </div>
+      ))}
+      {/* Duplicate set for seamless loop */}
+      {logos.map((logo, i) => (
+        <div class="marquee-item">
+          <img src={logo.src} alt={`Kundenlogo ${i + 1}`} loading="lazy" width="162" height="54" />
+        </div>
+      ))}
     </div>
   </div>
 </section>
+
+<style>
+  .marquee-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .marquee-fade-left,
+  .marquee-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .marquee-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-background, #0A0A0A), transparent);
+  }
+
+  .marquee-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-background, #0A0A0A), transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    width: max-content;
+    animation: marquee-scroll 90s linear infinite;
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 162px;
+    height: 54px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .marquee-item:hover {
+    opacity: 1;
+  }
+
+  .marquee-item img {
+    height: 54px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  @media (min-width: 768px) {
+    .marquee-track {
+      gap: 4rem;
+    }
+
+    .marquee-item {
+      width: 189px;
+      height: 65px;
+    }
+
+    .marquee-item img {
+      height: 65px;
+    }
+
+    .marquee-fade-left,
+    .marquee-fade-right {
+      width: 120px;
+    }
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

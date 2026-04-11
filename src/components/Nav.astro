@@ -4,7 +4,7 @@ import { Menu, X } from "@lucide/astro";
 const navLinks = [
   { label: "Leistungen", href: "/leistungen" },
   { label: "Über uns", href: "/ueber-uns" },
-  { label: "Referenzen", href: "/referenzen" },
+  { label: "Referenzen", href: "/#referenzen" },
   { label: "Kontakt", href: "/kontakt" },
 ];
 
@@ -13,10 +13,10 @@ const currentPath = Astro.url.pathname;
 
 <header class="fixed top-0 left-0 w-full z-50 bg-[rgba(10,10,10,0.9)]">
   <nav class="mx-auto max-w-7xl px-4 md:px-8" aria-label="Hauptnavigation">
-    <div class="relative flex items-center justify-between h-16 md:h-20">
+    <div class="relative flex items-center justify-between h-18 md:h-24">
       <!-- Logo -->
-      <a href="/" class="font-heading text-xl tracking-tight text-text-primary">
-        Telos
+      <a href="/" class="block shrink-0">
+        <img src="/kfl-logo-white.png" alt="KFL Consulting" class="h-9 md:h-11 w-auto" />
       </a>
 
       <!-- Desktop Nav — true center via absolute positioning -->
@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname;
           <a
             href={link.href}
             class:list={[
-              "text-sm font-bold transition-colors duration-200",
+              "text-sm font-bold transition-colors duration-200 py-2",
               currentPath === link.href
                 ? "text-text-primary"
                 : "text-text-secondary hover:text-text-primary",
@@ -39,14 +39,14 @@ const currentPath = Astro.url.pathname;
       <!-- Desktop CTA — isolated right -->
       <a
         href="/kontakt"
-        class="hidden md:inline-block bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-2.5 rounded-button transition-colors duration-200"
+        class="hidden md:inline-block bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-3 rounded-button transition-colors duration-200"
       >
-        Lern uns kennen
+        Termin buchen
       </a>
 
       <!-- Mobile Menu Toggle -->
       <button
-        class="md:hidden text-text-primary p-2 -mr-2"
+        class="md:hidden text-text-primary p-3 -mr-3"
         aria-label="Menü öffnen"
         aria-expanded="false"
         data-menu-toggle
@@ -81,7 +81,7 @@ const currentPath = Astro.url.pathname;
             href="/kontakt"
             class="bg-accent hover:bg-accent-hover text-background font-medium text-base px-6 py-3 rounded-button transition-colors duration-200 text-center mt-4"
           >
-            Lern uns kennen
+            Termin buchen
           </a>
         </div>
       </div>

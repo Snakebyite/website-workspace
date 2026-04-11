@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ const {
 } = Astro.props;
 
 const canonicalUrl = Astro.url.href;
-const fullTitle = `${title} | Telos`;
+const fullTitle = `${title} | KFL Consulting`;
 ---
 
 <!doctype html>
@@ -24,6 +25,7 @@ const fullTitle = `${title} | Telos`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <CookieConsent />
     <meta name="color-scheme" content="dark" />
     <meta name="description" content={description} />
 
@@ -34,6 +36,13 @@ const fullTitle = `${title} | Telos`;
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="KFL Consulting" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -41,9 +50,27 @@ const fullTitle = `${title} | Telos`;
     <!-- Fonts: self-hosted, preloaded for performance -->
     <link rel="preload" href="/fonts/satoshi-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/satoshi-medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/satoshi-bold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin />
 
     <title>{fullTitle}</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "KFL Consulting",
+      "description": "Dein Best Interest Advisor für digitale Marktplätze. Marktplatz-Strategie, organische Sichtbarkeit und KI-gestützte Prozessoptimierung.",
+      "url": "https://kfl-consulting.com",
+      "foundingDate": "2024",
+      "founder": [
+        { "@type": "Person", "name": "Kevin Flurschütz" },
+        { "@type": "Person", "name": "Luca" }
+      ],
+      "serviceType": ["Marktplatz-Strategie", "Organische Sichtbarkeit", "KI & Prozessoptimierung"],
+      "areaServed": { "@type": "Country", "name": "DE" },
+      "sameAs": []
+    })} />
   </head>
   <body>
     <!-- Noise overlay — global, subtle grain texture (design.md) -->
@@ -62,7 +89,7 @@ const fullTitle = `${title} | Telos`;
 
     <Nav />
 
-    <main id="main" class="pt-16 md:pt-20">
+    <main id="main" class="pt-36 md:pt-48">
       <slot />
     </main>
 
@@ -87,9 +114,10 @@ const fullTitle = `${title} | Telos`;
       }
 
       const lenis = new Lenis({
-        duration: 1.2,
+        duration: 0.8,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         touchMultiplier: 2,
+        wheelMultiplier: 1.2,
       });
 
       // Sync Lenis scroll position with GSAP ScrollTrigger

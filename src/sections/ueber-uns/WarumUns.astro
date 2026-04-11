@@ -1,0 +1,125 @@
+---
+// "Warum es uns gibt" — Origin Story, editorial Layout
+// Text oben (volle Breite) → großes Bild → Text unten (volle Breite)
+import { Image } from "astro:assets";
+import conferenceImg from "../../assets/conference-agency-challenges.png";
+---
+
+<section class="py-16 md:py-24" data-warum>
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <!-- Heading -->
+    <div class="mb-12 md:mb-16">
+      <span class="block text-xs font-medium tracking-[0.08em] uppercase text-text-muted mb-5">Unsere Geschichte</span>
+      <h2 data-warum-h2>Warum es uns gibt.</h2>
+    </div>
+
+    <!-- Teil 1: Text oben — volle Breite -->
+    <div class="space-y-6" data-warum-text="top">
+      <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        Im E-Commerce haben wir eine Lücke gesehen. Auf der einen Seite Full-Service-Agenturen, die alles anbieten, aber in nichts wirklich tief sind. Wechselnde Ansprechpartner, Beteiligungen am Ad-Spend und Kunden, die nach Schema&nbsp;X abgefertigt werden.
+      </p>
+      <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        Auf der anderen Seite Brands mit echten Produkten, die auf Marktplätzen riesiges Potenzial liegen lassen. Nicht weil das Produkt schlecht ist, sondern weil der richtige Sparringspartner fehlt. Jemand, der sich reindenkt, den Überblick behält und wirklich im besten Interesse des Kunden handelt.
+      </p>
+    </div>
+
+    <!-- Bild — groß, volle Breite -->
+    <div class="my-14 md:my-20" data-warum-img>
+      <Image
+        src={conferenceImg}
+        alt="Kevin Flurschütz spricht auf der Bühne über Agency Challenges vor großem Publikum"
+        class="w-full h-auto rounded-2xl object-cover"
+        widths={[640, 960, 1280, 1600]}
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Teil 2: Text unten — volle Breite -->
+    <div class="space-y-6" data-warum-text="bottom">
+      <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        KFL Consulting verbindet genau das: einen <span class="text-accent-text">wissenschaftlichen Fokus</span> auf digitale Marktplätze mit der Praxiserfahrung aus der Zusammenarbeit mit echten Brands. Kevins Forschung hat gezeigt, dass es eine Lücke am Markt gibt, die zu Ineffizienzen führt. Luca konnte seine KI-Expertise und sein Prozess-Know-how in der Industrie einsetzen. So entsteht ein Flywheel, das sich mit jedem Kunden weiter verdichtet.
+      </p>
+      <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        Für Brands ab einer bestimmten Größe ist genau dieser Ansatz extrem wertvoll, weil hier mehrere Hebel ineinandergreifen: organische Sichtbarkeit, datengetriebene Optimierung und KI-gestützte Prozesse. Das ist unser Ansporn. Kein Fließband. Kein Full-Service. Sondern ein <span class="text-accent-text">Best Interest Advisor</span>, der Marktplatz-Expertise und Technologie zusammenbringt. Persönlich, ehrlich und mit echtem Interesse an deinem Erfolg.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  const section = document.querySelector("[data-warum]");
+  if (section) {
+    const overline = section.querySelector("span.block.text-xs");
+    const h2 = section.querySelector("[data-warum-h2]");
+    const img = section.querySelector("[data-warum-img]");
+
+    if (overline) {
+      gsap.set(overline, { opacity: 0, y: 15 });
+    }
+
+    if (h2) {
+      const split = new SplitText(h2, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          once: true,
+        },
+      });
+
+      if (overline) {
+        tl.to(overline, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+      }
+
+      tl.to(split.words, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+
+    // Image reveal
+    if (img) {
+      gsap.set(img, { opacity: 0, y: 30, scale: 0.98 });
+      gsap.to(img, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: img,
+          start: "top 80%",
+          once: true,
+        },
+      });
+    }
+
+    // Text paragraphs fade in
+    section.querySelectorAll("[data-warum-text] p").forEach((p) => {
+      gsap.set(p, { opacity: 0, y: 20 });
+      gsap.to(p, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: p,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+  }
+</script>

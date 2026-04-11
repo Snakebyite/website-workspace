@@ -1,0 +1,340 @@
+---
+// ServiceAnbindungen — Marktplatz-Anbindungen
+// Job: Show pain of manual multichannel + solution via AI-first, API-first automation.
+// Layout: H2 top, then asymmetric 2-col (pain left 5col / solution right 7col),
+//         benchmark stats row, StrategieVisual full-width below.
+// Dichte: HOCH — pain/solution contrast + visual.
+import StrategieVisual from "../../components/StrategieVisual.astro";
+import { AlertTriangle, TrendingDown, ShieldAlert, FileWarning, CheckCircle, BarChart3, RefreshCw, ShieldCheck } from "@lucide/astro";
+---
+
+<section class="py-20 md:py-32" data-service-anbindungen>
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <!-- Overline + Headline -->
+    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">
+      Marktplatz-Anbindungen
+    </p>
+    <h2 class="max-w-4xl">
+      Marktplatz-Chaos kostet Umsatz — <span class="text-accent-text">jeden Tag.</span>
+    </h2>
+    <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-6 max-w-3xl">
+      Ohne Automatisierung wird der Multichannel-Verkauf schnell zum Albtraum. Manuelle Prozesse, fehlerhafte Daten und fehlende Synchronisation kosten nicht nur Zeit, sondern auch Ranking, Marge und Account Health.
+    </p>
+
+    <!-- Pain Points (left) + Solution (right) -->
+    <div class="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 items-stretch gap-12 lg:gap-16">
+
+      <!-- Left 5col: Pain Points -->
+      <div class="lg:col-span-5 flex flex-col">
+        <div class="flex flex-col gap-4 flex-1 justify-between" data-pain-items>
+
+          <div class="pain-item group relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="mt-0.5 shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <FileWarning class="w-4 h-4 text-red-400/80" />
+              </div>
+              <div>
+                <p class="text-text-primary font-medium text-base">Manuelles CSV-Chaos</p>
+                <p class="text-text-secondary text-sm mt-1 leading-relaxed">Fehleranfällig und zeitraubend bei jedem Update. Copy-Paste als Prozess ist kein Prozess.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pain-item group relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="mt-0.5 shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <TrendingDown class="w-4 h-4 text-red-400/80" />
+              </div>
+              <div>
+                <p class="text-text-primary font-medium text-base">Ausverkäufe & Stornos</p>
+                <p class="text-text-secondary text-sm mt-1 leading-relaxed">Bestand nicht aktuell, schlechte Account Health, frustrierte Kunden und verlorene Buy Box.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pain-item group relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="mt-0.5 shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <AlertTriangle class="w-4 h-4 text-red-400/80" />
+              </div>
+              <div>
+                <p class="text-text-primary font-medium text-base">Ranking-Verlust</p>
+                <p class="text-text-secondary text-sm mt-1 leading-relaxed">Schlechte Datenqualität senkt die Sichtbarkeit. Der Algorithmus verzeiht keine Lücken in den Stammdaten.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pain-item group relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="mt-0.5 shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <ShieldAlert class="w-4 h-4 text-red-400/80" />
+              </div>
+              <div>
+                <p class="text-text-primary font-medium text-base">Compliance-Risiken</p>
+                <p class="text-text-secondary text-sm mt-1 leading-relaxed">Fehlende Pflichtattribute und falsche Kategorisierung führen zu Abmahnungen und Listing-Sperrungen.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right 7col: Solution -->
+      <div class="lg:col-span-7 flex flex-col">
+        <div class="relative flex flex-col flex-1" data-solution-block>
+          <!-- Solution badge -->
+          <span class="inline-flex items-center bg-accent/15 rounded-lg px-3 py-1.5 mb-6">
+            <span class="font-body text-xs font-medium uppercase tracking-[0.08em] text-accent-text">Die Lösung</span>
+          </span>
+
+          <h3 class="text-2xl md:text-[2rem] leading-tight">
+            Automatisierte Anbindungen. <span class="text-text-secondary">API First. AI First.</span>
+          </h3>
+
+          <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-5 max-w-xl">
+            Wir verwandeln deinen Online-Shop in eine automatisierte Multichannel-Maschine. Dein Shop bleibt die zentrale Datenquelle, Produkte, Preise und Bestellungen synchronisieren in Echtzeit. Ohne Excel-Chaos, ohne manuelle Uploads.
+          </p>
+
+          <!-- Solution Features — 2x2 Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 flex-1 auto-rows-fr" data-solution-cards>
+
+            <div class="solution-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <CheckCircle class="w-5 h-5 text-accent-text shrink-0" />
+                <p class="text-text-primary font-medium text-base">Zentrale Datenverwaltung</p>
+              </div>
+              <p class="text-text-secondary text-sm leading-relaxed">Ein System, alle Kanäle. Deine Produktdaten kommen direkt aus dem Shop. Sauber, strukturiert und marktplatzkonform.</p>
+            </div>
+
+            <div class="solution-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <CheckCircle class="w-5 h-5 text-accent-text shrink-0" />
+                <p class="text-text-primary font-medium text-base">Echtzeit-Updates</p>
+              </div>
+              <p class="text-text-secondary text-sm leading-relaxed">Preis- und Lageränderungen synchronisieren sich automatisch. Kein Zeitverzug, kein manuelles Nachziehen.</p>
+            </div>
+
+            <div class="solution-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <CheckCircle class="w-5 h-5 text-accent-text shrink-0" />
+                <p class="text-text-primary font-medium text-base">Listing-Qualität</p>
+              </div>
+              <p class="text-text-secondary text-sm leading-relaxed">KI-gestützte Datenanreicherung und Validierung nach Marktplatz-Vorgaben. Pflichtattribute, Kategorisierung und SEO-optimierte Texte werden automatisch generiert.</p>
+            </div>
+
+            <div class="solution-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <CheckCircle class="w-5 h-5 text-accent-text shrink-0" />
+                <p class="text-text-primary font-medium text-base">Bestellsynchronisation</p>
+              </div>
+              <p class="text-text-secondary text-sm leading-relaxed">Alle Bestellungen fließen automatisch zurück in dein System. Fulfillment, Tracking und Retouren in einem geschlossenen Kreislauf.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Context Text -->
+    <div class="mt-14 md:mt-20" data-context-text>
+      <h3>
+        Marktplatz-Anbindungen scheitern selten am Willen. Sie scheitern an den Produktdaten.
+      </h3>
+      <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-8">
+        Wir übernehmen den gesamten Prozess: vom Stammdaten-Mapping über die Plattformkonfiguration bis zum Live-Gang. Ob Amazon, Kaufland, Otto oder internationale Marktplätze. Wir wissen, welche Datenfelder Pflicht sind, welche die Sichtbarkeit treiben und wo die typischen Fehler passieren. Dein Shop bleibt die zentrale Datenquelle, die Marktplätze werden sauber angebunden und automatisch bespielt.
+      </p>
+    </div>
+
+    <!-- StrategieVisual — Flow-Diagramm -->
+    <div class="mt-16 md:mt-24">
+      <StrategieVisual />
+    </div>
+
+    <!-- SEO + AI Monitoring Context -->
+    <div class="mt-16 md:mt-24 border border-white/5 rounded-2xl p-8 md:p-10 lg:p-12" data-seo-context>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        <div class="lg:col-span-7">
+          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">SEO + KI-Monitoring</p>
+          <h3 class="text-2xl md:text-[2rem] leading-tight">
+            Sichtbarkeit ist kein Einmalprojekt. Wir monitoren, was der Marktplatz sieht.
+          </h3>
+          <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-5">
+            Jedes Listing wird nicht nur technisch korrekt angebunden, sondern organisch optimiert. Unsere KI-gestützten Prozesse überwachen Keyword-Shifts, Wettbewerbsveränderungen und saisonale Trends in Echtzeit. So wird die maximale Sichtbarkeit und Relevanz deiner Produkte zum System statt zum Zufallsprodukt.
+          </p>
+        </div>
+        <div class="lg:col-span-5 flex flex-col justify-center gap-6">
+          <div class="flex items-start gap-4">
+            <div class="mt-0.5 shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle">
+              <BarChart3 class="w-5 h-5 text-accent-text" />
+            </div>
+            <div>
+              <p class="text-text-primary font-medium text-base">Rank Lift Organic Methode</p>
+              <p class="text-text-secondary text-sm md:text-base leading-relaxed mt-1">Auf jedes Listing angewandt, nicht nur auf dein Flaggschiff</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="mt-0.5 shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle">
+              <RefreshCw class="w-5 h-5 text-accent-text" />
+            </div>
+            <div>
+              <p class="text-text-primary font-medium text-base">Automatische Anpassung</p>
+              <p class="text-text-secondary text-sm md:text-base leading-relaxed mt-1">Wenn sich Suchintentionen verschieben, reagieren wir bevor du es merkst</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="mt-0.5 shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle">
+              <ShieldCheck class="w-5 h-5 text-accent-text" />
+            </div>
+            <div>
+              <p class="text-text-primary font-medium text-base">Compliance-Checks</p>
+              <p class="text-text-secondary text-sm md:text-base leading-relaxed mt-1">Laufend gegen aktuelle Marktplatz-Updates validiert. Pflichtattribute und Kategorisierung immer aktuell.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  function initAnbindungen(): void {
+    const section = document.querySelector<HTMLElement>("[data-service-anbindungen]");
+    if (!section) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const overline = section.querySelector<HTMLElement>("p:first-child");
+    const h2 = section.querySelector<HTMLElement>("h2");
+    const introP = section.querySelector<HTMLElement>("h2 + p");
+    const painItems = section.querySelectorAll<HTMLElement>("[data-pain-items] > div");
+    const solutionBlock = section.querySelector<HTMLElement>("[data-solution-block]");
+    const solutionBadge = solutionBlock?.querySelector<HTMLElement>(".inline-flex");
+    const solutionH3 = solutionBlock?.querySelector<HTMLElement>("h3");
+    const solutionP = solutionBlock?.querySelector<HTMLElement>("p");
+    const solutionCards = section.querySelectorAll<HTMLElement>("[data-solution-cards] > div");
+    const contextText = section.querySelector<HTMLElement>("[data-context-text]");
+    const contextParagraphs = contextText?.querySelectorAll<HTMLElement>("p");
+    const seoContext = section.querySelector<HTMLElement>("[data-seo-context]");
+
+    if (reduced) return;
+
+    const ctx = gsap.context(() => {
+
+      // Overline
+      if (overline) {
+        gsap.set(overline, { opacity: 0, y: 10 });
+        gsap.to(overline, {
+          opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 78%", once: true },
+        });
+      }
+
+      // H2 SplitText
+      if (h2) {
+        const split = new SplitText(h2, { type: "words" });
+        gsap.set(split.words, { opacity: 0, y: 20 });
+        gsap.to(split.words, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 75%", once: true },
+        });
+      }
+
+      // Intro paragraph
+      if (introP) {
+        gsap.set(introP, { opacity: 0, y: 20 });
+        gsap.to(introP, {
+          opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+          scrollTrigger: { trigger: introP, start: "top 88%", once: true },
+        });
+      }
+
+      // Pain items stagger
+      if (painItems.length) {
+        gsap.set(painItems, { opacity: 0, y: 25 });
+        gsap.to(painItems, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out",
+          scrollTrigger: { trigger: painItems[0], start: "top 85%", once: true },
+        });
+      }
+
+      // Solution block elements
+      if (solutionBadge) {
+        gsap.set(solutionBadge, { opacity: 0, y: 10 });
+        gsap.to(solutionBadge, {
+          opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
+          scrollTrigger: { trigger: solutionBlock, start: "top 82%", once: true },
+        });
+      }
+
+      if (solutionH3) {
+        const splitH3 = new SplitText(solutionH3, { type: "words" });
+        gsap.set(splitH3.words, { opacity: 0, y: 15 });
+        gsap.to(splitH3.words, {
+          opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: "power2.out",
+          scrollTrigger: { trigger: solutionH3, start: "top 85%", once: true },
+        });
+      }
+
+      if (solutionP) {
+        gsap.set(solutionP, { opacity: 0, y: 20 });
+        gsap.to(solutionP, {
+          opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+          scrollTrigger: { trigger: solutionP, start: "top 88%", once: true },
+        });
+      }
+
+      // Solution cards stagger
+      if (solutionCards.length) {
+        gsap.set(solutionCards, { opacity: 0, y: 25 });
+        gsap.to(solutionCards, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
+          scrollTrigger: { trigger: solutionCards[0], start: "top 88%", once: true },
+        });
+      }
+
+      // Context text paragraphs
+      if (contextParagraphs?.length) {
+        gsap.set(contextParagraphs, { opacity: 0, y: 20 });
+        gsap.to(contextParagraphs, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out",
+          scrollTrigger: { trigger: contextText, start: "top 85%", once: true },
+        });
+      }
+
+      // SEO context block
+      if (seoContext) {
+        gsap.set(seoContext, { opacity: 0, y: 30 });
+        gsap.to(seoContext, {
+          opacity: 1, y: 0, duration: 0.7, ease: "power2.out",
+          scrollTrigger: { trigger: seoContext, start: "top 85%", once: true },
+        });
+      }
+
+    }, section);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initAnbindungen();
+  document.addEventListener("astro:after-swap", initAnbindungen);
+</script>
+
+<style>
+  .pain-item:hover {
+    border-color: rgba(239, 68, 68, 0.15);
+    background-color: rgba(239, 68, 68, 0.03);
+  }
+
+  .solution-card:hover {
+    transform: translateY(-1.5px);
+    border-color: rgba(76, 175, 130, 0.25);
+    box-shadow: 0 8px 30px rgba(76, 175, 130, 0.08);
+  }
+</style>

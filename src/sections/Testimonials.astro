@@ -7,8 +7,10 @@
 // Background: default (#0A0A0A)
 ---
 
-<section class="py-24 md:py-section">
+<section class="py-20 md:py-32" data-testimonials>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <h2 class="max-w-2xl mb-12 md:mb-16">Echte Kundenstimmen.</h2>
 
     <!-- Tier 1 — Featured, Instrument Serif, breiteste Stufe -->
     <blockquote class="max-w-4xl">
@@ -21,27 +23,75 @@
       </footer>
     </blockquote>
 
-    <!-- Tier 2 — mittlere Stufe, gleiche Textbehandlung wie Tier 3 -->
-    <blockquote class="max-w-2xl mt-16 md:mt-24">
-      <p class="text-base md:text-lg text-text-secondary leading-relaxed">
+    <!-- Tier 2 — Stefanie, gleiche Größe wie Tier 1 -->
+    <blockquote class="max-w-4xl mt-12 md:mt-16">
+      <p class="font-heading font-normal text-2xl md:text-4xl leading-[1.3] tracking-[-0.02em]">
         &bdquo;Während mein Umsatz um 14,1% zulegen konnte, hat sich mein Gewinn um 68,4% gesteigert. Dass die Agentur hält, was sie beim Thema organisches Wachstum verspricht, steht außer Frage.&ldquo;
       </p>
-      <footer class="mt-4">
+      <footer class="mt-6">
         <span class="text-sm text-text-secondary">Stefanie Eusemann</span>
         <span class="text-sm text-text-muted"> &middot; CEO &amp; Gründerin, Heaven+Paper</span>
       </footer>
     </blockquote>
 
-    <!-- Tier 3 — gleiche Textbehandlung wie Tier 2, Zitat zweizeilig für Pyramidenform -->
-    <blockquote class="max-w-lg mt-16 md:mt-24">
-      <p class="text-base md:text-lg text-text-secondary leading-relaxed">
+    <!-- Tier 3 — Marius, gleiche Größe wie Tier 1 -->
+    <blockquote class="max-w-4xl mt-12 md:mt-16">
+      <p class="font-heading font-normal text-2xl md:text-4xl leading-[1.3] tracking-[-0.02em]">
         &bdquo;Absoluter Profi, was Amazon angeht.<br />100% Empfehlung.&ldquo;
       </p>
-      <footer class="mt-4">
+      <footer class="mt-6">
         <span class="text-sm text-text-secondary">Marius Klein</span>
         <span class="text-sm text-text-muted"> &middot; CEO &amp; Gründer, Arider</span>
       </footer>
     </blockquote>
 
+    <!-- Tier 4 — Matthias, ohne Bindestriche, gekürzt -->
+    <blockquote class="max-w-4xl mt-12 md:mt-16">
+      <p class="font-heading font-normal text-2xl md:text-4xl leading-[1.3] tracking-[-0.02em]">
+        &bdquo;Wir arbeiten mit Kevin und seinem Team nun seit knapp 18 Monaten zusammen und ich kann meine wärmste Empfehlung aussprechen. Durch unsere Zusammenarbeit konnten wir unseren Absatz auf den Marktplätzen verdoppeln und dabei unseren Produkt, Bestellungs und Bestandspflegeprozess halbieren. Was ein grandioser Deal.&ldquo;
+      </p>
+      <footer class="mt-6">
+        <span class="text-sm text-text-secondary">Matthias Buchkärt</span>
+        <span class="text-sm text-text-muted"> &middot; Co-Gründer, Pack &amp; Smooch</span>
+      </footer>
+    </blockquote>
+
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  const section = document.querySelector("[data-testimonials]");
+  if (section) {
+    const quotes = section.querySelectorAll("blockquote");
+
+    quotes.forEach((quote) => {
+      const text = quote.querySelector("p");
+      const footer = quote.querySelector("footer");
+
+      gsap.set([text, footer].filter(Boolean), { opacity: 0, y: 20 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: quote,
+          start: "top 80%",
+          once: true,
+        },
+      })
+        .to(text, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+        })
+        .to(footer, {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        }, "-=0.3");
+    });
+  }
+</script>

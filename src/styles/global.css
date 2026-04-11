@@ -42,7 +42,7 @@
   /* Colors — Text */
   --color-text-primary: #EFEFEF;
   --color-text-secondary: #999999;
-  --color-text-muted: #555555;
+  --color-text-muted: #717171;
 
   /* Colors — Accent (Telos Green, dark-mode adapted) */
   --color-accent: #4CAF82;
@@ -51,7 +51,7 @@
   --color-accent-subtle: rgba(76, 175, 130, 0.12);
 
   /* Spacing */
-  --spacing-section: 10rem; /* 160px */
+  --spacing-section: 12.5rem; /* 200px */
 
   /* Border Radius */
   --radius-card: 1rem; /* 16px */
@@ -78,6 +78,12 @@
     min-height: 100dvh;
   }
 
+  /* Word-break for long German compound words on mobile */
+  h1, h2, h3, h4, p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
   /* Headings */
   h1, h2, h3, h4 {
     font-family: var(--font-heading);
@@ -87,7 +93,7 @@
   h1 {
     font-size: 4rem;
     line-height: 1.1;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   h2 {
@@ -110,7 +116,7 @@
 
   /* Mobile Type Scale */
   @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
+    h1 { font-size: 2.75rem; }
     h2 { font-size: 2rem; }
     h3 { font-size: 1.5rem; }
     h4 { font-size: 1.25rem; }
@@ -120,6 +126,30 @@
   ::selection {
     background-color: rgba(76, 175, 130, 0.2);
     color: var(--color-text-primary);
+  }
+
+  /* Grid Background — subtle green grid overlay for pages */
+  .grid-bg {
+    position: relative;
+  }
+
+  .grid-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(76, 175, 130, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(76, 175, 130, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+  }
+
+  .grid-bg > * {
+    position: relative;
+    z-index: 1;
   }
 
   /* Reduced Motion */

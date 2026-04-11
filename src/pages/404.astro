@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Seite nicht gefunden" description="Die angeforderte Seite existiert nicht.">
+  <section class="min-h-[60vh] flex items-center justify-center">
+    <div class="mx-auto max-w-7xl px-4 md:px-8 text-center">
+      <span class="block text-8xl md:text-[10rem] font-heading font-medium text-text-muted/30 leading-none mb-6">404</span>
+      <h1 class="text-3xl md:text-4xl tracking-normal mb-4">Seite nicht gefunden.</h1>
+      <p class="text-lg text-text-secondary max-w-md mx-auto mb-10">
+        Die Seite, die du suchst, existiert nicht oder wurde verschoben.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+        >
+          Zur Startseite
+        </a>
+        <a
+          href="/kontakt"
+          class="border border-white/10 hover:border-white/20 text-text-primary font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+        >
+          Kontakt aufnehmen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,141 @@
+---
+// KIProzesseVisual.astro — Clean Flywheel
+// 4 nodes: Knowledge (top), Daten (right), Engpässe (bottom), Prozesse (left)
+// Center: "AI first" with lightning icon — clearly inside hub, no orbit overlap
+// Single orbiting dot on a clean circle, no arrows
+---
+
+<div class="ki-visual w-full flex justify-center" aria-hidden="true">
+  <svg
+    class="w-full h-auto max-w-[480px]"
+    viewBox="0 0 480 480"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <filter id="fw-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+      </filter>
+      <!-- Circular orbit path for animateMotion (clockwise from top) -->
+      <path id="orbit-path" d="M 240,100 A 140,140 0 1 1 239.99,100 Z" />
+    </defs>
+
+    <!-- ═══ SINGLE ORBIT RING ═══ -->
+    <circle class="fw-ring" cx="240" cy="240" r="140" fill="none" stroke="rgba(76,175,130,0.12)" stroke-width="1" style="opacity:0;" />
+
+    <!-- ═══ CENTER HUB ═══ -->
+    <g class="fw-hub" style="opacity:0;">
+      <circle cx="240" cy="240" r="52" fill="rgba(76,175,130,0.03)" filter="url(#fw-glow)" />
+      <circle cx="240" cy="240" r="46" fill="rgba(76,175,130,0.03)" stroke="rgba(76,175,130,0.15)" stroke-width="1" />
+      <!-- Lightning icon — centered at hub center -->
+      <g transform="translate(231, 226)">
+        <path d="M11 0L4 10h5l-1.5 8L15 8H9.5L11 0z" fill="rgba(76,175,130,0.55)" />
+      </g>
+      <!-- Label — well inside hub circle (r=46, so bottom edge at y=286) -->
+      <text x="240" y="256" text-anchor="middle" fill="rgba(76,175,130,0.7)" font-family="var(--font-body)" font-size="11" font-weight="600" letter-spacing="0.05em">AI first</text>
+    </g>
+
+    <!-- ═══ NODE 1: Knowledge — top (12 Uhr) ═══ -->
+    <g class="fw-step" style="opacity:0;">
+      <circle cx="240" cy="100" r="6" fill="rgba(76,175,130,0.06)" stroke="rgba(76,175,130,0.3)" stroke-width="1.2" />
+      <circle cx="240" cy="100" r="2.5" fill="rgba(76,175,130,0.5)" />
+      <!-- Label pill — centered above node -->
+      <rect x="175" y="48" width="130" height="34" rx="17" fill="rgba(76,175,130,0.05)" stroke="rgba(76,175,130,0.16)" stroke-width="1" />
+      <text x="240" y="71" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="var(--font-body)" font-size="14" font-weight="500">Knowledge</text>
+    </g>
+
+    <!-- ═══ NODE 2: Daten — right (3 Uhr) ═══ -->
+    <g class="fw-step" style="opacity:0;">
+      <circle cx="380" cy="240" r="6" fill="rgba(76,175,130,0.06)" stroke="rgba(76,175,130,0.3)" stroke-width="1.2" />
+      <circle cx="380" cy="240" r="2.5" fill="rgba(76,175,130,0.5)" />
+      <!-- Label pill — right of node -->
+      <rect x="396" y="223" width="80" height="34" rx="17" fill="rgba(76,175,130,0.05)" stroke="rgba(76,175,130,0.16)" stroke-width="1" />
+      <text x="436" y="246" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="var(--font-body)" font-size="14" font-weight="500">Daten</text>
+    </g>
+
+    <!-- ═══ NODE 3: Engpässe — bottom (6 Uhr) ═══ -->
+    <g class="fw-step" style="opacity:0;">
+      <circle cx="240" cy="380" r="6" fill="rgba(76,175,130,0.06)" stroke="rgba(76,175,130,0.3)" stroke-width="1.2" />
+      <circle cx="240" cy="380" r="2.5" fill="rgba(76,175,130,0.5)" />
+      <!-- Label pill — centered below node -->
+      <rect x="175" y="396" width="130" height="34" rx="17" fill="rgba(76,175,130,0.05)" stroke="rgba(76,175,130,0.16)" stroke-width="1" />
+      <text x="240" y="419" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="var(--font-body)" font-size="14" font-weight="500">Engpässe</text>
+    </g>
+
+    <!-- ═══ NODE 4: Prozesse — left (9 Uhr) ═══ -->
+    <g class="fw-step" style="opacity:0;">
+      <circle cx="100" cy="240" r="6" fill="rgba(76,175,130,0.06)" stroke="rgba(76,175,130,0.3)" stroke-width="1.2" />
+      <circle cx="100" cy="240" r="2.5" fill="rgba(76,175,130,0.5)" />
+      <!-- Label pill — left of node -->
+      <rect x="4" y="223" width="80" height="34" rx="17" fill="rgba(76,175,130,0.05)" stroke="rgba(76,175,130,0.16)" stroke-width="1" />
+      <text x="44" y="246" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="var(--font-body)" font-size="14" font-weight="500">Prozesse</text>
+    </g>
+
+    <!-- ═══ ORBITING DOT ═══ -->
+    <circle class="fw-orbit-dot" r="5" fill="rgba(76,175,130,0.6)" style="opacity:0;">
+      <animateMotion dur="8s" repeatCount="indefinite" begin="1.5s">
+        <mpath href="#orbit-path" />
+      </animateMotion>
+    </circle>
+    <circle class="fw-orbit-glow" r="14" fill="rgba(76,175,130,0.08)" filter="url(#fw-glow)" style="opacity:0;">
+      <animateMotion dur="8s" repeatCount="indefinite" begin="1.5s">
+        <mpath href="#orbit-path" />
+      </animateMotion>
+    </circle>
+  </svg>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  function initKIVisual(): void {
+    const visual = document.querySelector<HTMLElement>(".ki-visual");
+    if (!visual) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      visual.querySelectorAll("[style*='opacity:0']").forEach(el => {
+        (el as HTMLElement).style.opacity = "1";
+      });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const hub = visual.querySelector(".fw-hub");
+      const ring = visual.querySelector(".fw-ring");
+      const steps = visual.querySelectorAll(".fw-step");
+      const orbitDots = visual.querySelectorAll(".fw-orbit-dot, .fw-orbit-glow");
+
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        scrollTrigger: {
+          trigger: visual,
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      // Hub appears first
+      tl.fromTo(hub, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" });
+
+      // Ring draws in
+      tl.to(ring, { opacity: 1, duration: 0.5 }, "-=0.3");
+
+      // Steps appear with stagger (4 nodes)
+      tl.to(steps[0], { opacity: 1, duration: 0.4, ease: "back.out(1.3)" }, "-=0.15");
+      tl.to(steps[1], { opacity: 1, duration: 0.4, ease: "back.out(1.3)" }, "-=0.15");
+      tl.to(steps[2], { opacity: 1, duration: 0.4, ease: "back.out(1.3)" }, "-=0.15");
+      tl.to(steps[3], { opacity: 1, duration: 0.4, ease: "back.out(1.3)" }, "-=0.15");
+
+      // Orbit dots appear
+      tl.to(orbitDots, { opacity: 1, duration: 0.3 }, "-=0.1");
+
+    }, visual);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initKIVisual();
+  document.addEventListener("astro:after-swap", initKIVisual);
+</script>

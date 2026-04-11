@@ -4,31 +4,50 @@
 // Komposition: Foto-dominant, Magazine-Style. Breites Foto als Hero-Element,
 // kurzer Haltungssatz darunter, Stats + Badge als kompakte Zeile.
 // Background: #0A0A0A (default)
-import { ShieldCheck } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import duoPhoto from '../assets/luca-kevin-ueber-uns.jpg';
+import StaatlichBadge from '../components/StaatlichBadge.astro';
 ---
 
-<section class="py-24 md:py-section">
+<section class="py-20 md:py-32" data-trust>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
     <!-- Headline -->
     <h2 class="max-w-3xl">Warum es uns gibt.</h2>
 
     <!-- Foto — breit, cinematisch, das Hero-Element dieser Section -->
-    <div class="mt-12 md:mt-16">
-      <div class="bg-surface rounded-2xl aspect-[21/9] overflow-hidden">
-        <!-- Replace with real candid photo of Luca & Kevin -->
+    <div class="mt-10 md:mt-14">
+      <div class="rounded-2xl overflow-hidden" data-trust-photo>
+        <Image
+          src={duoPhoto}
+          alt="Kevin und Luca, Gründer von KFL Consulting"
+          widths={[600, 900, 1200]}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+          class="w-full h-auto object-cover aspect-[21/9] object-top"
+        />
       </div>
     </div>
 
-    <!-- Origin Story — persönlich, authentisch -->
-    <p class="text-lg md:text-xl text-text-secondary leading-relaxed mt-10 md:mt-14 max-w-2xl">
-      Wir haben zu viele Brands gesehen, die bei Agenturen nur eine Nummer waren. Deshalb gibt es Telos. Nicht als nächste Full Service Agentur, sondern als der Partner, den wir selbst gerne gehabt hätten.
-    </p>
+    <!-- Kontrast zum Markt + eigene Positionierung -->
+    <div class="mt-8 md:mt-10 space-y-5">
+      <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        Viele Full-Service-Agenturen arbeiten mit standardisierten Vorlagen und denselben Abläufen für jeden Account. Dazu ein automatisiertes Tool für Werbeanzeigen und danach wird der Account kaum noch betreut. Oder es wird eine Beteiligung an deinem Umsatz gefordert, was deine Margen noch mehr verringert.
+      </p>
+      <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        Wir kombinieren wissenschaftlich fundierte Methodik mit echter Praxiserfahrung und AI-First-Strategien.
+      </p>
+    </div>
+    <a
+      href="/ueber-uns"
+      class="inline-block text-accent-text hover:underline text-base font-medium mt-4 transition-colors duration-200"
+    >
+      Mehr über uns erfahren &rarr;
+    </a>
 
     <!-- Stats + Badge — eine kompakte Zeile -->
-    <div class="mt-12 md:mt-16 flex flex-wrap items-center gap-x-12 gap-y-6">
+    <div class="mt-10 md:mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 md:gap-x-12 md:gap-y-6">
       <div>
-        <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">75+</span>
+        <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">80+</span>
         <span class="font-body block text-sm text-text-muted mt-1">Marken</span>
       </div>
       <div>
@@ -39,11 +58,94 @@ import { ShieldCheck } from '@lucide/astro';
         <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">140+</span>
         <span class="font-body block text-sm text-text-muted mt-1">Marktplatz-Setups</span>
       </div>
-      <span class="inline-flex items-center gap-2 bg-accent-subtle text-accent-text text-sm font-medium px-4 py-2 rounded-badge">
-        <ShieldCheck class="w-4 h-4" />
-        Staatlich akkreditierte Berater
-      </span>
+      <StaatlichBadge />
     </div>
 
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  const section = document.querySelector("[data-trust]");
+  if (section) {
+    const h2 = section.querySelector("h2");
+    const photo = section.querySelector("[data-trust-photo]");
+    const story = section.querySelector("p.text-lg");
+    const statItems = section.querySelectorAll(".flex.flex-wrap > div");
+    const badge = section.querySelector(".inline-flex");
+
+    // H2 SplitText reveal
+    if (h2) {
+      const split = new SplitText(h2, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+
+      gsap.to(split.words, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          once: true,
+        },
+      });
+    }
+
+    // Photo reveal — clip from left
+    if (photo) {
+      gsap.set(photo, { clipPath: "inset(0 100% 0 0)" });
+
+      gsap.to(photo, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 1,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: photo,
+          start: "top 80%",
+          once: true,
+        },
+      });
+    }
+
+    // Origin story fade-in
+    if (story) {
+      gsap.set(story, { opacity: 0, y: 20 });
+
+      gsap.to(story, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: story,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    }
+
+    // Stats stagger + badge
+    const statsAndBadge = [...Array.from(statItems), badge].filter(Boolean) as Element[];
+    if (statsAndBadge.length) {
+      gsap.set(statsAndBadge, { opacity: 0, y: 20 });
+
+      gsap.to(statsAndBadge, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: statItems[0] || badge,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    }
+  }
+</script>

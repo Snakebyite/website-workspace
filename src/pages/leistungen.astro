@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LeistungenHero from "../sections/leistungen/LeistungenHero.astro";
+import ServiceSEO from "../sections/leistungen/ServiceSEO.astro";
+import ServiceStrategie from "../sections/leistungen/ServiceStrategie.astro";
+import ServiceAnbindungen from "../sections/leistungen/ServiceAnbindungen.astro";
+import ServiceKI from "../sections/leistungen/ServiceKI.astro";
+import LeistungenCTA from "../sections/leistungen/LeistungenCTA.astro";
+---
+
+<BaseLayout
+  title="Leistungen"
+  description="Amazon SEO, Marktplatz-Strategie, Marktplatz-Anbindungen und KI-Automatisierung. Alles aus einer Hand, datenbasiert und auf Augenhöhe."
+>
+  <div class="grid-bg">
+    <LeistungenHero />
+
+    <ServiceSEO />
+    <ServiceStrategie />
+    <ServiceAnbindungen />
+    <ServiceKI />
+    <LeistungenCTA />
+  </div>
+</BaseLayout>

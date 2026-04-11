@@ -1,0 +1,447 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Check, Star, ArrowRight, Download } from "@lucide/astro";
+---
+
+<BaseLayout
+  title="Rankflift Organic"
+  description="Kostenloser Leitfaden: Wie D2C Brands 7 bis 14% mehr Marge erzielen durch organische Sichtbarkeit auf Amazon."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-7xl px-4 md:px-8">
+    <div class="max-w-3xl">
+      <span class="inline-block text-xs font-body font-medium uppercase tracking-[0.08em] text-accent-text bg-accent-subtle px-3 py-1 rounded-badge mb-8">
+        Kostenloser Leitfaden
+      </span>
+      <h1 class="text-text-primary">Rankflift Organic</h1>
+      <p class="mt-8 text-lg md:text-xl text-text-secondary leading-relaxed max-w-2xl">
+        Wie D2C Brands 7 bis 14% mehr Marge erzielen. Durch organische Sichtbarkeit statt Ads-Abhängigkeit auf Amazon.
+      </p>
+      <p class="mt-6 text-sm text-text-muted max-w-xl">
+        Über 80 e-Com Brands auf digitalen Marktplätzen begleitet. Staatlich akkreditierte Beratungsagentur.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <div class="flex items-center gap-2 text-sm text-text-secondary">
+          <span class="w-5 h-5 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
+            <Check class="w-3 h-3 text-accent" />
+          </span>
+          Staatlich zertifizierte Beratung
+        </div>
+        <div class="flex items-center gap-2 text-sm text-text-secondary">
+          <span class="w-5 h-5 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
+            <Check class="w-3 h-3 text-accent" />
+          </span>
+          Staatlich zertifizierte Beratung
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opt-in Form -->
+  <section class="mx-auto max-w-7xl px-4 md:px-8 mt-24 md:mt-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+      <!-- Left: Context -->
+      <div>
+        <h2 class="text-text-primary">Lerne den Rankflift Organic Blueprint kennen</h2>
+        <p class="mt-6 text-text-secondary text-lg leading-relaxed">
+          Hol dir den kostenlosen Leitfaden mit Checkliste, Strategie-Framework und konkreten Optimierungstipps für deine Amazon Listings.
+        </p>
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-start gap-3 text-text-secondary">
+            <Check class="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <span>Schritt-für-Schritt Anleitung für organisches Ranking</span>
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <Check class="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <span>Checkliste für Listing-Optimierung</span>
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <Check class="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <span>Strategie-Framework mit konkreten Beispielen</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: Form -->
+      <div id="form-container">
+        <div class="bg-surface rounded-card p-6 md:p-8">
+          <form id="optin-form" class="flex flex-col gap-5">
+            <div>
+              <label for="optin-name" class="text-sm text-text-secondary mb-1.5 block">Name <span class="text-accent">*</span></label>
+              <input
+                type="text"
+                id="optin-name"
+                name="name"
+                required
+                placeholder="Max Mustermann"
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="optin-email" class="text-sm text-text-secondary mb-1.5 block">E-Mail <span class="text-accent">*</span></label>
+              <input
+                type="email"
+                id="optin-email"
+                name="email"
+                required
+                placeholder="max@unternehmen.de"
+                class="form-input"
+              />
+            </div>
+            <button
+              type="submit"
+              class="mt-2 w-full bg-accent hover:bg-accent-hover text-background font-medium py-3.5 rounded-button transition-colors duration-200 text-base flex items-center justify-center gap-2"
+            >
+              <Download class="w-4 h-4" />
+              Leitfaden kostenlos herunterladen
+            </button>
+          </form>
+          <p class="mt-4 text-xs text-text-muted leading-relaxed">
+            Deine Daten werden vertraulich behandelt. Mit dem Download stimmst du unserer
+            <a href="/datenschutz" class="text-accent-text hover:text-accent transition-colors duration-200 underline">Datenschutzerklärung</a> zu.
+          </p>
+        </div>
+
+        <!-- Success state (hidden by default) -->
+        <div id="form-success" class="hidden bg-surface rounded-card p-6 md:p-8 text-center">
+          <div class="w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-4">
+            <Check class="w-6 h-6 text-accent" />
+          </div>
+          <h3 class="text-text-primary text-xl mb-2">Dein Leitfaden ist bereit</h3>
+          <p class="text-text-secondary text-sm mb-6">Klicke auf den Button, um den Rankflift Organic Leitfaden zu öffnen.</p>
+          <a
+            href="/assets/rankflift-organic-leitfaden.html"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-background font-medium py-3.5 px-8 rounded-button transition-colors duration-200"
+          >
+            <Download class="w-4 h-4" />
+            Leitfaden öffnen
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Preview -->
+  <section class="mx-auto max-w-7xl px-4 md:px-8 mt-32 md:mt-40">
+    <h2 class="text-text-primary max-w-xl">Was steckt drin?</h2>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="feature-card">
+        <h4 class="text-text-primary">Amazon A10 Algorithmus</h4>
+        <p class="mt-3 text-text-secondary text-sm leading-relaxed">
+          Verstehe, wie Amazon Produkte rankt. Relevanz- und Performance-Faktoren einfach erklärt.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h4 class="text-text-primary">Die Roots-Strategie</h4>
+        <p class="mt-3 text-text-secondary text-sm leading-relaxed">
+          Long-Tail Keywords als Fundament für nachhaltiges organisches Wachstum.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h4 class="text-text-primary">Amazon Rufus & KI</h4>
+        <p class="mt-3 text-text-secondary text-sm leading-relaxed">
+          Was der neue KI-Assistent für deine Listings bedeutet. Mit konkreten Anforderungen.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h4 class="text-text-primary">Die 10/80/10 Regel</h4>
+        <p class="mt-3 text-text-secondary text-sm leading-relaxed">
+          Wie du mit KI-Unterstützung dein gesamtes Portfolio effizient optimierst.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10/80/10 Visual -->
+  <section class="mx-auto max-w-7xl px-4 md:px-8 mt-32 md:mt-40">
+    <h2 class="text-text-primary max-w-2xl">Geschwindigkeit schlägt Perfektion: Die 10/80/10 Regel</h2>
+    <p class="mt-6 text-text-secondary text-lg max-w-xl">
+      Die effizienteste Methode, um hunderte Listings zu optimieren, ohne Qualität zu opfern.
+    </p>
+
+    <!-- Bar visualization -->
+    <div class="mt-12 flex flex-col md:flex-row gap-4 md:gap-0">
+      <div class="rule-block rule-block--small md:w-[15%]">
+        <span class="rule-block__percent">10%</span>
+        <span class="rule-block__label">Recherche & Strategie</span>
+      </div>
+      <div class="rule-block rule-block--large md:w-[70%]">
+        <span class="rule-block__percent">80%</span>
+        <span class="rule-block__label">KI-gestützte Umsetzung</span>
+      </div>
+      <div class="rule-block rule-block--small md:w-[15%]">
+        <span class="rule-block__percent">10%</span>
+        <span class="rule-block__label">Expert Review</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof / Testimonials -->
+  <section class="mx-auto max-w-7xl px-4 md:px-8 mt-32 md:mt-40">
+    <h2 class="text-text-primary max-w-2xl">Das schreiben Partner über unsere Zusammenarbeit</h2>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card">
+        <div class="flex gap-1 mb-4">
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+        </div>
+        <p class="font-heading text-lg text-text-primary leading-snug">
+          "Unsere organische Sichtbarkeit auf Amazon hat sich innerhalb von drei Monaten verdoppelt. Die Zusammenarbeit war strukturiert, transparent und ergebnisorientiert."
+        </p>
+        <div class="mt-6 flex items-center gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Qualität</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Beratung</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Preis/Leistung</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-text-muted">D2C Brand, Nahrungsergänzung</p>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card">
+        <div class="flex gap-1 mb-4">
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+        </div>
+        <p class="font-heading text-lg text-text-primary leading-snug">
+          "Endlich eine Agentur, die nicht nur PPC-Budgets hochdreht, sondern organisch denkt. Der Leitfaden war der Einstieg, die Beratung hat den Unterschied gemacht."
+        </p>
+        <div class="mt-6 flex items-center gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Qualität</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Authentizität</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Beratung</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-text-muted">Hersteller, Beauty & Skincare</p>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card">
+        <div class="flex gap-1 mb-4">
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+        </div>
+        <p class="font-heading text-lg text-text-primary leading-snug">
+          "Wir haben vorher alles über PPC gelöst. Die organische Strategie von KFL hat unsere Margen spürbar verbessert, weil die Werbekosten deutlich gesunken sind."
+        </p>
+        <div class="mt-6 flex items-center gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Preis/Leistung</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Qualität</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Beratung</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-text-muted">D2C Brand, Home & Living</p>
+      </div>
+
+      <!-- Testimonial 4 -->
+      <div class="testimonial-card">
+        <div class="flex gap-1 mb-4">
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+          <Star class="w-4 h-4 text-accent fill-accent" />
+        </div>
+        <p class="font-heading text-lg text-text-primary leading-snug">
+          "Der Rankflift Organic Leitfaden war für uns der Startpunkt. Danach wussten wir, welche Hebel wir zuerst bewegen müssen. Klare Empfehlung."
+        </p>
+        <div class="mt-6 flex items-center gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Authentizität</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Qualität</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-rating-label">Preis/Leistung</span>
+            <div class="flex gap-0.5"><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /><Star class="w-3 h-3 text-accent fill-accent" /></div>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-text-muted">Reseller, Elektronik</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-7xl px-4 md:px-8 mt-32 md:mt-40 pb-32 md:pb-40">
+    <div class="max-w-2xl">
+      <h2 class="text-text-primary">Bereit für margenstarkes Wachstum?</h2>
+      <p class="mt-6 text-text-secondary text-lg leading-relaxed">
+        Du willst wissen, wie viel organisches Potenzial in deinem Portfolio steckt?
+      </p>
+      <a
+        href="/kontakt"
+        class="mt-8 inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-background font-medium py-3.5 px-8 rounded-button transition-colors duration-200"
+      >
+        Erstgespräch buchen
+        <ArrowRight class="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-badge);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-surface-elevated);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    transition: border-color 0.2s ease-out;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .feature-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+    transition: background-color 0.2s ease-out;
+  }
+
+  .feature-card:hover {
+    background: var(--color-surface-elevated);
+  }
+
+  .rule-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    border-radius: var(--radius-card);
+    text-align: center;
+  }
+
+  .rule-block--small {
+    background: var(--color-surface);
+  }
+
+  .rule-block--large {
+    background: var(--color-accent);
+  }
+
+  .rule-block__percent {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .rule-block--small .rule-block__percent {
+    color: var(--color-text-primary);
+  }
+
+  .rule-block--large .rule-block__percent {
+    color: var(--color-background);
+  }
+
+  .rule-block__label {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .rule-block--small .rule-block__label {
+    color: var(--color-text-secondary);
+  }
+
+  .rule-block--large .rule-block__label {
+    color: var(--color-background);
+  }
+
+  .testimonial-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+  }
+
+  .text-rating-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('optin-form') as HTMLFormElement | null;
+  const formContainer = document.getElementById('form-container');
+  const successEl = document.getElementById('form-success');
+
+  if (form && formContainer && successEl) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const name = formData.get('name') as string;
+      const email = formData.get('email') as string;
+
+      // TODO: Send data to backend API (e.g. newsletter service, CRM)
+      // Example:
+      // fetch('/api/optin', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ name, email, source: 'rankflift-organic' })
+      // });
+
+      console.log('Opt-in submitted:', { name, email });
+
+      // Show success, hide form
+      form.parentElement!.classList.add('hidden');
+      successEl.classList.remove('hidden');
+    });
+  }
+</script>

@@ -1,0 +1,138 @@
+---
+// ServiceKI — KI & Automatisierung
+// Job: Position AI as enabler, not replacement. Process-first mentality.
+// Layout: Full-width text, then 3-column use-case grid below.
+// Dichte: MITTEL — text-driven, examples illustrate.
+import { FileText, BarChart3, Workflow } from "@lucide/astro";
+---
+
+<section class="pt-28 md:pt-40 pb-20 md:pb-32" data-service-ki>
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <!-- Overline + Headline -->
+    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">
+      KI und Automatisierung
+    </p>
+    <h2 class="max-w-4xl">
+      Erst der Prozess, dann die Automatisierung. Nie umgekehrt.
+    </h2>
+
+    <!-- Text — full width -->
+    <div class="mt-10 md:mt-14 max-w-5xl">
+      <p class="text-text-secondary text-lg md:text-xl leading-relaxed">
+        KI auf einen schlechten Prozess zu kippen beschleunigt nur das Chaos. Deshalb starten wir nie mit dem Tool, sondern mit der Frage: <span class="text-text-primary font-medium">Wo verlierst du Zeit, ohne es zu merken?</span>
+      </p>
+      <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
+        Wir identifizieren die Engpässe in deinen operativen Abläufen, designen den Prozess sauber und automatisieren dann gezielt. Mit KI, wo sie einen echten Hebel hat, und mit klassischer Automatisierung, wo Zuverlässigkeit wichtiger ist als Intelligenz.
+      </p>
+      <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
+        Das Ergebnis: weniger manueller Aufwand, weniger Fehler, mehr Zeit für die Dinge, die nur du entscheiden kannst. Nicht KI um der KI willen, sondern KI als Werkzeug, das dir operative Freiräume schafft.
+      </p>
+    </div>
+
+    <!-- Use-Case grid — 3 columns -->
+    <div class="mt-14 md:mt-20">
+      <h3 class="font-body text-lg font-medium text-text-primary mb-8">Wo wir automatisieren</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-ki-cards>
+        <div class="ki-card relative bg-surface rounded-2xl p-6 md:p-8 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
+          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 ki-card-line"></div>
+          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle mb-5">
+            <FileText class="w-5 h-5 text-accent-text" />
+          </div>
+          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-3 transition-colors duration-300">Produktdaten</p>
+          <p class="text-text-primary font-medium text-lg mb-2">Listing Texte und Content</p>
+          <p class="text-text-secondary text-sm leading-relaxed">KI gestützte Texterstellung auf Basis deiner Keyword Map. Mit Review Loop, nie vollautomatisch.</p>
+        </div>
+
+        <div class="ki-card relative bg-surface rounded-2xl p-6 md:p-8 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
+          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 ki-card-line"></div>
+          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle mb-5">
+            <BarChart3 class="w-5 h-5 text-accent-text" />
+          </div>
+          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-3 transition-colors duration-300">Reporting</p>
+          <p class="text-text-primary font-medium text-lg mb-2">KPI Dashboard und Alerts</p>
+          <p class="text-text-secondary text-sm leading-relaxed">Automatisierte Reports, die dir zeigen was sich verändert hat. Statt dass du es selbst suchen musst.</p>
+        </div>
+
+        <div class="ki-card relative bg-surface rounded-2xl p-6 md:p-8 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
+          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 ki-card-line"></div>
+          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle mb-5">
+            <Workflow class="w-5 h-5 text-accent-text" />
+          </div>
+          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-3 transition-colors duration-300">Workflows</p>
+          <p class="text-text-primary font-medium text-lg mb-2">Operative Prozesse</p>
+          <p class="text-text-secondary text-sm leading-relaxed">Von der Bestellverarbeitung bis zur Stammdatenpflege. Wiederkehrende Abläufe, die keine menschliche Entscheidung brauchen.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  const section = document.querySelector("[data-service-ki]");
+  if (section) {
+    const overline = section.querySelector("p:first-child");
+    const h2 = section.querySelector("h2");
+    const textBlock = section.querySelector(".max-w-5xl");
+    const paragraphs = textBlock?.querySelectorAll("p");
+    const cardHeading = section.querySelector("[data-ki-cards]")?.previousElementSibling;
+    const cards = section.querySelectorAll("[data-ki-cards] > div");
+
+    if (overline) {
+      gsap.set(overline, { opacity: 0, y: 10 });
+      gsap.to(overline, {
+        opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
+        scrollTrigger: { trigger: section, start: "top 78%", once: true },
+      });
+    }
+
+    if (h2) {
+      const split = new SplitText(h2, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+      gsap.to(split.words, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+        scrollTrigger: { trigger: section, start: "top 75%", once: true },
+      });
+    }
+
+    if (paragraphs?.length) {
+      gsap.set(paragraphs, { opacity: 0, y: 20 });
+      gsap.to(paragraphs, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out",
+        scrollTrigger: { trigger: paragraphs[0], start: "top 85%", once: true },
+      });
+    }
+
+    if (cardHeading) {
+      gsap.set(cardHeading, { opacity: 0, y: 15 });
+      gsap.to(cardHeading, {
+        opacity: 1, y: 0, duration: 0.5, ease: "power2.out",
+        scrollTrigger: { trigger: cardHeading, start: "top 85%", once: true },
+      });
+    }
+
+    if (cards.length) {
+      gsap.set(cards, { opacity: 0, y: 25 });
+      gsap.to(cards, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: cards[0], start: "top 88%", once: true },
+      });
+    }
+  }
+</script>
+
+<style>
+  .ki-card:hover .ki-card-line {
+    background-color: rgba(76, 175, 130, 0.5);
+  }
+
+  .ki-card:hover p:first-child {
+    color: var(--color-accent-text);
+  }
+</style>

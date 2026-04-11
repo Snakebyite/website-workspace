@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rankflift Organic: Der Leitfaden f&uuml;r margenstarkes Wachstum auf Amazon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --surface-elevated: #1C1C1C;
+      --border: rgba(255,255,255, 0.05);
+      --text-primary: #EFEFEF;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --accent: #4CAF82;
+      --accent-hover: #348066;
+      --accent-text: #6BAF96;
+      --accent-subtle: rgba(76, 175, 130, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* ── Cover Page ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(76,175,130,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 span {
+      color: var(--accent);
+    }
+
+    .cover-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 32px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .cover-meta strong {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .cover-bottom {
+      position: absolute;
+      bottom: 60px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .cover-brand {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    .cover-url {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── Section Pages ── */
+    .section-page {
+      padding: 80px 60px;
+      min-height: 100vh;
+      page-break-before: always;
+    }
+
+    .section-number {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-page h2 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .section-page h2 span {
+      color: var(--accent);
+    }
+
+    .section-intro {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ── Info Cards ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .info-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .info-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .info-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .info-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Checklist ── */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      transition: border-color 0.2s;
+    }
+
+    .checklist li:hover {
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+      position: relative;
+    }
+
+    .check-box::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 6px;
+      width: 6px;
+      height: 10px;
+      border: solid var(--accent);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0.3;
+    }
+
+    .check-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .check-content p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Two-Column Layout ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .col-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .col-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .col-card h3 .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .col-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .col-card ul li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .col-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    /* ── Process Steps ── */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), rgba(76,175,130,0.1));
+    }
+
+    .process-step {
+      display: flex;
+      gap: 24px;
+      padding: 24px 0;
+      position: relative;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(76,175,130,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 4px;
+    }
+
+    .step-content h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Highlight Box ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(76,175,130,0.08), rgba(76,175,130,0.02));
+      border: 1px solid rgba(76,175,130,0.15);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin: 40px 0;
+    }
+
+    .highlight-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .highlight-box .stat-row {
+      display: flex;
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Listing Requirements Table ── */
+    .req-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 24px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .req-table th {
+      background: var(--surface-elevated);
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .req-table td {
+      background: var(--surface);
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .req-table td:first-child {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .req-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .req-badge.must {
+      background: rgba(76,175,130,0.12);
+      color: var(--accent);
+    }
+
+    .req-badge.nice {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+    }
+
+    /* ── CTA Page ── */
+    .cta-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 60px;
+      page-break-before: always;
+    }
+
+    .cta-page h2 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .cta-page p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .cta-trust {
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── Footer ── */
+    .pdf-footer {
+      text-align: center;
+      padding: 40px 60px;
+      color: var(--text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Print/PDF ── */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { max-width: 100%; }
+      .cover, .section-page, .cta-page { min-height: auto; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ════════════════ COVER ════════════════ -->
+    <div class="cover">
+      <div class="cover-label">Kostenloser Leitfaden</div>
+      <h1>Rankflift <span>Organic</span></h1>
+      <p class="cover-sub">
+        Wie D2C-Brands 7&ndash;14% mehr Marge erzielen. Durch organische Sichtbarkeit statt Ads-Abh&auml;ngigkeit auf Amazon.
+      </p>
+      <div class="cover-meta">
+        <div><strong>Autor:</strong> Kevin Flursch&uuml;tz</div>
+        <div><strong>F&uuml;r:</strong> D2C Brands, 20k&ndash;500k &euro;/Monat</div>
+        <div><strong>Lesezeit:</strong> 8 Minuten</div>
+      </div>
+      <div class="cover-bottom">
+        <div class="cover-brand">KFL Consulting</div>
+        <div class="cover-url">kfl-consulting.de</div>
+      </div>
+    </div>
+
+    <!-- ════════════════ SECTION 1: Ausgangslage ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Kapitel 01</div>
+      <h2>Warum organisch der <span>profitablere</span> Weg ist</h2>
+      <p class="section-intro">
+        Die meisten Amazon-Seller investieren den Gro&szlig;teil ihres Budgets in PPC und verlieren dabei Marge. Organische Sichtbarkeit ist der Hebel, den die wenigsten konsequent nutzen.
+      </p>
+
+      <div class="highlight-box">
+        <h3>Das Problem in Zahlen</h3>
+        <p>
+          Brands geben im Schnitt 15&ndash;30% ihres Umsatzes f&uuml;r Amazon Ads aus. Bei gleichem Umsatz k&ouml;nnten 7&ndash;14% davon als zus&auml;tzlicher Gewinn verbleiben, wenn die organischen Rankings stimmen.
+        </p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-value">7&ndash;14%</div>
+            <div class="stat-label">Mehr Marge</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">Klicks auf organische Ergebnisse</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">A10</div>
+            <div class="stat-label">Algorithmus verstehen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ SECTION 2: A10 Algorithmus ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Kapitel 02</div>
+      <h2>Der Amazon <span>A10</span>-Algorithmus</h2>
+      <p class="section-intro">
+        Amazons Algorithmus zeigt dem Kunden das Produkt, das am besten zu ihm passt. Er bewertet dein Listing auf zwei Ebenen.
+      </p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <h3><span class="dot"></span> Relevanzfaktoren</h3>
+          <ul>
+            <li>Keyword-Auswahl &amp; Platzierung im Listing</li>
+            <li>Wortfolge &amp; exakte Phrasen-Matches</li>
+            <li>Backend-Keywords &amp; Subject Matter</li>
+            <li>Indexierung &amp; Abdeckungsgrad</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <h3><span class="dot"></span> Performance-Faktoren</h3>
+          <ul>
+            <li>Click-Through-Rate (CTR)</li>
+            <li>Conversion Rate (CVR)</li>
+            <li>Verk&auml;ufe &amp; Sales Velocity</li>
+            <li>Kundenbewertungen &amp; Rating</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Was das f&uuml;r dich bedeutet</h3>
+        <p>
+          Du kannst die <strong>Relevanzfaktoren</strong> direkt beeinflussen, und zwar durch systematische Listing-Optimierung. Die Performance-Faktoren folgen, wenn die Relevanz stimmt. Rankflift setzt genau hier an.
+        </p>
+      </div>
+    </div>
+
+    <!-- ════════════════ SECTION 3: Roots-Strategie ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Kapitel 03</div>
+      <h2>Die <span>Roots</span>-Strategie</h2>
+      <p class="section-intro">
+        Statt auf die teuersten, hochvolumigen Keywords zu setzen, baust du nachhaltiges Wachstum von unten auf. Wie ein Baum, der &uuml;ber seine Wurzeln w&auml;chst.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon">&#127793;</div>
+          <h3>Long-Tail First</h3>
+          <p>Konzentriere dich auf spezifische Keywords mit hoher Kaufabsicht. Weniger Volumen, aber deutlich h&ouml;here Conversion.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">&#128200;</div>
+          <h3>Compound Growth</h3>
+          <p>Jedes rankende Long-Tail-Keyword st&auml;rkt die Relevanz f&uuml;r &uuml;bergeordnete Short-Tail-Keywords. Rankings bauen aufeinander auf.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">&#128176;</div>
+          <h3>Weniger Ad-Spend</h3>
+          <p>Organisch rankende Long-Tails brauchen kein PPC-Budget. Jeder organische Verkauf ist Reingewinn f&uuml;r deine Marge.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">&#128170;</div>
+          <h3>Nachhaltige Positionen</h3>
+          <p>Long-Tail-Rankings sind stabiler und schwerer angreifbar als generische Top-Keywords, wo der Wettbewerb st&auml;ndig dr&uuml;ckt.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ SECTION 4: Amazon Rufus ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Kapitel 04</div>
+      <h2>Amazon <span>Rufus</span>: der KI-Faktor</h2>
+      <p class="section-intro">
+        Amazons KI-Assistent Rufus ver&auml;ndert, wie Produkte gefunden werden. Er versteht Kundenabsicht kontextabh&auml;ngig, nicht nur einzelne Keywords.
+      </p>
+
+      <div class="highlight-box">
+        <h3>Was Rufus bedeutet</h3>
+        <p>
+          Rufus analysiert das gesamte Listing (Titel, Bullets, Beschreibung, Bilder) und bewertet, ob dein Produkt die <strong>Kundenanfrage ganzheitlich beantwortet</strong>. Stumpfes Keyword-Stuffing funktioniert nicht mehr.
+        </p>
+      </div>
+
+      <h3 style="font-size: 18px; font-weight: 600; margin: 32px 0 16px; letter-spacing: -0.01em;">Listing-Anforderungen f&uuml;r Rufus-Optimierung</h3>
+
+      <table class="req-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Anforderung</th>
+            <th>Priorit&auml;t</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Titel</td>
+            <td>Maximale L&auml;nge nutzen (~166 Zeichen)</td>
+            <td><span class="req-badge must">Muss</span></td>
+          </tr>
+          <tr>
+            <td>Bullet Points</td>
+            <td>Alle 5 Bullets ausf&uuml;llen, nutzenorientiert</td>
+            <td><span class="req-badge must">Muss</span></td>
+          </tr>
+          <tr>
+            <td>Bilder</td>
+            <td>6&ndash;9 Bilder (inkl. Infografiken)</td>
+            <td><span class="req-badge must">Muss</span></td>
+          </tr>
+          <tr>
+            <td>A+ Content</td>
+            <td>Enhanced Brand Content aktiv nutzen</td>
+            <td><span class="req-badge must">Muss</span></td>
+          </tr>
+          <tr>
+            <td>Rating</td>
+            <td>Mindestens 4+ Sterne</td>
+            <td><span class="req-badge nice">Ziel</span></td>
+          </tr>
+          <tr>
+            <td>Backend-Keywords</td>
+            <td>Alle Felder ausf&uuml;llen, keine Duplikate</td>
+            <td><span class="req-badge must">Muss</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ════════════════ SECTION 5: 10/80/10-Regel ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Kapitel 05</div>
+      <h2>Die <span>10/80/10</span>-Regel</h2>
+      <p class="section-intro">
+        Perfektion f&uuml;r wenige Listings oder 80% Potenzial f&uuml;r alle? Die Antwort ist klar. Und KI macht es m&ouml;glich.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon" style="font-size: 14px; font-weight: 700; color: var(--accent);">10%</div>
+          <h3>Recherche &amp; Strategie</h3>
+          <p>Keyword-Research, Wettbewerbsanalyse und Strategie. Hier investierst du die meiste manuelle Denkarbeit.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon" style="font-size: 14px; font-weight: 700; color: var(--accent);">80%</div>
+          <h3>KI-gest&uuml;tzte Umsetzung</h3>
+          <p>KI generiert optimierte Listings auf Basis deiner Strategie. Schnell, skalierbar und konsistent f&uuml;r dein gesamtes Portfolio.</p>
+        </div>
+        <div class="info-card full">
+          <div class="info-card-icon" style="font-size: 14px; font-weight: 700; color: var(--accent);">10%</div>
+          <h3>Review &amp; Feinschliff</h3>
+          <p>Du pr&uuml;fst, verfeinerst und gibst den finalen Schliff. Die Brand-Stimme, Nuancen und marktspezifische Details kommen von dir. KI liefert die Basis, du machst sie perfekt.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Der Vorteil</h3>
+        <p>
+          Statt monatelang 10 Listings manuell zu perfektionieren, bringst du <strong>dein gesamtes Portfolio auf 80% Potenzial</strong>. In einem Bruchteil der Zeit. Die verbleibenden 20% optimierst du iterativ.
+        </p>
+      </div>
+    </div>
+
+    <!-- ════════════════ SECTION 6: Rankflift-Prozess ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Kapitel 06</div>
+      <h2>Der <span>Rankflift</span>-Prozess</h2>
+      <p class="section-intro">
+        Vier Phasen, die systematisch aufeinander aufbauen. So gehen wir gemeinsam vor.
+      </p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Deep Dive &amp; Datenanalyse</h3>
+            <p>Wir tauchen in deine Daten ein: aktuelle Rankings, Wettbewerber, Marktposition, Keyword-Gaps. Wir verstehen, wo du stehst und wo die Chancen liegen.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Keyword-Masterlist erstellen</h3>
+            <p>Basierend auf dem Deep Dive bauen wir eine umfassende Keyword-Strategie, priorisiert nach Potenzial, Wettbewerb und Relevanz f&uuml;r deine Produkte.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Indexabdeckung optimieren</h3>
+            <p>Systematische Optimierung aller Listings: Titel, Bullets, Beschreibung, Backend-Keywords. Jedes Produkt wird f&uuml;r maximale Indexabdeckung aufgesetzt.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Werbeabh&auml;ngigkeit reduzieren</h3>
+            <p>Mit steigenden organischen Rankings senken wir schrittweise den Ad-Spend, bei gleichbleibendem oder wachsendem Umsatz. Mehr Marge, weniger Risiko.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ SECTION 7: Checkliste ════════════════ -->
+    <div class="section-page">
+      <div class="section-number">Checkliste</div>
+      <h2>Deine <span>Organic</span>-Checkliste</h2>
+      <p class="section-intro">
+        Pr&uuml;fe, ob deine Amazon-Listings bereit f&uuml;r organisches Wachstum sind. Hake ab, was du bereits erf&uuml;llst.
+      </p>
+
+      <ul class="checklist">
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>Titel nutzt die maximale Zeichenl&auml;nge (~166 Zeichen)</h4>
+            <p>Haupt-Keywords in nat&uuml;rlicher Reihenfolge, Markenname, Produkttyp und wichtigste Differenzierungsmerkmale.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>Alle 5 Bullet Points sind nutzenorientiert ausgef&uuml;llt</h4>
+            <p>Kein Keyword-Stuffing, sondern relevante Keywords nat&uuml;rlich in Kundennutzen eingebettet.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>6&ndash;9 Bilder hochgeladen (inkl. Infografiken)</h4>
+            <p>Hauptbild, Lifestyle-Bilder, Ma&szlig;e/Details, Vergleichsgrafiken, Anwendungsszenarien.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>Backend-Keywords vollst&auml;ndig &amp; ohne Duplikate</h4>
+            <p>Synonyme, Schreibvarianten und verwandte Begriffe, die nicht im sichtbaren Listing stehen.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>A+ Content / Enhanced Brand Content aktiv</h4>
+            <p>Visueller Content, der die Markengeschichte erz&auml;hlt und zus&auml;tzliche Keywords indexiert.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>Long-Tail-Keywords identifiziert &amp; priorisiert</h4>
+            <p>Roots-Strategie: Spezifische Keywords mit hoher Kaufabsicht als Basis f&uuml;r organisches Wachstum.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>Indexabdeckung &uuml;berpr&uuml;ft</h4>
+            <p>Sind deine relevanten Keywords tats&auml;chlich indexiert? Systematisch pr&uuml;fen und Gaps schlie&szlig;en.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-content">
+            <h4>TACOS &amp; ACOS im Blick</h4>
+            <p>Organischen vs. bezahlten Umsatzanteil tracken. Ziel: den organischen Anteil stetig erh&ouml;hen.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ════════════════ CTA PAGE ════════════════ -->
+    <div class="cta-page">
+      <div class="section-number" style="margin-bottom: 24px;">N&auml;chster Schritt</div>
+      <h2>Bereit f&uuml;r <span style="color: var(--accent);">margenstarkes</span> Wachstum?</h2>
+      <p>
+        Du willst wissen, wie viel organisches Potenzial in deinem Portfolio steckt? Lass uns in einem kostenlosen Erstgespr&auml;ch gemeinsam draufschauen.
+      </p>
+      <a href="https://kfl-consulting.de/kontakt" class="cta-btn">
+        Erstgespr&auml;ch buchen &rarr;
+      </a>
+      <p class="cta-trust">Kostenlos &amp; unverbindlich. 80+ Brands vertrauen uns bereits.</p>
+    </div>
+
+    <!-- ════════════════ FOOTER ════════════════ -->
+    <div class="pdf-footer">
+      &copy; 2026 KFL Consulting &middot; kfl-consulting.de
+    </div>
+
+  </div>
+</body>
+</html>

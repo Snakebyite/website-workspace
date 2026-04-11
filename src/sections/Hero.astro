@@ -4,7 +4,7 @@
 import HeroVisual from "../components/HeroVisual.astro";
 ---
 
-<section class="min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col relative overflow-hidden">
+<section class="min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col relative overflow-hidden" data-hero>
   <!-- Radial glow behind headline -->
   <div
     class="absolute top-1/3 left-[30%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
@@ -24,20 +24,20 @@ import HeroVisual from "../components/HeroVisual.astro";
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <!-- Left: Text -->
         <div class="lg:col-span-7">
-          <h1 class="text-[2.75rem] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[4.5rem] tracking-normal">
+          <h1 class="text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] tracking-normal" data-hero-h1>
             Dein <span class="text-accent-text">Best Interest Advisor</span>
             <br class="hidden sm:block" />
             für digitale Marktplätze.
           </h1>
-          <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-8 max-w-lg">
-            Wir machen Marktplatz-Wachstum planbar. Datenbasiert, gründergeführt, hands-on.
+          <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-8 max-w-lg" data-hero-sub>
+            Marktplatzwachstum planbar machen. Datenbasiert entscheiden. Mit den richtigen Prozessen auf 7-stellige Umsätze skalieren.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <div class="flex flex-col sm:flex-row gap-4 mt-8" data-hero-buttons>
             <a
               href="/kontakt"
               class="bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200 text-center"
             >
-              Lern uns kennen
+              Termin buchen
             </a>
             <a
               href="#leistungen"
@@ -53,7 +53,196 @@ import HeroVisual from "../components/HeroVisual.astro";
           <HeroVisual />
         </div>
       </div>
+
+      <!-- VSL Headline + Video -->
+      <div class="mt-24 md:mt-40 max-w-4xl mx-auto text-center" data-hero-vsl>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl tracking-normal leading-[1.2] mb-12 md:mb-16">
+          Wir bauen deine organische Sichtbarkeit auf Amazon & Co. systematisch auf. So gibst du weniger für Ads aus und behältst mehr von deinem Umsatz. <span class="text-accent-text">Für D2C Brands ab 250k Jahresumsatz.</span>
+        </h2>
+        <div class="relative aspect-video rounded-2xl overflow-hidden bg-surface cursor-pointer group" data-vsl-container>
+          <video
+            class="w-full h-full object-cover"
+            poster="/videos/vsl-poster.jpg"
+            preload="metadata"
+            playsinline
+            data-vsl-video
+          >
+            <source src="/videos/vsl.mp4" type="video/mp4" />
+          </video>
+          <!-- Play button — exact center (face is in upper third, center hits chest/hands) -->
+          <div class="absolute inset-0 flex items-center justify-center transition-opacity duration-200" data-vsl-overlay>
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/90 flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+              <svg class="w-6 h-6 md:w-8 md:h-8 text-background ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+          <!-- Video controls — bottom bar, visible only during playback -->
+          <div class="absolute bottom-0 left-0 right-0 opacity-0 transition-opacity duration-200 bg-gradient-to-t from-black/60 to-transparent pt-8 pb-3 px-4" data-vsl-controls>
+            <!-- Progress bar -->
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-white text-xs font-medium tabular-nums min-w-[3ch]" data-vsl-time>0:00</span>
+              <div class="flex-1 h-1 bg-white/20 rounded-full cursor-pointer group/bar relative" data-vsl-progress>
+                <div class="h-full bg-accent rounded-full relative" data-vsl-progress-fill style="width: 0%">
+                  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover/bar:opacity-100 transition-opacity duration-150"></div>
+                </div>
+              </div>
+              <span class="text-white text-xs font-medium tabular-nums min-w-[3ch]" data-vsl-duration>0:00</span>
+            </div>
+            <!-- Speed toggle -->
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium tracking-wide hover:bg-white/20 transition-colors duration-150"
+                data-vsl-speed-btn
+              >
+                1.1x
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  const section = document.querySelector("[data-hero]");
+  if (section) {
+    const h1 = section.querySelector("[data-hero-h1]");
+    const sub = section.querySelector("[data-hero-sub]");
+    const buttons = section.querySelector("[data-hero-buttons]");
+
+    const tl = gsap.timeline({ delay: 0.3 });
+
+    // SplitText word-by-word reveal on H1
+    if (h1) {
+      const split = new SplitText(h1, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+      tl.to(split.words, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power2.out",
+      });
+    }
+
+    // Subline fade-in
+    if (sub) {
+      gsap.set(sub, { opacity: 0, y: 20 });
+      tl.to(sub, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+
+    // Buttons stagger fade-in
+    if (buttons) {
+      const btns = buttons.querySelectorAll("a");
+      gsap.set(btns, { opacity: 0, y: 20 });
+      tl.to(btns, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: "power2.out",
+      }, "-=0.3");
+    }
+
+    // VSL fade-in
+    const vsl = section.querySelector("[data-hero-vsl]");
+    if (vsl) {
+      gsap.set(vsl, { opacity: 0, y: 30 });
+      tl.to(vsl, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+  }
+
+  // VSL click-to-play
+  const container = document.querySelector("[data-vsl-container]");
+  const video = document.querySelector<HTMLVideoElement>("[data-vsl-video]");
+  const overlay = document.querySelector("[data-vsl-overlay]");
+
+  const controls = document.querySelector("[data-vsl-controls]") as HTMLElement | null;
+  const speedBtn = document.querySelector("[data-vsl-speed-btn]") as HTMLButtonElement | null;
+  const progressBar = document.querySelector("[data-vsl-progress]") as HTMLElement | null;
+  const progressFill = document.querySelector("[data-vsl-progress-fill]") as HTMLElement | null;
+  const timeDisplay = document.querySelector("[data-vsl-time]") as HTMLElement | null;
+  const durationDisplay = document.querySelector("[data-vsl-duration]") as HTMLElement | null;
+  const speeds = [1.1, 1.5];
+  let speedIndex = 0;
+
+  function formatTime(seconds: number): string {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ":" + String(s).padStart(2, "0");
+  }
+
+  if (container && video && overlay && controls && speedBtn && progressBar && progressFill && timeDisplay && durationDisplay) {
+    // Play/pause toggle
+    container.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("[data-vsl-controls]")) return;
+
+      if (video.paused) {
+        video.playbackRate = speeds[speedIndex];
+        video.play();
+        overlay.style.opacity = "0";
+        overlay.style.pointerEvents = "none";
+        controls.style.opacity = "1";
+      } else {
+        video.pause();
+        overlay.style.opacity = "1";
+        overlay.style.pointerEvents = "auto";
+        controls.style.opacity = "0";
+      }
+    });
+
+    // Update progress bar + time
+    video.addEventListener("timeupdate", () => {
+      if (video.duration) {
+        const pct = (video.currentTime / video.duration) * 100;
+        progressFill.style.width = pct + "%";
+        timeDisplay.textContent = formatTime(video.currentTime);
+      }
+    });
+
+    // Set duration once loaded
+    video.addEventListener("loadedmetadata", () => {
+      durationDisplay.textContent = formatTime(video.duration);
+    });
+
+    // Seek on progress bar click
+    progressBar.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const rect = progressBar.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      video.currentTime = pct * video.duration;
+    });
+
+    // Speed toggle
+    speedBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      speedIndex = (speedIndex + 1) % speeds.length;
+      video.playbackRate = speeds[speedIndex];
+      speedBtn.textContent = speeds[speedIndex] + "x";
+    });
+
+    // Reset on end
+    video.addEventListener("ended", () => {
+      overlay.style.opacity = "1";
+      overlay.style.pointerEvents = "auto";
+      controls.style.opacity = "0";
+    });
+  }
+</script>

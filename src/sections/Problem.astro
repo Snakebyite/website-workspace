@@ -1,40 +1,233 @@
 ---
 // Problem Section — Homepage
 // Job: Spiegeln — "Wir wissen wie dein Alltag aussieht"
-// Asymmetric grid: headline left, pain statements right
+// Layout: Headline oben, darunter Dashboard (links) + Pain Points (rechts) bündig
 // Kein CTA — Resonanz erzeugen, nächste Section liefert die Antwort
 ---
 
-<section class="py-24 md:py-section">
+<section class="pt-16 pb-24 md:pt-24 md:pb-32" data-problem>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-start">
-      <!-- Headline — anchored left, sticky on desktop -->
-      <div class="lg:col-span-5 lg:sticky lg:top-28">
-        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-text-muted mb-5">Dein Alltag</span>
-        <h2>Kommt dir das bekannt vor?</h2>
+
+    <!-- Headline — above the grid -->
+    <div class="mb-14 md:mb-20" data-problem-header>
+      <h2>Kommt dir das bekannt vor?</h2>
+    </div>
+
+    <!-- Content grid: Dashboard left, Pain Points right — top & bottom aligned -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+
+      <!-- Left: Dashboard Visual -->
+      <div class="lg:col-span-5 hidden lg:block" data-problem-visual>
+        <div class="relative rounded-2xl border border-white/5 bg-surface p-8 md:p-10 overflow-hidden h-full flex flex-col justify-between">
+          <!-- Subtle glow -->
+          <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(239,68,68,0.04)_0%,transparent_70%)] pointer-events-none"></div>
+
+          <!-- Metric 1: Rising ACoS -->
+          <div class="relative" data-pv-metric="1">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">ACoS</span>
+              <span class="text-[13px] font-medium text-red-400/70">38,4 %</span>
+            </div>
+            <div class="h-[56px] w-full">
+              <svg class="w-full h-full" viewBox="0 0 320 56" fill="none" preserveAspectRatio="none">
+                <path
+                  class="pv-area"
+                  d="M0 46 C40 44, 60 40, 100 36 C140 30, 170 28, 200 22 C230 16, 260 12, 320 6 L320 56 L0 56 Z"
+                  fill="rgba(239,68,68,0.06)"
+                  style="opacity:0;"
+                />
+                <path
+                  class="pv-line"
+                  d="M0 46 C40 44, 60 40, 100 36 C140 30, 170 28, 200 22 C230 16, 260 12, 320 6"
+                  stroke="rgba(239,68,68,0.35)"
+                  stroke-width="1.5"
+                  fill="none"
+                  style="opacity:0;"
+                />
+                <circle class="pv-dot" cx="320" cy="6" r="3.5" fill="rgba(239,68,68,0.6)" style="opacity:0;" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="h-px bg-white/5 my-7"></div>
+
+          <!-- Metric 2: Organic Ranking declining -->
+          <div class="relative" data-pv-metric="2">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">Organisches Ranking</span>
+              <span class="text-[13px] font-medium text-amber-400/70">Sinkend</span>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <span class="text-[12px] text-text-muted w-20 shrink-0">Hauptkeyword</span>
+                <div class="h-2 flex-1 rounded-full bg-white/5 overflow-hidden">
+                  <div class="pv-bar h-full rounded-full bg-amber-400/30" style="width:0%;"></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-[12px] text-text-muted w-20 shrink-0">Longtail</span>
+                <div class="h-2 flex-1 rounded-full bg-white/5 overflow-hidden">
+                  <div class="pv-bar h-full rounded-full bg-amber-400/25" style="width:0%;"></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-[12px] text-text-muted w-20 shrink-0">Kategorie</span>
+                <div class="h-2 flex-1 rounded-full bg-white/5 overflow-hidden">
+                  <div class="pv-bar h-full rounded-full bg-amber-400/30" style="width:0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="h-px bg-white/5 my-7"></div>
+
+          <!-- Metric 3: Fragmented agency landscape -->
+          <div class="relative" data-pv-metric="3">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">Dienstleister</span>
+              <span class="text-[13px] font-medium text-text-muted/70">5 Agenturen</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">PPC</span>
+              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">SEO</span>
+              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">Content</span>
+              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">Listings</span>
+              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">Strategie</span>
+            </div>
+            <p class="mt-4 text-[12px] text-text-muted/60 leading-relaxed">Jeder Kanal ein anderer Ansprechpartner. Kein Gesamtbild.</p>
+          </div>
+        </div>
       </div>
 
-      <!-- Pain statements — right column, offset -->
-      <div class="lg:col-span-6 lg:col-start-7 space-y-14 md:space-y-20">
-        <div>
-          <span class="block text-sm font-medium tracking-[0.08em] text-accent-text mb-4">01</span>
-          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Dein Ad-Spend steigt, aber die <span class="text-accent-text font-medium">Marge schrumpft.</span>
+      <!-- Right: Pain statements -->
+      <div class="lg:col-span-6 lg:col-start-7 flex flex-col justify-between">
+        <div class="flex items-start gap-5">
+          <span class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border border-accent/20 bg-accent/[0.06] text-accent-text text-base font-semibold tracking-wide">01</span>
+          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed pt-2">
+            Dein ACoS steigt, die <span class="text-accent-text font-medium">Marge schrumpft.</span> Du weißt nicht, welche Kampagnen wirklich profitabel sind.
           </p>
         </div>
-        <div>
-          <span class="block text-sm font-medium tracking-[0.08em] text-accent-text mb-4">02</span>
-          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Marktplätze kosten <span class="text-accent-text font-medium">Zeit die du nicht hast</span> — und Know-how das intern fehlt.
+        <div class="flex items-start gap-5 mt-10 lg:mt-0">
+          <span class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border border-accent/20 bg-accent/[0.06] text-accent-text text-base font-semibold tracking-wide">02</span>
+          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed pt-2">
+            Listings pflegen, Rankings überwachen, PPC-Budgets steuern. Marktplätze kosten <span class="text-accent-text font-medium">Zeit, die du nicht hast.</span> Intern fehlt das Spezialwissen, um wirklich zu skalieren.
           </p>
         </div>
-        <div>
-          <span class="block text-sm font-medium tracking-[0.08em] text-accent-text mb-4">03</span>
-          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Du weißt, dass Potenzial da ist. Aber <span class="text-accent-text font-medium">kein Plan, wo du ansetzen sollst.</span>
+        <div class="flex items-start gap-5 mt-10 lg:mt-0">
+          <span class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border border-accent/20 bg-accent/[0.06] text-accent-text text-base font-semibold tracking-wide">03</span>
+          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed pt-2">
+            Für PPC eine Agentur, für SEO eine andere, für Content die nächste. <span class="text-accent-text font-medium">Fünf Dienstleister, aber keine Strategie.</span> Und keinen, der das Gesamtbild im Blick hat.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  function initProblemSection(): void {
+    const section = document.querySelector<HTMLElement>("[data-problem]");
+    if (!section) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const header = section.querySelector<HTMLElement>("[data-problem-header]");
+    const h2 = header?.querySelector<HTMLElement>("h2");
+    const painItems = section.querySelectorAll<HTMLElement>(".lg\\:col-span-6 > div");
+
+    if (reduced) {
+      section.querySelectorAll("[style*='opacity:0']").forEach(el => {
+        (el as HTMLElement).style.opacity = "1";
+      });
+      section.querySelectorAll(".pv-bar").forEach((el, i) => {
+        const widths = ["45%", "32%", "58%"];
+        (el as HTMLElement).style.width = widths[i] || "45%";
+      });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      // H2 entrance
+      if (h2) {
+        const split = new SplitText(h2, { type: "words" });
+        gsap.set(split.words, { opacity: 0, y: 20 });
+
+        gsap.to(split.words, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 75%", once: true },
+        });
+      }
+
+      // Pain statements fade in individually
+      painItems.forEach((item) => {
+        gsap.set(item, { opacity: 0, y: 20 });
+        gsap.to(item, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: { trigger: item, start: "top 80%", once: true },
+        });
+      });
+
+      // ── Dashboard Visual animation ──
+      const visual = section.querySelector<HTMLElement>("[data-problem-visual]");
+      if (!visual) return;
+
+      gsap.set(visual, { opacity: 0, y: 20, scale: 0.95 });
+
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        scrollTrigger: { trigger: visual, start: "top 80%", once: true },
+      });
+
+      tl.to(visual, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "back.out(1.4)" });
+
+      const line = visual.querySelector(".pv-line");
+      const area = visual.querySelector(".pv-area");
+      const dot = visual.querySelector(".pv-dot");
+
+      if (line) {
+        const lineEl = line as SVGPathElement;
+        const length = lineEl.getTotalLength();
+        gsap.set(lineEl, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
+        tl.to(lineEl, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, "-=0.2");
+      }
+      if (area) tl.to(area, { opacity: 1, duration: 0.6 }, "-=0.6");
+      if (dot) tl.to(dot, { opacity: 1, duration: 0.3, ease: "back.out(2)" }, "-=0.2");
+
+      const bars = visual.querySelectorAll<HTMLElement>(".pv-bar");
+      const barWidths = ["45%", "32%", "58%"];
+      bars.forEach((bar, i) => {
+        tl.to(bar, { width: barWidths[i], duration: 0.8, ease: "power2.out" }, i === 0 ? "-=0.3" : "-=0.6");
+      });
+
+      const tags = visual.querySelectorAll<HTMLElement>(".pv-tag");
+      gsap.set(tags, { scale: 0.6 });
+      tl.to(tags, { opacity: 1, scale: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2)" }, "-=0.3");
+
+      gsap.to(dot, {
+        scale: 1.4,
+        opacity: 0.3,
+        duration: 1.5,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+        delay: 2.5,
+        transformOrigin: "center center",
+      });
+
+    }, section);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initProblemSection();
+  document.addEventListener("astro:after-swap", initProblemSection);
+</script>

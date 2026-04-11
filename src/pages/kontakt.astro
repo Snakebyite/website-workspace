@@ -1,0 +1,516 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import kevinImg from "../assets/kevin.png";
+---
+
+<BaseLayout title="Kontakt" description="Buch dein kostenloses Erstgespräch mit KFL Consulting.">
+  <section class="mx-auto max-w-7xl px-4 md:px-8 py-24 md:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-start">
+
+      <!-- Left: Social Proof -->
+      <div class="lg:sticky lg:top-32">
+        <div class="max-w-md lg:ml-auto">
+          <Image
+            src={kevinImg}
+            alt="Kevin Flurschütz, Co-Founder von KFL Consulting"
+            width={280}
+            height={280}
+            class="rounded-full w-48 h-48 md:w-56 md:h-56 object-cover"
+          />
+          <blockquote class="mt-8">
+            <p class="font-heading text-xl md:text-2xl leading-snug text-text-primary">
+              "Wir haben mit über 80+ Marken und 5.000+ Listings gearbeitet. Lass uns gemeinsam herausfinden, wie wir auch dein Marktplatz-Wachstum beschleunigen können."
+            </p>
+          </blockquote>
+          <div class="mt-6">
+            <p class="text-text-primary font-medium">Kevin Flurschütz</p>
+            <span class="inline-block mt-2 text-accent-text text-sm bg-accent-subtle px-3 py-1 rounded-badge">
+              Founder, KFL Consulting
+            </span>
+          </div>
+          <p class="mt-10 text-text-muted text-sm flex items-center gap-2">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Deine Daten sind sicher. Kein Spam, versprochen.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Multi-Step Funnel -->
+      <div id="booking-funnel">
+        <!-- Header -->
+        <div class="bg-surface rounded-t-card p-6 md:p-8">
+          <h1 class="text-2xl md:text-3xl text-text-primary">Dein Best Interest Advisor für digitale Marktplätze</h1>
+          <p class="mt-3 text-text-secondary text-sm">Marktplatzwachstum planbar machen. Datenbasiert entscheiden. Mit den richtigen Prozessen auf 7-stellige Umsätze skalieren.</p>
+          <!-- Progress bar -->
+          <div class="mt-4 h-1 bg-white/5 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-accent rounded-full transition-all duration-500 ease-out" style="width: 16.66%"></div>
+          </div>
+        </div>
+
+        <!-- Steps container -->
+        <div class="bg-surface/50 rounded-b-card p-6 md:p-8 min-h-[420px] flex flex-col">
+
+          <!-- Step 1: Unternehmenstyp -->
+          <div data-step="1" class="step-content flex-1 flex flex-col">
+            <p class="text-text-muted text-sm text-center">Schritt 1 von 6</p>
+            <h2 class="text-xl font-body font-medium text-text-primary text-center mt-2 mb-8">Welche Art von Unternehmen hast du?</h2>
+            <div class="grid grid-cols-2 gap-3 max-w-md mx-auto w-full" data-multiselect="company_type">
+              <button class="option-btn" data-value="Brand">Brand</button>
+              <button class="option-btn" data-value="Hersteller">Hersteller</button>
+              <button class="option-btn" data-value="Reseller">Reseller</button>
+              <button class="option-btn" data-value="Agentur">Agentur</button>
+              <button class="option-btn" data-value="Distributor">Distributor</button>
+            </div>
+            <div class="mt-3 max-w-md mx-auto w-full">
+              <div class="sonstiges-wrapper">
+                <input type="text" class="sonstiges-input" data-field="company_type" placeholder="Sonstiges eingeben…" />
+              </div>
+            </div>
+            <button class="step-next-btn mt-6 w-full max-w-md mx-auto" data-step-next="1">Weiter</button>
+          </div>
+
+          <!-- Step 2: Jahresumsatz -->
+          <div data-step="2" class="step-content flex-1 flex-col hidden">
+            <p class="text-text-muted text-sm text-center">Schritt 2 von 6</p>
+            <h2 class="text-xl font-body font-medium text-text-primary text-center mt-2 mb-8">Wie hoch ist euer Jahresumsatz?</h2>
+            <div class="grid grid-cols-2 gap-3 max-w-md mx-auto w-full" data-multiselect="revenue">
+              <button class="option-btn" data-value="Unter 250.000 €">Unter 250.000 €</button>
+              <button class="option-btn" data-value="250.000 – 1 Mio. €">250.000 – 1 Mio. €</button>
+              <button class="option-btn" data-value="1 – 5 Mio. €">1 – 5 Mio. €</button>
+              <button class="option-btn" data-value="Über 5 Mio. €">Über 5 Mio. €</button>
+            </div>
+            <div class="mt-3 max-w-md mx-auto w-full">
+              <div class="sonstiges-wrapper">
+                <input type="text" class="sonstiges-input" data-field="revenue" placeholder="Sonstiges eingeben…" />
+              </div>
+            </div>
+            <button class="step-next-btn mt-6 w-full max-w-md mx-auto" data-step-next="2">Weiter</button>
+          </div>
+
+          <!-- Step 3: Herausforderung -->
+          <div data-step="3" class="step-content flex-1 flex-col hidden">
+            <p class="text-text-muted text-sm text-center">Schritt 3 von 6</p>
+            <h2 class="text-xl font-body font-medium text-text-primary text-center mt-2 mb-8">Was ist aktuell deine größte Herausforderung?</h2>
+            <div class="flex flex-col gap-3 max-w-md mx-auto w-full" data-multiselect="challenge">
+              <button class="option-btn-wide" data-value="Zu geringe Margen trotz Umsatz">Zu geringe Margen trotz Umsatz</button>
+              <button class="option-btn-wide" data-value="Zu hohe Werbekosten (PPC/Ads)">Zu hohe Werbekosten (PPC/Ads)</button>
+              <button class="option-btn-wide" data-value="Schlechte organische Sichtbarkeit">Schlechte organische Sichtbarkeit</button>
+              <button class="option-btn-wide" data-value="Kein Know-how / keine Zeit für Marktplätze">Kein Know-how / keine Zeit für Marktplätze</button>
+              <button class="option-btn-wide" data-value="Fehlende Strategie & Prozesse">Fehlende Strategie & Prozesse</button>
+              <div class="sonstiges-wrapper">
+                <input type="text" class="sonstiges-input" data-field="challenge" placeholder="Sonstiges eingeben…" />
+              </div>
+            </div>
+            <button class="step-next-btn mt-6 w-full max-w-md mx-auto" data-step-next="3">Weiter</button>
+          </div>
+
+          <!-- Step 4: Interessen (Multi-Select) -->
+          <div data-step="4" class="step-content flex-1 flex-col hidden">
+            <p class="text-text-muted text-sm text-center">Schritt 4 von 6</p>
+            <h2 class="text-xl font-body font-medium text-text-primary text-center mt-2">Woran bist du interessiert?</h2>
+            <p class="text-text-muted text-sm text-center mb-8">Wähle alle zutreffenden aus</p>
+            <div class="flex flex-col gap-3 max-w-md mx-auto w-full">
+              <label class="checkbox-option">
+                <input type="checkbox" name="interests" value="Amazon SEO & organische Sichtbarkeit" class="sr-only peer" />
+                <span class="checkbox-box peer-checked:border-accent peer-checked:bg-accent/10">
+                  <span class="checkbox-indicator"></span>
+                  Amazon SEO & organische Sichtbarkeit
+                </span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="interests" value="Marktplatz-Anbindung & API-Setups" class="sr-only peer" />
+                <span class="checkbox-box peer-checked:border-accent peer-checked:bg-accent/10">
+                  <span class="checkbox-indicator"></span>
+                  Marktplatz-Anbindung & API-Setups
+                </span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="interests" value="KI & Prozessautomatisierung" class="sr-only peer" />
+                <span class="checkbox-box peer-checked:border-accent peer-checked:bg-accent/10">
+                  <span class="checkbox-indicator"></span>
+                  KI & Prozessautomatisierung
+                </span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="interests" value="KI-Agenten" class="sr-only peer" />
+                <span class="checkbox-box peer-checked:border-accent peer-checked:bg-accent/10">
+                  <span class="checkbox-indicator"></span>
+                  KI-Agenten
+                </span>
+              </label>
+              <div class="sonstiges-wrapper">
+                <input type="text" id="interests-sonstiges" class="sonstiges-input" placeholder="Sonstiges eingeben…" />
+              </div>
+            </div>
+            <button id="step4-next" class="mt-6 w-full max-w-md mx-auto bg-accent hover:bg-accent-hover text-background font-medium py-3 rounded-button transition-colors duration-200">
+              Weiter
+            </button>
+          </div>
+
+          <!-- Step 5: Kontaktdaten -->
+          <div data-step="5" class="step-content flex-1 flex-col hidden">
+            <p class="text-text-muted text-sm text-center">Schritt 5 von 6</p>
+            <h2 class="text-xl font-body font-medium text-text-primary text-center mt-2 mb-8">Deine Kontaktdaten</h2>
+            <form id="contact-form" class="flex flex-col gap-4 max-w-md mx-auto w-full">
+              <!-- Honeypot — unsichtbar für echte Nutzer, Bots füllen es aus -->
+              <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;">
+                <label for="company_website_url">Website URL</label>
+                <input type="text" id="company_website_url" name="company_website_url" tabindex="-1" autocomplete="off" />
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="name" class="text-sm text-text-secondary mb-1 block">Name <span class="text-accent">*</span></label>
+                  <input type="text" id="name" name="name" required placeholder="Max Mustermann" class="form-input" />
+                </div>
+                <div>
+                  <label for="phone" class="text-sm text-text-secondary mb-1 block">Telefon <span class="text-accent">*</span></label>
+                  <input type="tel" id="phone" name="phone" required placeholder="+49 176 123456" class="form-input" />
+                </div>
+              </div>
+              <div>
+                <label for="email" class="text-sm text-text-secondary mb-1 block">E-Mail <span class="text-accent">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="max@unternehmen.de" class="form-input" />
+              </div>
+              <div>
+                <label for="website" class="text-sm text-text-secondary mb-1 block">Website <span class="text-text-muted">(optional)</span></label>
+                <input type="url" id="website" name="website" placeholder="dein-shop.de" class="form-input" />
+              </div>
+              <label class="flex items-start gap-3 mt-2 cursor-pointer">
+                <input type="checkbox" id="privacy" name="privacy" required class="mt-1 w-4 h-4 rounded border-white/10 bg-surface accent-accent shrink-0" />
+                <span class="text-sm text-text-secondary">
+                  Ich stimme zu, dass meine Daten gemäß <a href="/datenschutz" class="text-accent-text hover:text-accent transition-colors duration-200 underline">Datenschutz</a> verarbeitet werden.
+                </span>
+              </label>
+              <div class="grid grid-cols-2 gap-3 mt-4">
+                <button type="button" id="step5-back" class="py-3 rounded-button border border-white/10 text-text-primary font-medium hover:border-white/20 transition-colors duration-200">
+                  Zurück
+                </button>
+                <button type="submit" id="step5-submit" class="py-3 rounded-button bg-accent hover:bg-accent-hover text-background font-medium transition-colors duration-200 opacity-50 pointer-events-none">
+                  Weiter zum Kalender
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 6: Kalender (eingebettet) -->
+          <div data-step="6" class="step-content flex-1 flex-col hidden">
+            <p class="text-text-muted text-sm text-center">Schritt 6 von 6</p>
+            <h2 class="text-xl font-body font-medium text-text-primary text-center mt-2 mb-6">Wähle einen Termin</h2>
+            <div class="w-full">
+              <iframe
+                id="booking-iframe"
+                src="about:blank"
+                data-src="https://termin.kfl-consulting.de"
+                width="100%"
+                height="600"
+                frameborder="0"
+                title="Terminbuchung KFL Consulting"
+                loading="lazy"
+                class="md:h-[700px]"
+                style="border-radius: 12px; border: none; background: white; min-height: 500px;"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Back button (Steps 2 & 3) -->
+          <button id="back-btn" class="mt-6 text-text-muted text-sm hover:text-text-secondary transition-colors duration-200 hidden">
+            ← Zurück
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .option-btn {
+    padding: 1rem;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
+  }
+
+  .option-btn:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--color-surface-elevated);
+  }
+
+  .option-btn.selected {
+    border-color: var(--color-accent);
+    background: rgba(76, 175, 130, 0.1);
+  }
+
+  .option-btn-wide {
+    padding: 0.875rem 1.25rem;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
+    width: 100%;
+  }
+
+  .option-btn-wide:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--color-surface-elevated);
+  }
+
+  .option-btn-wide.selected {
+    border-color: var(--color-accent);
+    background: rgba(76, 175, 130, 0.1);
+  }
+
+  .checkbox-option {
+    cursor: pointer;
+  }
+
+  .checkbox-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--color-surface);
+    font-size: 0.9375rem;
+    color: var(--color-text-primary);
+    transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
+  }
+
+  .checkbox-box:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .checkbox-indicator {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    background: var(--color-surface);
+    flex-shrink: 0;
+    transition: all 0.2s ease-out;
+    position: relative;
+  }
+
+  .peer:checked ~ .checkbox-box .checkbox-indicator {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .peer:checked ~ .checkbox-box .checkbox-indicator::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--color-background);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .sonstiges-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--color-surface);
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s ease-out;
+  }
+
+  .sonstiges-wrapper:focus-within {
+    border-color: var(--color-accent);
+  }
+
+  .sonstiges-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .sonstiges-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .step-next-btn {
+    padding: 0.75rem;
+    border-radius: var(--radius-button);
+    background: var(--color-accent);
+    color: var(--color-background);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease-out;
+  }
+
+  .step-next-btn:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-badge);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    transition: border-color 0.2s ease-out;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  const funnel = document.getElementById('booking-funnel')!;
+  const progressBar = document.getElementById('progress-bar')!;
+  const backBtn = document.getElementById('back-btn')!;
+  const allSteps = funnel.querySelectorAll<HTMLElement>('.step-content');
+
+  let currentStep = 1;
+  const totalSteps = 6;
+  const formData: Record<string, string | string[]> = {};
+
+  function showStep(step: number) {
+    currentStep = step;
+    allSteps.forEach((el) => {
+      const s = Number(el.dataset.step);
+      el.classList.toggle('hidden', s !== step);
+      if (s === step) el.classList.add('flex');
+      else el.classList.remove('flex');
+    });
+    progressBar.style.width = `${(step / totalSteps) * 100}%`;
+
+    // Show back button for steps 2, 3 (single-select steps)
+    // Step 4, 5, 6 have their own back buttons
+    backBtn.classList.toggle('hidden', step === 1 || step >= 4);
+  }
+
+  // Multi-select toggle for option buttons (Steps 1, 2, 3)
+  funnel.querySelectorAll<HTMLButtonElement>('[data-multiselect] .option-btn, [data-multiselect] .option-btn-wide').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('selected');
+    });
+  });
+
+  // Collect selected values from a multiselect step
+  function collectMultiselect(stepEl: HTMLElement): string[] {
+    const container = stepEl.querySelector<HTMLElement>('[data-multiselect]');
+    if (!container) return [];
+
+    const selected = Array.from(container.querySelectorAll<HTMLButtonElement>('.selected'))
+      .map((b) => b.dataset.value!);
+
+    const sonstigesInput = stepEl.querySelector<HTMLInputElement>('.sonstiges-input');
+    const sonstigesValue = sonstigesInput?.value.trim();
+    if (sonstigesValue) selected.push(sonstigesValue);
+
+    return selected;
+  }
+
+  // "Weiter" buttons for Steps 1, 2, 3
+  funnel.querySelectorAll<HTMLButtonElement>('.step-next-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const stepEl = btn.closest<HTMLElement>('.step-content')!;
+      const container = stepEl.querySelector<HTMLElement>('[data-multiselect]')!;
+      const field = container.dataset.multiselect!;
+      formData[field] = collectMultiselect(stepEl);
+      showStep(currentStep + 1);
+    });
+  });
+
+  // Step 4: Multi-select "Weiter" button
+  document.getElementById('step4-next')!.addEventListener('click', () => {
+    const checked = funnel.querySelectorAll<HTMLInputElement>('input[name="interests"]:checked');
+    const interests = Array.from(checked).map((c) => c.value);
+
+    const sonstigesInput = document.getElementById('interests-sonstiges') as HTMLInputElement;
+    const sonstigesValue = sonstigesInput?.value.trim();
+    if (sonstigesValue) interests.push(sonstigesValue);
+
+    formData.interests = interests;
+    showStep(5);
+  });
+
+  // Step 5: Form validation — enable submit when required fields are filled
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('step5-submit')!;
+
+  contactForm.addEventListener('input', () => {
+    const isValid = contactForm.checkValidity();
+    submitBtn.classList.toggle('opacity-50', !isValid);
+    submitBtn.classList.toggle('pointer-events-none', !isValid);
+  });
+
+  // Step 5: Back button
+  document.getElementById('step5-back')!.addEventListener('click', () => {
+    showStep(4);
+  });
+
+  // Step 5: Submit
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Honeypot-Check: Feld ist für Menschen unsichtbar — wenn gefüllt, ist es ein Bot
+    const honeypot = (document.getElementById('company_website_url') as HTMLInputElement).value;
+    if (honeypot) return;
+
+    const fd = new FormData(contactForm);
+    formData.name = fd.get('name') as string;
+    formData.phone = fd.get('phone') as string;
+    formData.email = fd.get('email') as string;
+    formData.website = fd.get('website') as string;
+
+    // Fire-and-forget: send lead data to booking API
+    fetch('https://booking-tool-chi.vercel.app/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    }).catch((err) => console.error('Lead submission failed:', err));
+
+    // Lazy-load the booking iframe only when reaching step 6
+    const iframe = document.getElementById('booking-iframe') as HTMLIFrameElement;
+    if (iframe && iframe.src === 'about:blank') {
+      iframe.src = iframe.dataset.src!;
+    }
+
+    showStep(6);
+  });
+
+  // Global back button (Steps 2, 3)
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 1) showStep(currentStep - 1);
+  });
+
+  // Initialize
+  showStep(1);
+</script>
