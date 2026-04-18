@@ -1,15 +1,19 @@
 ---
 // Social Proof Section — Homepage
 // Job: Konkretes Vertrauen durch echte Ergebnisse. "Proof Stage."
-// Komposition: Browser-Frame mit Tabs im Chrome — alles in einem Viewport.
-// Video 16:9 oben als Hauptelement, KPIs darunter als kompakte Zeile.
-// Im Frame: nur Satoshi, Hierarchie über Farbe/Größe/Gewicht.
-// Background: surface (#141414) — bewusster Tonal Shift.
+// Komposition: Drei Case Studies untereinander, alternierender Rhythmus (Video L/R).
+// Jede Case zeigt Problem + Lösungsansatz + KPIs — nicht nur Zahlen ohne Kontext.
+// Ziel: Wiedererkennung. Der Besucher soll sich in mindestens einem Problem wiederfinden.
 import { Play } from '@lucide/astro';
+
 const caseStudies = [
   {
     id: 'sailfish',
     name: 'Sailfish',
+    problem:
+      'Der Amazon-Umsatz stagnierte trotz starker Marke. Das Ad-Budget wuchs schneller als der Gewinn, und der Webshop spielte im Wachstum praktisch keine Rolle mehr.',
+    solution:
+      'Wir haben Amazon als Wachstumsmotor neu aufgesetzt: saubere Listings, profitabel skalierte Ads und ein Webshop, der vom Marketplace-Traffic mitzieht statt übergangen zu werden. Das Ergebnis sind 300 % Umsatzwachstum über alle Kanäle.',
     heroKpi: { value: '+250%', label: 'Umsatzwachstum auf Amazon' },
     kpis: [
       { value: '>5', label: 'ROAS' },
@@ -17,23 +21,29 @@ const caseStudies = [
     ],
     videoId: 'xkrqYY4dpMI',
     thumbnail: 'https://i.ytimg.com/vi/xkrqYY4dpMI/hqdefault.jpg',
-    hasVideo: true,
   },
   {
     id: 'vaud',
     name: 'VAUD',
-    heroKpi: { value: '+50%', label: 'Deckungsbeitrag' },
+    problem:
+      'Die Pan-EU Expansion brachte Reichweite, aber kaum Umsatz. Die Listings rankten in den neuen Märkten nicht, und organische Sichtbarkeit blieb aus.',
+    solution:
+      'SEO und Listing-Optimierung für jeden EU-Markt separat aufgesetzt. Keywords pro Land recherchiert, Content für Ranking und Conversion lokalisiert. Das Ergebnis sind 70 % mehr Deckungsbeitrag bei gleichzeitig steigender Conversion Rate.',
+    heroKpi: { value: '+70%', label: 'Deckungsbeitrag' },
     kpis: [
       { value: '+9%', label: 'Conversion Rate' },
       { value: '+20%', label: 'Sales' },
     ],
     videoId: 'bzZ02fvN1Co',
-    thumbnail: 'https://i.ytimg.com/vi/bzZ02fvN1Co/hqdefault.jpg',
-    hasVideo: true,
+    thumbnail: '/case-studies/vaud-thumbnail.jpg',
   },
   {
     id: 'heaven-paper',
     name: 'Heaven+Paper',
+    problem:
+      'Die Abhängigkeit von Paid Ads wurde teurer statt profitabler. Organisch rankten die Produkte kaum, und das Potenzial auf weiteren Marktplätzen blieb ungenutzt.',
+    solution:
+      'Organische SEO-Basis gezielt aufgebaut und parallel ein Multi-Channel Go-In über Amazon, Webshop und zusätzliche Marktplätze umgesetzt. Sichtbarkeit, die sich selbst finanziert, und 100 % mehr Umsatz in acht Wochen.',
     heroKpi: { value: '+100%', label: 'Umsatz in 8 Wochen' },
     kpis: [
       { value: '+35%', label: 'Organischer Umsatzanteil' },
@@ -41,7 +51,6 @@ const caseStudies = [
     ],
     videoId: '7jrj0cesPrA',
     thumbnail: 'https://i.ytimg.com/vi/7jrj0cesPrA/hqdefault.jpg',
-    hasVideo: true,
   },
 ];
 ---
@@ -52,113 +61,72 @@ const caseStudies = [
     <!-- Headline -->
     <h2 class="max-w-3xl">Was passiert, wenn man es richtig angeht.</h2>
 
-    <!-- Browser Frame -->
-    <div class="mt-12 md:mt-16 bg-background rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-
-      <!-- Browser Chrome mit Tabs -->
-      <div class="bg-surface-elevated px-5 py-3 flex items-center gap-4">
-        <!-- Window Dots -->
-        <div class="flex gap-1.5 shrink-0">
-          <div class="w-2.5 h-2.5 rounded-full bg-text-muted/40"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-text-muted/40"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-text-muted/40"></div>
-        </div>
-
-        <!-- Tabs im Chrome -->
-        <div
-          class="flex gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          role="tablist"
-          aria-label="Case Studies"
-        >
-          {caseStudies.map((cs, i) => (
-            <button
-              role="tab"
-              aria-selected={i === 0 ? 'true' : 'false'}
-              aria-controls={`panel-${cs.id}`}
-              id={`tab-${cs.id}`}
-              data-tab={cs.id}
-              tabindex={i === 0 ? 0 : -1}
-              class:list={[
-                'font-body px-4 md:px-5 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 cursor-pointer shrink-0',
-                'hover:text-text-primary',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-                i === 0 ? 'text-text-primary bg-white/5' : 'text-text-muted',
-              ]}
-            >
-              {cs.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <!-- Panels -->
-      {caseStudies.map((cs, i) => (
-        <div
-          id={`panel-${cs.id}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${cs.id}`}
-          data-panel={cs.id}
-          class:list={[
-            'p-5 md:p-10 md:pb-14',
-            i !== 0 && 'hidden',
-          ]}
-        >
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
-
-            <!-- Video links — 16:9, nicht full-width -->
-            <div class="lg:col-span-7">
-              <div class="relative rounded-xl overflow-hidden bg-surface-elevated aspect-video" data-video-container={cs.id}>
-                {cs.hasVideo && cs.thumbnail ? (
-                  <Fragment>
-                    <img
-                      src={cs.thumbnail}
-                      alt={`Case Study: ${cs.name}`}
-                      class="absolute inset-0 w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    <button
-                      class="absolute inset-0 w-full h-full flex items-center justify-center group cursor-pointer bg-black/30 hover:bg-black/20 transition-colors duration-200"
-                      data-video-trigger={cs.id}
-                      aria-label={`Video abspielen: ${cs.name}`}
-                    >
-                      <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-200 backdrop-blur-sm">
-                        <Play class="w-6 h-6 text-text-primary ml-0.5" />
-                      </div>
-                    </button>
-                  </Fragment>
-                ) : cs.thumbnail ? (
-                  <img
-                    src={cs.thumbnail}
-                    alt={`Case Study: ${cs.name}`}
-                    class="absolute inset-0 w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="absolute inset-0 flex items-center justify-center">
-                    <span class="font-body text-sm text-text-muted">Case Study</span>
+    <!-- Cases — gestapelt, alternierend -->
+    <div class="mt-16 md:mt-24 flex flex-col gap-20 md:gap-28">
+      {caseStudies.map((cs, i) => {
+        const videoLeft = i % 2 === 0;
+        return (
+          <article
+            class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center"
+            data-case
+          >
+            <!-- Video -->
+            <div class:list={[
+              'lg:col-span-7',
+              videoLeft ? 'lg:order-1' : 'lg:order-2',
+            ]}>
+              <div class="relative rounded-xl overflow-hidden bg-surface aspect-video" data-video-container={cs.id}>
+                <img
+                  src={cs.thumbnail}
+                  alt={`Case Study: ${cs.name}`}
+                  class="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <button
+                  class="absolute inset-0 w-full h-full flex items-center justify-center group cursor-pointer bg-black/30 hover:bg-black/20 transition-colors duration-200"
+                  data-video-trigger={cs.id}
+                  aria-label={`Video abspielen: ${cs.name}`}
+                >
+                  <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-200 backdrop-blur-sm">
+                    <Play class="w-6 h-6 text-text-primary ml-0.5" />
                   </div>
-                )}
+                </button>
               </div>
             </div>
 
-            <!-- KPIs rechts — gleiche Gewichtung, vertikal -->
-            <div class="lg:col-span-5 flex flex-col gap-7 md:gap-9">
-              {[cs.heroKpi, ...cs.kpis].map((kpi) => (
+            <!-- Text + KPIs -->
+            <div class:list={[
+              'lg:col-span-5 flex flex-col gap-8 md:gap-10',
+              videoLeft ? 'lg:order-2' : 'lg:order-1',
+            ]}>
+              <div class="flex flex-col gap-7 md:gap-8">
                 <div>
-                  <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">{kpi.value}</span>
-                  <span class="font-body block text-xs md:text-sm text-text-muted mt-1">{kpi.label}</span>
+                  <span class="font-body text-xs font-medium tracking-[0.08em] uppercase text-text-muted">Problem</span>
+                  <p class="font-body text-lg md:text-xl text-text-primary mt-3 leading-relaxed">{cs.problem}</p>
                 </div>
-              ))}
+                <div>
+                  <span class="font-body text-xs font-medium tracking-[0.08em] uppercase text-text-muted">Lösungsansatz</span>
+                  <p class="font-body text-lg md:text-xl text-text-primary mt-3 leading-relaxed">{cs.solution}</p>
+                </div>
+              </div>
+
+              <!-- KPIs -->
+              <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/5">
+                {[cs.heroKpi, ...cs.kpis].map((kpi) => (
+                  <div>
+                    <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">{kpi.value}</span>
+                    <span class="font-body block text-xs md:text-sm text-text-muted mt-1.5 leading-tight">{kpi.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-
-          </div>
-        </div>
-      ))}
-
+          </article>
+        );
+      })}
     </div>
 
     <!-- Section CTA -->
-    <div class="mt-12 md:mt-16 flex flex-col sm:flex-row justify-center items-center gap-6">
+    <div class="mt-20 md:mt-28 flex flex-col sm:flex-row justify-center items-center gap-6" data-cta>
       <a
         href="/kontakt"
         class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
@@ -177,59 +145,7 @@ const caseStudies = [
 </section>
 
 <script>
-  function initSocialProofTabs() {
-    const tablist = document.querySelector('[aria-label="Case Studies"]');
-    if (!tablist) return;
-
-    const tabs = tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]');
-    const panels = document.querySelectorAll<HTMLElement>('[role="tabpanel"]');
-
-    function activateTab(targetTab: HTMLButtonElement) {
-      const targetId = targetTab.dataset.tab;
-      if (!targetId) return;
-
-      tabs.forEach((t) => {
-        const isActive = t.dataset.tab === targetId;
-        t.setAttribute('aria-selected', String(isActive));
-        t.setAttribute('tabindex', isActive ? '0' : '-1');
-        t.classList.toggle('text-text-primary', isActive);
-        t.classList.toggle('text-text-muted', !isActive);
-        t.classList.toggle('bg-white/5', isActive);
-      });
-
-      panels.forEach((panel) => {
-        panel.classList.toggle('hidden', panel.dataset.panel !== targetId);
-      });
-    }
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => activateTab(tab));
-    });
-
-    tablist.addEventListener('keydown', (e) => {
-      const tabArray = Array.from(tabs);
-      const currentIndex = tabArray.findIndex(t => t.getAttribute('aria-selected') === 'true');
-      let newIndex = currentIndex;
-
-      if (e.key === 'ArrowRight') {
-        newIndex = (currentIndex + 1) % tabArray.length;
-      } else if (e.key === 'ArrowLeft') {
-        newIndex = (currentIndex - 1 + tabArray.length) % tabArray.length;
-      } else if (e.key === 'Home') {
-        newIndex = 0;
-      } else if (e.key === 'End') {
-        newIndex = tabArray.length - 1;
-      } else {
-        return;
-      }
-
-      e.preventDefault();
-      activateTab(tabArray[newIndex]);
-      tabArray[newIndex].focus();
-    });
-  }
-
-  // Video Embed — Klick auf Play lädt YouTube/Canva iframe
+  // Video Embed — Klick auf Play lädt YouTube iframe
   function initVideoTriggers() {
     const videoUrls: Record<string, string> = {
       'sailfish': 'https://www.youtube.com/embed/xkrqYY4dpMI?autoplay=1&rel=0',
@@ -252,7 +168,6 @@ const caseStudies = [
     });
   }
 
-  initSocialProofTabs();
   initVideoTriggers();
 
   // --- Scroll Animations ---
@@ -263,8 +178,8 @@ const caseStudies = [
   const section = document.querySelector("[data-socialproof]");
   if (section) {
     const h2 = section.querySelector("h2");
-    const browserFrame = section.querySelector(".bg-background.rounded-2xl");
-    const ctaArea = section.querySelector(".flex.justify-center");
+    const cases = section.querySelectorAll<HTMLElement>("[data-case]");
+    const ctaArea = section.querySelector<HTMLElement>("[data-cta]");
 
     // H2 SplitText reveal
     if (h2) {
@@ -285,28 +200,25 @@ const caseStudies = [
       });
     }
 
-    // Browser frame entrance — scale + fade
-    if (browserFrame) {
-      gsap.set(browserFrame, { opacity: 0, y: 40, scale: 0.97 });
-
-      gsap.to(browserFrame, {
+    // Case entrances — fade + rise
+    cases.forEach((el) => {
+      gsap.set(el, { opacity: 0, y: 40 });
+      gsap.to(el, {
         opacity: 1,
         y: 0,
-        scale: 1,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: browserFrame,
+          trigger: el,
           start: "top 80%",
           once: true,
         },
       });
-    }
+    });
 
     // CTA area fade-in
     if (ctaArea) {
       gsap.set(ctaArea, { opacity: 0, y: 20 });
-
       gsap.to(ctaArea, {
         opacity: 1,
         y: 0,

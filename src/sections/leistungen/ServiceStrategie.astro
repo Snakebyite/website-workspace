@@ -3,6 +3,20 @@
 // Job: Position Telos as strategic partner, not executor.
 // Layout: Mirrored — Visual left (5col), text right (7col) for rhythm.
 // Dichte: MITTEL — text-focused, no visual component yet.
+import { Image } from "astro:assets";
+import kevinPortrait from "../../assets/kevin-portrait.png";
+import {
+  Database,
+  Search,
+  Compass,
+  TrendingUp,
+  Megaphone,
+  Cable,
+  Image as ImageIcon,
+  Sparkles,
+  Globe,
+  Workflow,
+} from "@lucide/astro";
 ---
 
 <section class="py-20 md:py-32" data-service-strategie>
@@ -28,7 +42,7 @@
         <div class="border border-white/5 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.02]">
           <p class="font-body text-base font-semibold uppercase tracking-[0.08em] text-accent-text mb-3">Kontext</p>
           <p class="text-text-primary font-medium text-lg">Markt, Wettbewerb & Produktportfolio</p>
-          <p class="text-text-secondary text-sm mt-2">Wir verstehen dein Geschäftsmodell, dein Sortiment und deine Wettbewerber — bevor wir eine einzige Optimierung starten.</p>
+          <p class="text-text-secondary text-sm mt-2">Wir verstehen dein Geschäftsmodell, dein Sortiment und deine Wettbewerber, bevor wir eine einzige Optimierung starten.</p>
         </div>
         <div class="border border-white/5 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.02]">
           <p class="font-body text-base font-semibold uppercase tracking-[0.08em] text-accent-text mb-3">Planung</p>
@@ -62,84 +76,94 @@
       </h3>
       <div class="divide-y divide-white/5 border-t border-white/5">
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">Produktdatenoptimierung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Optimierung deiner Produktdaten für maximale Sichtbarkeit und Conversion auf allen relevanten Marktplätzen.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Database class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">Produktdatenoptimierung</p>
+            <p class="text-text-secondary text-base mt-2">Optimierung deiner Produktdaten für maximale Sichtbarkeit und Conversion auf allen relevanten Marktplätzen.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">SEO-Optimierung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Datenbasierte Keyword-Recherche und Implementierung für maximale organische Sichtbarkeit und bessere Indexierung.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Search class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">SEO-Optimierung</p>
+            <p class="text-text-secondary text-base mt-2">Datenbasierte Keyword-Recherche und Implementierung für maximale organische Sichtbarkeit und bessere Indexierung.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">Strategische Beratung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Phasenbasierte Wachstumspläne mit klaren Meilensteinen und messbaren KPIs für nachhaltigen Marktplatzerfolg.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Compass class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">Strategische Beratung</p>
+            <p class="text-text-secondary text-base mt-2">Phasenbasierte Wachstumspläne mit klaren Meilensteinen und messbaren KPIs für nachhaltigen Marktplatzerfolg.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">Margenoptimierung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Kontinuierliche Analyse und Verbesserung deiner Gewinnmargen durch strategische Preis- und Kostenoptimierung.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <TrendingUp class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">Margenoptimierung</p>
+            <p class="text-text-secondary text-base mt-2">Kontinuierliche Analyse und Verbesserung deiner Gewinnmargen durch strategische Preis- und Kostenoptimierung.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">PPC-Management</p>
-            <p class="text-text-secondary text-sm mt-1.5">Effizientes Kampagnen-Management für Sponsored Products, Brands und Display. Datengetrieben, mit klarem Fokus auf ROAS und Profitabilität.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Megaphone class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">PPC-Management</p>
+            <p class="text-text-secondary text-base mt-2">Effizientes Kampagnen-Management für Sponsored Products, Brands und Display. Datengetrieben, mit klarem Fokus auf ROAS und Profitabilität.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">API-First-Strategien</p>
-            <p class="text-text-secondary text-sm mt-1.5">Direkte Anbindung an Marktplatz-APIs für automatisierte Prozesse, Echtzeit-Daten und skalierbare Workflows ohne manuelle Zwischenschritte.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Cable class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">API-First-Strategien</p>
+            <p class="text-text-secondary text-base mt-2">Direkte Anbindung an Marktplatz-APIs für automatisierte Prozesse, Echtzeit-Daten und skalierbare Workflows ohne manuelle Zwischenschritte.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">Produktbilder-Optimierung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Analyse und Optimierung deiner Produktbilder für höhere Klickraten und Conversion — abgestimmt auf Marktplatz-Anforderungen und Wettbewerb.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <ImageIcon class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">Produktbilder-Optimierung</p>
+            <p class="text-text-secondary text-base mt-2">Analyse und Optimierung deiner Produktbilder für höhere Klickraten und Conversion, abgestimmt auf Marktplatz-Anforderungen und Wettbewerb.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">A+ Content-Optimierung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Erstellung und Optimierung von A+ Content für stärkere Markenpräsenz, höhere Conversion und bessere organische Sichtbarkeit.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Sparkles class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">A+ Content-Optimierung</p>
+            <p class="text-text-secondary text-base mt-2">Erstellung und Optimierung von A+ Content für stärkere Markenpräsenz, höhere Conversion und bessere organische Sichtbarkeit.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">Internationalisierung</p>
-            <p class="text-text-secondary text-sm mt-1.5">Expansion auf internationale Marktplätze mit lokalisiertem Content, länderspezifischer Keyword-Strategie und angepasster Marktplatz-Architektur.</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Globe class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">Internationalisierung</p>
+            <p class="text-text-secondary text-base mt-2">Expansion auf internationale Marktplätze mit lokalisiertem Content, länderspezifischer Keyword-Strategie und angepasster Marktplatz-Architektur.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
-        <div class="flex items-start justify-between gap-6 py-6 md:py-8">
-          <div>
-            <p class="text-text-primary font-medium text-lg">Operations</p>
-            <p class="text-text-secondary text-sm mt-1.5">Automatisierung wiederkehrender Prozesse — Listing-Erstellung · KPI-Dashboards & Alerting · Workflow-Automatisierung · Bestandsmanagement</p>
+        <div class="group flex items-start gap-5 md:gap-6 py-6 md:py-8">
+          <Workflow class="shrink-0 w-6 h-6 text-accent-text mt-1" aria-hidden="true" />
+          <div class="flex-1">
+            <p class="text-text-primary font-medium text-xl">Operations</p>
+            <p class="text-text-secondary text-base mt-2">Automatisierung wiederkehrender Prozesse: Listing-Erstellung, KPI-Dashboards & Alerting, Workflow-Automatisierung, Bestandsmanagement.</p>
           </div>
-          <span class="shrink-0 rounded-lg bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text">Enthalten</span>
+          <span class="shrink-0 rounded-lg border border-[rgba(76,175,130,0.3)] bg-[rgba(76,175,130,0.12)] px-3 py-1 text-sm font-medium text-accent-text mt-1 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[rgba(76,175,130,0.65)] group-hover:bg-[rgba(76,175,130,0.22)] group-hover:shadow-[0_4px_12px_rgba(76,175,130,0.15)]">Enthalten</span>
         </div>
 
       </div>
@@ -153,13 +177,22 @@
           Marktplatz Strategie, organische Sichtbarkeit, Anbindungen, Automatisierung. Wir haben die Bausteine. Jetzt kommt es darauf an, welche Kombination für dein Setup den größten Hebel hat.
         </p>
       </div>
-      <div class="lg:col-span-5 flex flex-col items-start lg:items-end gap-4 md:gap-5">
-        <a
-          href="/kontakt"
-          class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
-        >
-          Kostenloses Erstgespräch
-        </a>
+      <div class="lg:col-span-5 flex flex-col items-start lg:items-center gap-4 md:gap-5">
+        <div class="flex items-center gap-4">
+          <Image
+            src={kevinPortrait}
+            alt="Kevin Flurschütz, Gründer von KFL Consulting"
+            widths={[160, 240, 320]}
+            sizes="112px"
+            class="w-28 h-28 rounded-xl object-cover shrink-0"
+          />
+          <a
+            href="/kontakt"
+            class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+          >
+            Kostenloses Erstgespräch
+          </a>
+        </div>
         <span class="text-sm text-text-muted">Unverbindlich, 30 Minuten</span>
       </div>
     </div>

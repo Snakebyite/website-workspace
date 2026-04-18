@@ -137,26 +137,17 @@ const marketplaces = [
 
     </div>
 
-    <!-- Tools Section — Marquee like LogoBand, sliding left to right -->
+    <!-- Tools Section — statisches Grid, alle Tools nebeneinander lesbar -->
     <div class="mt-20 md:mt-28" data-tools-band>
       <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-secondary">
         Tools, die wir nutzen.
       </h3>
-      <div class="tools-marquee-container mt-8 md:mt-10">
-        <div class="tools-marquee-fade-left"></div>
-        <div class="tools-marquee-fade-right"></div>
-        <div class="tools-marquee-track">
-          {tools.map((tool) => (
-            <div class="tool-item">
-              <img src={tool.src.src} alt={tool.name} loading="lazy" />
-            </div>
-          ))}
-          {tools.map((tool) => (
-            <div class="tool-item">
-              <img src={tool.src.src} alt={tool.name} loading="lazy" />
-            </div>
-          ))}
-        </div>
+      <div class="mt-10 md:mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1 w-full">
+        {tools.map((tool) => (
+          <div class="tool-item flex items-center justify-center rounded-lg overflow-hidden">
+            <img src={tool.src.src} alt={tool.name} loading="lazy" class="w-full h-auto object-contain opacity-80" />
+          </div>
+        ))}
       </div>
     </div>
 
@@ -255,91 +246,24 @@ const marketplaces = [
     opacity: 1;
   }
 
-  /* Tools Marquee */
-  .tools-marquee-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .tools-marquee-fade-left,
-  .tools-marquee-fade-right {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .tools-marquee-fade-left {
-    left: 0;
-    background: linear-gradient(to right, var(--color-background, #0A0A0A), transparent);
-  }
-
-  .tools-marquee-fade-right {
-    right: 0;
-    background: linear-gradient(to left, var(--color-background, #0A0A0A), transparent);
-  }
-
-  .tools-marquee-track {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-    width: max-content;
-    animation: tools-marquee-scroll 40s linear infinite;
-  }
-
+  /* Tools Grid — gleiche Optik wie Marketplace-Logos */
   .tool-item {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-    height: 90px;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    border: 1px solid transparent;
   }
 
   .tool-item:hover {
-    opacity: 1;
+    background-color: rgba(76, 175, 130, 0.06);
+    border-color: rgba(76, 175, 130, 0.25);
+    transform: translateY(-2px);
   }
 
   .tool-item img {
-    height: 90px;
-    max-width: 100%;
-    width: auto;
-    object-fit: contain;
+    transition: opacity 0.3s ease;
   }
 
-  @media (min-width: 768px) {
-    .tools-marquee-fade-left,
-    .tools-marquee-fade-right {
-      width: 120px;
-    }
-
-    .tools-marquee-track {
-      gap: 5rem;
-    }
-
-    .tool-item {
-      width: 380px;
-      height: 160px;
-    }
-
-    .tool-item img {
-      height: 160px;
-    }
-  }
-
-  /* Direction: left to right (reverse of default marquee) */
-  @keyframes tools-marquee-scroll {
-    from {
-      transform: translateX(-50%);
-    }
-    to {
-      transform: translateX(0);
-    }
+  .tool-item:hover img {
+    opacity: 1;
   }
 
 </style>

@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Roadmap Preview · Telos</title>
+    <style>
+      :root {
+        --background: #0a0a0a;
+        --surface: #141414;
+        --surface-elevated: #1c1c1c;
+        --border: rgba(255, 255, 255, 0.05);
+        --border-hover: rgba(255, 255, 255, 0.1);
+        --text-primary: #efefef;
+        --text-secondary: #999999;
+        --text-muted: #555555;
+        --accent: #4caf82;
+        --accent-text: #6baf96;
+        --accent-subtle: rgba(76, 175, 130, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--background);
+        color: var(--text-primary);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-feature-settings: "ss01";
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .serif {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+
+      .hint {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        background: var(--surface-elevated);
+        border: 1px solid var(--border);
+        padding: 10px 14px;
+        font-size: 12px;
+        color: var(--text-secondary);
+        border-radius: 8px;
+        z-index: 50;
+      }
+
+      .overline {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-text);
+        margin-bottom: 16px;
+      }
+
+      h2.serif {
+        font-size: clamp(32px, 5vw, 48px);
+        max-width: 760px;
+        margin-bottom: 32px;
+      }
+
+      .section {
+        padding: 120px 0;
+      }
+
+      .lead {
+        max-width: 720px;
+        font-size: 18px;
+        color: var(--text-secondary);
+        margin-bottom: 80px;
+      }
+
+      .lead em {
+        color: var(--text-primary);
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      /* === ROADMAP === */
+      .roadmap {
+        position: relative;
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+
+      /* central vertical line */
+      .roadmap::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateX(-50%);
+      }
+
+      .progress-line {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 1px;
+        height: 0;
+        background: linear-gradient(to bottom, transparent 0%, var(--accent-text) 20%, var(--accent-text) 100%);
+        transform: translateX(-50%);
+        transition: height 80ms linear;
+        box-shadow: 0 0 12px rgba(107, 175, 150, 0.4);
+        pointer-events: none;
+      }
+
+      .station {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 80px 1fr;
+        align-items: center;
+        margin-bottom: 96px;
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+      }
+
+      .station:last-child {
+        margin-bottom: 0;
+      }
+
+      .station.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .station-content {
+        padding: 8px 0;
+      }
+
+      .station:nth-child(odd) .station-content {
+        grid-column: 1;
+        text-align: right;
+        padding-right: 8px;
+      }
+
+      .station:nth-child(even) .station-content {
+        grid-column: 3;
+        text-align: left;
+        padding-left: 8px;
+      }
+
+      .station-label {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-text);
+        margin-bottom: 8px;
+      }
+
+      .station-title {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        margin-bottom: 10px;
+        line-height: 1.2;
+      }
+
+      .station-text {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        max-width: 360px;
+      }
+
+      .station:nth-child(odd) .station-text {
+        margin-left: auto;
+      }
+
+      /* node */
+      .node {
+        grid-column: 2;
+        justify-self: center;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--background);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        transition: all 0.5s ease-out;
+      }
+
+      .station.in-view .node {
+        border-color: var(--accent-text);
+        background: var(--accent-subtle);
+        box-shadow: 0 0 0 6px rgba(107, 175, 150, 0.06), 0 0 24px rgba(107, 175, 150, 0.25);
+      }
+
+      .node svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--text-secondary);
+        stroke-width: 1.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke 0.5s ease-out;
+      }
+
+      .station.in-view .node svg {
+        stroke: var(--accent-text);
+      }
+
+      /* number variant */
+      .node.numeric {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 22px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .station.in-view .node.numeric {
+        color: var(--accent-text);
+      }
+
+      /* glow behind */
+      .glow {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(ellipse at center, rgba(76, 175, 130, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+      }
+
+      .station.in-view .glow {
+        opacity: 1;
+      }
+
+      /* coda */
+      .coda {
+        max-width: 720px;
+        margin: 96px auto 0;
+        font-size: 17px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        text-align: center;
+        padding: 0 16px;
+      }
+
+      .coda em {
+        color: var(--text-primary);
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      /* divider between variants */
+      .variant-label {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 48px;
+        padding-top: 80px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.05);
+      }
+
+      .variant-label .swatch {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      /* mobile */
+      @media (max-width: 720px) {
+        .roadmap::before,
+        .progress-line {
+          left: 32px;
+          transform: none;
+        }
+        .station {
+          grid-template-columns: 64px 1fr;
+          gap: 16px;
+          margin-bottom: 64px;
+        }
+        .station:nth-child(odd) .station-content,
+        .station:nth-child(even) .station-content {
+          grid-column: 2;
+          text-align: left;
+          padding: 0;
+        }
+        .station:nth-child(odd) .station-text {
+          margin-left: 0;
+        }
+        .node {
+          grid-column: 1;
+          justify-self: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hint">Preview · Telos Roadmap-Konzept</div>
+
+    <!-- VARIANT A: with icons -->
+    <section class="section">
+      <div class="container">
+        <p class="overline">MARKTPLATZ-STRATEGIE</p>
+        <h2 class="serif">Erst die Strategie, dann die Skalierung. Nicht umgekehrt.</h2>
+
+        <p class="lead">
+          Viele Brands starten auf Marktplätzen, indem sie Produkte listen und hoffen, dass es läuft. Wenn es nicht läuft,
+          wird mehr Geld in Ads gesteckt. Das Problem ist selten der Kanal — das Problem ist, dass es <em>keinen Plan gab</em>.
+          Wir setzen genau da an.
+        </p>
+
+        <p class="variant-label" style="border: none; padding-top: 0;"><span class="swatch"></span>Variante A · mit Icons</p>
+
+        <div class="roadmap" data-roadmap>
+          <div class="progress-line" data-progress></div>
+
+          <div class="station">
+            <div class="station-content">
+              <p class="station-label">Analyse</p>
+              <p class="station-title">Deep Research Analysis</p>
+              <p class="station-text">
+                Wie groß ist dein Markt wirklich? Wer sind die relevanten Player? Wo liegen die Lücken, die andere nicht sehen?
+              </p>
+            </div>
+            <div class="node">
+              <span class="glow"></span>
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+            </div>
+          </div>
+
+          <div class="station">
+            <div class="node">
+              <span class="glow"></span>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2 2 7l10 5 10-5-10-5z" />
+                <path d="m2 17 10 5 10-5" />
+                <path d="m2 12 10 5 10-5" />
+              </svg>
+            </div>
+            <div class="station-content">
+              <p class="station-label">Kontext</p>
+              <p class="station-title">Markt, Wettbewerb &amp; Produktportfolio</p>
+              <p class="station-text">
+                Wir verstehen dein Geschäftsmodell, dein Sortiment und deine Wettbewerber, bevor wir eine einzige Optimierung
+                starten.
+              </p>
+            </div>
+          </div>
+
+          <div class="station">
+            <div class="station-content">
+              <p class="station-label">Planung</p>
+              <p class="station-title">Go-to-Market &amp; Rollout</p>
+              <p class="station-text">
+                Welche Marktplätze zuerst? Welche Produkte haben den größten Hebel? Was ist die richtige Reihenfolge?
+              </p>
+            </div>
+            <div class="node">
+              <span class="glow"></span>
+              <svg viewBox="0 0 24 24">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6" />
+                <line x1="9" y1="3" x2="9" y2="18" />
+                <line x1="15" y1="6" x2="15" y2="21" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="station">
+            <div class="node">
+              <span class="glow"></span>
+              <svg viewBox="0 0 24 24">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+              </svg>
+            </div>
+            <div class="station-content">
+              <p class="station-label">Umsetzung</p>
+              <p class="station-title">Schritt für Schritt, messbar</p>
+              <p class="station-text">
+                Datenbasiert priorisiert, nicht nach Bauchgefühl. Wir setzen gemeinsam um — mit klaren Verantwortlichkeiten
+                und messbaren Meilensteinen.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="coda">
+          Wir denken dabei nicht in isolierten Kanälen, sondern <em>holistisch</em>: Wie spielen organische Sichtbarkeit,
+          Advertising und Produktdaten zusammen? Wo ist der Engpass, der das Wachstum blockiert? Genau dort setzen wir den
+          Hebel an.
+        </p>
+      </div>
+    </section>
+
+    <!-- VARIANT B: with numbers (design.md compliant) -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <p class="variant-label"><span class="swatch"></span>Variante B · mit Nummern (folgt design.md "Prozess"-Archetyp)</p>
+
+        <div class="roadmap" data-roadmap>
+          <div class="progress-line" data-progress></div>
+
+          <div class="station">
+            <div class="station-content">
+              <p class="station-label">Analyse</p>
+              <p class="station-title">Deep Research Analysis</p>
+              <p class="station-text">
+                Wie groß ist dein Markt wirklich? Wer sind die relevanten Player? Wo liegen die Lücken, die andere nicht sehen?
+              </p>
+            </div>
+            <div class="node numeric">
+              <span class="glow"></span>
+              01
+            </div>
+          </div>
+
+          <div class="station">
+            <div class="node numeric">
+              <span class="glow"></span>
+              02
+            </div>
+            <div class="station-content">
+              <p class="station-label">Kontext</p>
+              <p class="station-title">Markt, Wettbewerb &amp; Produktportfolio</p>
+              <p class="station-text">
+                Wir verstehen dein Geschäftsmodell, dein Sortiment und deine Wettbewerber, bevor wir eine einzige Optimierung
+                starten.
+              </p>
+            </div>
+          </div>
+
+          <div class="station">
+            <div class="station-content">
+              <p class="station-label">Planung</p>
+              <p class="station-title">Go-to-Market &amp; Rollout</p>
+              <p class="station-text">
+                Welche Marktplätze zuerst? Welche Produkte haben den größten Hebel? Was ist die richtige Reihenfolge?
+              </p>
+            </div>
+            <div class="node numeric">
+              <span class="glow"></span>
+              03
+            </div>
+          </div>
+
+          <div class="station">
+            <div class="node numeric">
+              <span class="glow"></span>
+              04
+            </div>
+            <div class="station-content">
+              <p class="station-label">Umsetzung</p>
+              <p class="station-title">Schritt für Schritt, messbar</p>
+              <p class="station-text">
+                Datenbasiert priorisiert, nicht nach Bauchgefühl. Wir setzen gemeinsam um — mit klaren Verantwortlichkeiten
+                und messbaren Meilensteinen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="height: 200px;"></div>
+
+    <script>
+      // Reveal stations on scroll
+      const stations = document.querySelectorAll(".station");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("in-view");
+          });
+        },
+        { threshold: 0.4, rootMargin: "0px 0px -10% 0px" }
+      );
+      stations.forEach((s) => io.observe(s));
+
+      // Draw progress line based on scroll progress through each roadmap
+      const roadmaps = document.querySelectorAll("[data-roadmap]");
+      const update = () => {
+        roadmaps.forEach((rm) => {
+          const rect = rm.getBoundingClientRect();
+          const vh = window.innerHeight;
+          const total = rect.height;
+          const scrolled = Math.min(Math.max(vh * 0.5 - rect.top, 0), total);
+          const progress = total > 0 ? scrolled / total : 0;
+          const line = rm.querySelector("[data-progress]");
+          if (line) line.style.height = progress * 100 + "%";
+        });
+      };
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    </script>
+  </body>
+</html>
