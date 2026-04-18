@@ -1,8 +1,8 @@
 ---
-// ServiceStrategie — Marktplatz-Strategie
+// ServiceStrategie — Marktplatz Strategie
 // Job: Position Telos as strategic partner, not executor.
-// Layout: Mirrored — Visual left (5col), text right (7col) for rhythm.
-// Dichte: MITTEL — text-focused, no visual component yet.
+// Layout: Zigzag-Roadmap mit zentraler Progress-Line (scroll-getrieben) ersetzt den Fließtext.
+// Dichte: MITTEL — visueller Fokus auf 3 Phasen: Analyse, Kontext, Fahrplan.
 import { Image } from "astro:assets";
 import kevinPortrait from "../../assets/kevin-portrait.png";
 import {
@@ -23,54 +23,66 @@ import {
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
     <!-- Overline + Headline -->
-    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">
-      Marktplatz-Strategie
+    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-strategie-overline>
+      Marktplatz Strategie
     </p>
     <h2 class="max-w-3xl">
       Erst die Strategie, dann die Skalierung. Nicht umgekehrt.
     </h2>
 
-    <div class="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+    <!-- Lead -->
+    <p class="mt-8 md:mt-10 max-w-2xl text-text-secondary text-lg leading-relaxed" data-strategie-lead>
+      Viele Brands starten auf Marktplätzen, indem sie Produkte listen und hoffen. Wenn es nicht läuft, wird mehr Geld in Ads gesteckt. Das Problem ist selten der Kanal. Das Problem ist, dass es keinen Plan gab.
+    </p>
 
-      <!-- Left: Visual weight — Key principles as compact blocks -->
-      <div class="lg:col-span-5 flex flex-col gap-6">
-        <div class="border border-white/5 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.02]">
-          <p class="font-body text-base font-semibold uppercase tracking-[0.08em] text-accent-text mb-3">Analyse</p>
-          <p class="text-text-primary font-medium text-lg">Deep Research Analysis</p>
-          <p class="text-text-secondary text-sm mt-2">Wie groß ist dein Markt wirklich? Wer sind die relevanten Player? Wo liegen die Lücken, die andere nicht sehen?</p>
+    <!-- Roadmap -->
+    <div class="roadmap mx-auto mt-20 md:mt-28 max-w-[1040px]" data-roadmap>
+      <div class="progress-line" data-progress></div>
+
+      <div class="station" data-station>
+        <div class="station-content">
+          <span class="station-num">01</span>
+          <p class="station-label">Analyse</p>
+          <p class="station-title">Deep Research Analysis</p>
+          <p class="station-text">
+            Wie groß ist dein Markt wirklich? Wo liegen die Lücken, die aktuell übersehen werden? Wie viele Keyword Roots deckst du ab? Welche deiner Produkte bringen dir den meisten Profit?
+          </p>
         </div>
-        <div class="border border-white/5 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.02]">
-          <p class="font-body text-base font-semibold uppercase tracking-[0.08em] text-accent-text mb-3">Kontext</p>
-          <p class="text-text-primary font-medium text-lg">Markt, Wettbewerb & Produktportfolio</p>
-          <p class="text-text-secondary text-sm mt-2">Wir verstehen dein Geschäftsmodell, dein Sortiment und deine Wettbewerber, bevor wir eine einzige Optimierung starten.</p>
-        </div>
-        <div class="border border-white/5 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.02]">
-          <p class="font-body text-base font-semibold uppercase tracking-[0.08em] text-accent-text mb-3">Planung</p>
-          <p class="text-text-primary font-medium text-lg">Go-to-Market & Rollout</p>
-          <p class="text-text-secondary text-sm mt-2">Welche Marktplätze zuerst? Welche Produkte haben den größten Hebel? Was ist die richtige Reihenfolge?</p>
+        <span class="station-dot"></span>
+      </div>
+
+      <div class="station" data-station>
+        <span class="station-dot"></span>
+        <div class="station-content">
+          <span class="station-num">02</span>
+          <p class="station-label">Kontext</p>
+          <p class="station-title">Markt, Wettbewerb &amp; Produktportfolio</p>
+          <p class="station-text">
+            Bevor wir optimieren, verstehen wir dein Sortiment, deinen Wettbewerb, deine Margen. KI scannt in Stunden, was manuell Wochen bräuchte. Den Plan schreiben wir gemeinsam mit dir.
+          </p>
         </div>
       </div>
 
-      <!-- Right: Text -->
-      <div class="lg:col-span-7">
-        <p class="text-text-secondary text-lg md:text-xl leading-relaxed">
-          Viele Brands starten auf Marktplätzen, indem sie Produkte listen und hoffen, dass es läuft. Wenn es nicht läuft, wird mehr Geld in Ads gesteckt. Wenn es dann immer noch nicht läuft, wird der Kanal als "nicht profitabel" abgestempelt.
-        </p>
-        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
-          Das Problem ist selten der Kanal. Das Problem ist, dass es keinen Plan gab. Keine Marktanalyse, keine Priorisierung, keine klare Reihenfolge. Wir setzen genau da an: Bevor eine einzige Optimierung startet, verstehen wir deinen Markt, deine Wettbewerber und dein Produktportfolio in der Tiefe.
-        </p>
-        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
-          Daraus entsteht ein Plan. Kein 80-Seiten-Dokument, sondern eine klare Roadmap: Welche Marktplätze, welche Produkte, welche Hebel. Datenbasiert priorisiert, nicht nach Bauchgefühl. Und dann setzen wir gemeinsam um. Schritt für Schritt, messbar, mit klaren Verantwortlichkeiten.
-        </p>
-        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
-          Wir denken dabei nicht in isolierten Kanälen, sondern <span class="text-text-primary font-medium">holistisch</span>: Wie spielen organische Sichtbarkeit, Advertising und Produktdaten zusammen? Wo ist der Engpass, der das Wachstum blockiert? Genau dort setzen wir den Hebel an.
-        </p>
+      <div class="station" data-station>
+        <div class="station-content">
+          <span class="station-num">03</span>
+          <p class="station-label">Fahrplan</p>
+          <p class="station-title">Go to Market &amp; Rollout</p>
+          <p class="station-text">
+            Welche Produkte haben den größten Hebel auf Umsatz und Marge? Woran erkennen wir Fortschritt nach 4 Wochen, woran nach 3 Monaten?
+          </p>
+        </div>
+        <span class="station-dot"></span>
       </div>
-
     </div>
 
+    <!-- Coda -->
+    <p class="mt-24 md:mt-32 mx-auto max-w-3xl text-center text-text-secondary text-lg leading-relaxed" data-strategie-coda>
+      Wir denken dabei nicht in isolierten Kanälen, sondern <span class="text-text-primary font-medium">holistisch</span>: Wie spielen organische Sichtbarkeit, Advertising und Produktdaten zusammen? Genau dort setzen wir den Hebel an.
+    </p>
+
     <!-- Checklist -->
-    <div class="mt-16 md:mt-20" data-strategie-checklist>
+    <div class="mt-24 md:mt-32" data-strategie-checklist>
       <h3 class="text-[2rem] sm:text-[2.5rem] md:text-[3rem] leading-tight text-center mb-12" data-pakete-h3>
         Unsere Betreuung enthält folgende Pakete
       </h3>
@@ -173,32 +185,216 @@ import {
     <div class="mt-20 md:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center" data-strategie-cta>
       <div class="lg:col-span-7">
         <h3 class="text-2xl md:text-[2rem] tracking-[-0.02em] leading-[1.2]">Lass uns über deine Strategie sprechen.</h3>
-        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-4 max-w-lg">
+        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-4 max-w-xl">
           Marktplatz Strategie, organische Sichtbarkeit, Anbindungen, Automatisierung. Wir haben die Bausteine. Jetzt kommt es darauf an, welche Kombination für dein Setup den größten Hebel hat.
         </p>
       </div>
-      <div class="lg:col-span-5 flex flex-col items-start lg:items-center gap-4 md:gap-5">
-        <div class="flex items-center gap-4">
+      <div class="lg:col-span-5 flex flex-col items-start lg:items-center gap-7 md:gap-8">
+        <!-- Person-Card: Foto + Name + Rolle -->
+        <div class="flex items-center gap-5 md:gap-6">
           <Image
             src={kevinPortrait}
-            alt="Kevin Flurschütz, Gründer von KFL Consulting"
-            widths={[160, 240, 320]}
-            sizes="112px"
-            class="w-28 h-28 rounded-xl object-cover shrink-0"
+            alt="Kevin Flurschütz"
+            widths={[256, 384, 512]}
+            sizes="(max-width: 640px) 128px, 160px"
+            class="w-32 h-32 lg:w-40 lg:h-40 rounded-xl object-cover shrink-0"
           />
+          <div class="flex flex-col">
+            <p class="text-text-primary font-medium text-xl leading-tight">Kevin Flurschütz</p>
+            <p class="text-text-secondary text-base mt-2">Founder, KFL Consulting</p>
+          </div>
+        </div>
+        <!-- CTA -->
+        <div class="flex flex-col items-start lg:items-center gap-3">
           <a
             href="/kontakt"
             class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
           >
             Kostenloses Erstgespräch
           </a>
+          <span class="text-sm text-text-muted">Unverbindlich, 30 Minuten</span>
         </div>
-        <span class="text-sm text-text-muted">Unverbindlich, 30 Minuten</span>
       </div>
     </div>
 
   </div>
 </section>
+
+<style>
+  .roadmap {
+    position: relative;
+  }
+
+  .roadmap::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 32px;
+    bottom: 32px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-50%);
+  }
+
+  .progress-line {
+    position: absolute;
+    left: 50%;
+    top: 32px;
+    width: 1px;
+    height: 0;
+    background: #6baf96;
+    box-shadow: 0 0 12px rgba(107, 175, 150, 0.45);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: height 80ms linear;
+  }
+
+  .station {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    align-items: start;
+    margin-bottom: 112px;
+  }
+
+  .station:last-child {
+    margin-bottom: 0;
+  }
+
+  .station-content {
+    padding-top: 8px;
+  }
+
+  .station:nth-child(odd) .station-content {
+    grid-column: 1;
+    text-align: right;
+    padding-right: 48px;
+  }
+
+  .station:nth-child(even) .station-content {
+    grid-column: 3;
+    text-align: left;
+    padding-left: 48px;
+  }
+
+  .station-num {
+    display: block;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #555555;
+    line-height: 1;
+    margin-bottom: 16px;
+    transition: color 0.5s ease-out;
+  }
+
+  .station.in-view .station-num {
+    color: #6baf96;
+  }
+
+  .station-label {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6baf96;
+    margin-bottom: 12px;
+  }
+
+  .station-title {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #efefef;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .station-text {
+    font-size: 16px;
+    color: #999999;
+    line-height: 1.65;
+    max-width: 420px;
+  }
+
+  .station:nth-child(odd) .station-text {
+    margin-left: auto;
+  }
+
+  .station-dot {
+    grid-column: 2;
+    justify-self: center;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 16px;
+    z-index: 2;
+    transition: all 0.5s ease-out;
+  }
+
+  .station.in-view .station-dot {
+    background: #6baf96;
+    border-color: #6baf96;
+    box-shadow: 0 0 0 6px rgba(107, 175, 150, 0.1), 0 0 18px rgba(107, 175, 150, 0.5);
+  }
+
+  .roadmap > .station:nth-child(2) .station-dot {
+    margin-top: -40px;
+  }
+  .roadmap > .station:nth-child(3) .station-dot {
+    margin-top: 56px;
+  }
+  .roadmap > .station:nth-child(4) .station-dot {
+    margin-top: -24px;
+  }
+
+  [data-strategie-coda] {
+    text-wrap: balance;
+  }
+
+  @media (max-width: 720px) {
+    .roadmap::before,
+    .progress-line {
+      left: 20px;
+      transform: none;
+    }
+    .station {
+      grid-template-columns: 40px 1fr;
+      gap: 24px;
+      margin-bottom: 72px;
+    }
+    .station:nth-child(odd) .station-content,
+    .station:nth-child(even) .station-content {
+      grid-column: 2;
+      text-align: left;
+      padding: 0;
+    }
+    .station:nth-child(odd) .station-text {
+      margin-left: 0;
+    }
+    .station-dot,
+    .roadmap > .station:nth-child(2) .station-dot,
+    .roadmap > .station:nth-child(3) .station-dot,
+    .roadmap > .station:nth-child(4) .station-dot {
+      grid-column: 1;
+      justify-self: start;
+      margin-left: 13px;
+      margin-top: 16px;
+    }
+    .station-num {
+      font-size: 40px;
+    }
+    .station-title {
+      font-size: 26px;
+    }
+  }
+</style>
 
 <script>
   import { gsap } from "gsap";
@@ -207,10 +403,8 @@ import {
 
   const section = document.querySelector("[data-service-strategie]");
   if (section) {
-    const overline = section.querySelector("p:first-child");
+    const overline = section.querySelector("[data-strategie-overline]");
     const h2 = section.querySelector("h2");
-    const cards = section.querySelectorAll(".lg\\:col-span-5 > div");
-    const paragraphs = section.querySelectorAll(".lg\\:col-span-7 p");
 
     if (overline) {
       gsap.set(overline, { opacity: 0, y: 10 });
@@ -229,19 +423,59 @@ import {
       });
     }
 
-    if (cards.length) {
-      gsap.set(cards, { opacity: 0, y: 25 });
-      gsap.to(cards, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
-        scrollTrigger: { trigger: cards[0], start: "top 85%", once: true },
+    // Lead
+    const lead = section.querySelector("[data-strategie-lead]");
+    if (lead) {
+      gsap.set(lead, { opacity: 0, y: 15 });
+      gsap.to(lead, {
+        opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+        scrollTrigger: { trigger: lead, start: "top 85%", once: true },
       });
     }
 
-    if (paragraphs.length) {
-      gsap.set(paragraphs, { opacity: 0, y: 20 });
-      gsap.to(paragraphs, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out",
-        scrollTrigger: { trigger: paragraphs[0], start: "top 85%", once: true },
+    // Roadmap progress line — direct scroll-driven (matches preview exactly)
+    const roadmap = section.querySelector("[data-roadmap]") as HTMLElement | null;
+    const progressLine = section.querySelector("[data-progress]") as HTMLElement | null;
+    if (roadmap && progressLine) {
+      const updateProgress = () => {
+        const rect = roadmap.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = rect.height;
+        const scrolled = Math.min(Math.max(vh * 0.55 - rect.top, 0), total);
+        const progress = total > 0 ? scrolled / total : 0;
+        progressLine.style.height = progress * 100 + "%";
+      };
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+      updateProgress();
+    }
+
+    // Stations: fade-in + in-view toggle
+    const stations = section.querySelectorAll("[data-station]");
+    stations.forEach((station) => {
+      const content = station.querySelector(".station-content");
+      if (content) {
+        gsap.set(content, { opacity: 0, y: 24 });
+        gsap.to(content, {
+          opacity: 1, y: 0, duration: 0.7, ease: "power2.out",
+          scrollTrigger: { trigger: station, start: "top 80%", once: true },
+        });
+      }
+      ScrollTrigger.create({
+        trigger: station,
+        start: "top 70%",
+        once: true,
+        onEnter: () => station.classList.add("in-view"),
+      });
+    });
+
+    // Coda
+    const coda = section.querySelector("[data-strategie-coda]");
+    if (coda) {
+      gsap.set(coda, { opacity: 0, y: 15 });
+      gsap.to(coda, {
+        opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+        scrollTrigger: { trigger: coda, start: "top 85%", once: true },
       });
     }
 

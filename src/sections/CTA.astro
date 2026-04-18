@@ -1,8 +1,10 @@
 ---
 // CTA Section — Homepage
 // Job: Letzter Impuls zur Conversion. Einladend, nicht drängend.
-// Layout: Headline + Subline links, Button + Friction-Reducer rechts.
+// Layout: Headline + Subline links, Portrait + Button rechts.
 // Background: default (#0A0A0A) — kein farbiger Banner.
+import { Image } from "astro:assets";
+import kevinPortrait from "../assets/kevin-portrait.png";
 ---
 
 <section class="py-20 md:py-32" aria-label="Termin buchen" data-cta>
@@ -19,20 +21,25 @@
       </div>
 
       <!-- Right: Action -->
-      <div class="lg:col-span-5 flex flex-col items-start lg:items-end gap-4 md:gap-5">
-        <a
-          href="/kontakt"
-          class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
-        >
-          Kostenloses Erstgespräch
-        </a>
-        <span class="text-sm text-text-muted">Unverbindlich, 30 Minuten</span>
-        <a
-          href="/referenzen"
-          class="text-accent-text hover:underline text-sm font-medium transition-colors duration-200"
-        >
-          Erstmal Referenzen ansehen &rarr;
-        </a>
+      <div class="lg:col-span-5 flex flex-col items-start lg:items-end">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-5">
+          <Image
+            src={kevinPortrait}
+            alt="Kevin Flurschütz, Gründer von KFL Consulting"
+            widths={[256, 384, 512]}
+            sizes="(max-width: 640px) 128px, 160px"
+            class="w-32 h-32 lg:w-40 lg:h-40 rounded-xl object-cover shrink-0"
+          />
+          <div class="flex flex-col items-center gap-3">
+            <a
+              href="/kontakt"
+              class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+            >
+              Kostenloses Erstgespräch
+            </a>
+            <span class="text-sm text-text-muted">Unverbindlich, 30 Minuten</span>
+          </div>
+        </div>
       </div>
 
     </div>

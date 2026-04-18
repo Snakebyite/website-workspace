@@ -1,61 +1,175 @@
 ---
 // ServiceSEO — Organische Sichtbarkeit / Amazon SEO
-// Job: Deep dive into core service. Philosophy + approach + deliverables.
-// Layout: Full-width row. Text left (7col), card grid right (5col).
+// Job: Rank Lift Organic Methode als Named Framework, 3 Bausteine mit klarer Hierarchie.
+// Layout: Fundament links groß (7 cols, 2 rows) + Umsetzung/Monitoring rechts gestapelt (5 cols each).
+// Visuelle Verknüpfung: Connector-Linien (SVG) zeigen, wie 02/03 aus 01 hervorgehen.
+import { Layers, Wrench, Activity, Check } from "@lucide/astro";
 ---
 
-<section class="py-12 md:py-20" data-service-seo>
+<section class="py-20 md:py-32" data-service-seo>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
     <!-- Overline + Headline -->
-    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">
+    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-seo-overline>
       Organische Sichtbarkeit
     </p>
     <h2 class="max-w-3xl">
       Amazon SEO ist kein Einmalprojekt. Es ist die Basis für alles, was danach kommt.
     </h2>
 
-    <!-- Philosophy Text + Deliverable Cards -->
-    <div class="mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+    <!-- Lead -->
+    <p class="mt-8 md:mt-10 max-w-3xl text-text-secondary text-lg leading-relaxed" data-seo-lead>
+      Während die meisten Seller Geld in PPC verbrennen, baust du mit der <span class="text-text-primary font-medium">Rank Lift Organic Methode</span> ein organisches Fundament, das dir planbar mehr Gewinn bringt.
+    </p>
 
-      <div class="lg:col-span-7">
-        <p class="text-text-secondary text-lg md:text-xl leading-relaxed max-w-[44rem]">
-          Jedes Projekt startet bei uns mit einem vollständigen Keyword Mapping. Nicht mit einer Liste aus einem Tool, sondern mit einem <span class="text-text-primary font-medium">Deep Dive nach der Rank Lift Organic Methode</span>. Wir analysieren alle Wortkombinationen innerhalb der Keywordwurzeln, gleichen Suchintention und relevante Stammdaten ab und bauen das Ganze auf deinem Zielgruppenverständnis auf. Jede Lücke in diesem Prozess wird durch KI und menschliche Validierung geschlossen.
-        </p>
-        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6 max-w-[44rem]">
-          Parallel dazu schauen wir uns sämtliche Bewertungen an. Deine und die vom Wettbewerb. AI First integriert, weil das Arbeiten sind, die ein Mensch alleine in dieser Tiefe gar nicht mehr umsetzen kann. Wir setzen das in einem Konzept um, das in kurzer Zeit iteriert wird, so dass das komplette Maximum aus den Daten herausgearbeitet wird. So haben wir komplette Klarheit über alle organischen Lücken in der Nische und maximieren das organische Fundament.
-        </p>
-        <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6 max-w-[44rem]">
-          Was die meisten übersehen: Genauso wie sich Deal Events ändern, gibt es themenbezogene Keywords, die von nahezu 90% der Seller nicht berücksichtigt werden. Saisonale Shifts, veränderte Suchintentionen, neue Wettbewerberstrukturen. Wir monitoren, passen an und reagieren. Bevor du es merkst.
-        </p>
-      </div>
+    <!-- Bausteine-Framework -->
+    <div class="relative mt-20 md:mt-28" data-seo-framework>
 
-      <!-- Deliverable Cards -->
-      <div class="lg:col-span-5">
-        <h3 class="font-body text-lg font-medium text-text-primary mb-6">Was du bekommst</h3>
-        <div class="space-y-4" data-seo-cards>
-          <div class="seo-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
-            <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-2 transition-colors duration-300">Fundament</p>
-            <p class="text-text-primary font-medium text-base mb-1.5">Rank Lift Organic Analyse</p>
-            <p class="text-text-secondary text-sm leading-relaxed">Alle Wortkombinationen innerhalb der Keywordwurzeln, Suchintentionen und Stammdaten. KI gestützt aufgebaut, manuell validiert.</p>
+      <!-- Connector-SVG (nur Desktop, hinter den Blöcken) -->
+      <svg
+        class="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
+        <!-- Trunk aus Fundament + Branch nach oben zu Umsetzung -->
+        <path
+          d="M 57 50 L 58.7 50 L 58.7 24.5 L 60.4 24.5"
+          stroke="rgba(107, 175, 150, 0.4)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+          vector-effect="non-scaling-stroke"
+        />
+        <!-- Branch nach unten zu Monitoring -->
+        <path
+          d="M 58.7 50 L 58.7 75.5 L 60.4 75.5"
+          stroke="rgba(107, 175, 150, 0.4)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+          vector-effect="non-scaling-stroke"
+        />
+        <!-- Connection nodes -->
+        <circle cx="57" cy="50" r="0.55" fill="rgba(107, 175, 150, 0.65)" data-seo-node />
+        <circle cx="60.4" cy="24.5" r="0.55" fill="rgba(107, 175, 150, 0.65)" data-seo-node />
+        <circle cx="60.4" cy="75.5" r="0.55" fill="rgba(107, 175, 150, 0.65)" data-seo-node />
+      </svg>
+
+      <!-- Grid: Fundament (7/12, row-span-2) + Umsetzung (5/12) + Monitoring (5/12) -->
+      <div class="relative z-10 grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12 lg:grid-rows-2 lg:gap-x-10 lg:gap-y-6">
+
+        <!-- 01 / FUNDAMENT — Hero Block -->
+        <div class="lg:col-span-7 lg:row-span-2 group" data-seo-block>
+          <div class="relative h-full rounded-2xl border border-white/10 p-5 md:p-7 lg:p-8 transition-all duration-300 ease-out hover:border-white/25 hover:bg-white/[0.015] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)]">
+            <div class="flex items-center gap-3.5">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[rgba(76,175,130,0.10)] border border-[rgba(76,175,130,0.25)] transition-all duration-300 group-hover:bg-[rgba(76,175,130,0.22)] group-hover:border-[rgba(76,175,130,0.55)]">
+                <Layers class="w-5 h-5 text-accent-text" aria-hidden="true" />
+              </span>
+              <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text">
+                Fundament
+              </p>
+            </div>
+            <h3 class="text-[1.625rem] md:text-[2rem] tracking-[-0.02em] leading-[1.2] mt-6">
+              Rank Lift Organic Analyse
+            </h3>
+            <p class="text-text-secondary text-base leading-relaxed mt-4 max-w-[52ch]">
+              Jedes Projekt startet mit vollständigem Keyword-Mapping, nicht mit einer Tool-Liste. Wir analysieren alle Wortkombinationen innerhalb deiner Keyword-Roots, gleichen Suchintention und Stammdaten gegen deine Zielgruppe ab und erweitern um eine Bewertungsanalyse deiner und der Wettbewerber-Listings.
+            </p>
+            <p class="text-text-secondary text-base leading-relaxed mt-3.5 max-w-[52ch]">
+              KI-gestützt gemappt, manuell validiert. Angewandt auf jedes Listing, nicht nur auf dein Flaggschiff. Ergebnis: volle Klarheit über alle organischen Lücken in deiner Nische.
+            </p>
+
+            <!-- Deliverables -->
+            <div class="mt-8 md:mt-10 pt-6 border-t border-white/5" data-seo-deliverables>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                <li class="flex items-start gap-3">
+                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
+                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
+                  </span>
+                  <span class="text-text-secondary text-[0.95rem] leading-snug">
+                    Keyword-Architektur mit Suchintention-Clustering
+                  </span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
+                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
+                  </span>
+                  <span class="text-text-secondary text-[0.95rem] leading-snug">
+                    Bewertungsanalyse deiner und der Wettbewerber-Listings
+                  </span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
+                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
+                  </span>
+                  <span class="text-text-secondary text-[0.95rem] leading-snug">
+                    Research Report pro Produktbereich
+                  </span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
+                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
+                  </span>
+                  <span class="text-text-secondary text-[0.95rem] leading-snug">
+                    Datenbasis, auf die Umsetzung und Monitoring aufbauen
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
-
-          <div class="seo-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
-            <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-2 transition-colors duration-300">Umsetzung</p>
-            <p class="text-text-primary font-medium text-base mb-1.5">Listing Optimierung</p>
-            <p class="text-text-secondary text-sm leading-relaxed">Titel, Bullet Points, Backend Keywords, A+ Content. Vollständig abgestimmt auf die Analyse und den Wettbewerb.</p>
-          </div>
-
-          <div class="seo-card relative bg-surface rounded-2xl p-5 md:p-6 border border-white/5 overflow-hidden transition-all duration-300">
-            <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-2 transition-colors duration-300">Laufend</p>
-            <p class="text-text-primary font-medium text-base mb-1.5">Monitoring und Event Keywords</p>
-            <p class="text-text-secondary text-sm leading-relaxed">Rankings, Deal Event Shifts, saisonale Suchintentionen. Kontinuierlich angepasst, kein Set and Forget.</p>
-          </div>
-
         </div>
+
+        <!-- 02 / UMSETZUNG -->
+        <div class="lg:col-span-5 group" data-seo-block>
+          <div class="relative h-full rounded-2xl border border-white/5 bg-surface p-5 md:p-6 transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/[0.025] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[rgba(76,175,130,0.08)] border border-[rgba(76,175,130,0.2)] transition-all duration-300 group-hover:bg-[rgba(76,175,130,0.20)] group-hover:border-[rgba(76,175,130,0.5)]">
+                <Wrench class="w-5 h-5 text-accent-text" aria-hidden="true" />
+              </span>
+              <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text">
+                Umsetzung
+              </p>
+            </div>
+            <h3 class="text-[1.375rem] md:text-[1.625rem] tracking-[-0.02em] leading-[1.25] mt-5">
+              Listing-Optimierung
+            </h3>
+            <p class="text-text-secondary text-[0.95rem] leading-relaxed mt-3.5">
+              Titel, Bullets, Backend, A+ Content. Jedes Element datenbasiert gegen Analyse und Wettbewerb abgestimmt. Wir iterieren das Konzept in kurzen Zyklen, bis das Maximum aus deinen Daten herausgearbeitet ist.
+            </p>
+          </div>
+        </div>
+
+        <!-- 03 / LAUFEND -->
+        <div class="lg:col-span-5 group" data-seo-block>
+          <div class="relative h-full rounded-2xl border border-white/5 bg-surface p-5 md:p-6 transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/[0.025] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[rgba(76,175,130,0.08)] border border-[rgba(76,175,130,0.2)] transition-all duration-300 group-hover:bg-[rgba(76,175,130,0.20)] group-hover:border-[rgba(76,175,130,0.5)]">
+                <Activity class="w-5 h-5 text-accent-text" aria-hidden="true" />
+              </span>
+              <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text">
+                Laufend
+              </p>
+            </div>
+            <h3 class="text-[1.375rem] md:text-[1.625rem] tracking-[-0.02em] leading-[1.25] mt-5">
+              Event &amp; Season Monitoring
+            </h3>
+            <p class="text-text-secondary text-[0.95rem] leading-relaxed mt-3.5">
+              Deal Events, saisonale Suchintentionen, neue Wettbewerber-Strukturen. Themenbezogene Keywords, die kaum ein Seller sauber abdeckt. Wir erkennen Shifts früh und justieren, bevor dein Ranking fällt. So bleibt deine organische Sichtbarkeit stabil, auch wenn sich der Markt um dich herum ständig verändert.
+            </p>
+          </div>
+        </div>
+
       </div>
 
     </div>
+
+    <!-- Coda — großes Statement als Übergang zur nächsten Section -->
+    <p class="mt-28 md:mt-40 text-center font-heading text-[2rem] md:text-[3rem] lg:text-[3.5rem] tracking-[-0.02em] leading-[1.2]" data-seo-coda>
+      5.000+ optimierte Listings. <span class="text-accent-text">Eine Methode.</span>
+    </p>
 
   </div>
 </section>
@@ -67,91 +181,91 @@
 
   const section = document.querySelector("[data-service-seo]");
   if (section) {
-    const overline = section.querySelector("p:first-child");
+    const overline = section.querySelector("[data-seo-overline]");
     const h2 = section.querySelector("h2");
-    const paragraphs = section.querySelectorAll(".lg\\:col-span-7 p");
-    const cardHeading = section.querySelector(".lg\\:col-span-5 h3");
-    const cards = section.querySelectorAll("[data-seo-cards] > div");
+    const lead = section.querySelector("[data-seo-lead]");
+    const framework = section.querySelector("[data-seo-framework]");
+    const blocks = section.querySelectorAll("[data-seo-block]");
+    const connectorPaths = section.querySelectorAll("[data-seo-framework] svg path");
+    const coda = section.querySelector("[data-seo-coda]");
 
-    // H2 SplitText reveal
-    if (h2) {
-      const split = new SplitText(h2, { type: "words" });
-      gsap.set(split.words, { opacity: 0, y: 20 });
-
-      gsap.to(split.words, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          once: true,
-        },
-      });
-    }
-
-    // Overline fade-in
     if (overline) {
       gsap.set(overline, { opacity: 0, y: 10 });
       gsap.to(overline, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power2.out",
+        opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
         scrollTrigger: { trigger: section, start: "top 78%", once: true },
       });
     }
 
-    // Paragraphs stagger
-    if (paragraphs.length) {
-      gsap.set(paragraphs, { opacity: 0, y: 20 });
-      gsap.to(paragraphs, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power2.out",
-        scrollTrigger: { trigger: paragraphs[0], start: "top 85%", once: true },
+    if (h2) {
+      const split = new SplitText(h2, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+      gsap.to(split.words, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+        scrollTrigger: { trigger: section, start: "top 75%", once: true },
       });
     }
 
-    // Card heading
-    if (cardHeading) {
-      gsap.set(cardHeading, { opacity: 0, y: 15 });
-      gsap.to(cardHeading, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        scrollTrigger: { trigger: cardHeading, start: "top 85%", once: true },
+    if (lead) {
+      gsap.set(lead, { opacity: 0, y: 15 });
+      gsap.to(lead, {
+        opacity: 1, y: 0, duration: 0.5, ease: "power2.out",
+        scrollTrigger: { trigger: lead, start: "top 85%", once: true },
       });
     }
 
-    // Cards stagger entrance
-    if (cards.length) {
-      gsap.set(cards, { opacity: 0, y: 25 });
-      gsap.to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: { trigger: cards[0], start: "top 88%", once: true },
+    if (blocks.length) {
+      gsap.set(blocks, { opacity: 0, y: 25 });
+      gsap.to(blocks, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: framework, start: "top 82%", once: true },
+      });
+    }
+
+    if (connectorPaths.length) {
+      connectorPaths.forEach((path) => {
+        const element = path as SVGPathElement;
+        const length = element.getTotalLength();
+        gsap.set(element, {
+          strokeDasharray: length,
+          strokeDashoffset: length,
+          opacity: 0,
+        });
+        gsap.to(element, {
+          strokeDashoffset: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power2.inOut",
+          scrollTrigger: { trigger: framework, start: "top 75%", once: true },
+        });
+      });
+    }
+
+    const connectorNodes = section.querySelectorAll("[data-seo-node]");
+    if (connectorNodes.length) {
+      gsap.set(connectorNodes, { opacity: 0, scale: 0, transformOrigin: "center center" });
+      gsap.to(connectorNodes, {
+        opacity: 1, scale: 1, duration: 0.5, stagger: 0.15, ease: "back.out(2)",
+        scrollTrigger: { trigger: framework, start: "top 70%", once: true },
+      });
+    }
+
+    const deliverables = section.querySelector("[data-seo-deliverables]");
+    const deliverableItems = section.querySelectorAll("[data-seo-deliverables] li");
+    if (deliverableItems.length) {
+      gsap.set(deliverableItems, { opacity: 0, x: -10 });
+      gsap.to(deliverableItems, {
+        opacity: 1, x: 0, duration: 0.45, stagger: 0.08, ease: "power2.out",
+        scrollTrigger: { trigger: deliverables, start: "top 92%", once: true },
+      });
+    }
+
+    if (coda) {
+      gsap.set(coda, { opacity: 0, y: 20 });
+      gsap.to(coda, {
+        opacity: 1, y: 0, duration: 0.7, ease: "power2.out",
+        scrollTrigger: { trigger: coda, start: "top 85%", once: true },
       });
     }
   }
 </script>
-
-<style>
-  .seo-card:hover {
-    transform: translateY(-1.5px);
-    border-color: rgba(76, 175, 130, 0.25);
-    box-shadow: 0 8px 30px rgba(76, 175, 130, 0.08);
-  }
-
-  .seo-card:hover p:first-child {
-    color: var(--color-accent-text);
-  }
-</style>

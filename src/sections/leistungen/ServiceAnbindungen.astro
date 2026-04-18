@@ -5,7 +5,7 @@
 //         benchmark stats row, StrategieVisual full-width below.
 // Dichte: HOCH — pain/solution contrast + visual.
 import StrategieVisual from "../../components/StrategieVisual.astro";
-import { AlertTriangle, TrendingDown, ShieldAlert, FileWarning, CheckCircle, BarChart3, RefreshCw, ShieldCheck } from "@lucide/astro";
+import { AlertTriangle, TrendingDown, ShieldAlert, FileWarning, CheckCircle } from "@lucide/astro";
 ---
 
 <section class="py-20 md:py-32" data-service-anbindungen>
@@ -152,50 +152,6 @@ import { AlertTriangle, TrendingDown, ShieldAlert, FileWarning, CheckCircle, Bar
       <StrategieVisual />
     </div>
 
-    <!-- SEO + AI Monitoring Context -->
-    <div class="mt-16 md:mt-24 border border-white/5 rounded-2xl p-8 md:p-10 lg:p-12" data-seo-context>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-        <div class="lg:col-span-7">
-          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">SEO + KI-Monitoring</p>
-          <h3 class="text-2xl md:text-[2rem] leading-tight">
-            Sichtbarkeit ist kein Einmalprojekt. Wir monitoren, was der Marktplatz sieht.
-          </h3>
-          <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-5">
-            Jedes Listing wird nicht nur technisch korrekt angebunden, sondern organisch optimiert. Unsere KI-gestützten Prozesse überwachen Keyword-Shifts, Wettbewerbsveränderungen und saisonale Trends in Echtzeit. So wird die maximale Sichtbarkeit und Relevanz deiner Produkte zum System statt zum Zufallsprodukt.
-          </p>
-        </div>
-        <div class="lg:col-span-5 flex flex-col justify-center gap-6">
-          <div class="flex items-start gap-4">
-            <div class="mt-0.5 shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle">
-              <BarChart3 class="w-5 h-5 text-accent-text" />
-            </div>
-            <div>
-              <p class="text-text-primary font-medium text-base">Rank Lift Organic Methode</p>
-              <p class="text-text-secondary text-sm md:text-base leading-relaxed mt-1">Auf jedes Listing angewandt, nicht nur auf dein Flaggschiff</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="mt-0.5 shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle">
-              <RefreshCw class="w-5 h-5 text-accent-text" />
-            </div>
-            <div>
-              <p class="text-text-primary font-medium text-base">Automatische Anpassung</p>
-              <p class="text-text-secondary text-sm md:text-base leading-relaxed mt-1">Wenn sich Suchintentionen verschieben, reagieren wir bevor du es merkst</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="mt-0.5 shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle">
-              <ShieldCheck class="w-5 h-5 text-accent-text" />
-            </div>
-            <div>
-              <p class="text-text-primary font-medium text-base">Compliance-Checks</p>
-              <p class="text-text-secondary text-sm md:text-base leading-relaxed mt-1">Laufend gegen aktuelle Marktplatz-Updates validiert. Pflichtattribute und Kategorisierung immer aktuell.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -221,7 +177,6 @@ import { AlertTriangle, TrendingDown, ShieldAlert, FileWarning, CheckCircle, Bar
     const solutionCards = section.querySelectorAll<HTMLElement>("[data-solution-cards] > div");
     const contextText = section.querySelector<HTMLElement>("[data-context-text]");
     const contextParagraphs = contextText?.querySelectorAll<HTMLElement>("p");
-    const seoContext = section.querySelector<HTMLElement>("[data-seo-context]");
 
     if (reduced) return;
 
@@ -305,15 +260,6 @@ import { AlertTriangle, TrendingDown, ShieldAlert, FileWarning, CheckCircle, Bar
         gsap.to(contextParagraphs, {
           opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out",
           scrollTrigger: { trigger: contextText, start: "top 85%", once: true },
-        });
-      }
-
-      // SEO context block
-      if (seoContext) {
-        gsap.set(seoContext, { opacity: 0, y: 30 });
-        gsap.to(seoContext, {
-          opacity: 1, y: 0, duration: 0.7, ease: "power2.out",
-          scrollTrigger: { trigger: seoContext, start: "top 85%", once: true },
         });
       }
 

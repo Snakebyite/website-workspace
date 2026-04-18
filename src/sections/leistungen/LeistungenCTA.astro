@@ -3,8 +3,6 @@
 // Job: Natural next step after reading all services — book a call.
 // Layout: Centered booking CTA + trust badges row underneath.
 // Tone: Inviting, backed by proof.
-import { Image } from "astro:assets";
-import kevinPortrait from "../../assets/kevin-portrait.png";
 ---
 
 <section class="pt-14 md:pt-20 pb-20 md:pb-32" aria-label="Termin buchen" data-leistungen-cta>
@@ -23,16 +21,6 @@ import kevinPortrait from "../../assets/kevin-portrait.png";
       >
         Kostenloses Erstgespräch
       </a>
-      <div class="flex items-center gap-4 mt-6" data-cta-hint>
-        <Image
-          src={kevinPortrait}
-          alt="Kevin Flurschütz, Gründer von KFL Consulting"
-          widths={[160, 240, 320]}
-          sizes="112px"
-          class="w-28 h-28 rounded-xl object-cover shrink-0"
-        />
-        <span class="text-base text-text-muted">30 Minuten mit Kevin</span>
-      </div>
     </div>
 
     <!-- Trust Badges -->
@@ -96,7 +84,6 @@ import kevinPortrait from "../../assets/kevin-portrait.png";
     const h2 = section.querySelector("h2");
     const subtext = section.querySelector("p");
     const ctaLink = section.querySelector("a");
-    const ctaHint = section.querySelector("[data-cta-hint]");
     const badges = section.querySelector("[data-trust-badges]");
 
     if (h2) {
@@ -108,7 +95,7 @@ import kevinPortrait from "../../assets/kevin-portrait.png";
       });
     }
 
-    const fadeItems = [subtext, ctaLink, ctaHint].filter(Boolean) as Element[];
+    const fadeItems = [subtext, ctaLink].filter(Boolean) as Element[];
     if (fadeItems.length) {
       gsap.set(fadeItems, { opacity: 0, y: 20 });
       gsap.to(fadeItems, {

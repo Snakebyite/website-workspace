@@ -1,69 +1,137 @@
 ---
 // ServiceKI — KI & Automatisierung
-// Job: Position AI as enabler, not replacement. Process-first mentality.
-// Layout: Full-width text, then 3-column use-case grid below.
-// Dichte: MITTEL — text-driven, examples illustrate.
-import { FileText, BarChart3, Workflow } from "@lucide/astro";
+// Job: Position AI as enabler on top of a process foundation.
+// Layout: Headline + body, then vertical 3-Layer-Stack with connecting arrows,
+//         then inline use-cases row with dividers.
 ---
 
-<section class="pt-28 md:pt-40 pb-20 md:pb-32" data-service-ki>
+<section class="py-20 md:py-32" data-service-ki>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
     <!-- Overline + Headline -->
-    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4">
+    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-ki-overline>
       KI und Automatisierung
     </p>
     <h2 class="max-w-4xl">
       Erst der Prozess, dann die Automatisierung. Nie umgekehrt.
     </h2>
 
-    <!-- Text — full width -->
-    <div class="mt-10 md:mt-14 max-w-5xl">
+    <!-- Lead — kompaktes Intro -->
+    <div class="mt-10 md:mt-14 max-w-4xl" data-ki-text>
       <p class="text-text-secondary text-lg md:text-xl leading-relaxed">
         KI auf einen schlechten Prozess zu kippen beschleunigt nur das Chaos. Deshalb starten wir nie mit dem Tool, sondern mit der Frage: <span class="text-text-primary font-medium">Wo verlierst du Zeit, ohne es zu merken?</span>
       </p>
-      <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
-        Wir identifizieren die Engpässe in deinen operativen Abläufen, designen den Prozess sauber und automatisieren dann gezielt. Mit KI, wo sie einen echten Hebel hat, und mit klassischer Automatisierung, wo Zuverlässigkeit wichtiger ist als Intelligenz.
-      </p>
-      <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-6">
-        Das Ergebnis: weniger manueller Aufwand, weniger Fehler, mehr Zeit für die Dinge, die nur du entscheiden kannst. Nicht KI um der KI willen, sondern KI als Werkzeug, das dir operative Freiräume schafft.
+      <p class="text-text-secondary text-base md:text-lg leading-relaxed mt-5">
+        Weniger manueller Aufwand, weniger Fehler, mehr Zeit für das, was nur du entscheiden kannst. Nicht KI um der KI willen, sondern KI als Werkzeug.
       </p>
     </div>
 
-    <!-- Use-Case grid — 3 columns -->
-    <div class="mt-14 md:mt-20">
-      <h3 class="font-body text-lg font-medium text-text-primary mb-8">Wo wir automatisieren</h3>
+    <!-- Layer Stack -->
+    <div class="mt-20 md:mt-28 max-w-5xl mx-auto" data-ki-stack>
+      <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-10 text-center" data-ki-stack-label>
+        Unser Ansatz in drei Schichten
+      </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-ki-cards>
-        <div class="ki-card relative bg-surface rounded-2xl p-6 md:p-8 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
-          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 ki-card-line"></div>
-          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle mb-5">
-            <FileText class="w-5 h-5 text-accent-text" />
+      <div class="flex flex-col items-stretch">
+
+        <!-- Layer 01 -->
+        <div class="ki-layer group relative rounded-2xl border border-white/5 bg-transparent p-6 md:p-8 transition-all duration-300 ease-out hover:border-[rgba(76,175,130,0.28)] hover:bg-white/[0.02] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]" data-ki-layer>
+          <div class="grid grid-cols-12 gap-4 md:gap-8 items-start">
+            <div class="col-span-12 md:col-span-3 flex items-baseline gap-4 md:flex-col md:items-start md:gap-3">
+              <span class="ki-layer-num font-heading text-[2.5rem] md:text-[3rem] text-text-muted leading-none transition-colors duration-300">01</span>
+              <p class="font-body text-xs md:text-sm font-medium uppercase tracking-[0.08em] text-accent-text">Fundament</p>
+            </div>
+            <div class="col-span-12 md:col-span-9">
+              <h3 class="font-heading text-[1.5rem] md:text-[1.75rem] tracking-[-0.02em] leading-[1.25]">Prozess verstehen</h3>
+              <p class="text-text-secondary text-base md:text-[1.0625rem] leading-relaxed mt-3 md:mt-4 max-w-2xl">
+                Wo entstehen Reibung und Wartezeiten? Welche Aufgaben wiederholen sich, ohne dass eine echte Entscheidung dahintersteht? Bevor wir ein Tool nennen, verstehen wir den Ablauf.
+              </p>
+            </div>
           </div>
-          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-3 transition-colors duration-300">Produktdaten</p>
-          <p class="text-text-primary font-medium text-lg mb-2">Listing Texte und Content</p>
-          <p class="text-text-secondary text-sm leading-relaxed">KI gestützte Texterstellung auf Basis deiner Keyword Map. Mit Review Loop, nie vollautomatisch.</p>
         </div>
 
-        <div class="ki-card relative bg-surface rounded-2xl p-6 md:p-8 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
-          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 ki-card-line"></div>
-          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle mb-5">
-            <BarChart3 class="w-5 h-5 text-accent-text" />
-          </div>
-          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-3 transition-colors duration-300">Reporting</p>
-          <p class="text-text-primary font-medium text-lg mb-2">KPI Dashboard und Alerts</p>
-          <p class="text-text-secondary text-sm leading-relaxed">Automatisierte Reports, die dir zeigen was sich verändert hat. Statt dass du es selbst suchen musst.</p>
+        <!-- Connector 01 → 02 -->
+        <div class="ki-connector flex justify-center py-2 md:py-3" data-ki-connector aria-hidden="true">
+          <svg class="w-4 h-10 md:h-14" viewBox="0 0 16 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line class="ki-connector-line" x1="8" y1="4" x2="8" y2="44" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-linecap="round" />
+            <path class="ki-connector-head" d="M3 40 L8 48 L13 40" stroke="rgba(107,175,150,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
         </div>
 
-        <div class="ki-card relative bg-surface rounded-2xl p-6 md:p-8 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
-          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 ki-card-line"></div>
-          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-subtle mb-5">
-            <Workflow class="w-5 h-5 text-accent-text" />
+        <!-- Layer 02 -->
+        <div class="ki-layer group relative rounded-2xl border border-white/5 bg-transparent p-6 md:p-8 transition-all duration-300 ease-out hover:border-[rgba(76,175,130,0.28)] hover:bg-white/[0.02] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]" data-ki-layer>
+          <div class="grid grid-cols-12 gap-4 md:gap-8 items-start">
+            <div class="col-span-12 md:col-span-3 flex items-baseline gap-4 md:flex-col md:items-start md:gap-3">
+              <span class="ki-layer-num font-heading text-[2.5rem] md:text-[3rem] text-text-muted leading-none transition-colors duration-300">02</span>
+              <p class="font-body text-xs md:text-sm font-medium uppercase tracking-[0.08em] text-accent-text">Leitplanken</p>
+            </div>
+            <div class="col-span-12 md:col-span-9">
+              <h3 class="font-heading text-[1.5rem] md:text-[1.75rem] tracking-[-0.02em] leading-[1.25]">Regeln und Review Loops</h3>
+              <p class="text-text-secondary text-base md:text-[1.0625rem] leading-relaxed mt-3 md:mt-4 max-w-2xl">
+                Für jeden Schritt definieren wir, wo die Maschine entscheidet und wo ein Mensch gegenliest. Keine Blackbox, keine versehentliche Vollautomatik.
+              </p>
+            </div>
           </div>
-          <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-3 transition-colors duration-300">Workflows</p>
-          <p class="text-text-primary font-medium text-lg mb-2">Operative Prozesse</p>
-          <p class="text-text-secondary text-sm leading-relaxed">Von der Bestellverarbeitung bis zur Stammdatenpflege. Wiederkehrende Abläufe, die keine menschliche Entscheidung brauchen.</p>
         </div>
+
+        <!-- Connector 02 → 03 -->
+        <div class="ki-connector flex justify-center py-2 md:py-3" data-ki-connector aria-hidden="true">
+          <svg class="w-4 h-10 md:h-14" viewBox="0 0 16 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line class="ki-connector-line" x1="8" y1="4" x2="8" y2="44" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-linecap="round" />
+            <path class="ki-connector-head" d="M3 40 L8 48 L13 40" stroke="rgba(107,175,150,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+        </div>
+
+        <!-- Layer 03 -->
+        <div class="ki-layer group relative rounded-2xl border border-white/5 bg-transparent p-6 md:p-8 transition-all duration-300 ease-out hover:border-[rgba(76,175,130,0.28)] hover:bg-white/[0.02] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]" data-ki-layer>
+          <div class="grid grid-cols-12 gap-4 md:gap-8 items-start">
+            <div class="col-span-12 md:col-span-3 flex items-baseline gap-4 md:flex-col md:items-start md:gap-3">
+              <span class="ki-layer-num font-heading text-[2.5rem] md:text-[3rem] text-text-muted leading-none transition-colors duration-300">03</span>
+              <p class="font-body text-xs md:text-sm font-medium uppercase tracking-[0.08em] text-accent-text">Ausführung</p>
+            </div>
+            <div class="col-span-12 md:col-span-9">
+              <h3 class="font-heading text-[1.5rem] md:text-[1.75rem] tracking-[-0.02em] leading-[1.25]">KI und klassische Automatisierung</h3>
+              <p class="text-text-secondary text-base md:text-[1.0625rem] leading-relaxed mt-3 md:mt-4 max-w-2xl">
+                KI übernimmt dort, wo Sprache, Kontext oder Einschätzung gefragt sind. Klassische Automatisierung dort, wo Regeln klar sind und jedes Mal dasselbe passieren muss. Welche Technik zum Einsatz kommt, entscheidet der Anwendungsfall, nicht der Trend.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Use-Cases — Stationen mit Hover -->
+    <div class="mt-24 md:mt-32" data-ki-usecases>
+      <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-text-muted mb-10" data-ki-usecases-label>
+        Typische Anwendungsfälle bei unseren Kunden
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+
+        <div class="ki-usecase group relative rounded-2xl border border-white/5 bg-transparent p-6 md:p-7 transition-all duration-300 ease-out hover:border-[rgba(76,175,130,0.28)] hover:bg-white/[0.02] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]" data-ki-usecase>
+          <p class="font-body text-xs font-medium uppercase tracking-[0.08em] text-accent-text mb-3 transition-colors duration-300">Produktdaten</p>
+          <h4 class="font-heading text-[1.25rem] md:text-[1.375rem] tracking-[-0.02em] leading-[1.3] mb-3">Listing Texte und Content</h4>
+          <p class="text-text-secondary text-[0.95rem] leading-relaxed">
+            Erste Entwürfe schreibt die KI auf Basis deiner Keyword Map. Wir prüfen und korrigieren. Nie vollautomatisch veröffentlicht.
+          </p>
+        </div>
+
+        <div class="ki-usecase group relative rounded-2xl border border-white/5 bg-transparent p-6 md:p-7 transition-all duration-300 ease-out hover:border-[rgba(76,175,130,0.28)] hover:bg-white/[0.02] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]" data-ki-usecase>
+          <p class="font-body text-xs font-medium uppercase tracking-[0.08em] text-accent-text mb-3 transition-colors duration-300">Reporting</p>
+          <h4 class="font-heading text-[1.25rem] md:text-[1.375rem] tracking-[-0.02em] leading-[1.3] mb-3">KPI Dashboards und Alerts</h4>
+          <p class="text-text-secondary text-[0.95rem] leading-relaxed">
+            Automatisierte Reports, die dir zeigen was sich verändert hat. Statt dass du wöchentlich selbst in drei Tools nachsiehst.
+          </p>
+        </div>
+
+        <div class="ki-usecase group relative rounded-2xl border border-white/5 bg-transparent p-6 md:p-7 transition-all duration-300 ease-out hover:border-[rgba(76,175,130,0.28)] hover:bg-white/[0.02] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]" data-ki-usecase>
+          <p class="font-body text-xs font-medium uppercase tracking-[0.08em] text-accent-text mb-3 transition-colors duration-300">Workflows</p>
+          <h4 class="font-heading text-[1.25rem] md:text-[1.375rem] tracking-[-0.02em] leading-[1.3] mb-3">Wiederkehrende Abläufe</h4>
+          <p class="text-text-secondary text-[0.95rem] leading-relaxed">
+            Von Bestellverarbeitung bis Stammdatenpflege. Prozesse, die keine menschliche Entscheidung brauchen, laufen automatisch.
+          </p>
+        </div>
+
       </div>
     </div>
 
@@ -75,64 +143,118 @@ import { FileText, BarChart3, Workflow } from "@lucide/astro";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { SplitText } from "gsap/SplitText";
 
-  const section = document.querySelector("[data-service-ki]");
-  if (section) {
-    const overline = section.querySelector("p:first-child");
-    const h2 = section.querySelector("h2");
-    const textBlock = section.querySelector(".max-w-5xl");
-    const paragraphs = textBlock?.querySelectorAll("p");
-    const cardHeading = section.querySelector("[data-ki-cards]")?.previousElementSibling;
-    const cards = section.querySelectorAll("[data-ki-cards] > div");
+  function initKI(): void {
+    const section = document.querySelector<HTMLElement>("[data-service-ki]");
+    if (!section) return;
 
-    if (overline) {
-      gsap.set(overline, { opacity: 0, y: 10 });
-      gsap.to(overline, {
-        opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
-        scrollTrigger: { trigger: section, start: "top 78%", once: true },
-      });
-    }
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (h2) {
-      const split = new SplitText(h2, { type: "words" });
-      gsap.set(split.words, { opacity: 0, y: 20 });
-      gsap.to(split.words, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
-        scrollTrigger: { trigger: section, start: "top 75%", once: true },
-      });
-    }
+    const overline = section.querySelector<HTMLElement>("[data-ki-overline]");
+    const h2 = section.querySelector<HTMLElement>("h2");
+    const textBlock = section.querySelector<HTMLElement>("[data-ki-text]");
+    const paragraphs = textBlock?.querySelectorAll<HTMLElement>("p");
+    const stackLabel = section.querySelector<HTMLElement>("[data-ki-stack-label]");
+    const layers = section.querySelectorAll<HTMLElement>("[data-ki-layer]");
+    const connectors = section.querySelectorAll<HTMLElement>("[data-ki-connector]");
+    const usecasesLabel = section.querySelector<HTMLElement>("[data-ki-usecases-label]");
+    const usecases = section.querySelectorAll<HTMLElement>("[data-ki-usecase]");
 
-    if (paragraphs?.length) {
-      gsap.set(paragraphs, { opacity: 0, y: 20 });
-      gsap.to(paragraphs, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out",
-        scrollTrigger: { trigger: paragraphs[0], start: "top 85%", once: true },
-      });
-    }
+    if (reduced) return;
 
-    if (cardHeading) {
-      gsap.set(cardHeading, { opacity: 0, y: 15 });
-      gsap.to(cardHeading, {
-        opacity: 1, y: 0, duration: 0.5, ease: "power2.out",
-        scrollTrigger: { trigger: cardHeading, start: "top 85%", once: true },
-      });
-    }
+    const ctx = gsap.context(() => {
 
-    if (cards.length) {
-      gsap.set(cards, { opacity: 0, y: 25 });
-      gsap.to(cards, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
-        scrollTrigger: { trigger: cards[0], start: "top 88%", once: true },
+      if (overline) {
+        gsap.set(overline, { opacity: 0, y: 10 });
+        gsap.to(overline, {
+          opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 78%", once: true },
+        });
+      }
+
+      if (h2) {
+        const split = new SplitText(h2, { type: "words" });
+        gsap.set(split.words, { opacity: 0, y: 20 });
+        gsap.to(split.words, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 75%", once: true },
+        });
+      }
+
+      if (paragraphs?.length) {
+        gsap.set(paragraphs, { opacity: 0, y: 20 });
+        gsap.to(paragraphs, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out",
+          scrollTrigger: { trigger: paragraphs[0], start: "top 85%", once: true },
+        });
+      }
+
+      if (stackLabel) {
+        gsap.set(stackLabel, { opacity: 0, y: 10 });
+        gsap.to(stackLabel, {
+          opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
+          scrollTrigger: { trigger: stackLabel, start: "top 85%", once: true },
+        });
+      }
+
+      if (layers.length) {
+        layers.forEach((layer) => {
+          gsap.set(layer, { opacity: 0, y: 30 });
+          gsap.to(layer, {
+            opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+            scrollTrigger: { trigger: layer, start: "top 88%", once: true },
+          });
+        });
+      }
+
+      connectors.forEach((connector) => {
+        const line = connector.querySelector<SVGLineElement>(".ki-connector-line");
+        const head = connector.querySelector<SVGPathElement>(".ki-connector-head");
+
+        if (line) {
+          const length = line.getTotalLength();
+          gsap.set(line, { strokeDasharray: length, strokeDashoffset: length });
+          gsap.to(line, {
+            strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut",
+            scrollTrigger: { trigger: connector, start: "top 88%", once: true },
+          });
+        }
+        if (head) {
+          gsap.set(head, { opacity: 0, y: -4 });
+          gsap.to(head, {
+            opacity: 1, y: 0, duration: 0.3, ease: "power2.out",
+            scrollTrigger: { trigger: connector, start: "top 85%", once: true },
+            delay: 0.4,
+          });
+        }
       });
-    }
+
+      if (usecasesLabel) {
+        gsap.set(usecasesLabel, { opacity: 0, y: 10 });
+        gsap.to(usecasesLabel, {
+          opacity: 1, y: 0, duration: 0.4, ease: "power2.out",
+          scrollTrigger: { trigger: usecasesLabel, start: "top 85%", once: true },
+        });
+      }
+
+      if (usecases.length) {
+        gsap.set(usecases, { opacity: 0, y: 20 });
+        gsap.to(usecases, {
+          opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "power2.out",
+          scrollTrigger: { trigger: usecases[0], start: "top 88%", once: true },
+        });
+      }
+
+    }, section);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
   }
+
+  initKI();
+  document.addEventListener("astro:after-swap", initKI);
 </script>
 
 <style>
-  .ki-card:hover .ki-card-line {
-    background-color: rgba(76, 175, 130, 0.5);
-  }
-
-  .ki-card:hover p:first-child {
-    color: var(--color-accent-text);
+  .ki-layer:hover .ki-layer-num {
+    color: #6baf96;
   }
 </style>
