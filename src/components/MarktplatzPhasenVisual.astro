@@ -1,0 +1,180 @@
+---
+// MarktplatzPhasenVisual.astro — 4-Phasen-Timeline für Marktplatz-Strategie
+// Horizontale Abfolge von 4 Nodes + Verbindungslinien. Ein Pulse wandert durch,
+// Nodes & Verbindungs-Segmente aktivieren sich nacheinander. Loop mit Reset.
+// Labels unter den Nodes: abstrakte Platzhalter-Rechtecke (kein Text).
+---
+
+<div class="marktplatz-phasen-visual w-full" aria-hidden="true">
+  <svg
+    class="w-full h-auto"
+    viewBox="0 0 640 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <defs>
+      <filter id="ph-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" />
+      </filter>
+    </defs>
+
+    <!-- ═══ VERBINDUNGS-SEGMENTE ═══ -->
+    <!-- Inaktive Basis-Linien -->
+    <line x1="94" y1="70" x2="226" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+    <line x1="254" y1="70" x2="386" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+    <line x1="414" y1="70" x2="546" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+
+    <!-- Aktive Overlay-Linien (füllen sich mit Pulse) -->
+    <line class="ph-seg" data-seg="0" x1="94" y1="70" x2="226" y2="70" stroke="rgba(76,175,130,0.7)" stroke-width="1.5" stroke-linecap="round" pathLength="1" style="stroke-dasharray:1; stroke-dashoffset:1;" />
+    <line class="ph-seg" data-seg="1" x1="254" y1="70" x2="386" y2="70" stroke="rgba(76,175,130,0.7)" stroke-width="1.5" stroke-linecap="round" pathLength="1" style="stroke-dasharray:1; stroke-dashoffset:1;" />
+    <line class="ph-seg" data-seg="2" x1="414" y1="70" x2="546" y2="70" stroke="rgba(76,175,130,0.7)" stroke-width="1.5" stroke-linecap="round" pathLength="1" style="stroke-dasharray:1; stroke-dashoffset:1;" />
+
+    <!-- ═══ PULSE-DOT — wandert entlang der Linie ═══ -->
+    <circle class="ph-pulse" cx="80" cy="70" r="5" fill="rgba(76,175,130,1)" filter="url(#ph-glow)" style="opacity:0;" />
+    <circle class="ph-pulse-core" cx="80" cy="70" r="3" fill="rgba(255,255,255,0.95)" style="opacity:0;" />
+
+    <!-- ═══ PHASEN-NODES ═══ -->
+    <!-- Node 1 -->
+    <g class="ph-node" data-node="0" style="opacity:0;">
+      <circle cx="80" cy="70" r="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" stroke-width="1" class="ph-node-outer" />
+      <circle cx="80" cy="70" r="6" fill="rgba(255,255,255,0.25)" class="ph-node-inner" />
+      <!-- Label-Platzhalter -->
+      <rect x="48" y="108" width="64" height="6" rx="3" fill="rgba(255,255,255,0.15)" class="ph-label-title" />
+      <rect x="58" y="122" width="44" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" class="ph-label-sub" />
+    </g>
+
+    <!-- Node 2 -->
+    <g class="ph-node" data-node="1" style="opacity:0;">
+      <circle cx="240" cy="70" r="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" stroke-width="1" class="ph-node-outer" />
+      <circle cx="240" cy="70" r="6" fill="rgba(255,255,255,0.25)" class="ph-node-inner" />
+      <rect x="208" y="108" width="64" height="6" rx="3" fill="rgba(255,255,255,0.15)" class="ph-label-title" />
+      <rect x="218" y="122" width="44" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" class="ph-label-sub" />
+    </g>
+
+    <!-- Node 3 -->
+    <g class="ph-node" data-node="2" style="opacity:0;">
+      <circle cx="400" cy="70" r="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" stroke-width="1" class="ph-node-outer" />
+      <circle cx="400" cy="70" r="6" fill="rgba(255,255,255,0.25)" class="ph-node-inner" />
+      <rect x="368" y="108" width="64" height="6" rx="3" fill="rgba(255,255,255,0.15)" class="ph-label-title" />
+      <rect x="378" y="122" width="44" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" class="ph-label-sub" />
+    </g>
+
+    <!-- Node 4 — Ziel (mit Ring für Dauer-Pulse nach Durchlauf) -->
+    <g class="ph-node" data-node="3" style="opacity:0;">
+      <circle class="ph-target-pulse" cx="560" cy="70" r="16" fill="none" stroke="rgba(76,175,130,0.5)" stroke-width="1.5" style="opacity:0;" />
+      <circle cx="560" cy="70" r="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" stroke-width="1" class="ph-node-outer" />
+      <circle cx="560" cy="70" r="6" fill="rgba(255,255,255,0.25)" class="ph-node-inner" />
+      <rect x="528" y="108" width="64" height="6" rx="3" fill="rgba(255,255,255,0.15)" class="ph-label-title" />
+      <rect x="538" y="122" width="44" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" class="ph-label-sub" />
+    </g>
+  </svg>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  function initMarktplatzPhasenVisual(): void {
+    const visual = document.querySelector<HTMLElement>(".marktplatz-phasen-visual");
+    if (!visual) return;
+
+    const ctx = gsap.context(() => {
+      const nodes = visual.querySelectorAll<SVGGElement>(".ph-node");
+      const segs = visual.querySelectorAll<SVGLineElement>(".ph-seg");
+      const pulse = visual.querySelector<SVGCircleElement>(".ph-pulse");
+      const pulseCore = visual.querySelector<SVGCircleElement>(".ph-pulse-core");
+      const targetPulse = visual.querySelector<SVGCircleElement>(".ph-target-pulse");
+
+      if (!nodes.length) return;
+
+      // Node-Positionen (x-Koordinaten)
+      const nodePositions = [80, 240, 400, 560];
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduced) {
+        // Final state: alle Nodes aktiv, alle Segmente gefüllt
+        gsap.set(nodes, { opacity: 1 });
+        nodes.forEach((node) => activateNode(node, true));
+        segs.forEach((seg) => gsap.set(seg, { strokeDashoffset: 0 }));
+        return;
+      }
+
+      // ── EINMALIGER DURCHLAUF: Entrance + Pulse wandert → Ziel-Pulse dauerhaft ──
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: visual,
+          start: "top 80%",
+          once: true,
+        },
+        onComplete: () => startTargetPulse(),
+      });
+
+      // Entrance: Nodes fade in
+      tl.fromTo(nodes,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+      );
+
+      // Pulse erscheint bei Node 1
+      tl.set([pulse, pulseCore], { attr: { cx: nodePositions[0] }, opacity: 1 }, "+=0.2");
+      tl.call(() => activateNode(nodes[0], true));
+
+      // Node 1 → Node 2
+      tl.to(segs[0], { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, "+=0.3");
+      tl.to([pulse, pulseCore], { attr: { cx: nodePositions[1] }, duration: 1.0, ease: "power2.inOut" }, "<");
+      tl.call(() => activateNode(nodes[1], true));
+
+      // Node 2 → Node 3
+      tl.to(segs[1], { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, "+=0.3");
+      tl.to([pulse, pulseCore], { attr: { cx: nodePositions[2] }, duration: 1.0, ease: "power2.inOut" }, "<");
+      tl.call(() => activateNode(nodes[2], true));
+
+      // Node 3 → Node 4 (Ziel)
+      tl.to(segs[2], { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, "+=0.3");
+      tl.to([pulse, pulseCore], { attr: { cx: nodePositions[3] }, duration: 1.0, ease: "power2.inOut" }, "<");
+      tl.call(() => activateNode(nodes[3], true));
+
+      // Pulse-Dot fadet am Ziel aus
+      tl.to([pulse, pulseCore], { opacity: 0, duration: 0.5, ease: "power2.out" }, "+=0.2");
+
+      function startTargetPulse(): void {
+        if (!targetPulse) return;
+        // Ripple: r wächst von 16 → 26, opacity fadet dabei aus. Dann Reset + kurze Pause.
+        const pulseTl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+        pulseTl.set(targetPulse, { attr: { r: 16 }, opacity: 0.7 });
+        pulseTl.to(targetPulse, {
+          attr: { r: 26 },
+          opacity: 0,
+          duration: 1.6,
+          ease: "sine.out",
+        });
+      }
+    }, visual);
+
+    function activateNode(node: SVGGElement, active: boolean): void {
+      const outer = node.querySelector<SVGCircleElement>(".ph-node-outer");
+      const inner = node.querySelector<SVGCircleElement>(".ph-node-inner");
+      const labelTitle = node.querySelector<SVGRectElement>(".ph-label-title");
+      const labelSub = node.querySelector<SVGRectElement>(".ph-label-sub");
+
+      if (active) {
+        gsap.to(outer, { attr: { fill: "rgba(76,175,130,0.12)", stroke: "rgba(76,175,130,0.55)" }, duration: 0.35 });
+        gsap.to(inner, { attr: { fill: "rgba(76,175,130,0.95)" }, duration: 0.35 });
+        gsap.to(labelTitle, { attr: { fill: "rgba(76,175,130,0.55)" }, duration: 0.35 });
+        gsap.to(labelSub, { attr: { fill: "rgba(76,175,130,0.3)" }, duration: 0.35 });
+      } else {
+        gsap.to(outer, { attr: { fill: "rgba(255,255,255,0.03)", stroke: "rgba(255,255,255,0.15)" }, duration: 0.35 });
+        gsap.to(inner, { attr: { fill: "rgba(255,255,255,0.25)" }, duration: 0.35 });
+        gsap.to(labelTitle, { attr: { fill: "rgba(255,255,255,0.15)" }, duration: 0.35 });
+        gsap.to(labelSub, { attr: { fill: "rgba(255,255,255,0.08)" }, duration: 0.35 });
+      }
+    }
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initMarktplatzPhasenVisual();
+  document.addEventListener("astro:after-swap", initMarktplatzPhasenVisual);
+</script>

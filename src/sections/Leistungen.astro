@@ -7,6 +7,7 @@
 // Hierarchie: "Was wir tun." als einziges Serif-Element (H2).
 // Service-Namen in Satoshi medium, Sublines + Body in text-secondary.
 import OrganicRankingVisual from "../components/OrganicRankingVisual.astro";
+import MarktplatzPhasenVisual from "../components/MarktplatzPhasenVisual.astro";
 
 // Tool logos — all white on dark background
 import toolMake from "../assets/tools/make.png";
@@ -73,6 +74,10 @@ const marketplaces = [
         <p class="font-body text-lg text-text-secondary leading-relaxed mt-3">
           Wir machen den Einstieg und die Skalierung auf digitalen Marktplätzen <span class="text-accent-text font-medium">planbar.</span> Keine Bauchentscheidungen, sondern Strategie, die auf Daten basiert.
         </p>
+        <!-- Phasen-Visual: 4-Phasen-Timeline mit Pulse der durchwandert -->
+        <div class="mt-8 md:mt-10">
+          <MarktplatzPhasenVisual />
+        </div>
       </div>
 
       <!-- Kachel 2: Organische Sichtbarkeit — 6col -->

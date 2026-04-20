@@ -1,7 +1,8 @@
 ---
 // OrganicRankingVisual.astro — "Rank Rise" kompakte Variante für Leistungen-Kachel.
 // Reduziertes Panel: Suchleiste oben + 3 Listing-Rows. Das Hero-Listing startet
-// auf Platz 3 und klettert nach Rewrite auf Platz 1. Langsamer Loop.
+// auf Platz 3 und klettert nach Rewrite einmalig auf Platz 1. Kein Loop.
+// Nach Durchlauf: dezenter Dauer-Pulse auf dem Hero-Listing (Platz 1).
 // Design konsistent zum HeroVisual (Suchleiste, Rows, Accent-Highlight).
 import { Search, Store } from '@lucide/astro';
 
@@ -14,7 +15,6 @@ const HERO_INDEX = 2; // startet auf Platz 3, klettert auf #1
     <div class="rank-search">
       <Search size={16} strokeWidth={2} class="search-icon" />
       <div class="search-query"></div>
-      <div class="search-cursor"></div>
       <div class="search-separator"></div>
       <Store size={16} strokeWidth={1.6} class="search-platform-icon" />
     </div>
@@ -65,13 +65,6 @@ const HERO_INDEX = 2; // startet auf Platz 3, klettert auf #1
     max-width: 70%;
     transform-origin: left center;
     transform: scaleX(0);
-  }
-  .search-cursor {
-    width: 2px;
-    height: 16px;
-    background: rgba(76, 175, 130, 0.85);
-    opacity: 0;
-    flex-shrink: 0;
   }
   .search-separator {
     width: 1px;
@@ -156,7 +149,6 @@ const HERO_INDEX = 2; // startet auf Platz 3, klettert auf #1
       const titleBar = heroRow.querySelector<HTMLElement>(".rank-bar-title");
       const thumb = heroRow.querySelector<HTMLElement>(".rank-thumb");
       const searchQuery = visual.querySelector<HTMLElement>(".search-query");
-      const searchCursor = visual.querySelector<HTMLElement>(".search-cursor");
 
       const STEP = 56; // row height (52) + gap (4)
 
@@ -170,105 +162,77 @@ const HERO_INDEX = 2; // startet auf Platz 3, klettert auf #1
         return;
       }
 
-      // Cursor blink (independent from main timeline)
-      if (searchCursor) {
-        gsap.to(searchCursor, {
-          opacity: 0.9,
-          duration: 0.45,
-          yoyo: true,
-          repeat: -1,
-          ease: "steps(1)",
-        });
-      }
-
-      // ── ENTRANCE (once, on scroll-in) ──────────────────────────
-      const entrance = gsap.timeline({
+      // ── EINMALIGER DURCHLAUF: Entrance → Search → Rewrite → Rise → dezenter Pulse ──
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.inOut" },
         scrollTrigger: {
           trigger: visual,
           start: "top 80%",
           once: true,
         },
-        onComplete: () => loop.play(),
+        onComplete: () => startHeroPulse(),
       });
 
-      entrance.fromTo(panel,
+      // 0) Panel fade in
+      tl.fromTo(panel,
         { opacity: 0, y: 20, scale: 0.98 },
         { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }
       );
 
-      // ── LOOP: slow search → rewrite → rise → reset ────────────
-      const loop = gsap.timeline({
-        repeat: -1,
-        paused: true,
-        defaults: { ease: "power2.inOut" },
-      });
-
-      // 1) Search types in (slow)
+      // 1) Search types in
       if (searchQuery) {
-        loop.to(searchQuery, { scaleX: 1, duration: 1.4, ease: "steps(14)" }, 0.5);
+        tl.to(searchQuery, { scaleX: 1, duration: 1.2, ease: "steps(14)" }, "+=0.3");
       }
 
-      // 2) Hero row highlight pulse
-      loop.to(heroRow, {
+      // 2) Hero row highlight pulse (wird angepeilt)
+      tl.to(heroRow, {
         scale: 1.03,
         backgroundColor: "rgba(76, 175, 130, 0.14)",
         borderColor: "rgba(76, 175, 130, 0.5)",
-        duration: 0.6,
+        duration: 0.5,
         ease: "power2.out",
-      }, 2.2);
+      }, "+=0.2");
 
       // 3) Rewrite: title bar collapses and regrows
       if (titleBar) {
-        loop.to(titleBar, { scaleX: 0, duration: 0.45, ease: "power1.in" }, 2.7);
-        loop.to(titleBar, { scaleX: 1, duration: 0.9, ease: "power2.out" }, 3.15);
+        tl.to(titleBar, { scaleX: 0, duration: 0.4, ease: "power1.in" }, "+=0.15");
+        tl.to(titleBar, { scaleX: 1, duration: 0.8, ease: "power2.out" });
       }
       if (thumb) {
-        loop.to(thumb, { opacity: 0.5, duration: 0.3 }, 2.7);
-        loop.to(thumb, { opacity: 1, duration: 0.45 }, 3.15);
+        tl.to(thumb, { opacity: 0.5, duration: 0.25 }, "-=1.0");
+        tl.to(thumb, { opacity: 1, duration: 0.4 }, "-=0.55");
       }
 
       // 4) Rise to #1
-      loop.to(heroRow, {
+      tl.to(heroRow, {
         y: -STEP * heroIndex,
         scale: 1.05,
         boxShadow: "0 10px 28px rgba(76, 175, 130, 0.18), 0 0 0 1px rgba(76, 175, 130, 0.4)",
-        duration: 1.1,
+        duration: 1.0,
         ease: "back.out(1.2)",
-      }, 4.3);
+      }, "+=0.2");
       rowsAboveHero.forEach((row) => {
-        loop.to(row, { y: STEP, duration: 1.1, ease: "power2.inOut" }, 4.3);
+        tl.to(row, { y: STEP, duration: 1.0, ease: "power2.inOut" }, "<");
       });
 
-      // 5) Hold with gentle breath
-      loop.to(heroRow, {
-        scale: 1.03,
-        duration: 1.4,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: 1,
-      }, 5.6);
+      // 5) Settle auf #1 (sanftes Einrasten, keine Größenänderung mehr)
+      tl.to(heroRow, {
+        scale: 1.0,
+        duration: 0.8,
+        ease: "sine.out",
+      }, "+=0.1");
 
-      // 6) Long hold on #1 (let viewer register)
-      loop.to({}, { duration: 2.5 }, 8.4);
-
-      // 7) Reset
-      if (searchQuery) {
-        loop.to(searchQuery, { scaleX: 0, duration: 0.6, ease: "power1.in" }, 10.9);
+      function startHeroPulse(): void {
+        // Präsenter Dauer-Pulse: border + boxShadow deutlich sichtbar atmend, keine Scale-Änderung
+        gsap.to(heroRow, {
+          borderColor: "rgba(76, 175, 130, 0.8)",
+          boxShadow: "0 12px 40px rgba(76, 175, 130, 0.38), 0 0 0 1.5px rgba(76, 175, 130, 0.68)",
+          duration: 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       }
-      loop.to(heroRow, {
-        y: 0,
-        scale: 1,
-        backgroundColor: "rgba(76, 175, 130, 0.08)",
-        borderColor: "rgba(76, 175, 130, 0.22)",
-        boxShadow: "0 0 0 rgba(0,0,0,0)",
-        duration: 1.2,
-      }, 10.9);
-      rowsAboveHero.forEach((row) => {
-        loop.to(row, { y: 0, duration: 1.2 }, 10.9);
-      });
-
-      // 8) Long pause before next cycle
-      loop.to({}, { duration: 3.5 }, 12.1);
     }, visual);
 
     document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
