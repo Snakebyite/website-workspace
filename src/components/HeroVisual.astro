@@ -23,7 +23,6 @@ const HERO_INDEX = 3; // "unser Kunde" — startet auf Platz 4, klettert auf Pla
       <div class="rank-search">
         <Search size={16} strokeWidth={2} class="search-icon" />
         <div class="search-query"></div>
-        <div class="search-cursor"></div>
         <div class="search-separator"></div>
         <Store size={16} strokeWidth={1.6} class="search-platform-icon" />
       </div>
@@ -140,13 +139,6 @@ const HERO_INDEX = 3; // "unser Kunde" — startet auf Platz 4, klettert auf Pla
     max-width: 70%;
     transform-origin: left center;
     transform: scaleX(0);
-  }
-  .search-cursor {
-    width: 2px;
-    height: 16px;
-    background: rgba(76, 175, 130, 0.85);
-    opacity: 0;
-    flex-shrink: 0;
   }
   .search-separator {
     width: 1px;
@@ -301,7 +293,6 @@ const HERO_INDEX = 3; // "unser Kunde" — startet auf Platz 4, klettert auf Pla
       const titleBar = heroRow.querySelector<HTMLElement>(".rank-bar-title");
       const thumb = heroRow.querySelector<HTMLElement>(".rank-thumb");
       const searchQuery = visual.querySelector<HTMLElement>(".search-query");
-      const searchCursor = visual.querySelector<HTMLElement>(".search-cursor");
 
       // Cockpit
       const cockpit = visual.querySelector<HTMLElement>(".data-cockpit");
@@ -351,17 +342,6 @@ const HERO_INDEX = 3; // "unser Kunde" — startet auf Platz 4, klettert auf Pla
       if (reduced) {
         if (searchQuery) gsap.set(searchQuery, { scaleX: 0.65 });
         return;
-      }
-
-      // Cursor-Blink (unabhängig vom Loop)
-      if (searchCursor) {
-        gsap.to(searchCursor, {
-          opacity: 0.9,
-          duration: 0.45,
-          yoyo: true,
-          repeat: -1,
-          ease: "steps(1)",
-        });
       }
 
       // ── LOOP: SEARCH → RANK RISE ──────────────────────────────
