@@ -1,7 +1,6 @@
 ---
-// LeistungenCTA — Service page CTA mit Inline-Booking-Embed
-// Job: Letzter Schritt auf der Leistungen-Seite — direkt aus der Seite heraus buchen
-//      ohne Kontext-Wechsel. Gleicher Mechanik wie UeberUnsBooking.
+// UeberUnsBooking — Inline-Embed des Booking-Tools am Ende der Über-uns-Seite.
+// Ersetzt UeberUnsCTA: der Besucher soll ohne Page-Wechsel direkt buchen können.
 
 const bookingUrl =
   import.meta.env.PUBLIC_BOOKING_URL ??
@@ -11,15 +10,15 @@ const bookingUrl =
 ---
 
 <section
-  class="pt-14 md:pt-20 pb-20 md:pb-32"
+  class="py-16 md:py-24"
   aria-label="Termin buchen"
-  data-leistungen-cta
+  data-ueber-booking
 >
   <div class="mx-auto max-w-7xl px-4 md:px-8">
     <div class="max-w-2xl mb-10 md:mb-14">
-      <h2>Der nächste Schritt ist ein Gespräch.</h2>
+      <h2>Der nächste Schritt ist ein unverbindliches Gespräch.</h2>
       <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-6">
-        Wir schauen gemeinsam auf dein Marktplatz-Setup und deine Herausforderungen und finden heraus, wo dein größter Engpass liegt.
+        Wir schauen uns deine größten Engpässe an und sagen dir ehrlich, wo die Hebel liegen.
       </p>
     </div>
 
@@ -50,7 +49,7 @@ const bookingUrl =
 </section>
 
 <style>
-  /* Responsive Fallback-Höhe. Wird von postMessage aus dem Booking-Tool überschrieben. */
+  /* Responsive fallback height: overridden by postMessage once iframe posts its height */
   .booking-frame iframe {
     height: 900px;
   }
@@ -62,9 +61,9 @@ const bookingUrl =
 </style>
 
 <script>
-  const iframe = document.querySelector<HTMLIFrameElement>(
-    "[data-leistungen-cta] [data-booking-iframe]",
-  );
+  // Dynamic iframe height: booking-tool posts its content height, we apply it here.
+  // Breakpoints fall back via CSS min-height if postMessage doesn't arrive.
+  const iframe = document.querySelector<HTMLIFrameElement>("[data-booking-iframe]");
 
   window.addEventListener("message", (e) => {
     if (
@@ -73,10 +72,12 @@ const bookingUrl =
       typeof e.data.height === "number" &&
       iframe
     ) {
+      // 24px buffer against rounding / scrollbar jitter
       iframe.style.height = `${e.data.height}px`;
     }
   });
 
+  // Entrance animation for headline + subtext (match site rhythm)
   import("gsap").then(({ gsap }) => {
     Promise.all([
       import("gsap/ScrollTrigger"),
@@ -84,7 +85,7 @@ const bookingUrl =
     ]).then(([{ ScrollTrigger }, { SplitText }]) => {
       gsap.registerPlugin(ScrollTrigger, SplitText);
 
-      const section = document.querySelector("[data-leistungen-cta]");
+      const section = document.querySelector("[data-ueber-booking]");
       if (!section) return;
 
       const h2 = section.querySelector("h2");

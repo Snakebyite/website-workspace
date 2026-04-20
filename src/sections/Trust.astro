@@ -5,7 +5,7 @@
 // kurzer Haltungssatz darunter, Stats + Badge als kompakte Zeile.
 // Background: #0A0A0A (default)
 import { Image } from 'astro:assets';
-import duoPhoto from '../assets/luca-kevin-ueber-uns.jpg';
+import duoPhoto from '../assets/luca-kevin-triptychon-v2.jpg';
 import StaatlichBadge from '../components/StaatlichBadge.astro';
 ---
 
@@ -20,21 +20,21 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
       <div class="rounded-2xl overflow-hidden" data-trust-photo>
         <Image
           src={duoPhoto}
-          alt="Kevin und Luca, Gründer von KFL Consulting"
-          widths={[600, 900, 1200]}
+          alt="Luca und Kevin, Gründer von KFL Consulting, im Workshop und auf Reise"
+          widths={[600, 900, 1200, 1800]}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
-          class="w-full h-auto object-cover aspect-[21/9] object-top"
+          class="w-full h-auto object-cover aspect-[16/9] object-center"
         />
       </div>
     </div>
 
-    <!-- Kontrast zum Markt + eigene Positionierung -->
+    <!-- Kennenlernstory + Haltung -->
     <div class="mt-8 md:mt-10 space-y-5">
       <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
-        Viele Full-Service-Agenturen arbeiten mit standardisierten Vorlagen und denselben Abläufen für jeden Account. Dazu ein automatisiertes Tool für Werbeanzeigen und danach wird der Account kaum noch betreut. Oder es wird eine Beteiligung an deinem Umsatz gefordert, was deine Margen noch mehr verringert.
+        Kennengelernt haben wir uns im Master <em>Innovation für den Mittelstand</em>. Im ersten Semester, November 2022, kam ChatGPT heraus. Zufall oder Schicksal? Der Moment hat uns nicht mehr losgelassen. Seitdem verfolgen wir jede relevante Entwicklung in diesem Bereich intensiv und lassen uns immer wieder neu davon begeistern.
       </p>
       <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
-        Wir kombinieren wissenschaftlich fundierte Methodik mit echter Praxiserfahrung und AI-First-Strategien.
+        In seiner Masterarbeit hat Kevin zu Amazons A10 Algorithmus und KI auf Marktplätzen geforscht. Zwischen dieser Forschung, Projekten mit echten Unternehmen und unseren eigenen Experimenten wurde uns beiden dasselbe klar: Die besten Antworten entstehen, wenn Forschung, Praxis und KI am selben Tisch sitzen statt in getrennten Welten. An dieser Schnittstelle bauen wir seitdem Systeme, in denen am Ende jede Seite gewinnt. Den Rest der Geschichte findest du hier.
       </p>
     </div>
     <a
@@ -73,7 +73,7 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
   if (section) {
     const h2 = section.querySelector("h2");
     const photo = section.querySelector("[data-trust-photo]");
-    const story = section.querySelector("p.text-lg");
+    const stories = section.querySelectorAll("p.text-lg");
     const statItems = section.querySelectorAll(".flex.flex-wrap > div");
     const badge = section.querySelector(".inline-flex");
 
@@ -112,17 +112,18 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
       });
     }
 
-    // Origin story fade-in
-    if (story) {
-      gsap.set(story, { opacity: 0, y: 20 });
+    // Origin story fade-in (staggered für mehrere Absätze)
+    if (stories.length) {
+      gsap.set(stories, { opacity: 0, y: 20 });
 
-      gsap.to(story, {
+      gsap.to(stories, {
         opacity: 1,
         y: 0,
         duration: 0.6,
+        stagger: 0.12,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: story,
+          trigger: stories[0],
           start: "top 85%",
           once: true,
         },

@@ -1,46 +1,73 @@
 ---
 // CTA Section — Homepage
 // Job: Letzter Impuls zur Conversion. Einladend, nicht drängend.
-// Layout: Headline + Subline links, Portrait + Button rechts.
+// Layout: Zentrierte Headline + Subline + Button, darunter Trust Badges.
 // Background: default (#0A0A0A) — kein farbiger Banner.
-import { Image } from "astro:assets";
-import kevinPortrait from "../assets/kevin-portrait.png";
 ---
 
 <section class="py-20 md:py-32" aria-label="Termin buchen" data-cta>
-
   <div class="mx-auto max-w-7xl px-4 md:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+    <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
 
-      <!-- Left: Headline + Context -->
-      <div class="lg:col-span-7">
-        <h2>Der nächste Schritt ist ein Gespräch.</h2>
-        <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-6 max-w-lg">
-          Wir schauen gemeinsam auf dein Marktplatz-Setup und deine Herausforderungen und finden heraus, wo dein größter Engpass liegt.
-        </p>
-      </div>
+      <h2>Jetzt Erstgespräch buchen.</h2>
+      <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-6">
+        Kostenlos und unverbindlich. Wir schauen gemeinsam, wo bei dir das größte Potenzial liegt.
+      </p>
 
-      <!-- Right: Action -->
-      <div class="lg:col-span-5 flex flex-col items-start lg:items-end">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-5">
-          <Image
-            src={kevinPortrait}
-            alt="Kevin Flurschütz, Gründer von KFL Consulting"
-            widths={[256, 384, 512]}
-            sizes="(max-width: 640px) 128px, 160px"
-            class="w-32 h-32 lg:w-40 lg:h-40 rounded-xl object-cover shrink-0"
-          />
-          <div class="flex flex-col items-center gap-3">
-            <a
-              href="/kontakt"
-              class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
-            >
-              Kostenloses Erstgespräch
-            </a>
-            <span class="text-sm text-text-muted">Unverbindlich, 30 Minuten</span>
+      <a
+        href="/kontakt"
+        class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200 mt-8"
+      >
+        Kostenloses Erstgespräch
+      </a>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-14 md:mt-16" data-trust-badges>
+
+      <!-- Google 5.0 Badge -->
+      <a href="https://www.google.com/search?sca_esv=ca9c119048fe3647&rlz=1C5AJCO_enDE1206DE1206&sxsrf=ANbL-n7IsVAf5P06RwqoueitFQUi6XzBHw:1775942145149&q=kfl+consulting&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZNvtIaICfLfHaYlEovs20SPM-O8fJVtQDVXsdd0RsZ-AHLQqdJszHi7vx7CLfKYwjw6gYk%3D&uds=ALYpb_mM1P_6lpjjfowRxWEKPgkkfj-V__IA0i1mwLAXDlTAC5MZ0BlXfID3RXFrnCKiq3YTe0Grw1hf9WhGu7dTwv0YoO-D9D7NsmTCGFEEZjPd-7CJqW8&sa=X&ved=2ahUKEwjA58-F3OaTAxVXIBAIHQRlFmoQ3PALegQIKBAF&biw=1468&bih=828&dpr=2" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-surface rounded-xl px-5 py-3.5 border border-white/5 transition-colors duration-200 hover:border-white/10">
+        <svg viewBox="0 0 24 24" class="w-7 h-7 shrink-0" aria-hidden="true">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="text-text-primary font-bold text-lg leading-none">5.0</span>
+            <div class="flex gap-0.5" aria-label="5 von 5 Sternen">
+              {Array.from({ length: 5 }).map(() => (
+                <svg viewBox="0 0 20 20" class="w-3.5 h-3.5 text-amber-400 fill-current" aria-hidden="true">
+                  <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.7l5.34-.78L10 1z"/>
+                </svg>
+              ))}
+            </div>
           </div>
+          <span class="text-text-muted text-xs mt-0.5">Google Bewertungen</span>
         </div>
-      </div>
+      </a>
+
+      <!-- ProvenExpert Badge -->
+      <a href="https://www.provenexpert.com/de-de/kfl-consulting/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-surface rounded-xl px-5 py-3.5 border border-white/5 transition-colors duration-200 hover:border-white/10">
+        <svg viewBox="0 0 40 40" class="w-7 h-7 shrink-0" aria-hidden="true">
+          <circle cx="20" cy="20" r="20" fill="#C5A94B"/>
+          <path d="M12 20.5l5.5 5L28 15" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="text-text-primary font-bold text-lg leading-none">5.0</span>
+            <div class="flex gap-0.5" aria-label="5 von 5 Sternen">
+              {Array.from({ length: 5 }).map(() => (
+                <svg viewBox="0 0 20 20" class="w-3.5 h-3.5 text-amber-400 fill-current" aria-hidden="true">
+                  <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.7l5.34-.78L10 1z"/>
+                </svg>
+              ))}
+            </div>
+          </div>
+          <span class="text-text-muted text-xs mt-0.5">ProvenExpert</span>
+        </div>
+      </a>
 
     </div>
   </div>
@@ -55,60 +82,33 @@ import kevinPortrait from "../assets/kevin-portrait.png";
   if (section) {
     const h2 = section.querySelector("h2");
     const subtext = section.querySelector("p");
-    const actionArea = section.querySelector(".lg\\:col-span-5");
+    const ctaLink = section.querySelector("a");
+    const badges = section.querySelector("[data-trust-badges]");
 
-    // H2 SplitText reveal
     if (h2) {
       const split = new SplitText(h2, { type: "words" });
       gsap.set(split.words, { opacity: 0, y: 20 });
-
       gsap.to(split.words, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          once: true,
-        },
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+        scrollTrigger: { trigger: section, start: "top 75%", once: true },
       });
     }
 
-    // Subtext fade-in
-    if (subtext) {
-      gsap.set(subtext, { opacity: 0, y: 20 });
-
-      gsap.to(subtext, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: subtext,
-          start: "top 85%",
-          once: true,
-        },
+    const fadeItems = [subtext, ctaLink].filter(Boolean) as Element[];
+    if (fadeItems.length) {
+      gsap.set(fadeItems, { opacity: 0, y: 20 });
+      gsap.to(fadeItems, {
+        opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out",
+        scrollTrigger: { trigger: subtext, start: "top 85%", once: true },
       });
     }
 
-    // Action area (button + links) fade-in
-    if (actionArea) {
-      const items = actionArea.children;
-      gsap.set(items, { opacity: 0, y: 20 });
-
-      gsap.to(items, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: actionArea,
-          start: "top 85%",
-          once: true,
-        },
+    if (badges) {
+      const badgeItems = badges.children;
+      gsap.set(badgeItems, { opacity: 0, y: 20 });
+      gsap.to(badgeItems, {
+        opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: badges, start: "top 90%", once: true },
       });
     }
   }

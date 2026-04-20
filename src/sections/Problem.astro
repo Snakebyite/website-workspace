@@ -52,30 +52,32 @@
           <!-- Divider -->
           <div class="h-px bg-white/5 my-7"></div>
 
-          <!-- Metric 2: Organic Ranking declining -->
+          <!-- Metric 2: Platform friction — blocked accounts, rejected listings, rules -->
           <div class="relative" data-pv-metric="2">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">Organisches Ranking</span>
-              <span class="text-[13px] font-medium text-amber-400/70">Sinkend</span>
+              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">Plattform-Status</span>
+              <span class="text-[13px] font-medium text-red-400/70">Kritisch</span>
             </div>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3">
-                <span class="text-[12px] text-text-muted w-20 shrink-0">Hauptkeyword</span>
-                <div class="h-2 flex-1 rounded-full bg-white/5 overflow-hidden">
-                  <div class="pv-bar h-full rounded-full bg-amber-400/30" style="width:0%;"></div>
-                </div>
+            <div class="space-y-2.5">
+              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
+                <svg class="w-3.5 h-3.5 text-red-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Account-Status</span>
+                <span class="text-[11px] text-red-400/70 shrink-0">Unter Review</span>
               </div>
-              <div class="flex items-center gap-3">
-                <span class="text-[12px] text-text-muted w-20 shrink-0">Longtail</span>
-                <div class="h-2 flex-1 rounded-full bg-white/5 overflow-hidden">
-                  <div class="pv-bar h-full rounded-full bg-amber-400/25" style="width:0%;"></div>
-                </div>
+              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
+                <svg class="w-3.5 h-3.5 text-red-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Flat-File abgelehnt</span>
+                <span class="text-[11px] text-red-400/70 shrink-0">47 Fehler</span>
               </div>
-              <div class="flex items-center gap-3">
-                <span class="text-[12px] text-text-muted w-20 shrink-0">Kategorie</span>
-                <div class="h-2 flex-1 rounded-full bg-white/5 overflow-hidden">
-                  <div class="pv-bar h-full rounded-full bg-amber-400/30" style="width:0%;"></div>
-                </div>
+              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
+                <svg class="w-3.5 h-3.5 text-amber-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Support-Ticket</span>
+                <span class="text-[11px] text-amber-400/70 shrink-0">14 Tage offen</span>
+              </div>
+              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
+                <svg class="w-3.5 h-3.5 text-amber-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Richtlinien-Update</span>
+                <span class="text-[11px] text-amber-400/70 shrink-0">3 neu/Monat</span>
               </div>
             </div>
           </div>
@@ -83,42 +85,63 @@
           <!-- Divider -->
           <div class="h-px bg-white/5 my-7"></div>
 
-          <!-- Metric 3: Fragmented agency landscape -->
+          <!-- Metric 3: SEO backlog — internal resources missing -->
           <div class="relative" data-pv-metric="3">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">Dienstleister</span>
-              <span class="text-[13px] font-medium text-text-muted/70">5 Agenturen</span>
+              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">SEO-Aufgaben</span>
+              <span class="text-[13px] font-medium text-amber-400/70">Nicht gestartet</span>
             </div>
-            <div class="flex flex-wrap gap-2">
-              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">PPC</span>
-              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">SEO</span>
-              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">Content</span>
-              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">Listings</span>
-              <span class="pv-tag inline-block rounded-full border border-white/5 bg-white/[0.02] px-3 py-1.5 text-[12px] text-text-muted" style="opacity:0;">Strategie</span>
+            <div class="space-y-2.5">
+              <div class="pv-task flex items-center gap-3" style="opacity:0;">
+                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
+                <span class="text-[12px] text-text-muted flex-1">Keyword-Recherche</span>
+                <span class="text-[11px] text-amber-400/60">offen</span>
+              </div>
+              <div class="pv-task flex items-center gap-3" style="opacity:0;">
+                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
+                <span class="text-[12px] text-text-muted flex-1">Listings</span>
+                <span class="text-[11px] text-amber-400/60">offen</span>
+              </div>
+              <div class="pv-task flex items-center gap-3" style="opacity:0;">
+                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
+                <span class="text-[12px] text-text-muted flex-1">Content</span>
+                <span class="text-[11px] text-amber-400/60">offen</span>
+              </div>
+              <div class="pv-task flex items-center gap-3" style="opacity:0;">
+                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
+                <span class="text-[12px] text-text-muted flex-1">Monitoring</span>
+                <span class="text-[11px] text-amber-400/60">offen</span>
+              </div>
             </div>
-            <p class="mt-4 text-[12px] text-text-muted/60 leading-relaxed">Jeder Kanal ein anderer Ansprechpartner. Kein Gesamtbild.</p>
+            <div class="mt-5 flex items-center gap-3">
+              <span class="text-[12px] text-text-muted/70 shrink-0">Interne Kapazität</span>
+              <div class="h-1.5 flex-1 rounded-full bg-white/5 overflow-hidden">
+                <div class="pv-capacity h-full rounded-full bg-red-400/50" style="width:0%;"></div>
+              </div>
+              <span class="text-[11px] text-red-400/70 shrink-0">14 % frei</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Right: Pain statements -->
-      <div class="lg:col-span-6 lg:col-start-7 flex flex-col justify-between">
+      <div class="lg:col-span-6 lg:col-start-7 flex flex-col gap-10 lg:gap-12">
         <div class="flex gap-5">
           <span class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border border-accent/20 bg-accent/[0.06] text-accent-text text-base font-semibold tracking-wide mt-1">01</span>
           <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Dein ACoS steigt, die <span class="text-accent-text font-medium">Marge schrumpft.</span> Du weißt nicht, welche Kampagnen wirklich profitabel sind.
+            Dein ACoS steigt, die <span class="text-accent-text font-medium">Marge schrumpft.</span> Organisch rankst du kaum, also musst du mehr Geld in PPC stecken, wenn du mehr Umsatz willst.
           </p>
         </div>
-        <div class="flex gap-5 mt-10 lg:mt-0">
+        <div class="flex gap-5">
           <span class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border border-accent/20 bg-accent/[0.06] text-accent-text text-base font-semibold tracking-wide mt-1">02</span>
           <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Listings pflegen, Rankings überwachen, PPC-Budgets steuern. Marktplätze kosten <span class="text-accent-text font-medium">Zeit, die du nicht hast.</span> Intern fehlt das Spezialwissen, um wirklich zu skalieren.
+            Gesperrte Accounts ohne Vorwarnung, ständig neue Regeln, abgelehnte Listings, Support-Tickets ohne Antwort. Amazon legt dir <span class="text-accent-text font-medium">Steine in den Weg</span> und kostet Nerven, aber du weißt: An der Plattform kommst du nicht vorbei.
           </p>
         </div>
-        <div class="flex gap-5 mt-10 lg:mt-0">
+        <div class="flex gap-5">
           <span class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border border-accent/20 bg-accent/[0.06] text-accent-text text-base font-semibold tracking-wide mt-1">03</span>
           <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Für PPC eine Agentur, für SEO eine andere, für Content die nächste. <span class="text-accent-text font-medium">Fünf Dienstleister, aber keine Strategie.</span> Und keinen, der das Gesamtbild im Blick hat.
+            SEO auf Amazon ist ein eigenes Handwerk: Keyword-Recherche, Listings, Content, Monitoring. Sich neben dem Tagesgeschäft einzuarbeiten, kostet <span class="text-accent-text font-medium">Ressourcen, die intern selten frei sind.</span>
           </p>
         </div>
       </div>
@@ -145,10 +168,8 @@
       section.querySelectorAll("[style*='opacity:0']").forEach(el => {
         (el as HTMLElement).style.opacity = "1";
       });
-      section.querySelectorAll(".pv-bar").forEach((el, i) => {
-        const widths = ["45%", "32%", "58%"];
-        (el as HTMLElement).style.width = widths[i] || "45%";
-      });
+      const cap = section.querySelector<HTMLElement>(".pv-capacity");
+      if (cap) cap.style.width = "86%";
       return;
     }
 
@@ -202,15 +223,18 @@
       if (area) tl.to(area, { opacity: 1, duration: 0.6 }, "-=0.6");
       if (dot) tl.to(dot, { opacity: 1, duration: 0.3, ease: "back.out(2)" }, "-=0.2");
 
-      const bars = visual.querySelectorAll<HTMLElement>(".pv-bar");
-      const barWidths = ["45%", "32%", "58%"];
-      bars.forEach((bar, i) => {
-        tl.to(bar, { width: barWidths[i], duration: 0.8, ease: "power2.out" }, i === 0 ? "-=0.3" : "-=0.6");
-      });
+      const alerts = visual.querySelectorAll<HTMLElement>(".pv-alert");
+      gsap.set(alerts, { x: -8 });
+      tl.to(alerts, { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" }, "-=0.3");
 
-      const tags = visual.querySelectorAll<HTMLElement>(".pv-tag");
-      gsap.set(tags, { scale: 0.6 });
-      tl.to(tags, { opacity: 1, scale: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2)" }, "-=0.3");
+      const tasks = visual.querySelectorAll<HTMLElement>(".pv-task");
+      gsap.set(tasks, { x: -8 });
+      tl.to(tasks, { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" }, "-=0.3");
+
+      const capacity = visual.querySelector<HTMLElement>(".pv-capacity");
+      if (capacity) {
+        tl.to(capacity, { width: "86%", duration: 0.9, ease: "power2.out" }, "-=0.2");
+      }
 
       gsap.to(dot, {
         scale: 1.4,
