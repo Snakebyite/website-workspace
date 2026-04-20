@@ -1,0 +1,279 @@
+---
+// OrganicRankingVisual.astro — "Rank Rise" kompakte Variante für Leistungen-Kachel.
+// Reduziertes Panel: Suchleiste oben + 3 Listing-Rows. Das Hero-Listing startet
+// auf Platz 3 und klettert nach Rewrite auf Platz 1. Langsamer Loop.
+// Design konsistent zum HeroVisual (Suchleiste, Rows, Accent-Highlight).
+import { Search, Store } from '@lucide/astro';
+
+const ROWS = 3;
+const HERO_INDEX = 2; // startet auf Platz 3, klettert auf #1
+---
+
+<div class="organic-ranking-visual w-full" aria-hidden="true">
+  <div class="rank-panel" style="opacity:0;">
+    <div class="rank-search">
+      <Search size={16} strokeWidth={2} class="search-icon" />
+      <div class="search-query"></div>
+      <div class="search-cursor"></div>
+      <div class="search-separator"></div>
+      <Store size={16} strokeWidth={1.6} class="search-platform-icon" />
+    </div>
+    <div class="rank-stack">
+      {Array.from({ length: ROWS }).map((_, i) => (
+        <div class={`rank-row ${i === HERO_INDEX ? 'is-hero' : ''}`} data-row-index={i}>
+          <div class="rank-thumb"></div>
+          <div class="rank-bars">
+            <div class="rank-bar rank-bar-title"></div>
+            <div class="rank-bar rank-bar-meta"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .rank-panel {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+  }
+
+  /* Suchleiste */
+  .rank-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 14px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+  }
+  .search-icon {
+    color: rgba(255, 255, 255, 0.45);
+    flex-shrink: 0;
+  }
+  .search-query {
+    flex: 1;
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.24);
+    max-width: 70%;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+  .search-cursor {
+    width: 2px;
+    height: 16px;
+    background: rgba(76, 175, 130, 0.85);
+    opacity: 0;
+    flex-shrink: 0;
+  }
+  .search-separator {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .search-platform-icon {
+    color: rgba(239, 239, 239, 0.55);
+    flex-shrink: 0;
+  }
+
+  /* Listing-Stack */
+  .rank-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .rank-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    will-change: transform;
+  }
+  .rank-row.is-hero {
+    background: rgba(76, 175, 130, 0.08);
+    border-color: rgba(76, 175, 130, 0.22);
+  }
+
+  .rank-thumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    flex-shrink: 0;
+  }
+  .rank-row.is-hero .rank-thumb {
+    background: linear-gradient(135deg, rgba(76,175,130,0.35), rgba(76,175,130,0.1));
+  }
+
+  .rank-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rank-bar {
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.12);
+    transform-origin: left center;
+  }
+  .rank-bar-title { width: 85%; }
+  .rank-bar-meta  { width: 55%; background: rgba(255, 255, 255, 0.07); }
+  .rank-row.is-hero .rank-bar-title { background: rgba(76, 175, 130, 0.6); }
+  .rank-row.is-hero .rank-bar-meta  { background: rgba(76, 175, 130, 0.3); }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  function initOrganicRankingVisual(): void {
+    const visual = document.querySelector<HTMLElement>(".organic-ranking-visual");
+    if (!visual) return;
+
+    const ctx = gsap.context(() => {
+      const panel = visual.querySelector<HTMLElement>(".rank-panel");
+      const rows = visual.querySelectorAll<HTMLElement>(".rank-row");
+      const heroRow = visual.querySelector<HTMLElement>(".rank-row.is-hero");
+      if (!panel || !rows.length || !heroRow) return;
+
+      const heroIndex = parseInt(heroRow.dataset.rowIndex || "0", 10);
+      const rowsAboveHero = Array.from(rows).filter((_, i) => i < heroIndex);
+      const titleBar = heroRow.querySelector<HTMLElement>(".rank-bar-title");
+      const thumb = heroRow.querySelector<HTMLElement>(".rank-thumb");
+      const searchQuery = visual.querySelector<HTMLElement>(".search-query");
+      const searchCursor = visual.querySelector<HTMLElement>(".search-cursor");
+
+      const STEP = 56; // row height (52) + gap (4)
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduced) {
+        gsap.set(panel, { opacity: 1 });
+        if (searchQuery) gsap.set(searchQuery, { scaleX: 0.65 });
+        gsap.set(heroRow, { y: -STEP * heroIndex });
+        rowsAboveHero.forEach((row) => gsap.set(row, { y: STEP }));
+        return;
+      }
+
+      // Cursor blink (independent from main timeline)
+      if (searchCursor) {
+        gsap.to(searchCursor, {
+          opacity: 0.9,
+          duration: 0.45,
+          yoyo: true,
+          repeat: -1,
+          ease: "steps(1)",
+        });
+      }
+
+      // ── ENTRANCE (once, on scroll-in) ──────────────────────────
+      const entrance = gsap.timeline({
+        scrollTrigger: {
+          trigger: visual,
+          start: "top 80%",
+          once: true,
+        },
+        onComplete: () => loop.play(),
+      });
+
+      entrance.fromTo(panel,
+        { opacity: 0, y: 20, scale: 0.98 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }
+      );
+
+      // ── LOOP: slow search → rewrite → rise → reset ────────────
+      const loop = gsap.timeline({
+        repeat: -1,
+        paused: true,
+        defaults: { ease: "power2.inOut" },
+      });
+
+      // 1) Search types in (slow)
+      if (searchQuery) {
+        loop.to(searchQuery, { scaleX: 1, duration: 1.4, ease: "steps(14)" }, 0.5);
+      }
+
+      // 2) Hero row highlight pulse
+      loop.to(heroRow, {
+        scale: 1.03,
+        backgroundColor: "rgba(76, 175, 130, 0.14)",
+        borderColor: "rgba(76, 175, 130, 0.5)",
+        duration: 0.6,
+        ease: "power2.out",
+      }, 2.2);
+
+      // 3) Rewrite: title bar collapses and regrows
+      if (titleBar) {
+        loop.to(titleBar, { scaleX: 0, duration: 0.45, ease: "power1.in" }, 2.7);
+        loop.to(titleBar, { scaleX: 1, duration: 0.9, ease: "power2.out" }, 3.15);
+      }
+      if (thumb) {
+        loop.to(thumb, { opacity: 0.5, duration: 0.3 }, 2.7);
+        loop.to(thumb, { opacity: 1, duration: 0.45 }, 3.15);
+      }
+
+      // 4) Rise to #1
+      loop.to(heroRow, {
+        y: -STEP * heroIndex,
+        scale: 1.05,
+        boxShadow: "0 10px 28px rgba(76, 175, 130, 0.18), 0 0 0 1px rgba(76, 175, 130, 0.4)",
+        duration: 1.1,
+        ease: "back.out(1.2)",
+      }, 4.3);
+      rowsAboveHero.forEach((row) => {
+        loop.to(row, { y: STEP, duration: 1.1, ease: "power2.inOut" }, 4.3);
+      });
+
+      // 5) Hold with gentle breath
+      loop.to(heroRow, {
+        scale: 1.03,
+        duration: 1.4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: 1,
+      }, 5.6);
+
+      // 6) Long hold on #1 (let viewer register)
+      loop.to({}, { duration: 2.5 }, 8.4);
+
+      // 7) Reset
+      if (searchQuery) {
+        loop.to(searchQuery, { scaleX: 0, duration: 0.6, ease: "power1.in" }, 10.9);
+      }
+      loop.to(heroRow, {
+        y: 0,
+        scale: 1,
+        backgroundColor: "rgba(76, 175, 130, 0.08)",
+        borderColor: "rgba(76, 175, 130, 0.22)",
+        boxShadow: "0 0 0 rgba(0,0,0,0)",
+        duration: 1.2,
+      }, 10.9);
+      rowsAboveHero.forEach((row) => {
+        loop.to(row, { y: 0, duration: 1.2 }, 10.9);
+      });
+
+      // 8) Long pause before next cycle
+      loop.to({}, { duration: 3.5 }, 12.1);
+    }, visual);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initOrganicRankingVisual();
+  document.addEventListener("astro:after-swap", initOrganicRankingVisual);
+</script>
