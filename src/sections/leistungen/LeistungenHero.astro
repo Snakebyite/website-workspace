@@ -1,37 +1,73 @@
 ---
 // LeistungenHero — Service page hero
 // Job: Frame the page. Visitor already knows KFL from homepage/touchpoint.
-// Layout: Full-width H1 left-aligned, subline below, proof stats underneath.
+// Layout: Centered editorial. H1+Subline zentriert, Laptop mittig drunter, dann Stats + Reiter.
 import StaatlichBadge from "../../components/StaatlichBadge.astro";
+import ProcessLoopVisual from "../../components/ProcessLoopVisual.astro";
 ---
 
-<section class="pt-32 md:pt-section pb-12 md:pb-16" data-leistungen-hero>
+<section class="-mt-36 md:-mt-48 pt-36 md:pt-44 pb-12 md:pb-16" data-leistungen-hero>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <h1 class="text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] tracking-normal max-w-4xl" data-hero-h1>
-      Organisch wachsen, <span class="text-accent-text">bevor</span> du für Klicks zahlst.
-    </h1>
+    <!-- Centered Text Block -->
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="text-[2.5rem] sm:text-[3.25rem] md:text-[4rem] lg:text-[4.75rem] xl:text-[5.25rem] tracking-normal leading-[1.05]" data-hero-h1>
+        Skalieren funktioniert nur, wenn die <span class="text-accent-text">Basis</span> sitzt.
+      </h1>
 
-    <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-8 max-w-2xl" data-hero-sub>
-      Vier Hebel, ein Ziel: deine Marke auf digitalen Marktplätzen so aufzustellen, dass Wachstum planbar wird und nicht vom Werbebudget abhängt.
-    </p>
+      <p class="mx-auto mt-8 max-w-2xl text-text-secondary text-lg md:text-xl leading-relaxed" data-hero-sub>
+        Sichtbarkeit, Strategie, Anbindungen. Wer diese drei Bausteine überspringt, verbrennt spätestens im Wachstum Geld in PPC, ohne die erhofften Renditen zu sehen.
+      </p>
+    </div>
 
-    <!-- Proof Stats -->
-    <div class="mt-12 md:mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 md:gap-x-14" data-hero-stats>
-      <StaatlichBadge />
-      <div>
-        <span class="block text-2xl md:text-3xl font-bold tracking-tight text-text-primary" data-count="30000" data-count-suffix="+" data-count-separator=".">0</span>
-        <span class="block text-sm text-text-muted mt-1">Produkte gelistet</span>
+    <!-- Laptop mit Process-Loop, zentriert -->
+    <div class="mx-auto mt-10 md:mt-16 max-w-4xl" data-hero-visual>
+      <ProcessLoopVisual />
+    </div>
+
+    <!-- Proof Stats — zentriert drunter -->
+    <div class="mt-10 md:mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 md:gap-x-12" data-hero-stats>
+      <div class="scale-[0.9] origin-center">
+        <StaatlichBadge />
       </div>
-      <div>
-        <span class="block text-2xl md:text-3xl font-bold tracking-tight text-text-primary" data-count="5000" data-count-suffix="+" data-count-separator=".">0</span>
-        <span class="block text-sm text-text-muted mt-1">Listings optimiert</span>
+      <div class="text-center">
+        <span class="block text-xl md:text-2xl font-bold tracking-tight text-text-primary" data-count="30000" data-count-suffix="+" data-count-separator=".">0</span>
+        <span class="block text-xs md:text-sm text-text-muted mt-1">Produkte gelistet</span>
       </div>
-      <div>
-        <span class="block text-2xl md:text-3xl font-bold tracking-tight text-text-primary" data-count="140" data-count-suffix="+">0</span>
-        <span class="block text-sm text-text-muted mt-1">Marktplatz-Setups</span>
+      <div class="text-center">
+        <span class="block text-xl md:text-2xl font-bold tracking-tight text-text-primary" data-count="5000" data-count-suffix="+" data-count-separator=".">0</span>
+        <span class="block text-xs md:text-sm text-text-muted mt-1">Listings optimiert</span>
+      </div>
+      <div class="text-center">
+        <span class="block text-xl md:text-2xl font-bold tracking-tight text-text-primary" data-count="140" data-count-suffix="+">0</span>
+        <span class="block text-xs md:text-sm text-text-muted mt-1">Marktplatz-Setups</span>
       </div>
     </div>
+
+    <!-- Anchor-Row — zentriert -->
+    <nav class="mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 md:gap-x-12" aria-label="Leistungen" data-hero-anchors>
+      <a
+        href="#organische-sichtbarkeit"
+        class="anchor-link group inline-flex items-center gap-3.5 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
+      >
+        <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+        <span>Organische Sichtbarkeit</span>
+      </a>
+      <a
+        href="#marktplatz-strategie"
+        class="anchor-link group inline-flex items-center gap-3.5 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
+      >
+        <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+        <span>Marktplatz-Strategie</span>
+      </a>
+      <a
+        href="#marktplatz-anbindungen"
+        class="anchor-link group inline-flex items-center gap-3.5 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
+      >
+        <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+        <span>Marktplatz-Anbindungen</span>
+      </a>
+    </nav>
 
   </div>
 </section>
@@ -65,6 +101,18 @@ import StaatlichBadge from "../../components/StaatlichBadge.astro";
         opacity: 1,
         y: 0,
         duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+
+    // Process-Loop Visual nach dem Text
+    const heroVisual = section.querySelector("[data-hero-visual]");
+    if (heroVisual) {
+      gsap.set(heroVisual, { opacity: 0, y: 30 });
+      tl.to(heroVisual, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
         ease: "power2.out",
       }, "-=0.2");
     }
@@ -103,6 +151,21 @@ import StaatlichBadge from "../../components/StaatlichBadge.astro";
           },
         }, "-=1.6");
       });
+    }
+
+    const anchors = section.querySelector("[data-hero-anchors]");
+    if (anchors) {
+      const items = anchors.querySelectorAll<HTMLElement>("a");
+      if (items.length) {
+        gsap.set(items, { opacity: 0, y: 14 });
+        tl.to(items, {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.1,
+          ease: "power2.out",
+        }, "-=0.4");
+      }
     }
   }
 </script>

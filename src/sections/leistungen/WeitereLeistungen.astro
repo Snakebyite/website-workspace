@@ -1,0 +1,112 @@
+---
+// WeitereLeistungen — Ergänzende Themen nach den 3 Kern-Sections
+// Job: Sales-Frage "macht ihr auch X?" pragmatisch beantworten, ohne Verkaufsdruck.
+// Layout: H2 etwas kleiner als Hauptsections (visuell sekundär), 5 kompakte Kacheln.
+import { Icon } from "astro-icon/components";
+
+const tiles = [
+  {
+    icon: "uim:table",
+    title: "Produktdatenoptimierung",
+    text: "Saubere Stammdaten als Basis für Sichtbarkeit und Conversion.",
+  },
+  {
+    icon: "uim:document-layout-center",
+    title: "A+ Content",
+    text: "Markenmodule, die Vertrauen schaffen und die Detailseite stärker konvertieren.",
+  },
+  {
+    icon: "uim:image-v",
+    title: "Produktbilder-Optimierung",
+    text: "Bilder, die zum Klick führen, abgestimmt auf den Wettbewerb in deiner Nische.",
+  },
+  {
+    icon: "ph:globe-duotone",
+    title: "Internationalisierung",
+    text: "Expansion auf neue Märkte mit lokalisiertem Content und passender Strategie.",
+  },
+  {
+    icon: "uim:process",
+    title: "Operations & Automatisierung",
+    text: "Wiederkehrende Prozesse automatisieren: Stammdaten, Bestand, Reporting.",
+  },
+];
+---
+
+<section class="py-20 md:py-32" data-weitere-leistungen>
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+
+    <h2 class="text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] tracking-[-0.02em] leading-[1.2] max-w-3xl" data-weitere-h2>
+      Was wir sonst noch abdecken
+    </h2>
+    <p class="mt-5 max-w-2xl text-text-secondary text-base md:text-lg leading-relaxed" data-weitere-lead>
+      Themen, die regelmäßig in unseren Projekten dazukommen.
+    </p>
+
+    <div class="mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5" data-weitere-tiles>
+      {tiles.map((tile) => (
+        <article class="weitere-tile group relative overflow-hidden rounded-2xl bg-surface p-6 md:p-7 transition-all duration-300 ease-out hover:bg-surface-elevated hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(0,0,0,0.25)]">
+          <span class="weitere-indicator absolute left-6 md:left-7 top-0 h-[2px] w-10 bg-accent-text/60 transition-all duration-300 ease-out group-hover:w-16 group-hover:bg-accent-text" aria-hidden="true"></span>
+          <Icon name={tile.icon} class="w-6 h-6 text-text-secondary transition-colors duration-300 group-hover:text-accent-text" aria-hidden="true" />
+          <h3 class="font-body font-medium text-lg md:text-xl text-text-primary leading-snug mt-5">
+            {tile.title}
+          </h3>
+          <p class="text-text-secondary text-[0.95rem] leading-relaxed mt-3">
+            {tile.text}
+          </p>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  function initWeitereLeistungen(): void {
+    const section = document.querySelector<HTMLElement>("[data-weitere-leistungen]");
+    if (!section) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    const h2 = section.querySelector<HTMLElement>("[data-weitere-h2]");
+    const lead = section.querySelector<HTMLElement>("[data-weitere-lead]");
+    const tiles = section.querySelectorAll<HTMLElement>("[data-weitere-tiles] > article");
+
+    const ctx = gsap.context(() => {
+      if (h2) {
+        const split = new SplitText(h2, { type: "words" });
+        gsap.set(split.words, { opacity: 0, y: 20 });
+        gsap.to(split.words, {
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 78%", once: true },
+        });
+      }
+
+      if (lead) {
+        gsap.set(lead, { opacity: 0, y: 15 });
+        gsap.to(lead, {
+          opacity: 1, y: 0, duration: 0.5, ease: "power2.out",
+          scrollTrigger: { trigger: lead, start: "top 88%", once: true },
+        });
+      }
+
+      if (tiles.length) {
+        gsap.set(tiles, { opacity: 0, y: 20 });
+        gsap.to(tiles, {
+          opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: tiles[0], start: "top 88%", once: true },
+        });
+      }
+    }, section);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initWeitereLeistungen();
+  document.addEventListener("astro:after-swap", initWeitereLeistungen);
+</script>

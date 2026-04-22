@@ -1,0 +1,1698 @@
+---
+// ProcessLoopVisual — Device-Frame mit Szenen-Loop.
+// 4 Szenen: Shopify → Channable → Data Dive → Amazon.
+import { Image } from "astro:assets";
+import datadiveLogo from "../assets/tools/datadive.png";
+import shopifyLogo from "../assets/tools/shopify.webp";
+import amazonLogo from "../assets/tools/amazon.png";
+---
+
+<div class="process-loop" data-process-loop>
+
+  <!-- Desktop: Laptop-Frame mit Szenen-Loop -->
+  <div class="laptop hidden lg:block">
+    <div class="laptop-bezel">
+      <!-- Notch (modern MacBook) -->
+      <div class="laptop-notch" aria-hidden="true"></div>
+
+      <!-- Screen -->
+      <div class="laptop-screen">
+
+        <!-- Scene 1: Shopify Admin -->
+        <div class="scene scene-shopify" data-scene="shopify">
+          <!-- Top Bar -->
+          <div class="shopify-topbar">
+            <div class="shopify-logo" aria-label="Shopify" role="img">
+              <Image
+                src={shopifyLogo}
+                alt=""
+                width={815}
+                height={260}
+                loading="eager"
+                class="shopify-logo-img"
+              />
+            </div>
+            <div class="shopify-topbar-pill"></div>
+            <div class="shopify-topbar-circle"></div>
+          </div>
+
+          <!-- Main Layout: Sidebar + Content -->
+          <div class="shopify-body">
+            <!-- Sidebar -->
+            <aside class="shopify-sidebar">
+              <span class="shopify-nav-item">
+                <span class="dot"></span>
+                <span class="line" style="width: 38px"></span>
+              </span>
+              <span class="shopify-nav-item shopify-nav-active">
+                <span class="dot active"></span>
+                <span class="line" style="width: 44px"></span>
+              </span>
+              <span class="shopify-nav-item">
+                <span class="dot"></span>
+                <span class="line" style="width: 32px"></span>
+              </span>
+              <span class="shopify-nav-item">
+                <span class="dot"></span>
+                <span class="line" style="width: 40px"></span>
+              </span>
+              <span class="shopify-nav-item">
+                <span class="dot"></span>
+                <span class="line" style="width: 28px"></span>
+              </span>
+            </aside>
+
+            <!-- Products Table -->
+            <div class="shopify-content">
+              <div class="shopify-header">
+                <span class="shopify-title"></span>
+                <span class="shopify-action"></span>
+              </div>
+
+              <div class="shopify-products">
+                <div class="shopify-row">
+                  <span class="shopify-thumb"></span>
+                  <span class="shopify-name shopify-name-1"></span>
+                  <span class="shopify-badge">Aktiv</span>
+                </div>
+                <div class="shopify-row">
+                  <span class="shopify-thumb"></span>
+                  <span class="shopify-name shopify-name-2"></span>
+                  <span class="shopify-badge">Aktiv</span>
+                </div>
+                <div class="shopify-row">
+                  <span class="shopify-thumb"></span>
+                  <span class="shopify-name shopify-name-3"></span>
+                  <span class="shopify-badge">Aktiv</span>
+                </div>
+                <div class="shopify-row">
+                  <span class="shopify-thumb"></span>
+                  <span class="shopify-name shopify-name-4"></span>
+                  <span class="shopify-badge shopify-badge-muted">Entwurf</span>
+                </div>
+                <div class="shopify-row">
+                  <span class="shopify-thumb"></span>
+                  <span class="shopify-name shopify-name-5"></span>
+                  <span class="shopify-badge">Aktiv</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 2: Channable API/Channel Connections -->
+        <div class="scene scene-channable" data-scene="channable">
+          <!-- Body: Sidebar + Main -->
+          <div class="channable-body">
+            <!-- Dark Sidebar with Logo on top -->
+            <aside class="channable-sidebar">
+              <div class="channable-logo" aria-label="Channable" role="img">
+                <svg viewBox="0 0 40 32" class="channable-hexes" aria-hidden="true">
+                  <!-- Blue top hexagon -->
+                  <path d="M20 2 L27.5 6.5 L27.5 14.5 L20 19 L12.5 14.5 L12.5 6.5 Z" fill="#2F80FF"/>
+                  <!-- Yellow bottom-left hexagon -->
+                  <path d="M12.5 14.5 L20 19 L20 27 L12.5 31.5 L5 27 L5 19 Z" fill="#F5B932"/>
+                  <!-- Pink bottom-right hexagon -->
+                  <path d="M27.5 14.5 L35 19 L35 27 L27.5 31.5 L20 27 L20 19 Z" fill="#E91E63"/>
+                </svg>
+                <span class="channable-wordmark">channable</span>
+              </div>
+
+              <nav class="channable-nav">
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:38px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:28px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:22px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:44px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:26px"></span></span>
+                <span class="ch-nav-item ch-nav-active"><span class="ch-nav-dot ch-nav-dot-active"></span><span class="ch-nav-line ch-nav-line-active" style="width:18px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:34px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:40px"></span></span>
+                <span class="ch-nav-item"><span class="ch-nav-dot"></span><span class="ch-nav-line" style="width:24px"></span></span>
+              </nav>
+            </aside>
+
+            <!-- Main: API Connections -->
+            <div class="channable-main">
+              <!-- Header row -->
+              <div class="channable-header">
+                <div class="ch-header-title">
+                  <svg class="ch-header-icon" viewBox="0 0 16 16" fill="none" stroke="#374151" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M4 2v12M4 2l-2 2M4 2l2 2M12 14V2M12 14l-2-2M12 14l2-2"/>
+                  </svg>
+                  <span class="ch-header-bar"></span>
+                </div>
+                <span class="ch-help-pill">
+                  <span class="ch-help-dot"></span>
+                  <span class="ch-help-line"></span>
+                </span>
+              </div>
+
+              <!-- Channel rows -->
+              <div class="channable-channels">
+                <div class="ch-channel-row">
+                  <div class="ch-channel-brand ch-brand-google">
+                    <span class="ch-google-mark" aria-hidden="true">
+                      <span class="g-seg g-blue"></span>
+                      <span class="g-seg g-red"></span>
+                      <span class="g-seg g-yellow"></span>
+                      <span class="g-seg g-green"></span>
+                    </span>
+                    <span class="ch-brand-text">Google</span>
+                  </div>
+                  <span class="ch-btn">Edit</span>
+                  <span class="ch-btn">Run</span>
+                  <span class="ch-status ch-status-done">Finished</span>
+                </div>
+
+                <div class="ch-channel-row">
+                  <div class="ch-channel-brand">
+                    <span class="ch-amazon-mark" aria-hidden="true">a</span>
+                    <span class="ch-brand-text ch-brand-amazon">amazon</span>
+                  </div>
+                  <span class="ch-btn">Edit</span>
+                  <span class="ch-btn">Run</span>
+                  <span class="ch-status ch-status-done">Finished</span>
+                </div>
+
+                <div class="ch-channel-row ch-channel-row-active">
+                  <div class="ch-channel-brand">
+                    <span class="ch-fb-mark" aria-hidden="true">f</span>
+                    <span class="ch-brand-text ch-brand-fb">facebook</span>
+                  </div>
+                  <span class="ch-btn">Edit</span>
+                  <span class="ch-btn">Run</span>
+                  <span class="ch-status ch-status-sync">
+                    <span class="ch-status-pulse"></span>
+                    Running
+                  </span>
+                </div>
+
+                <div class="ch-channel-row">
+                  <div class="ch-channel-brand">
+                    <span class="ch-tiktok-mark" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="#1f2937" aria-hidden="true">
+                        <path d="M11.5 1h-2v9.5a2 2 0 1 1-2-2V6.5a4.5 4.5 0 1 0 4.5 4.5V5.8a5 5 0 0 0 3 1V4.3a3 3 0 0 1-3-3Z"/>
+                      </svg>
+                    </span>
+                    <span class="ch-brand-text">TikTok</span>
+                  </div>
+                  <span class="ch-btn">Edit</span>
+                  <span class="ch-btn">Run</span>
+                  <span class="ch-status ch-status-done">Finished</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 3: Data Dive Keyword Research -->
+        <div class="scene scene-datadive" data-scene="datadive">
+          <!-- Top Bar -->
+          <div class="datadive-topbar">
+            <div class="datadive-logo-crop" aria-label="DataDive" role="img">
+              <Image
+                src={datadiveLogo}
+                alt=""
+                width={500}
+                height={500}
+                loading="eager"
+                class="datadive-logo-img"
+              />
+            </div>
+            <div class="datadive-title">
+              <span class="dd-title-bar"></span>
+            </div>
+            <div class="datadive-pills">
+              <span class="dd-pill-orange"></span>
+              <span class="dd-pill-muted"></span>
+            </div>
+          </div>
+
+          <!-- Body: Sidebar + Main -->
+          <div class="datadive-body">
+            <!-- Sidebar -->
+            <aside class="datadive-sidebar">
+              <span class="dd-side-section"></span>
+              <span class="dd-side-item"><span class="dd-dot"></span><span class="dd-line" style="width:36px"></span></span>
+              <span class="dd-side-item"><span class="dd-dot"></span><span class="dd-line" style="width:30px"></span></span>
+              <span class="dd-side-section dd-side-section-spaced"></span>
+              <span class="dd-side-item"><span class="dd-dot"></span><span class="dd-line" style="width:38px"></span></span>
+              <span class="dd-side-item dd-side-active"><span class="dd-dot dd-dot-active"></span><span class="dd-line dd-line-active" style="width:44px"></span></span>
+              <span class="dd-side-item"><span class="dd-dot"></span><span class="dd-line" style="width:32px"></span></span>
+              <span class="dd-side-item"><span class="dd-dot"></span><span class="dd-line" style="width:28px"></span></span>
+              <span class="dd-side-item"><span class="dd-dot"></span><span class="dd-line" style="width:34px"></span></span>
+            </aside>
+
+            <!-- Main -->
+            <div class="datadive-main">
+              <!-- Stat cards row -->
+              <div class="dd-stat-strip">
+                <div class="dd-stat-card">
+                  <span class="dd-stat-label"></span>
+                  <div class="dd-stat-pcts">
+                    <span class="dd-pct dd-pct-amber">63%</span>
+                    <span class="dd-pct dd-pct-green">46%</span>
+                    <span class="dd-pct dd-pct-red">500</span>
+                  </div>
+                </div>
+                <div class="dd-stat-card">
+                  <span class="dd-stat-label"></span>
+                  <div class="dd-stat-pcts">
+                    <span class="dd-pct dd-pct-green">21%</span>
+                    <span class="dd-pct dd-pct-amber">17%</span>
+                    <span class="dd-pct dd-pct-red">29%</span>
+                  </div>
+                </div>
+                <div class="dd-stat-card">
+                  <span class="dd-stat-label"></span>
+                  <div class="dd-stat-pcts">
+                    <span class="dd-pct-num">742k</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Keyword table -->
+              <div class="dd-table">
+                <div class="dd-thead">
+                  <span class="dd-th dd-th-kw"></span>
+                  <span class="dd-th dd-th-sv"></span>
+                  <span class="dd-th dd-th-rel"></span>
+                  <span class="dd-th dd-th-bid"></span>
+                  <span class="dd-th dd-th-asin"></span>
+                  <span class="dd-th dd-th-asin"></span>
+                  <span class="dd-th dd-th-asin"></span>
+                </div>
+                <div class="dd-tbody">
+                  <div class="dd-tr">
+                    <span class="dd-cell dd-cell-kw" style="width:84%"></span>
+                    <span class="dd-cell dd-cell-sv">19,280</span>
+                    <span class="dd-cell dd-cell-rel dd-rel-green">96%</span>
+                    <span class="dd-cell dd-cell-bid">0.58</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">2</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">13</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">39</span>
+                  </div>
+                  <div class="dd-tr">
+                    <span class="dd-cell dd-cell-kw" style="width:72%"></span>
+                    <span class="dd-cell dd-cell-sv">3,232</span>
+                    <span class="dd-cell dd-cell-rel dd-rel-green">96%</span>
+                    <span class="dd-cell dd-cell-bid">0.35</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">2</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">8</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">61</span>
+                  </div>
+                  <div class="dd-tr">
+                    <span class="dd-cell dd-cell-kw" style="width:82%"></span>
+                    <span class="dd-cell dd-cell-sv">3,256</span>
+                    <span class="dd-cell dd-cell-rel dd-rel-green">92%</span>
+                    <span class="dd-cell dd-cell-bid">1.03</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-amber">2</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">2</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">13</span>
+                  </div>
+                  <div class="dd-tr dd-tr-highlight">
+                    <span class="dd-cell dd-cell-kw" style="width:92%"></span>
+                    <span class="dd-cell dd-cell-sv">1,409</span>
+                    <span class="dd-cell dd-cell-rel dd-rel-green">92%</span>
+                    <span class="dd-cell dd-cell-bid">4.56</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">4</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">6</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-amber">18</span>
+                  </div>
+                  <div class="dd-tr">
+                    <span class="dd-cell dd-cell-kw" style="width:68%"></span>
+                    <span class="dd-cell dd-cell-sv">50,483</span>
+                    <span class="dd-cell dd-cell-rel dd-rel-green">88%</span>
+                    <span class="dd-cell dd-cell-bid">1.68</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">2</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">13</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">63</span>
+                  </div>
+                  <div class="dd-tr">
+                    <span class="dd-cell dd-cell-kw" style="width:76%"></span>
+                    <span class="dd-cell dd-cell-sv">25,386</span>
+                    <span class="dd-cell dd-cell-rel dd-rel-green">88%</span>
+                    <span class="dd-cell dd-cell-bid">1.40</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-amber">1</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">7</span>
+                    <span class="dd-cell dd-cell-asin dd-rel-green">42</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 4: Amazon Product Page -->
+        <div class="scene scene-amazon" data-scene="amazon">
+          <!-- Amazon Top Nav -->
+          <div class="amazon-topnav">
+            <div class="amazon-logo" aria-label="Amazon" role="img">
+              <Image
+                src={amazonLogo}
+                alt=""
+                width={860}
+                height={440}
+                loading="eager"
+                class="amazon-logo-img"
+              />
+            </div>
+            <div class="amazon-search">
+              <span class="amazon-search-cat"></span>
+              <span class="amazon-search-input"></span>
+              <span class="amazon-search-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#131921" stroke-width="2.5" stroke-linecap="round">
+                  <circle cx="11" cy="11" r="7"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+              </span>
+            </div>
+            <div class="amazon-cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/>
+                <circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Secondary Nav -->
+          <div class="amazon-secondary"></div>
+
+          <!-- Product Detail -->
+          <div class="amazon-product">
+            <div class="amazon-thumbs">
+              <span class="amazon-thumb"></span>
+              <span class="amazon-thumb"></span>
+              <span class="amazon-thumb"></span>
+              <span class="amazon-thumb"></span>
+            </div>
+
+            <div class="amazon-main-image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#d5d5d5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="m21 15-4.5-4.5L7 21"/>
+              </svg>
+            </div>
+
+            <div class="amazon-info">
+              <span class="amazon-title-line" style="width: 95%"></span>
+              <span class="amazon-title-line" style="width: 78%"></span>
+
+              <div class="amazon-rating">
+                <svg class="star" viewBox="0 0 20 20" fill="#FFA41C"><path d="M10 1l2.753 5.585 6.164.897-4.459 4.342 1.053 6.136L10 15.072l-5.511 2.888 1.053-6.136L1.083 7.482l6.164-.897L10 1z"/></svg>
+                <svg class="star" viewBox="0 0 20 20" fill="#FFA41C"><path d="M10 1l2.753 5.585 6.164.897-4.459 4.342 1.053 6.136L10 15.072l-5.511 2.888 1.053-6.136L1.083 7.482l6.164-.897L10 1z"/></svg>
+                <svg class="star" viewBox="0 0 20 20" fill="#FFA41C"><path d="M10 1l2.753 5.585 6.164.897-4.459 4.342 1.053 6.136L10 15.072l-5.511 2.888 1.053-6.136L1.083 7.482l6.164-.897L10 1z"/></svg>
+                <svg class="star" viewBox="0 0 20 20" fill="#FFA41C"><path d="M10 1l2.753 5.585 6.164.897-4.459 4.342 1.053 6.136L10 15.072l-5.511 2.888 1.053-6.136L1.083 7.482l6.164-.897L10 1z"/></svg>
+                <svg class="star" viewBox="0 0 20 20" fill="#FFA41C"><path d="M10 1l2.753 5.585 6.164.897-4.459 4.342 1.053 6.136L10 15.072l-5.511 2.888 1.053-6.136L1.083 7.482l6.164-.897L10 1z"/></svg>
+                <span class="amazon-review-count"></span>
+              </div>
+
+              <div class="amazon-price-block">
+                <span class="amazon-price-currency">€</span>
+                <span class="amazon-price-main">22,90</span>
+              </div>
+
+              <div class="amazon-buybox">
+                <span class="amazon-btn amazon-btn-cart">In den Einkaufswagen</span>
+                <span class="amazon-btn amazon-btn-buy">Jetzt kaufen</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Laptop base / hinge -->
+    <div class="laptop-base" aria-hidden="true"></div>
+  </div>
+
+  <!-- Scene Indicator Labels (unter dem Laptop) -->
+  <div class="scene-labels hidden lg:flex" data-scene-labels>
+    <span class="scene-label" data-scene-label="shopify">
+      <span class="label-dot" style="--dot-color: #008060"></span>
+      Shopify
+    </span>
+    <span class="scene-label-arrow" aria-hidden="true">→</span>
+    <span class="scene-label" data-scene-label="channable">
+      <span class="label-dot" style="--dot-color: #6D28D9"></span>
+      channable
+    </span>
+    <span class="scene-label-arrow" aria-hidden="true">→</span>
+    <span class="scene-label" data-scene-label="datadive">
+      <span class="label-dot" style="--dot-color: #2563EB"></span>
+      DataDive
+    </span>
+    <span class="scene-label-arrow" aria-hidden="true">→</span>
+    <span class="scene-label" data-scene-label="amazon">
+      <span class="label-dot" style="--dot-color: #FF9900"></span>
+      Amazon
+    </span>
+  </div>
+
+  <!-- Mobile: statisches Amazon-Listing (Loop ergibt auf Mobile keinen Sinn) -->
+  <div class="lg:hidden">
+    <div class="mobile-amazon-listing">
+      <div class="flex items-center gap-2 border-b border-gray-100 bg-gray-50 px-3 py-2">
+        <span class="h-[5px] w-14 rounded-sm bg-gray-200"></span>
+        <span class="text-[9px] leading-none text-gray-300">›</span>
+        <span class="h-[5px] w-16 rounded-sm bg-gray-200"></span>
+      </div>
+      <div class="flex gap-3 p-3">
+        <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded bg-gray-100">
+          <svg class="h-7 w-7 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-4.5-4.5L7 21"/>
+          </svg>
+        </div>
+        <div class="flex flex-1 flex-col gap-1 min-w-0">
+          <p class="text-[12px] font-medium leading-snug text-gray-900 line-clamp-2">
+            Premium Bartbalsam | Handgefertigt | Natürliche Pflege für volles Wachstum | 55g
+          </p>
+          <div class="flex items-center gap-1">
+            <div class="flex gap-[1px]">
+              {Array.from({ length: 5 }).map(() => (
+                <svg class="h-2.5 w-2.5" viewBox="0 0 20 20" fill="#FFA41C" aria-hidden="true"><path d="M10 1l2.753 5.585 6.164.897-4.459 4.342 1.053 6.136L10 15.072l-5.511 2.888 1.053-6.136L1.083 7.482l6.164-.897L10 1z"/></svg>
+              ))}
+            </div>
+            <span class="text-[10px] text-[#007185]">(842)</span>
+          </div>
+          <div class="flex items-baseline gap-0.5 mt-auto">
+            <span class="text-[10px] font-medium text-gray-900">€</span>
+            <span class="text-[15px] font-medium leading-none text-gray-900">22,90</span>
+          </div>
+        </div>
+        <div class="flex shrink-0 flex-col justify-center gap-1.5">
+          <span class="rounded-full bg-[#FFD814] px-2.5 py-1 text-center text-[9px] font-medium text-gray-900 whitespace-nowrap">In den Warenkorb</span>
+          <span class="rounded-full bg-[#FFA41C] px-2.5 py-1 text-center text-[9px] font-medium text-gray-900 whitespace-nowrap">Jetzt kaufen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* ==========================================================
+     Laptop Frame
+     ========================================================== */
+  .laptop {
+    position: relative;
+    width: 100%;
+  }
+
+  .laptop-bezel {
+    position: relative;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 18px 14px 14px;
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .laptop-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 10px;
+    background: #0a0a0a;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .laptop-screen {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #ffffff;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+
+  .laptop-base {
+    position: relative;
+    height: 6px;
+    margin: 0 -3%;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .laptop-base::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12%;
+    height: 4px;
+    background: #0a0a0a;
+    border-radius: 0 0 6px 6px;
+  }
+
+  /* ==========================================================
+     Scene base
+     ========================================================== */
+  .scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  .scene[data-scene="shopify"] {
+    opacity: 1;
+  }
+
+  /* ==========================================================
+     Scene: Shopify
+     ========================================================== */
+  .scene-shopify {
+    background: #f6f6f7;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shopify-topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    height: 36px;
+  }
+
+  .shopify-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .shopify-logo-img {
+    width: auto;
+    height: 18px;
+    display: block;
+  }
+
+  .shopify-topbar-pill {
+    flex: 1;
+    height: 18px;
+    max-width: 180px;
+    background: #f1f1f1;
+    border-radius: 9px;
+  }
+
+  .shopify-topbar-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #008060;
+  }
+
+  .shopify-body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .shopify-sidebar {
+    width: 68px;
+    background: #fbfbfb;
+    border-right: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 8px;
+    gap: 10px;
+  }
+
+  .shopify-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .shopify-nav-item .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+
+  .shopify-nav-item .dot.active {
+    background: #008060;
+  }
+
+  .shopify-nav-item .line {
+    height: 4px;
+    background: #dcdcdc;
+    border-radius: 2px;
+  }
+
+  .shopify-nav-active .line {
+    background: #008060;
+    opacity: 0.8;
+  }
+
+  .shopify-content {
+    flex: 1;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .shopify-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6px;
+  }
+
+  .shopify-title {
+    width: 60px;
+    height: 10px;
+    background: #2e2e2e;
+    border-radius: 2px;
+  }
+
+  .shopify-action {
+    width: 54px;
+    height: 14px;
+    background: #008060;
+    border-radius: 4px;
+  }
+
+  .shopify-products {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+  .shopify-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 6px;
+    border-radius: 4px;
+  }
+
+  .shopify-row + .shopify-row {
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .shopify-thumb {
+    width: 18px;
+    height: 18px;
+    background: #e5e5e5;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .shopify-name {
+    flex: 1;
+    height: 6px;
+    background: #d5d5d5;
+    border-radius: 2px;
+  }
+
+  .shopify-name-1 { width: 72%; }
+  .shopify-name-2 { width: 58%; }
+  .shopify-name-3 { width: 80%; }
+  .shopify-name-4 { width: 45%; }
+  .shopify-name-5 { width: 66%; }
+
+  .shopify-badge {
+    font-family: system-ui, sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: #d1f7e6;
+    color: #008060;
+    flex-shrink: 0;
+  }
+
+  .shopify-badge-muted {
+    background: #eee;
+    color: #666;
+  }
+
+  /* ==========================================================
+     Scene: Amazon
+     ========================================================== */
+  .scene-amazon {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .amazon-topnav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #131921;
+    height: 34px;
+  }
+
+  .amazon-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .amazon-logo-img {
+    width: auto;
+    height: 16px;
+    display: block;
+    /* Schwarz → weiß invert für die dunkle Navy-Topbar.
+       Nebeneffekt: orangener Smile-Arc wird auch weiß (bei 16px kaum sichtbar). */
+    filter: brightness(0) invert(1);
+  }
+
+  .amazon-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 3px;
+    overflow: hidden;
+    height: 20px;
+  }
+
+  .amazon-search-cat {
+    width: 28px;
+    height: 100%;
+    background: #f3f3f3;
+    border-right: 1px solid #cdcdcd;
+  }
+
+  .amazon-search-input {
+    flex: 1;
+    height: 100%;
+  }
+
+  .amazon-search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 100%;
+    background: #febd69;
+  }
+
+  .amazon-search-btn svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .amazon-cart {
+    padding: 2px 4px;
+  }
+
+  .amazon-cart svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .amazon-secondary {
+    height: 20px;
+    background: #232f3e;
+  }
+
+  .amazon-product {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 24px 1fr 1.15fr;
+    gap: 8px;
+    padding: 10px 12px;
+    min-height: 0;
+  }
+
+  .amazon-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .amazon-thumb {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f3f3f3;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+  }
+
+  .amazon-thumb:first-child {
+    border-color: #ff9900;
+    box-shadow: 0 0 0 1px #ff9900;
+  }
+
+  .amazon-main-image {
+    background: #fafafa;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .amazon-main-image svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .amazon-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+
+  .amazon-title-line {
+    height: 8px;
+    background: #333;
+    border-radius: 2px;
+  }
+
+  .amazon-rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 2px;
+  }
+
+  .amazon-rating .star {
+    width: 9px;
+    height: 9px;
+  }
+
+  .amazon-review-count {
+    width: 24px;
+    height: 6px;
+    background: #007185;
+    border-radius: 2px;
+    opacity: 0.6;
+    margin-left: 3px;
+  }
+
+  .amazon-price-block {
+    display: flex;
+    align-items: baseline;
+    gap: 1px;
+    margin-top: 3px;
+    font-family: system-ui, sans-serif;
+  }
+
+  .amazon-price-currency {
+    font-size: 9px;
+    font-weight: 600;
+    color: #0f1111;
+  }
+
+  .amazon-price-main {
+    font-size: 15px;
+    font-weight: 500;
+    color: #0f1111;
+    line-height: 1;
+  }
+
+  .amazon-buybox {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .amazon-btn {
+    display: inline-block;
+    padding: 4px 0;
+    border-radius: 10px;
+    font-family: system-ui, sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    color: #0f1111;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .amazon-btn-cart {
+    background: #ffd814;
+  }
+
+  .amazon-btn-buy {
+    background: #ffa41c;
+  }
+
+  /* ==========================================================
+     Scene: Channable (Dark Sidebar + Light Main)
+     ========================================================== */
+  .scene-channable {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, sans-serif;
+  }
+
+  .channable-body {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+  }
+
+  /* Dark sidebar */
+  .channable-sidebar {
+    width: 96px;
+    background: #1a1f2e;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 8px;
+    gap: 2px;
+  }
+
+  .channable-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px 10px;
+    flex-shrink: 0;
+  }
+
+  .channable-hexes {
+    width: 26px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .channable-wordmark {
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .channable-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ch-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 5px;
+    border-radius: 3px;
+  }
+
+  .ch-nav-active {
+    background: #6D28D9;
+  }
+
+  .ch-nav-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #64748b;
+    flex-shrink: 0;
+  }
+
+  .ch-nav-dot-active {
+    background: #ffffff;
+  }
+
+  .ch-nav-line {
+    height: 4px;
+    background: #64748b;
+    border-radius: 2px;
+  }
+
+  .ch-nav-line-active {
+    background: #ffffff;
+  }
+
+  /* Main content */
+  .channable-main {
+    flex: 1;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    background: #ffffff;
+  }
+
+  .channable-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 4px;
+  }
+
+  .ch-header-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .ch-header-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .ch-header-bar {
+    display: inline-block;
+    height: 8px;
+    width: 72px;
+    background: #1f2937;
+    border-radius: 2px;
+  }
+
+  .ch-help-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    background: #ecfeff;
+    border: 1px solid #a5f3fc;
+    border-radius: 10px;
+  }
+
+  .ch-help-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #06b6d4;
+    flex-shrink: 0;
+  }
+
+  .ch-help-line {
+    display: inline-block;
+    width: 40px;
+    height: 4px;
+    background: #0891b2;
+    border-radius: 2px;
+  }
+
+  /* Channel rows */
+  .channable-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ch-channel-row {
+    display: grid;
+    grid-template-columns: 1fr 34px 34px 54px;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 7px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+  }
+
+  .ch-channel-row-active {
+    background: #f5f3ff;
+    border-color: #ddd6fe;
+  }
+
+  .ch-channel-brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .ch-brand-text {
+    font-size: 10px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .ch-brand-amazon {
+    color: #ff9900;
+  }
+
+  .ch-brand-fb {
+    color: #1877F2;
+  }
+
+  /* Google 4-color mark */
+  .ch-google-mark {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .g-seg {
+    display: block;
+  }
+
+  .g-blue { background: #4285F4; }
+  .g-red { background: #EA4335; }
+  .g-yellow { background: #FBBC05; }
+  .g-green { background: #34A853; }
+
+  /* Amazon wordmark prefix (the 'a' logo hint) */
+  .ch-amazon-mark {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ff9900;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* Facebook */
+  .ch-fb-mark {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1877F2;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  /* TikTok icon */
+  .ch-tiktok-mark {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ch-tiktok-mark svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Buttons */
+  .ch-btn {
+    padding: 3px 6px;
+    font-size: 8.5px;
+    font-weight: 500;
+    color: #374151;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  /* Status */
+  .ch-status {
+    padding: 4px 6px;
+    font-size: 8.5px;
+    font-weight: 600;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .ch-status-done {
+    background: #2563EB;
+    color: #ffffff;
+  }
+
+  .ch-status-sync {
+    background: #EDE9FE;
+    color: #6D28D9;
+    position: relative;
+  }
+
+  .ch-status-pulse {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #6D28D9;
+    animation: chPulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes chPulse {
+    0%, 100% { transform: scale(0.7); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  /* ==========================================================
+     Scene: Data Dive (Light Mode, orange accent)
+     ========================================================== */
+  .scene-datadive {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    color: #1f2937;
+    font-family: system-ui, sans-serif;
+  }
+
+  .datadive-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    height: 34px;
+  }
+
+  .datadive-logo-crop {
+    position: relative;
+    width: 96px;
+    height: 22px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .datadive-logo-img {
+    position: absolute;
+    height: 105px;
+    width: 105px;
+    top: -42px;
+    left: -18px;
+    /* White PNG → #2563EB tint */
+    filter: brightness(0) saturate(100%) invert(27%) sepia(85%) saturate(2055%) hue-rotate(218deg) brightness(94%) contrast(93%);
+  }
+
+  .datadive-title {
+    padding-left: 4px;
+    border-left: 1px solid #e5e7eb;
+    margin-left: 2px;
+  }
+
+  .dd-title-bar {
+    display: block;
+    width: 70px;
+    height: 6px;
+    background: #4b5563;
+    border-radius: 2px;
+  }
+
+  .datadive-pills {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .dd-pill-orange {
+    width: 42px;
+    height: 16px;
+    background: #2563EB;
+    border-radius: 3px;
+  }
+
+  .dd-pill-muted {
+    width: 32px;
+    height: 16px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 3px;
+  }
+
+  .datadive-body {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+  }
+
+  /* Sidebar */
+  .datadive-sidebar {
+    width: 68px;
+    background: #fafbfc;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 6px;
+    gap: 4px;
+  }
+
+  .dd-side-section {
+    display: block;
+    width: 26px;
+    height: 5px;
+    background: #9ca3af;
+    border-radius: 2px;
+    margin-bottom: 2px;
+  }
+
+  .dd-side-section-spaced {
+    margin-top: 6px;
+  }
+
+  .dd-side-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+
+  .dd-side-active {
+    background: #eff6ff;
+  }
+
+  .dd-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #d1d5db;
+    flex-shrink: 0;
+  }
+
+  .dd-dot-active {
+    background: #2563EB;
+  }
+
+  .dd-line {
+    height: 4px;
+    background: #d1d5db;
+    border-radius: 2px;
+  }
+
+  .dd-line-active {
+    background: #4b5563;
+  }
+
+  /* Main */
+  .datadive-main {
+    flex: 1;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  /* Stat strip */
+  .dd-stat-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.8fr;
+    gap: 6px;
+  }
+
+  .dd-stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 7px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+  }
+
+  .dd-stat-label {
+    display: block;
+    width: 54px;
+    height: 4px;
+    background: #9ca3af;
+    border-radius: 2px;
+  }
+
+  .dd-stat-pcts {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dd-pct {
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .dd-pct-amber { color: #F5A623; }
+  .dd-pct-green { color: #16a34a; }
+  .dd-pct-red { color: #dc2626; }
+
+  .dd-pct-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: -0.02em;
+  }
+
+  /* Keyword table */
+  .dd-table {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .dd-thead {
+    display: grid;
+    grid-template-columns: 1.5fr 0.55fr 0.4fr 0.4fr 0.3fr 0.3fr 0.3fr;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 7px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .dd-th {
+    height: 4px;
+    background: #9ca3af;
+    border-radius: 2px;
+  }
+
+  .dd-th-kw { width: 36px; }
+  .dd-th-sv { width: 18px; }
+  .dd-th-rel { width: 14px; }
+  .dd-th-bid { width: 16px; }
+  .dd-th-asin { width: 14px; }
+
+  .dd-tbody {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dd-tr {
+    display: grid;
+    grid-template-columns: 1.5fr 0.55fr 0.4fr 0.4fr 0.3fr 0.3fr 0.3fr;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 7px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .dd-tr:last-child {
+    border-bottom: none;
+  }
+
+  .dd-tr-highlight {
+    background: #eff6ff;
+  }
+
+  .dd-cell {
+    font-size: 8px;
+    font-weight: 600;
+    color: #374151;
+    text-align: right;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dd-cell-kw {
+    height: 5px;
+    background: #9ca3af;
+    border-radius: 2px;
+    padding: 0;
+    justify-self: start;
+  }
+
+  .dd-tr-highlight .dd-cell-kw {
+    background: #2563EB;
+  }
+
+  .dd-cell-sv {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dd-cell-rel,
+  .dd-cell-asin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 3px;
+    border-radius: 2px;
+    min-width: 14px;
+    font-size: 7.5px;
+  }
+
+  .dd-rel-green {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .dd-rel-amber {
+    background: #fef3c7;
+    color: #b45309;
+  }
+
+  .dd-rel-red {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+
+  /* ==========================================================
+     Scene Labels
+     ========================================================== */
+  .scene-labels {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    justify-content: center;
+  }
+
+  .scene-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.35);
+    transition: color 0.4s ease;
+  }
+
+  .scene-label.is-active {
+    color: #efefef;
+  }
+
+  .scene-label .label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--dot-color, #efefef);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .scene-label.is-active .label-dot {
+    opacity: 1;
+  }
+
+  .scene-label-arrow {
+    font-size: 14px;
+    color: rgba(239, 239, 239, 0.3);
+  }
+
+  /* ==========================================================
+     Mobile: statisches Amazon-Listing
+     ========================================================== */
+  .mobile-amazon-listing {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initProcessLoop(): void {
+    const container = document.querySelector<HTMLElement>("[data-process-loop]");
+    if (!container) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    const scenes = container.querySelectorAll<HTMLElement>(".scene");
+    const labels = container.querySelectorAll<HTMLElement>("[data-scene-label]");
+    if (scenes.length < 2) return;
+
+    // Initial: scene 1 sichtbar, rest unsichtbar
+    gsap.set(scenes[0], { opacity: 1 });
+    scenes.forEach((s, i) => {
+      if (i > 0) gsap.set(s, { opacity: 0 });
+    });
+
+    // Initial labels
+    labels.forEach((l, i) => {
+      if (i === 0) l.classList.add("is-active");
+      else l.classList.remove("is-active");
+    });
+
+    const hold = 2.4;
+    const fade = 0.7;
+    const tl = gsap.timeline({ repeat: -1, defaults: { ease: "power2.inOut" } });
+
+    for (let i = 0; i < scenes.length; i++) {
+      const current = scenes[i];
+      const next = scenes[(i + 1) % scenes.length];
+      const currentLabel = labels[i];
+      const nextLabel = labels[(i + 1) % labels.length];
+
+      // Hold
+      tl.to({}, { duration: hold });
+
+      // Crossfade
+      tl.to(current, { opacity: 0, duration: fade }, "+=0");
+      tl.to(next, { opacity: 1, duration: fade }, "<");
+
+      // Labels synchron wechseln (Mitte der Transition)
+      tl.call(
+        () => {
+          currentLabel?.classList.remove("is-active");
+          nextLabel?.classList.add("is-active");
+        },
+        [],
+        `-=${fade / 2}`
+      );
+    }
+
+    // Pause wenn Tab nicht aktiv
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) tl.pause();
+      else tl.play();
+    });
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        tl.kill();
+      },
+      { once: true }
+    );
+  }
+
+  initProcessLoop();
+  document.addEventListener("astro:after-swap", initProcessLoop);
+</script>
