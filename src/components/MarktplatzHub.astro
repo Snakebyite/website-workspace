@@ -1,0 +1,672 @@
+---
+// MarktplatzHub — Channable Feed-Hub als Mini-Dashboard-Panel
+// Stilistisch konsistent zu OrganicRankingVisual: Surface-Card mit Placeholder-Bars,
+// simuliert eine Channable-Produktfeed-Ansicht mit Multi-Marketplace-Sync-Status.
+import { Store } from "@lucide/astro";
+import channableLogo from "../assets/tools/channable.png";
+import amazonLogo from "../assets/marketplaces/amazon.png";
+import ottoLogo from "../assets/marketplaces/otto.png";
+import kauflandLogo from "../assets/marketplaces/kaufland.png";
+import ebayLogo from "../assets/marketplaces/ebay.png";
+
+const marketplaces = [
+  { name: "Amazon", logo: amazonLogo },
+  { name: "Otto", logo: ottoLogo },
+  { name: "Kaufland", logo: kauflandLogo },
+  { name: "eBay", logo: ebayLogo },
+];
+
+// Product rows: varied bar widths + last-sync-seconds für organisches Feeling
+const rows = [
+  { titleW: 76, metaW: 32, sync: 2 },
+  { titleW: 58, metaW: 44, sync: 4 },
+  { titleW: 82, metaW: 28, sync: 1 },
+  { titleW: 66, metaW: 38, sync: 6 },
+  { titleW: 72, metaW: 34, sync: 3 },
+];
+---
+
+<div class="channable-panel w-full" aria-hidden="true" data-cp>
+  <div class="cp-frame">
+
+    {/* ═══ HEADER ═══ */}
+    <div class="cp-header">
+      <div class="cp-brand">
+        <img src={channableLogo.src} alt="" class="cp-brand-logo" />
+        <div class="cp-brand-text">
+          <span class="cp-brand-name">Channable</span>
+          <span class="cp-brand-sub">Feed-Hub</span>
+        </div>
+      </div>
+      <div class="cp-live">
+        <span class="cp-live-dot"></span>
+        <span>Live</span>
+      </div>
+    </div>
+
+    {/* ═══ SOURCE ROW ═══ */}
+    <div class="cp-source">
+      <div class="cp-source-chip">
+        <div class="cp-source-icon-wrap">
+          <Store class="cp-source-icon" strokeWidth={1.6} />
+        </div>
+        <div class="cp-source-text">
+          <span class="cp-source-label">Quelle</span>
+          <span class="cp-source-name">Dein Shop</span>
+        </div>
+      </div>
+      <div class="cp-source-flow">
+        <div class="cp-source-line"></div>
+        <span class="cp-source-meta">Alle Informationen fließen in Echtzeit</span>
+        <div class="cp-source-line"></div>
+      </div>
+    </div>
+
+    {/* ═══ FEED TABLE ═══ */}
+    <div class="cp-feed">
+      <div class="cp-feed-head">
+        <div class="cp-col-product">Produkt</div>
+        <div class="cp-col-channels">
+          {marketplaces.map((mp) => (
+            <div class="cp-col-ch">
+              <img src={mp.logo.src} alt={mp.name} class="cp-mono" />
+            </div>
+          ))}
+        </div>
+        <div class="cp-col-sync">Sync</div>
+      </div>
+
+      <div class="cp-rows" data-rows>
+        {rows.map((row, i) => (
+          <div class="cp-row" data-row={i}>
+            <div class="cp-col-product">
+              <div class="cp-thumb"></div>
+              <div class="cp-bars">
+                <div class="cp-bar cp-bar-title" style={`width:${row.titleW}%`}></div>
+                <div class="cp-bar cp-bar-meta" style={`width:${row.metaW}%`}></div>
+              </div>
+            </div>
+            <div class="cp-col-channels">
+              {marketplaces.map(() => (
+                <div class="cp-col-ch">
+                  <span class="cp-dot" data-dot></span>
+                </div>
+              ))}
+            </div>
+            <div class="cp-col-sync">
+              <span class="cp-time" data-time>{row.sync}s</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* ═══ FOOTER META ═══ */}
+    <div class="cp-footer">
+      <div class="cp-stat">
+        <span class="cp-stat-num">1.247</span>
+        <span class="cp-stat-label">Produkte</span>
+      </div>
+      <div class="cp-stat">
+        <span class="cp-stat-num">4.988</span>
+        <span class="cp-stat-label">Listings</span>
+      </div>
+      <div class="cp-stat">
+        <span class="cp-stat-num">99,4<span class="cp-stat-unit">%</span></span>
+        <span class="cp-stat-label">Sync-Rate</span>
+      </div>
+      <div class="cp-scan" data-scan></div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .channable-panel {
+    position: relative;
+  }
+
+  .cp-frame {
+    position: relative;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 20px 22px;
+    overflow: hidden;
+  }
+
+  /* Subtiler grün-Glow oben-links */
+  .cp-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 20% 0%,
+      rgba(76, 175, 130, 0.08) 0%,
+      transparent 45%
+    );
+    pointer-events: none;
+  }
+
+  /* ═══ HEADER ═══ */
+  .cp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .cp-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cp-brand-logo {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    opacity: 0.95;
+  }
+
+  .cp-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .cp-brand-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(239, 239, 239, 0.95);
+    letter-spacing: -0.01em;
+  }
+
+  .cp-brand-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 0.75);
+  }
+
+  .cp-live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(107, 175, 150, 0.95);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .cp-live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgb(76, 175, 130);
+    box-shadow: 0 0 8px rgba(76, 175, 130, 0.7);
+    animation: live-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+
+  /* ═══ SOURCE ROW ═══ */
+  .cp-source {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .cp-source-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px 10px 10px;
+    background: rgba(76, 175, 130, 0.06);
+    border: 1px solid rgba(76, 175, 130, 0.22);
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .cp-source-icon-wrap {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: rgba(76, 175, 130, 0.12);
+    flex-shrink: 0;
+  }
+
+  .cp-source-icon {
+    width: 16px;
+    height: 16px;
+    color: rgba(107, 175, 150, 1);
+  }
+
+  .cp-source-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.2;
+  }
+
+  .cp-source-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(107, 175, 150, 0.8);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cp-source-name {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(239, 239, 239, 0.98);
+    letter-spacing: -0.01em;
+  }
+
+  .cp-source-flow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cp-source-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      rgba(76, 175, 130, 0.35),
+      rgba(76, 175, 130, 0.05)
+    );
+  }
+
+  .cp-source-line:last-child {
+    background: linear-gradient(
+      to right,
+      rgba(76, 175, 130, 0.05),
+      rgba(76, 175, 130, 0.35)
+    );
+  }
+
+  .cp-source-meta {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: rgba(153, 153, 153, 0.85);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Monochrome treatment für Logos */
+  .cp-mono {
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
+  }
+
+  /* ═══ FEED TABLE ═══ */
+  .cp-feed {
+    padding: 18px 0;
+  }
+
+  .cp-feed-head {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    padding: 0 4px 12px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 0.6);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cp-col-channels {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .cp-col-ch {
+    width: 90px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cp-col-ch img {
+    height: 22px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    opacity: 0.65;
+  }
+
+  .cp-col-sync {
+    min-width: 44px;
+    text-align: right;
+  }
+
+  .cp-rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cp-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    padding: 12px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  .cp-row:last-child {
+    border-bottom: none;
+  }
+
+  .cp-col-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .cp-thumb {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 5px;
+  }
+
+  .cp-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cp-bar {
+    height: 5px;
+    border-radius: 2.5px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .cp-bar-meta {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .cp-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(76, 175, 130, 0.75);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .cp-dot[data-status="sync"] {
+    background: rgba(76, 175, 130, 1);
+    box-shadow: 0 0 8px rgba(76, 175, 130, 0.7);
+    transform: scale(1.25);
+  }
+
+  .cp-dot[data-status="idle"] {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .cp-time {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: rgba(153, 153, 153, 0.7);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  .cp-time[data-status="now"] {
+    color: rgba(107, 175, 150, 0.95);
+  }
+
+  /* ═══ FOOTER ═══ */
+  .cp-footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .cp-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .cp-stat-num {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(239, 239, 239, 0.95);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  .cp-stat-unit {
+    font-size: 13px;
+    color: rgba(153, 153, 153, 0.8);
+    margin-left: 2px;
+  }
+
+  .cp-stat-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 0.65);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .cp-scan {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    width: 40%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(76, 175, 130, 0.5),
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .cp-frame {
+      padding: 16px 14px;
+    }
+
+    .cp-source {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+    }
+
+    .cp-source-flow {
+      display: none;
+    }
+
+    .cp-col-channels {
+      gap: 8px;
+    }
+
+    .cp-col-ch {
+      width: 60px;
+      height: 16px;
+    }
+
+    .cp-col-ch img {
+      height: 16px;
+    }
+
+    .cp-dot {
+      width: 7px;
+      height: 7px;
+    }
+
+    .cp-footer {
+      gap: 24px;
+    }
+
+    .cp-stat-num {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  function initChannablePanel(): void {
+    const panel = document.querySelector<HTMLElement>("[data-cp]");
+    if (!panel) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const frame = panel.querySelector<HTMLElement>(".cp-frame");
+    const header = panel.querySelector<HTMLElement>(".cp-header");
+    const source = panel.querySelector<HTMLElement>(".cp-source");
+    const feedHead = panel.querySelector<HTMLElement>(".cp-feed-head");
+    const rows = panel.querySelectorAll<HTMLElement>(".cp-row");
+    const footer = panel.querySelector<HTMLElement>(".cp-footer");
+    const scan = panel.querySelector<HTMLElement>("[data-scan]");
+
+    if (reduced) return;
+
+    const ctx = gsap.context(() => {
+      // Initial state
+      gsap.set(frame, { opacity: 0, y: 20 });
+      gsap.set([header, source, feedHead, footer], { opacity: 0, y: 10 });
+      gsap.set(rows, { opacity: 0, y: 8 });
+
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        scrollTrigger: { trigger: panel, start: "top 78%", once: true },
+      });
+
+      tl.to(frame, { opacity: 1, y: 0, duration: 0.6 })
+        .to(header, { opacity: 1, y: 0, duration: 0.4 }, "-=0.3")
+        .to(source, { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
+        .to(feedHead, { opacity: 1, y: 0, duration: 0.3 }, "-=0.15")
+        .to(rows, { opacity: 1, y: 0, duration: 0.4, stagger: 0.07 }, "-=0.15")
+        .to(footer, { opacity: 1, y: 0, duration: 0.4 }, "-=0.15");
+
+      // Scan line pulse
+      if (scan) {
+        gsap.set(scan, { x: "-100%", opacity: 0 });
+        tl.call(() => {
+          gsap.to(scan, {
+            opacity: 1,
+            x: "250%",
+            duration: 2.5,
+            ease: "power1.inOut",
+            repeat: -1,
+            repeatDelay: 3,
+          });
+        });
+      }
+
+      // Sync cycle: one row at a time, dot-by-dot activation
+      tl.call(() => {
+        startSyncCycle(rows);
+      });
+    }, panel);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  function startSyncCycle(rows: NodeListOf<HTMLElement>): void {
+    let rowIdx = 0;
+
+    function cycleRow(): void {
+      const row = rows[rowIdx];
+      if (!row) return;
+
+      const dots = row.querySelectorAll<HTMLElement>("[data-dot]");
+      const time = row.querySelector<HTMLElement>("[data-time]");
+
+      // Reset dots to idle
+      dots.forEach((d) => d.setAttribute("data-status", "idle"));
+      if (time) {
+        time.textContent = "…";
+        time.setAttribute("data-status", "now");
+      }
+
+      // Activate dots sequentially
+      dots.forEach((dot, i) => {
+        gsap.delayedCall(0.15 * i + 0.1, () => {
+          dot.setAttribute("data-status", "sync");
+        });
+        gsap.delayedCall(0.15 * i + 0.5, () => {
+          dot.setAttribute("data-status", "ok");
+          dot.removeAttribute("data-status");
+        });
+      });
+
+      // Finalize row
+      gsap.delayedCall(0.15 * dots.length + 0.6, () => {
+        if (time) {
+          time.textContent = "0s";
+          time.removeAttribute("data-status");
+        }
+      });
+
+      // Age all row times by 1s-ish
+      gsap.delayedCall(0.15 * dots.length + 0.8, () => {
+        rows.forEach((r, i) => {
+          if (i === rowIdx) return;
+          const t = r.querySelector<HTMLElement>("[data-time]");
+          if (t && t.textContent) {
+            const match = t.textContent.match(/^(\d+)s$/);
+            if (match) {
+              const n = parseInt(match[1], 10);
+              t.textContent = `${n + 1}s`;
+            }
+          }
+        });
+
+        rowIdx = (rowIdx + 1) % rows.length;
+        gsap.delayedCall(2.2, cycleRow);
+      });
+    }
+
+    cycleRow();
+  }
+
+  initChannablePanel();
+  document.addEventListener("astro:after-swap", initChannablePanel);
+</script>
