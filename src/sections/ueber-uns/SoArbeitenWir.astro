@@ -1,28 +1,22 @@
 ---
-// "So arbeiten wir" — 4 Werte-Karten
-// Border-only cards, accent-green hover mit Linie oben
-import { Handshake, Users, Target, Zap } from "@lucide/astro";
-
-const values = [
+// "Wann es passt, und wann nicht." — ICP-Filter via Polaritäts-Pairs
+// Editorial Rows: Nummer als Anker links, positive Headline + Disqualifikations-Zeile rechts.
+// Ersetzt das vorherige 4er-Card-Grid (Wertekatalog) durch self-selection.
+const pairs = [
   {
-    icon: Handshake,
-    title: "Win-Win oder gar nicht.",
-    text: 'Eine Zusammenarbeit kommt für uns nur in Frage, wenn wir dir ehrlich sagen können, dass es sich für <span class="text-accent-text font-medium">beide Seiten lohnt</span>. Wir lehnen Projekte ab, bei denen wir keinen echten Impact versprechen können. Auch wenn das Geld auf dem Tisch liegt.',
+    headline: "Es muss sich für beide lohnen.",
+    detail:
+      "Wenn wir nicht überzeugt sind, dass wir bei dir echten Impact liefern können, sagen wir ab. Auch wenn das Geld auf dem Tisch liegt.",
   },
   {
-    icon: Users,
-    title: "Partnerschaft auf Augenhöhe.",
-    text: 'Wir sind keine Ja-Sager. Wenn wir eine bessere Idee haben, sagen wir das. Du bekommst einen <span class="text-accent-text font-medium">ehrlichen Sparringspartner</span>, der die Strategie hinterfragt, statt einfach abzunicken.',
+    headline: "Du willst jemanden, der mitdenkt.",
+    detail:
+      "Das heißt für uns auch: andere Wege vorschlagen und im Zweifel deine Idee challengen. Wenn du jemanden suchst, der blind ausführt und keine Rückfragen stellt, sind wir die falschen.",
   },
   {
-    icon: Target,
-    title: "Tiefe statt Breite.",
-    text: 'Wir nehmen uns die Zeit, in dein Unternehmen und deine Produkte einzutauchen. Kein Quick-Fix, kein oberflächliches Drüberschauen. Wir wollen verstehen, wo <span class="text-accent-text font-medium">die größten Hebel</span> liegen.',
-  },
-  {
-    icon: Zap,
-    title: "Lean und effizient.",
-    text: 'Keine aufgeblähten Teams, keine unnötigen Meetings, keine Powerpoint-Schlachten. Wir arbeiten <span class="text-accent-text font-medium">fokussiert und ergebnisorientiert</span>. Damit du mehr Ergebnisse bekommst und weniger Zeit in Abstimmungen verbrennst.',
+    headline: "Wir machen eine Sache richtig: Marktplätze.",
+    detail:
+      "Wenn du eine Agentur suchst, die parallel auch Website, Branding und E-Mail-Marketing übernimmt, bist du bei uns an der falschen Adresse. Wir haben oft genug gesehen: Wer alles anbietet, ist in nichts wirklich Experte.",
   },
 ];
 ---
@@ -30,20 +24,41 @@ const values = [
 <section class="py-16 md:py-24" data-so-arbeiten>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <h2 data-so-arbeiten-h2>So arbeiten wir.</h2>
-
-    <div class="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6" data-so-arbeiten-grid>
-      {values.map((value) => (
-        <div class="wert-card relative rounded-2xl p-7 md:p-10 border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/25 hover:shadow-[0_8px_30px_rgba(76,175,130,0.08)]">
-          <div class="absolute top-0 left-6 right-6 h-px bg-accent/0 transition-all duration-300 wert-card-line"></div>
-          <div class="mb-5 text-text-muted transition-colors duration-300 wert-card-icon">
-            <value.icon size={24} stroke-width={1.5} />
-          </div>
-          <h3 class="text-xl md:text-2xl font-medium tracking-[-0.02em] leading-[1.2] mb-4">{value.title}</h3>
-          <p class="text-text-secondary text-base md:text-lg leading-relaxed" set:html={value.text} />
-        </div>
-      ))}
+    <div class="max-w-3xl mb-14 md:mb-20">
+      <h2 data-so-arbeiten-h2>Wann für uns eine Zusammenarbeit in Frage kommt.</h2>
     </div>
+
+    <ol data-so-arbeiten-rows>
+      {pairs.map((pair, i) => (
+        <li
+          class="group relative grid grid-cols-12 items-baseline gap-x-6 md:gap-x-10 gap-y-6 py-14 md:py-20"
+          data-pair-row
+        >
+          <div class="col-span-12 md:col-span-3 lg:col-span-2">
+            <span
+              class="block text-4xl md:text-5xl lg:text-6xl leading-[0.85] text-text-muted/70 transition-colors duration-300 group-hover:text-accent-text"
+              style="font-family: var(--font-heading); font-feature-settings: 'lnum';"
+              aria-hidden="true"
+              data-pair-num
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+          </div>
+
+          <div class="col-span-12 md:col-span-9 md:col-start-4">
+            <h3 class="mb-5 md:mb-6 max-w-3xl" data-pair-h3>
+              {pair.headline}
+            </h3>
+            <p
+              class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl transition-colors duration-300 group-hover:text-text-primary/90"
+              data-pair-p
+            >
+              {pair.detail}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
 
   </div>
 </section>
@@ -56,53 +71,38 @@ const values = [
   const section = document.querySelector("[data-so-arbeiten]");
   if (section) {
     const h2 = section.querySelector("[data-so-arbeiten-h2]");
-    const cards = section.querySelectorAll("[data-so-arbeiten-grid] > div");
+    const rows = section.querySelectorAll("[data-pair-row]");
 
-    // H2 SplitText reveal
     if (h2) {
       const split = new SplitText(h2, { type: "words" });
       gsap.set(split.words, { opacity: 0, y: 20 });
-
       gsap.to(split.words, {
         opacity: 1,
         y: 0,
         duration: 0.6,
         stagger: 0.08,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          once: true,
-        },
+        scrollTrigger: { trigger: section, start: "top 75%", once: true },
       });
     }
 
-    // Cards stagger fade-in
-    if (cards.length) {
-      gsap.set(cards, { opacity: 0, y: 25 });
+    rows.forEach((row) => {
+      const num = row.querySelector("[data-pair-num]");
+      const h3 = row.querySelector("[data-pair-h3]");
+      const p = row.querySelector("[data-pair-p]");
+      const elements = [num, h3, p].filter((el): el is Element => el !== null);
 
-      gsap.to(cards, {
+      if (!elements.length) return;
+
+      gsap.set(elements, { opacity: 0, y: 20 });
+      gsap.to(elements, {
         opacity: 1,
         y: 0,
         duration: 0.6,
-        stagger: 0.12,
+        stagger: 0.08,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: cards[0],
-          start: "top 85%",
-          once: true,
-        },
+        scrollTrigger: { trigger: row, start: "top 85%", once: true },
       });
-    }
+    });
   }
 </script>
-
-<style>
-  .wert-card:hover .wert-card-line {
-    background-color: rgba(76, 175, 130, 0.5);
-  }
-
-  .wert-card:hover .wert-card-icon {
-    color: var(--color-accent-text);
-  }
-</style>
