@@ -1,194 +1,264 @@
 ---
-// ServiceSEO — Organische Sichtbarkeit / Amazon SEO
-// Job: Rank Lift Organic Methode als Named Framework, 3 Bausteine mit klarer Hierarchie.
-// Layout: Fundament links groß (7 cols, 2 rows) + Umsetzung/Monitoring rechts gestapelt (5 cols each).
-// Visuelle Verknüpfung: Connector-Linien (SVG) zeigen, wie 02/03 aus 01 hervorgehen.
-import { Layers, Wrench, Activity, Check } from "@lucide/astro";
+// ServiceSEO — Organische Sichtbarkeit / Rank Lift Organic Methode
+// Horizontale Timeline mit Scroll-Pin + Scrub. Stil angelehnt an MarktplatzPhasenVisual
+// von der Startseite: segmentierte Linien (nicht durchgehend), Outer-Ring + Node-Bubble,
+// wandernder Pulse-Dot der beim Scrubben mit progress mitläuft.
+
+const steps = [
+  {
+    title: "Portfolio und Wettbewerb",
+    teaser: "Dein Portfolio, deine Wettbewerber.",
+    body: `Wir analysieren die <strong class="text-text-primary font-medium">relevanten Produkte</strong> aus deinem Portfolio und sammeln die <strong class="text-text-primary font-medium">relevanten Wettbewerber</strong> in deiner Nische. Die Ausgangslage: was du verkaufst, gegen wen du verkaufst.`,
+  },
+  {
+    title: "Positionierung",
+    teaser: "Die Strategie, bevor das Listing kommt.",
+    body: `Deep Dive in die Kategorien: <strong class="text-text-primary font-medium">USPs</strong>, <strong class="text-text-primary font-medium">Differenzierungsmerkmale</strong>, <strong class="text-text-primary font-medium">Reviews</strong> aus Kunden- und Wettbewerbsperspektive. Daraus leiten wir ab, wie deine Marke und dein Produkt auf Amazon auftreten müssen, damit die echten Stärken sichtbar werden.`,
+  },
+  {
+    title: "Keyword-Architektur",
+    teaser: "Jedes Keyword mit Zahlen hinterlegt.",
+    body: `Datenbasierter Deep Dive in die Suchwelt deiner Nische. Welche Keywords bringen <strong class="text-text-primary font-medium">Volumen</strong>, welche <strong class="text-text-primary font-medium">Suchintention</strong> steckt dahinter, welche <strong class="text-text-primary font-medium">Kombinationen</strong> deckt bisher niemand sauber ab. Das Ergebnis: die Karte, nach der das Listing gebaut wird.`,
+  },
+  {
+    title: "Listing-Build",
+    teaser: "Aus Portfolio, Strategie und Keywords: dein Listing.",
+    body: `Wir führen Portfolio, Positionierung und Keyword-Architektur zusammen. <strong class="text-text-primary font-medium">Titel</strong>, <strong class="text-text-primary font-medium">Bullets</strong>, <strong class="text-text-primary font-medium">Backend</strong>, <strong class="text-text-primary font-medium">A+ Content</strong>. Jedes Element so gebaut, dass es organisch rankt und gleichzeitig dein Produkt überzeugend darstellt.`,
+  },
+];
 ---
 
-<section id="organische-sichtbarkeit" class="scroll-mt-24 py-20 md:py-32" data-service-seo>
+<section id="organische-sichtbarkeit" class="scroll-mt-24 pt-32 md:pt-48 pb-20 md:pb-32" data-service-seo>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <!-- Overline + Headline -->
-    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-seo-overline>
-      Organische Sichtbarkeit
-    </p>
-    <h2 class="max-w-3xl">
-      Amazon SEO ist kein Einmalprojekt. Es ist die Basis für alles, was danach kommt.
-    </h2>
+    <!-- Pin-Wrapper: Header + Desktop Timeline werden gemeinsam gepinnt -->
+    <div data-seo-pin>
 
-    <!-- Lead -->
-    <p class="mt-8 md:mt-10 max-w-3xl text-text-secondary text-lg leading-relaxed" data-seo-lead>
-      Während die meisten Seller Geld in PPC verbrennen, baust du mit der <span class="text-text-primary font-medium">Rank Lift Organic Methode</span> ein organisches Fundament, das dir planbar mehr Gewinn bringt.
-    </p>
+      <!-- Header -->
+      <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-seo-overline>
+        Organische Sichtbarkeit
+      </p>
+      <h2 class="max-w-4xl">
+        Organische Käufe haben die höchste Marge. Alles, was du organisch liegen lässt, zahlst du in PPC nach.
+      </h2>
+      <p class="mt-6 md:mt-8 max-w-3xl text-text-secondary text-lg leading-relaxed" data-seo-lead>
+        Wer organisch nicht sichtbar ist, zahlt bei Amazon doppelt. Einmal für jeden PPC-Klick und ein zweites Mal, wenn Besucher auf einem Listing landen, das sie nicht überzeugt. Mit der <span class="text-accent-text font-medium">Rank Lift Organic</span> Methode bauen wir in vier Schritten das Listing, das beides kann: ranken und verkaufen.
+      </p>
 
-    <!-- Bausteine-Framework -->
-    <div class="relative mt-20 md:mt-28" data-seo-framework>
+      <!-- ─────────────────── DESKTOP: Timeline ─────────────────── -->
+      <div class="hidden md:block mt-14 lg:mt-20" data-seo-desktop>
 
-      <!-- Connector-SVG (nur Desktop, hinter den Blöcken) -->
-      <svg
-        class="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
-        preserveAspectRatio="none"
-        viewBox="0 0 100 100"
-        aria-hidden="true"
-      >
-        <!-- Trunk aus Fundament + Branch nach oben zu Umsetzung -->
-        <path
-          d="M 57 50 L 58.7 50 L 58.7 24.5 L 60.4 24.5"
-          stroke="rgba(107, 175, 150, 0.4)"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          fill="none"
-          vector-effect="non-scaling-stroke"
-        />
-        <!-- Branch nach unten zu Monitoring -->
-        <path
-          d="M 58.7 50 L 58.7 75.5 L 60.4 75.5"
-          stroke="rgba(107, 175, 150, 0.4)"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          fill="none"
-          vector-effect="non-scaling-stroke"
-        />
-        <!-- Connection nodes -->
-        <circle cx="57" cy="50" r="0.55" fill="rgba(107, 175, 150, 0.65)" data-seo-node />
-        <circle cx="60.4" cy="24.5" r="0.55" fill="rgba(107, 175, 150, 0.65)" data-seo-node />
-        <circle cx="60.4" cy="75.5" r="0.55" fill="rgba(107, 175, 150, 0.65)" data-seo-node />
-      </svg>
+        <!-- Timeline -->
+        <div class="relative" data-seo-timeline>
+          <!-- Background segments (inactive) — positioned via JS between bubbles -->
+          <div class="seo-seg-bg" data-seo-seg-bg="0" aria-hidden="true"></div>
+          <div class="seo-seg-bg" data-seo-seg-bg="1" aria-hidden="true"></div>
+          <div class="seo-seg-bg" data-seo-seg-bg="2" aria-hidden="true"></div>
 
-      <!-- Grid: Fundament (7/12, row-span-2) + Umsetzung (5/12) + Monitoring (5/12) -->
-      <div class="relative z-10 grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12 lg:grid-rows-2 lg:gap-x-10 lg:gap-y-6">
+          <!-- Active fill segments — grow via scaleX on scroll -->
+          <div class="seo-seg-fill" data-seo-seg="0" aria-hidden="true"></div>
+          <div class="seo-seg-fill" data-seo-seg="1" aria-hidden="true"></div>
+          <div class="seo-seg-fill" data-seo-seg="2" aria-hidden="true"></div>
 
-        <!-- 01 / FUNDAMENT — Hero Block -->
-        <div class="lg:col-span-7 lg:row-span-2 group" data-seo-block>
-          <div class="relative h-full rounded-2xl border border-white/10 p-5 md:p-7 lg:p-8 transition-all duration-300 ease-out hover:border-white/25 hover:bg-white/[0.015] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)]">
-            <div class="flex items-center gap-3.5">
-              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[rgba(76,175,130,0.10)] border border-[rgba(76,175,130,0.25)] transition-all duration-300 group-hover:bg-[rgba(76,175,130,0.22)] group-hover:border-[rgba(76,175,130,0.55)]">
-                <Layers class="w-5 h-5 text-accent-text" aria-hidden="true" />
-              </span>
-              <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text">
-                Fundament
-              </p>
-            </div>
-            <h3 class="text-[1.625rem] md:text-[2rem] tracking-[-0.02em] leading-[1.2] mt-6">
-              Rank Lift Organic Analyse
-            </h3>
-            <p class="text-text-secondary text-base leading-relaxed mt-4 max-w-[52ch]">
-              Jedes Projekt startet mit vollständigem Keyword-Mapping, nicht mit einer Tool-Liste. Wir analysieren alle Wortkombinationen innerhalb deiner Keyword-Roots, gleichen Suchintention und Stammdaten gegen deine Zielgruppe ab und erweitern um eine Bewertungsanalyse deiner und der Wettbewerber-Listings.
-            </p>
-            <p class="text-text-secondary text-base leading-relaxed mt-3.5 max-w-[52ch]">
-              KI-gestützt gemappt, manuell validiert. Angewandt auf jedes Listing, nicht nur auf dein Flaggschiff. Ergebnis: volle Klarheit über alle organischen Lücken in deiner Nische.
-            </p>
+          <!-- Pulse-dot — travels along segments during transitions -->
+          <div class="seo-pulse" data-seo-pulse aria-hidden="true">
+            <div class="seo-pulse-core"></div>
+          </div>
 
-            <!-- Deliverables -->
-            <div class="mt-8 md:mt-10 pt-6 border-t border-white/5" data-seo-deliverables>
-              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-                <li class="flex items-start gap-3">
-                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
-                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
+          <!-- 4 Columns with bubbles + titles -->
+          <div class="grid grid-cols-4 gap-x-6 lg:gap-x-10">
+            {steps.map((step, i) => (
+              <div class="flex flex-col items-center text-center">
+                <!-- Outer ring (glow when active) -->
+                <div class="seo-node relative" data-seo-bubble data-step-index={i}>
+                  <span class="seo-bubble-ring" aria-hidden="true"></span>
+                  <span
+                    class="font-body font-medium text-[1rem] tracking-[0.02em] tabular-nums seo-bubble-num"
+                    data-seo-bubble-number
+                  >
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span class="text-text-secondary text-[0.95rem] leading-snug">
-                    Keyword-Architektur mit Suchintention-Clustering
-                  </span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
-                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
-                  </span>
-                  <span class="text-text-secondary text-[0.95rem] leading-snug">
-                    Bewertungsanalyse deiner und der Wettbewerber-Listings
-                  </span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
-                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
-                  </span>
-                  <span class="text-text-secondary text-[0.95rem] leading-snug">
-                    Research Report pro Produktbereich
-                  </span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <span class="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded bg-[rgba(76,175,130,0.12)] mt-[3px]">
-                    <Check class="w-3.5 h-3.5 text-accent-text" aria-hidden="true" />
-                  </span>
-                  <span class="text-text-secondary text-[0.95rem] leading-snug">
-                    Datenbasis, auf die Umsetzung und Monitoring aufbauen
-                  </span>
-                </li>
-              </ul>
-            </div>
+                </div>
+                <h4
+                  class="mt-6 font-body font-medium text-[1rem] lg:text-[1.0625rem] uppercase tracking-[0.08em] leading-[1.3] max-w-[20ch]"
+                  data-seo-step-title
+                  data-step-index={i}
+                >
+                  {step.title}
+                </h4>
+              </div>
+            ))}
           </div>
         </div>
 
-        <!-- 02 / UMSETZUNG -->
-        <div class="lg:col-span-5 group" data-seo-block>
-          <div class="relative h-full rounded-2xl border border-white/5 bg-surface p-5 md:p-6 transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/[0.025] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]">
-            <div class="flex items-center gap-3">
-              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[rgba(76,175,130,0.08)] border border-[rgba(76,175,130,0.2)] transition-all duration-300 group-hover:bg-[rgba(76,175,130,0.20)] group-hover:border-[rgba(76,175,130,0.5)]">
-                <Wrench class="w-5 h-5 text-accent-text" aria-hidden="true" />
-              </span>
-              <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text">
-                Umsetzung
+        <!-- Central text area -->
+        <div
+          class="relative mt-14 lg:mt-16 min-h-[260px] max-w-3xl mx-auto px-4"
+          data-seo-text-area
+        >
+          {steps.map((step, i) => (
+            <div
+              class="absolute inset-0 px-4 text-center"
+              data-seo-text
+              data-step-index={i}
+              style={`opacity: ${i === 0 ? 1 : 0};`}
+            >
+              <p class="font-body text-xl md:text-2xl font-medium text-text-primary leading-[1.35] tracking-[-0.01em]">
+                {step.teaser}
               </p>
+              <p
+                class="mt-5 text-text-secondary text-[1.0625rem] lg:text-lg leading-[1.65]"
+                set:html={step.body}
+              />
             </div>
-            <h3 class="text-[1.375rem] md:text-[1.625rem] tracking-[-0.02em] leading-[1.25] mt-5">
-              Listing-Optimierung
-            </h3>
-            <p class="text-text-secondary text-[0.95rem] leading-relaxed mt-3.5">
-              Titel, Bullets, Backend, A+ Content. Jedes Element datenbasiert gegen Analyse und Wettbewerb abgestimmt. Wir iterieren das Konzept in kurzen Zyklen, bis das Maximum aus deinen Daten herausgearbeitet ist.
-            </p>
-          </div>
-        </div>
-
-        <!-- 03 / LAUFEND -->
-        <div class="lg:col-span-5 group" data-seo-block>
-          <div class="relative h-full rounded-2xl border border-white/5 bg-surface p-5 md:p-6 transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/[0.025] hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(76,175,130,0.08)]">
-            <div class="flex items-center gap-3">
-              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[rgba(76,175,130,0.08)] border border-[rgba(76,175,130,0.2)] transition-all duration-300 group-hover:bg-[rgba(76,175,130,0.20)] group-hover:border-[rgba(76,175,130,0.5)]">
-                <Activity class="w-5 h-5 text-accent-text" aria-hidden="true" />
-              </span>
-              <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text">
-                Laufend
-              </p>
-            </div>
-            <h3 class="text-[1.375rem] md:text-[1.625rem] tracking-[-0.02em] leading-[1.25] mt-5">
-              Event &amp; Season Monitoring
-            </h3>
-            <p class="text-text-secondary text-[0.95rem] leading-relaxed mt-3.5">
-              Deal Events, saisonale Suchintentionen, neue Wettbewerber-Strukturen. Themenbezogene Keywords, die kaum ein Seller sauber abdeckt. Wir erkennen Shifts früh und justieren, bevor dein Ranking fällt. So bleibt deine organische Sichtbarkeit stabil, auch wenn sich der Markt um dich herum ständig verändert.
-            </p>
-          </div>
+          ))}
         </div>
 
       </div>
-
     </div>
 
-    <!-- Coda — großes Statement als Übergang zur nächsten Section -->
-    <p class="mt-28 md:mt-40 text-center font-heading text-[2rem] md:text-[3rem] lg:text-[3.5rem] tracking-[-0.02em] leading-[1.2]" data-seo-coda>
-      5.000+ optimierte Listings. <span class="text-accent-text">Eine Methode.</span>
-    </p>
+    <!-- ─────────────────── MOBILE: Vertikaler Flow ─────────────────── -->
+    <div class="md:hidden mt-12" data-seo-mobile>
+      <div class="relative" data-seo-mobile-steps>
+        <div
+          class="absolute top-6 bottom-6 w-px bg-gradient-to-b from-accent-text/50 via-white/15 to-white/5 left-6"
+          aria-hidden="true"
+        ></div>
+
+        {steps.map((step, i) => (
+          <div class="relative flex gap-5 pb-10 last:pb-0" data-seo-mobile-step>
+            <div class="relative z-10 shrink-0 flex items-center justify-center w-12 h-12 rounded-full border border-accent-text/40 bg-surface">
+              <span class="font-body font-medium text-[0.875rem] tracking-[0.02em] tabular-nums text-accent-text">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <div class="pt-1.5 max-w-2xl">
+              <h4 class="font-body font-medium text-[0.9375rem] uppercase tracking-[0.08em] leading-[1.3]">
+                {step.title}
+              </h4>
+              <p class="mt-2 text-text-primary font-medium text-base leading-[1.4]">
+                {step.teaser}
+              </p>
+              <p
+                class="mt-2.5 text-text-secondary text-[0.9375rem] leading-[1.6]"
+                set:html={step.body}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
   </div>
 </section>
+
+<style>
+  /* ─── Timeline Segments ─── */
+  .seo-seg-bg,
+  .seo-seg-fill {
+    position: absolute;
+    top: 31px; /* node center: 32px - half of 1px line */
+    height: 1px;
+    pointer-events: none;
+  }
+
+  .seo-seg-bg {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .seo-seg-fill {
+    background: rgba(107, 175, 150, 0.85);
+    box-shadow: 0 0 8px rgba(107, 175, 150, 0.45);
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  /* ─── Node (bubble + outer ring) ─── */
+  .seo-node {
+    z-index: 10;
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    background: #0a0a0a; /* solid page bg so segments can't bleed through */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+
+  /* Outer glow ring — only visible when active */
+  .seo-bubble-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 1px solid rgba(76, 175, 130, 0);
+    box-shadow: 0 0 0 rgba(76, 175, 130, 0);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    pointer-events: none;
+  }
+
+  .seo-bubble-num {
+    color: rgba(153, 153, 153, 1);
+    position: relative;
+    z-index: 1;
+    transition: color 0.4s ease;
+  }
+
+  /* ─── Pulse-Dot ─── */
+  .seo-pulse {
+    position: absolute;
+    top: 31px;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    margin-top: -6.5px;
+    border-radius: 9999px;
+    background: rgba(107, 175, 150, 0.55);
+    filter: blur(4px);
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .seo-pulse-core {
+    position: absolute;
+    inset: 4px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.95);
+    filter: none;
+  }
+</style>
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { SplitText } from "gsap/SplitText";
 
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  const INACTIVE_BORDER = "rgba(255,255,255,0.15)";
+  const INACTIVE_BG = "rgba(10,10,10,1)";
+  const INACTIVE_NUMBER = "rgba(153,153,153,1)";
+  const INACTIVE_TITLE = "rgba(153,153,153,1)";
+  const INACTIVE_RING_BORDER = "rgba(76,175,130,0)";
+  const INACTIVE_RING_SHADOW = "0 0 0 rgba(76,175,130,0)";
+
+  const ACTIVE_BORDER = "rgba(107,175,150,0.7)";
+  const ACTIVE_BG = "rgba(76,175,130,0.12)";
+  const ACTIVE_NUMBER = "rgba(107,175,150,1)";
+  const ACTIVE_TITLE = "rgba(239,239,239,1)";
+  const ACTIVE_RING_BORDER = "rgba(76,175,130,0.25)";
+  const ACTIVE_RING_SHADOW = "0 0 20px rgba(76,175,130,0.35)";
+
   const section = document.querySelector("[data-service-seo]");
   if (section) {
     const overline = section.querySelector("[data-seo-overline]");
     const h2 = section.querySelector("h2");
     const lead = section.querySelector("[data-seo-lead]");
-    const framework = section.querySelector("[data-seo-framework]");
-    const blocks = section.querySelectorAll("[data-seo-block]");
-    const connectorPaths = section.querySelectorAll("[data-seo-framework] svg path");
-    const coda = section.querySelector("[data-seo-coda]");
 
+    // Header entrance animations (always on)
     if (overline) {
       gsap.set(overline, { opacity: 0, y: 10 });
       gsap.to(overline, {
@@ -201,7 +271,7 @@ import { Layers, Wrench, Activity, Check } from "@lucide/astro";
       const split = new SplitText(h2, { type: "words" });
       gsap.set(split.words, { opacity: 0, y: 20 });
       gsap.to(split.words, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.06, ease: "power2.out",
         scrollTrigger: { trigger: section, start: "top 75%", once: true },
       });
     }
@@ -214,58 +284,162 @@ import { Layers, Wrench, Activity, Check } from "@lucide/astro";
       });
     }
 
-    if (blocks.length) {
-      gsap.set(blocks, { opacity: 0, y: 25 });
-      gsap.to(blocks, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
-        scrollTrigger: { trigger: framework, start: "top 82%", once: true },
-      });
-    }
+    // Desktop: pinned scroll-scrubbed timeline
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
-    if (connectorPaths.length) {
-      connectorPaths.forEach((path) => {
-        const element = path as SVGPathElement;
-        const length = element.getTotalLength();
-        gsap.set(element, {
-          strokeDasharray: length,
-          strokeDashoffset: length,
-          opacity: 0,
+    if (isDesktop) {
+      const pin = section.querySelector<HTMLElement>("[data-seo-pin]");
+      const timelineEl = section.querySelector<HTMLElement>("[data-seo-timeline]");
+      const bubbles = section.querySelectorAll<HTMLElement>("[data-seo-bubble]");
+      const bubbleNumbers = section.querySelectorAll<HTMLElement>("[data-seo-bubble-number]");
+      const bubbleRings = section.querySelectorAll<HTMLElement>(".seo-bubble-ring");
+      const stepTitles = section.querySelectorAll<HTMLElement>("[data-seo-step-title]");
+      const segFills = section.querySelectorAll<HTMLElement>("[data-seo-seg]");
+      const segBgs = section.querySelectorAll<HTMLElement>("[data-seo-seg-bg]");
+      const pulse = section.querySelector<HTMLElement>("[data-seo-pulse]");
+      const texts = section.querySelectorAll<HTMLElement>("[data-seo-text]");
+
+      if (pin && timelineEl && bubbles.length === 4 && texts.length === 4 && pulse) {
+        // ── Position segments + measure bubble centers (responsive) ──
+        const bubbleCenters: number[] = [0, 0, 0, 0];
+
+        const layoutSegments = () => {
+          const timelineRect = timelineEl.getBoundingClientRect();
+          const bubbleRects = Array.from(bubbles).map((b) => b.getBoundingClientRect());
+
+          // Cache bubble-center x offsets (relative to timeline) for pulse positioning
+          bubbleRects.forEach((r, i) => {
+            bubbleCenters[i] = r.left + r.width / 2 - timelineRect.left;
+          });
+
+          for (let i = 0; i < 3; i++) {
+            const left = bubbleRects[i].right - timelineRect.left;
+            const width = Math.max(0, bubbleRects[i + 1].left - bubbleRects[i].right);
+            [segFills[i], segBgs[i]].forEach((seg) => {
+              if (!seg) return;
+              seg.style.left = `${left}px`;
+              seg.style.width = `${width}px`;
+            });
+          }
+        };
+
+        layoutSegments();
+        window.addEventListener("resize", layoutSegments);
+
+        // ── Initial state: Step 1 active, rest muted ──
+        bubbles.forEach((b, i) => {
+          gsap.set(b, {
+            borderColor: i === 0 ? ACTIVE_BORDER : INACTIVE_BORDER,
+            backgroundColor: i === 0 ? ACTIVE_BG : INACTIVE_BG,
+          });
         });
-        gsap.to(element, {
-          strokeDashoffset: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power2.inOut",
-          scrollTrigger: { trigger: framework, start: "top 75%", once: true },
+        bubbleRings.forEach((r, i) => {
+          gsap.set(r, {
+            borderColor: i === 0 ? ACTIVE_RING_BORDER : INACTIVE_RING_BORDER,
+            boxShadow: i === 0 ? ACTIVE_RING_SHADOW : INACTIVE_RING_SHADOW,
+          });
         });
-      });
-    }
+        bubbleNumbers.forEach((n, i) => {
+          gsap.set(n, { color: i === 0 ? ACTIVE_NUMBER : INACTIVE_NUMBER });
+        });
+        stepTitles.forEach((t, i) => {
+          gsap.set(t, { color: i === 0 ? ACTIVE_TITLE : INACTIVE_TITLE });
+        });
+        texts.forEach((t, i) => {
+          gsap.set(t, { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 14 });
+        });
+        gsap.set(pulse, { x: bubbleCenters[0], opacity: 0 });
 
-    const connectorNodes = section.querySelectorAll("[data-seo-node]");
-    if (connectorNodes.length) {
-      gsap.set(connectorNodes, { opacity: 0, scale: 0, transformOrigin: "center center" });
-      gsap.to(connectorNodes, {
-        opacity: 1, scale: 1, duration: 0.5, stagger: 0.15, ease: "back.out(2)",
-        scrollTrigger: { trigger: framework, start: "top 70%", once: true },
-      });
-    }
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: pin,
+            start: "top top+=220",
+            end: "+=2000",
+            pin: true,
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+            onRefresh: layoutSegments,
+          },
+        });
 
-    const deliverables = section.querySelector("[data-seo-deliverables]");
-    const deliverableItems = section.querySelectorAll("[data-seo-deliverables] li");
-    if (deliverableItems.length) {
-      gsap.set(deliverableItems, { opacity: 0, x: -10 });
-      gsap.to(deliverableItems, {
-        opacity: 1, x: 0, duration: 0.45, stagger: 0.08, ease: "power2.out",
-        scrollTrigger: { trigger: deliverables, start: "top 92%", once: true },
-      });
-    }
+        // Transitions at progress 0.25, 0.5, 0.75
+        for (let i = 1; i < 4; i++) {
+          const pos = i / 4;
+          const D = 0.08;
 
-    if (coda) {
-      gsap.set(coda, { opacity: 0, y: 20 });
-      gsap.to(coda, {
-        opacity: 1, y: 0, duration: 0.7, ease: "power2.out",
-        scrollTrigger: { trigger: coda, start: "top 85%", once: true },
-      });
+          // Pulse travels from previous bubble-center to current bubble-center
+          tl.to(pulse, { opacity: 1, duration: D * 0.3, ease: "power2.out" }, pos - D);
+          tl.to(pulse, {
+            x: () => bubbleCenters[i],
+            duration: D * 1.5,
+            ease: "power2.inOut",
+          }, pos - D);
+          tl.to(pulse, { opacity: 0, duration: D * 0.4, ease: "power2.in" }, pos + D * 0.5);
+
+          // Segment fill
+          tl.to(segFills[i - 1], {
+            scaleX: 1,
+            duration: D * 1.5,
+            ease: "power1.inOut",
+          }, pos - D);
+
+          // Previous text out
+          tl.to(texts[i - 1], { opacity: 0, y: -14, duration: D, ease: "power2.inOut" }, pos - D);
+
+          // Next text in
+          tl.fromTo(texts[i],
+            { opacity: 0, y: 14 },
+            { opacity: 1, y: 0, duration: D, ease: "power2.inOut" },
+            pos + D * 0.2
+          );
+
+          // Deactivate previous bubble
+          tl.to(bubbles[i - 1], {
+            borderColor: INACTIVE_BORDER,
+            backgroundColor: INACTIVE_BG,
+            duration: D,
+            ease: "power2.inOut",
+          }, pos - D * 0.5);
+          tl.to(bubbleRings[i - 1], {
+            borderColor: INACTIVE_RING_BORDER,
+            boxShadow: INACTIVE_RING_SHADOW,
+            duration: D,
+            ease: "power2.inOut",
+          }, pos - D * 0.5);
+          tl.to(bubbleNumbers[i - 1], { color: INACTIVE_NUMBER, duration: D, ease: "power2.inOut" }, pos - D * 0.5);
+          tl.to(stepTitles[i - 1], { color: INACTIVE_TITLE, duration: D, ease: "power2.inOut" }, pos - D * 0.5);
+
+          // Activate current bubble
+          tl.to(bubbles[i], {
+            borderColor: ACTIVE_BORDER,
+            backgroundColor: ACTIVE_BG,
+            duration: D,
+            ease: "power2.inOut",
+          }, pos - D * 0.5);
+          tl.to(bubbleRings[i], {
+            borderColor: ACTIVE_RING_BORDER,
+            boxShadow: ACTIVE_RING_SHADOW,
+            duration: D,
+            ease: "power2.inOut",
+          }, pos - D * 0.5);
+          tl.to(bubbleNumbers[i], { color: ACTIVE_NUMBER, duration: D, ease: "power2.inOut" }, pos - D * 0.5);
+          tl.to(stepTitles[i], { color: ACTIVE_TITLE, duration: D, ease: "power2.inOut" }, pos - D * 0.5);
+        }
+      }
+    } else {
+      // Mobile: simple staggered reveal
+      const mobileSteps = section.querySelectorAll<HTMLElement>("[data-seo-mobile-step]");
+      if (mobileSteps.length) {
+        gsap.set(mobileSteps, { opacity: 0, y: 20 });
+        gsap.to(mobileSteps, {
+          opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "power2.out",
+          scrollTrigger: {
+            trigger: section.querySelector("[data-seo-mobile-steps]"),
+            start: "top 80%",
+            once: true,
+          },
+        });
+      }
     }
   }
 </script>
