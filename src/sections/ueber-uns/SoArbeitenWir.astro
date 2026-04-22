@@ -4,11 +4,6 @@
 // Ersetzt das vorherige 4er-Card-Grid (Wertekatalog) durch self-selection.
 const pairs = [
   {
-    headline: "Es muss sich für beide lohnen.",
-    detail:
-      "Wenn wir nicht überzeugt sind, dass wir bei dir echten Impact liefern können, sagen wir ab. Auch wenn das Geld auf dem Tisch liegt.",
-  },
-  {
     headline: "Du willst jemanden, der mitdenkt.",
     detail:
       "Das heißt für uns auch: andere Wege vorschlagen und im Zweifel deine Idee challengen. Wenn du jemanden suchst, der blind ausführt und keine Rückfragen stellt, sind wir die falschen.",
@@ -17,6 +12,11 @@ const pairs = [
     headline: "Wir machen eine Sache richtig: Marktplätze.",
     detail:
       "Wenn du eine Agentur suchst, die parallel auch Website, Branding und E-Mail-Marketing übernimmt, bist du bei uns an der falschen Adresse. Wir haben oft genug gesehen: Wer alles anbietet, ist in nichts wirklich Experte.",
+  },
+  {
+    headline: "Es muss sich für beide lohnen.",
+    detail:
+      "Wenn wir nicht überzeugt sind, dass wir bei dir echten Impact liefern können, sagen wir ab. Auch wenn das Geld auf dem Tisch liegt.",
   },
 ];
 ---
@@ -31,7 +31,7 @@ const pairs = [
     <ol data-so-arbeiten-rows>
       {pairs.map((pair, i) => (
         <li
-          class="group relative grid grid-cols-12 items-baseline gap-x-6 md:gap-x-10 gap-y-6 py-14 md:py-20"
+          class="group relative grid grid-cols-12 items-baseline gap-x-6 md:gap-x-10 gap-y-6 py-8 md:py-10"
           data-pair-row
         >
           <div class="col-span-12 md:col-span-3 lg:col-span-2">
