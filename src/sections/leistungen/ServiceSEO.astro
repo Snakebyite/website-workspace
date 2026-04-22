@@ -3,6 +3,7 @@
 // Horizontale Timeline mit Scroll-Pin + Scrub. Stil angelehnt an MarktplatzPhasenVisual
 // von der Startseite: segmentierte Linien (nicht durchgehend), Outer-Ring + Node-Bubble,
 // wandernder Pulse-Dot der beim Scrubben mit progress mitläuft.
+import ListingMockup from "../../components/ListingMockup.astro";
 
 const steps = [
   {
@@ -93,7 +94,7 @@ const steps = [
 
         <!-- Central text area -->
         <div
-          class="relative mt-14 lg:mt-16 min-h-[260px] max-w-3xl mx-auto px-4"
+          class="relative mt-12 lg:mt-14 min-h-[220px] max-w-3xl mx-auto px-4"
           data-seo-text-area
         >
           {steps.map((step, i) => (
@@ -112,6 +113,29 @@ const steps = [
               />
             </div>
           ))}
+        </div>
+
+        <!-- Before/After listing comparison — static, shows final result -->
+        <div class="mt-8 lg:mt-10 max-w-[1040px] mx-auto" data-seo-mockups>
+          <div class="grid grid-cols-[1fr_auto_1fr] gap-x-5 lg:gap-x-7 gap-y-3 items-stretch">
+            <!-- Labels row -->
+            <p class="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-text-muted text-center self-end">
+              Vorher
+            </p>
+            <div></div>
+            <p class="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-accent-text text-center self-end">
+              Nachher
+            </p>
+            <!-- Cards row — items-stretch makes both cards equal height -->
+            <ListingMockup variant="before" />
+            <div class="self-center flex items-center justify-center text-accent-text">
+              <svg class="w-5 h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+            <ListingMockup variant="after" />
+          </div>
         </div>
 
       </div>
@@ -146,6 +170,28 @@ const steps = [
             </div>
           </div>
         ))}
+      </div>
+
+      <!-- Before/After listing comparison (mobile) -->
+      <div class="mt-14 space-y-8">
+        <div>
+          <p class="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-text-muted mb-2.5 text-center">
+            Vorher
+          </p>
+          <ListingMockup variant="before" />
+        </div>
+        <div class="flex items-center justify-center text-accent-text">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="5 12 12 19 19 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <p class="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-accent-text mb-2.5 text-center">
+            Nachher
+          </p>
+          <ListingMockup variant="after" />
+        </div>
       </div>
     </div>
 
@@ -353,7 +399,7 @@ const steps = [
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: pin,
-            start: "top top+=220",
+            start: "top top+=120",
             end: "+=2000",
             pin: true,
             scrub: 0.6,
