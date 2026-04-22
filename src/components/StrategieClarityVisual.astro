@@ -1,26 +1,25 @@
 ---
-// StrategieClarityVisual — Analyse-Pool → Priorisierte Hebel.
-// Linke Zone (5-52% x): Chaos-Chips als "Analyse-Pool".
-// Rechte Zone (~78% x): 3 Winner-Slots als "Priorisierte Hebel".
+// StrategieClarityVisual — Hochformat, Analyse-Pool oben → Priorisierte Hebel unten.
+// Chaos-Chips in obere Hälfte (y 5-55%), 3 Winner-Slots vertikal unten (y 68/80/92%).
 // Loop wechselt die ausgewählten 3 über 3 kuratierte Sets.
 
 const chips = [
-  { id: "amazon-seo",     text: "Amazon SEO",               pos: { x: 16, y: 22, rot: -3 } },
-  { id: "otto",           text: "Otto anbinden",            pos: { x: 38, y: 14, rot: 4 } },
-  { id: "ppc",            text: "PPC rebalancieren",        pos: { x: 50, y: 42, rot: -5 } },
-  { id: "stammdaten",     text: "Stammdaten harmonisieren", pos: { x: 14, y: 58, rot: 3 } },
-  { id: "kaufland",       text: "Kaufland launchen",        pos: { x: 28, y: 10, rot: -2 } },
-  { id: "prozesse",       text: "Prozess-Automatisierung",  pos: { x: 42, y: 80, rot: 4 } },
-  { id: "sortiment",      text: "Sortiment bereinigen",     pos: { x: 22, y: 82, rot: -4 } },
-  { id: "reviews",        text: "Reviews strategisch",      pos: { x: 48, y: 28, rot: 2 } },
-  { id: "en-rollout",     text: "EN-Rollout",               pos: { x: 8,  y: 34, rot: 5 } },
-  { id: "content",        text: "Content-Velocity",         pos: { x: 34, y: 90, rot: -3 } },
-  { id: "vine",           text: "Amazon Vine",              pos: { x: 24, y: 42, rot: 3 } },
-  { id: "tiktok",         text: "TikTok Shop",              pos: { x: 52, y: 64, rot: -2 } },
-  { id: "pricing",        text: "Pricing-Tests",            pos: { x: 12, y: 74, rot: 4 } },
-  { id: "zalando",        text: "Zalando Partner",          pos: { x: 32, y: 54, rot: -3 } },
-  { id: "dsp",            text: "Amazon DSP",               pos: { x: 6,  y: 16, rot: 2 } },
-  { id: "brandstore",     text: "Brand-Store",              pos: { x: 46, y: 92, rot: -4 } },
+  { id: "amazon-seo",     text: "Amazon SEO",               pos: { x: 16, y: 8,  rot: -3 } },
+  { id: "dsp",            text: "Amazon DSP",               pos: { x: 44, y: 5,  rot: 2 } },
+  { id: "otto",           text: "Otto anbinden",            pos: { x: 74, y: 10, rot: 4 } },
+  { id: "brandstore",     text: "Brand-Store",              pos: { x: 92, y: 6,  rot: -4 } },
+  { id: "stammdaten",     text: "Stammdaten harmonisieren", pos: { x: 14, y: 22, rot: 3 } },
+  { id: "vine",           text: "Amazon Vine",              pos: { x: 40, y: 19, rot: 3 } },
+  { id: "kaufland",       text: "Kaufland launchen",        pos: { x: 62, y: 24, rot: -2 } },
+  { id: "ppc",            text: "PPC rebalancieren",        pos: { x: 86, y: 22, rot: -5 } },
+  { id: "pricing",        text: "Pricing-Tests",            pos: { x: 20, y: 36, rot: 4 } },
+  { id: "reviews",        text: "Reviews strategisch",      pos: { x: 48, y: 38, rot: 2 } },
+  { id: "prozesse",       text: "Prozess-Automatisierung",  pos: { x: 76, y: 36, rot: 4 } },
+  { id: "content",        text: "Content-Velocity",         pos: { x: 10, y: 48, rot: -3 } },
+  { id: "sortiment",      text: "Sortiment bereinigen",     pos: { x: 36, y: 52, rot: -4 } },
+  { id: "en-rollout",     text: "EN-Rollout",               pos: { x: 58, y: 52, rot: 5 } },
+  { id: "zalando",        text: "Zalando Partner",          pos: { x: 82, y: 50, rot: -3 } },
+  { id: "tiktok",         text: "TikTok Shop",              pos: { x: 30, y: 14, rot: -2 } },
 ] as const;
 
 type Prio = "hoch" | "mittel" | "niedrig";
@@ -34,10 +33,10 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
 
 <div class="clarity-wrap" data-clarity-wrap>
   <div class="clarity-canvas" data-clarity-canvas>
-    {/* Subtile vertikale Trennung zwischen Pool und Hebel-Zone */}
+    {/* Horizontaler Divider zwischen Pool (oben) und Hebel-Zone (unten) */}
     <div class="clarity-divider" aria-hidden="true"></div>
 
-    {/* Leere Slot-Marker rechts — zeigen wo Hebel landen, auch im Chaos-State */}
+    {/* Leere Slot-Marker unten — zeigen wo Hebel landen, auch im Chaos-State */}
     <div class="slot-marker" data-slot-marker="0" aria-hidden="true"></div>
     <div class="slot-marker" data-slot-marker="1" aria-hidden="true"></div>
     <div class="slot-marker" data-slot-marker="2" aria-hidden="true"></div>
@@ -53,7 +52,7 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
       </div>
     ))}
 
-    {/* Radial Glow hinter der Hebel-Zone — verstärkt im Clarity-State */}
+    {/* Radial Glow hinter der Hebel-Zone unten */}
     <div class="clarity-glow" data-clarity-glow aria-hidden="true"></div>
   </div>
 
@@ -68,19 +67,19 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
   .clarity-canvas {
     position: relative;
     width: 100%;
-    height: 520px;
+    height: 640px;
     border-radius: 1rem;
     overflow: hidden;
   }
 
   .clarity-divider {
     position: absolute;
-    left: 62%;
-    top: 12%;
-    bottom: 12%;
-    width: 1px;
+    left: 10%;
+    right: 10%;
+    top: 60%;
+    height: 1px;
     background: linear-gradient(
-      to bottom,
+      to right,
       transparent 0%,
       rgba(255, 255, 255, 0.06) 25%,
       rgba(255, 255, 255, 0.06) 75%,
@@ -91,10 +90,10 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
 
   .clarity-glow {
     position: absolute;
-    left: 78%;
-    top: 50%;
-    width: 440px;
-    height: 360px;
+    left: 50%;
+    top: 80%;
+    width: 480px;
+    height: 300px;
     transform: translate(-50%, -50%);
     background: radial-gradient(ellipse at center, rgba(107, 175, 150, 0.1) 0%, transparent 70%);
     opacity: 0.4;
@@ -103,8 +102,8 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
 
   .slot-marker {
     position: absolute;
-    left: 78%;
-    width: 180px;
+    left: 50%;
+    width: 240px;
     height: 36px;
     border-radius: 9999px;
     border: 1px dashed rgba(255, 255, 255, 0.08);
@@ -112,9 +111,9 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
     pointer-events: none;
   }
 
-  .slot-marker[data-slot-marker="0"] { top: 25%; }
-  .slot-marker[data-slot-marker="1"] { top: 50%; }
-  .slot-marker[data-slot-marker="2"] { top: 75%; }
+  .slot-marker[data-slot-marker="0"] { top: 68%; }
+  .slot-marker[data-slot-marker="1"] { top: 80%; }
+  .slot-marker[data-slot-marker="2"] { top: 92%; }
 
   .chip {
     position: absolute;
@@ -134,7 +133,6 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
     pointer-events: none;
     will-change: transform, opacity;
     transition: border-color 0.4s ease, background-color 0.4s ease;
-    /* Initial transform — GSAP nimmt danach über */
     transform: translate(-50%, -50%) rotate(var(--rot));
   }
 
@@ -174,38 +172,46 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
     color: #999999;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .clarity-canvas {
-      height: 460px;
+      height: 560px;
+    }
+    .clarity-glow {
+      width: 380px;
+      height: 260px;
+    }
+    .slot-marker {
+      width: 200px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .clarity-canvas {
+      height: 500px;
     }
     .chip {
       font-size: 0.75rem;
       padding: 0.4375rem 0.75rem;
     }
-    .clarity-divider {
-      left: 58%;
-    }
     .slot-marker {
-      left: 74%;
-      width: 140px;
+      width: 170px;
     }
     .clarity-glow {
-      left: 74%;
-      width: 280px;
-      height: 260px;
+      width: 300px;
+      height: 220px;
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 420px) {
     .clarity-canvas {
-      height: 420px;
+      height: 460px;
     }
     .chip {
       font-size: 0.6875rem;
       padding: 0.375rem 0.625rem;
     }
     .slot-marker {
-      width: 124px;
+      width: 150px;
     }
   }
 
@@ -252,19 +258,13 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function getSlotX(): number {
-      const rect = canvas!.getBoundingClientRect();
-      const ratio = rect.width < 768 ? 0.74 : 0.78;
-      return rect.width * ratio;
-    }
-
     function getSlotPositions(): { x: number; y: number }[] {
       const rect = canvas!.getBoundingClientRect();
-      const sx = getSlotX();
+      const sx = rect.width * 0.5;
       return [
-        { x: sx, y: rect.height * 0.25 },
-        { x: sx, y: rect.height * 0.5 },
-        { x: sx, y: rect.height * 0.75 },
+        { x: sx, y: rect.height * 0.68 },
+        { x: sx, y: rect.height * 0.8 },
+        { x: sx, y: rect.height * 0.92 },
       ];
     }
 
@@ -358,7 +358,7 @@ const sets: { ids: string[]; prios: Prio[] }[] = [
         // Phase 2: Chaos-Hold
         master.to({}, { duration: 1.4 });
 
-        // Phase 3: Kristallisation — Winner fliegen nach rechts in Slots
+        // Phase 3: Kristallisation — Winner fliegen nach unten in Slots
         master.add(() => {
           set.ids.forEach((id, i) => {
             const chip = chipsById.get(id);

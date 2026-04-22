@@ -17,55 +17,47 @@ import StrategieClarityVisual from "../../components/StrategieClarityVisual.astr
       Erst die Strategie, dann die Skalierung. Nicht umgekehrt.
     </h2>
 
-    {/* Lead */}
-    <p class="mt-8 md:mt-10 max-w-2xl text-text-secondary text-lg leading-relaxed" data-strategie-lead>
-      Viele Brands starten auf Marktplätzen, ohne eine klare Antwort darauf, wo sie eigentlich hin wollen. Die Folge: planloses Springen zwischen Themen, jedes Shiny Object fühlt sich wichtig an, Budget und Zeit verbrennen. Das Problem ist selten die Taktik. Es ist der fehlende Überblick.
+    {/* Intro — Problem + Lösung in einem Block, Kern-Phrasen hervorgehoben */}
+    <p class="mt-8 md:mt-10 max-w-4xl text-text-secondary text-lg leading-relaxed" data-strategie-lead>
+      Viele Unternehmen starten auf Marktplätzen, ohne eine klare Antwort darauf, wo sie eigentlich hin wollen und wo die Engpässe liegen. Die Folge: planloses Springen zwischen Themen, jedes Shiny Object fühlt sich wichtig an, Budget und Zeit verbrennen. Das Problem ist selten die Taktik, es ist der <span class="text-text-primary font-medium">fehlende Überblick</span>. Den allein zu behalten ist schwer, zwischen Tagesgeschäft, Teams und zehn gleichzeitigen Baustellen. Genau da setzen wir an: mit <span class="text-text-primary font-medium">Außenperspektive</span> und den <span class="text-text-primary font-medium">Mustern aus vielen Brands</span>, die wir schon begleitet haben.
     </p>
 
-    {/* Step-Grid — macht die Struktur Analyse → Ableitung auf einen Blick sichtbar */}
-    <div class="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 max-w-5xl" data-strategie-steps>
-      <div class="step flex gap-5 md:gap-6" data-step>
-        <span class="font-body text-sm font-medium tabular-nums text-text-muted leading-none pt-1 shrink-0">01</span>
-        <div>
-          <p class="font-body text-xs font-medium uppercase tracking-[0.1em] text-accent-text leading-none">
-            Analyse
-          </p>
-          <p class="mt-3 text-text-primary text-base md:text-[1.0625rem] leading-relaxed">
-            Ehrlicher Blick auf Kanäle, KPIs, Portfolio, Stärken und Schwächen. Daraus wird sichtbar, wo Budget wirklich liegen bleibt.
-          </p>
+    {/* Editorial-Split: Steps vertikal links, Grafik rechts im Hochformat */}
+    <div class="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <div class="lg:col-span-5 flex flex-col gap-10 md:gap-12" data-strategie-steps>
+        <div class="step flex gap-5 md:gap-6" data-step>
+          <span class="font-body text-sm font-medium tabular-nums text-text-muted leading-none pt-1 shrink-0">01</span>
+          <div>
+            <p class="font-body text-xs font-medium uppercase tracking-[0.1em] text-accent-text leading-none">
+              Analyse
+            </p>
+            <p class="mt-3 text-text-primary text-base md:text-[1.0625rem] leading-relaxed">
+              Ehrlicher Blick auf Kanäle, KPIs, Portfolio, Stärken und Schwächen. Daraus wird sichtbar, wo Budget wirklich liegen bleibt.
+            </p>
+          </div>
+        </div>
+        <div class="step flex gap-5 md:gap-6" data-step>
+          <span class="font-body text-sm font-medium tabular-nums text-text-muted leading-none pt-1 shrink-0">02</span>
+          <div>
+            <p class="font-body text-xs font-medium uppercase tracking-[0.1em] text-accent-text leading-none">
+              Priorisierte Hebel
+            </p>
+            <p class="mt-3 text-text-primary text-base md:text-[1.0625rem] leading-relaxed">
+              Aus der Analyse leiten wir eine klare, fahrbare Roadmap ab, die für euer Setup den größten Hebel hat. Kein Katalog, eine Priorisierung.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="step flex gap-5 md:gap-6" data-step>
-        <span class="font-body text-sm font-medium tabular-nums text-text-muted leading-none pt-1 shrink-0">02</span>
-        <div>
-          <p class="font-body text-xs font-medium uppercase tracking-[0.1em] text-accent-text leading-none">
-            Priorisierte Hebel
-          </p>
-          <p class="mt-3 text-text-primary text-base md:text-[1.0625rem] leading-relaxed">
-            Aus der Analyse leiten wir drei konkrete Maßnahmen ab, die für euer Setup den größten Hebel haben. Kein Katalog, eine Priorisierung.
-          </p>
-        </div>
+
+      <div class="lg:col-span-7" data-strategie-visual>
+        <StrategieClarityVisual />
       </div>
-    </div>
 
-    {/* Key Visual — Analyse-Pool → Priorisierte Hebel */}
-    <div class="mt-12 md:mt-16" data-strategie-visual>
-      <StrategieClarityVisual />
     </div>
-
-    {/* Coda */}
-    <p class="mt-20 md:mt-28 mx-auto max-w-3xl text-center text-text-secondary text-lg leading-relaxed" data-strategie-coda>
-      Als Geschäftsführer allein den Überblick zu behalten ist schwer, zwischen Tagesgeschäft, Teams und zehn gleichzeitigen Baustellen. Unser Wert liegt in der <span class="text-text-primary font-medium">Außenperspektive</span> und in den Mustern aus vielen Brands, die wir schon begleitet haben.
-    </p>
 
   </div>
 </section>
-
-<style>
-  [data-strategie-coda] {
-    text-wrap: balance;
-  }
-</style>
 
 <script>
   import { gsap } from "gsap";
@@ -86,10 +78,9 @@ import StrategieClarityVisual from "../../components/StrategieClarityVisual.astr
       const lead = section.querySelector<HTMLElement>("[data-strategie-lead]");
       const steps = section.querySelectorAll<HTMLElement>("[data-strategie-steps] [data-step]");
       const visual = section.querySelector<HTMLElement>("[data-strategie-visual]");
-      const coda = section.querySelector<HTMLElement>("[data-strategie-coda]");
 
       if (reduced) {
-        [overline, h2, lead, visual, coda].forEach((el) => {
+        [overline, h2, lead, visual].forEach((el) => {
           if (el) gsap.set(el, { opacity: 1, y: 0 });
         });
         steps.forEach((el) => gsap.set(el, { opacity: 1, y: 0 }));
@@ -134,14 +125,6 @@ import StrategieClarityVisual from "../../components/StrategieClarityVisual.astr
         gsap.to(visual, {
           opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
           scrollTrigger: { trigger: visual, start: "top 85%", once: true },
-        });
-      }
-
-      if (coda) {
-        gsap.set(coda, { opacity: 0, y: 15 });
-        gsap.to(coda, {
-          opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: coda, start: "top 85%", once: true },
         });
       }
     }, section);
