@@ -1,74 +1,140 @@
 ---
-// Über-uns Hero — Split layout: Headline left, Duo-Photo right
-// Bigger photo (6 cols) for more visual presence
+// Über-uns Hero — Headline oben, darunter Split: Gründungsstory links, Bild rechts.
 import { Image } from "astro:assets";
-import duoPhoto from "../../assets/luca-kevin-ueber-uns.jpg";
+import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4160x2773.jpeg";
 ---
 
-<section class="min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex items-center pb-16 md:pb-20" data-ueber-hero>
-  <div class="mx-auto max-w-7xl px-4 md:px-8 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+<section class="-mt-36 md:-mt-48 pt-36 md:pt-44 pb-12 md:pb-16" data-ueber-hero>
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-      <!-- Left: Headline -->
-      <div class="lg:col-span-5">
-        <h1 class="text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] tracking-normal" data-ueber-hero-h1>
-          Wir haben zu viele Brands gesehen, die bei Agenturen nur eine Kundennummer waren.
+    <!-- Single asymmetric split: all text left, image right -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+
+      <!-- Left: Overline + H1 + Subline + Story -->
+      <div class="lg:col-span-6 order-2 lg:order-1">
+        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text mb-4" data-ueber-hero-overline>
+          Über uns
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl md:text-[3.75rem] leading-[1.05] tracking-normal" data-ueber-hero-h1>
+          Warum es uns gibt.
         </h1>
+
+        <p class="mt-5 md:mt-6 text-lg md:text-xl text-text-secondary leading-relaxed" data-ueber-hero-sub>
+          Wir haben zu viele Brands gesehen, die bei Agenturen nur eine Kundennummer waren.
+        </p>
+
+        <div class="mt-6 md:mt-8 space-y-4" data-ueber-hero-story>
+          <p class="text-base md:text-lg text-text-secondary leading-relaxed">
+            Wir haben uns im Master kennengelernt. Kevin war zu dem Zeitpunkt bereits seit Jahren als Freelancer im E-Commerce unterwegs und hat einen Partner gesucht, um das Ganze zu skalieren und auf ein neues Level zu bringen. Schnell haben wir gemerkt, wie gut sich unsere Stärken ergänzen, und Telos gegründet.
+          </p>
+          <p class="text-base md:text-lg text-text-secondary leading-relaxed">
+            Aus Kevins Erfahrung im Feld wussten wir früh: Die meisten Agenturen und Freelancer arbeiten anders, als wir es für richtig halten. Diese Chance haben wir genutzt und sind seit 2024 im E-Commerce unterwegs, mit der gleichen Energie und Passion wie am ersten Tag.
+          </p>
+        </div>
       </div>
 
-      <!-- Right: Duo Photo — bigger, asymmetric 5/7 split with accent glow -->
-      <div class="lg:col-span-7">
+      <!-- Right: Image mit Accent-Glow und Drop-Shadow -->
+      <div class="lg:col-span-6 order-1 lg:order-2 lg:pt-8" data-ueber-hero-image>
         <div
-          class="relative rounded-2xl overflow-hidden"
-          data-ueber-hero-photo
-          style="box-shadow: 0 0 140px 10px rgba(76, 175, 130, 0.18), 0 30px 70px -20px rgba(0, 0, 0, 0.5);"
+          class="relative lg:h-full rounded-2xl"
+          style="box-shadow: 0 0 160px 20px rgba(76, 175, 130, 0.22);"
         >
-          <Image
-            src={duoPhoto}
-            alt="Luca und Kevin, Gründer von KFL Consulting"
-            widths={[400, 600, 900, 1200, 1400]}
-            sizes="(max-width: 1024px) 100vw, 58vw"
-            class="w-full h-auto object-cover"
-            loading="eager"
-          />
+          <div class="rounded-2xl overflow-hidden lg:h-full" data-ueber-hero-image-inner>
+            <Image
+              src={heroBild}
+              alt="Luca und Kevin, Mitgründer von Telos"
+              widths={[500, 750, 1000, 1280]}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              class="w-full h-auto lg:h-full lg:object-cover block"
+              loading="eager"
+            />
+          </div>
         </div>
       </div>
 
     </div>
+
   </div>
 </section>
 
 <script>
   import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { SplitText } from "gsap/SplitText";
 
   const section = document.querySelector("[data-ueber-hero]");
   if (section) {
+    const overline = section.querySelector("[data-ueber-hero-overline]");
     const h1 = section.querySelector("[data-ueber-hero-h1]");
-    const photo = section.querySelector("[data-ueber-hero-photo]");
+    const sub = section.querySelector("[data-ueber-hero-sub]");
+    const story = section.querySelectorAll("[data-ueber-hero-story] p");
+    const image = section.querySelector("[data-ueber-hero-image-inner]");
 
-    const tl = gsap.timeline({ delay: 0.3 });
+    // Intro timeline — Overline, H1, Subline
+    const introTl = gsap.timeline({ delay: 0.2 });
 
-    if (h1) {
-      const split = new SplitText(h1, { type: "words" });
-      gsap.set(split.words, { opacity: 0, y: 20 });
-      tl.to(split.words, {
+    if (overline) {
+      gsap.set(overline, { opacity: 0, y: 15 });
+      introTl.to(overline, {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        stagger: 0.08,
+        duration: 0.5,
         ease: "power2.out",
       });
     }
 
-    if (photo) {
-      gsap.set(photo, { opacity: 0, y: 20 });
-      tl.to(photo, {
+    if (h1) {
+      const split = new SplitText(h1, { type: "words" });
+      gsap.set(split.words, { opacity: 0, y: 20 });
+      introTl.to(split.words, {
         opacity: 1,
         y: 0,
-        duration: 0.7,
+        duration: 0.6,
+        stagger: 0.1,
         ease: "power2.out",
-      }, "-=0.4");
+      }, "-=0.2");
     }
+
+    if (sub) {
+      gsap.set(sub, { opacity: 0, y: 15 });
+      introTl.to(sub, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      }, "-=0.2");
+    }
+
+    // Split block — scroll-triggered reveal
+    if (image) {
+      gsap.set(image, { clipPath: "inset(0 100% 0 0)" });
+      gsap.to(image, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 1,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: image,
+          start: "top 80%",
+          once: true,
+        },
+      });
+    }
+
+    story.forEach((p, i) => {
+      gsap.set(p, { opacity: 0, y: 20 });
+      gsap.to(p, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: 0.1 * i,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: p,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
   }
 </script>
