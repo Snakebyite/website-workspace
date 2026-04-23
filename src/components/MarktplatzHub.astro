@@ -3,11 +3,11 @@
 // Stilistisch konsistent zu OrganicRankingVisual: Surface-Card mit Placeholder-Bars,
 // simuliert eine Channable-Produktfeed-Ansicht mit Multi-Marketplace-Sync-Status.
 import { Store } from "@lucide/astro";
-import channableLogo from "../assets/tools/channable.png";
-import amazonLogo from "../assets/marketplaces/amazon.png";
-import ottoLogo from "../assets/marketplaces/otto.png";
-import kauflandLogo from "../assets/marketplaces/kaufland.png";
-import ebayLogo from "../assets/marketplaces/ebay.png";
+import channableLogo from "../assets/leistungen/tools/channable.png";
+import amazonLogo from "../assets/leistungen/marketplaces/amazon.png";
+import ottoLogo from "../assets/leistungen/marketplaces/otto.png";
+import kauflandLogo from "../assets/leistungen/marketplaces/kaufland.png";
+import ebayLogo from "../assets/leistungen/marketplaces/ebay.png";
 
 const marketplaces = [
   { name: "Amazon", logo: amazonLogo },
@@ -32,11 +32,8 @@ const rows = [
     {/* ═══ HEADER ═══ */}
     <div class="cp-header">
       <div class="cp-brand">
-        <img src={channableLogo.src} alt="" class="cp-brand-logo" />
-        <div class="cp-brand-text">
-          <span class="cp-brand-name">Channable</span>
-          <span class="cp-brand-sub">Feed-Hub</span>
-        </div>
+        <img src={channableLogo.src} alt="Channable" class="cp-brand-logo" />
+        <span class="cp-brand-name">Feed-Hub</span>
       </div>
       <div class="cp-live">
         <span class="cp-live-dot"></span>
@@ -160,20 +157,15 @@ const rows = [
   .cp-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
   }
 
   .cp-brand-logo {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
+    width: 150px;
+    height: 44px;
+    object-fit: cover;
+    object-position: center;
     opacity: 0.95;
-  }
-
-  .cp-brand-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
   }
 
   .cp-brand-name {
@@ -182,13 +174,6 @@ const rows = [
     font-weight: 500;
     color: rgba(239, 239, 239, 0.95);
     letter-spacing: -0.01em;
-  }
-
-  .cp-brand-sub {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 400;
-    color: rgba(153, 153, 153, 0.75);
   }
 
   .cp-live {
@@ -312,10 +297,9 @@ const rows = [
     flex-shrink: 0;
   }
 
-  /* Monochrome treatment für Logos */
+  /* Logos: opazitätsreduziert, ohne Filter (PNGs sind bereits weiß-auf-dark) */
   .cp-mono {
-    filter: brightness(0) invert(1);
-    opacity: 0.75;
+    opacity: 0.8;
   }
 
   /* ═══ FEED TABLE ═══ */
@@ -345,19 +329,29 @@ const rows = [
   }
 
   .cp-col-ch {
-    width: 90px;
+    width: 110px;
     height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  /* Header-Zeile: größere Höhe für Logos — Body-Rows bleiben kompakt */
+  .cp-feed-head .cp-col-ch {
+    height: 96px;
+  }
+
   .cp-col-ch img {
-    height: 22px;
+    height: 68px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
-    opacity: 0.65;
+    opacity: 0.8;
+  }
+
+  /* Kaufland-Logo hat viel Whitespace im PNG — extra Boost für visuelle Balance */
+  .cp-feed-head .cp-col-channels .cp-col-ch:nth-child(3) img {
+    height: 90px;
   }
 
   .cp-col-sync {
@@ -524,12 +518,16 @@ const rows = [
     }
 
     .cp-col-ch {
-      width: 60px;
+      width: 70px;
       height: 16px;
     }
 
+    .cp-feed-head .cp-col-ch {
+      height: 28px;
+    }
+
     .cp-col-ch img {
-      height: 16px;
+      height: 26px;
     }
 
     .cp-dot {
