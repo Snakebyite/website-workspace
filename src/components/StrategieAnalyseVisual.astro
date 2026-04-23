@@ -1,0 +1,420 @@
+---
+// StrategieAnalyseVisual — Visual für Step 01 "Analyse"
+// Metapher: Die Daten sind da, aber unscharf. Eine Lupe wandert diagonal
+// drüber und deckt auf. Am Ende ist alles lesbar.
+// Technik: Zwei Layer (blur + sharp), sharp wird via clip-path: circle()
+// auf den Lupen-Kreis beschnitten. Lupe + Clip teilen sich CSS-Variablen
+// auf dem Canvas, GSAP animiert diese Variablen.
+
+interface Props {
+  pinControlled?: boolean;
+}
+const { pinControlled = false } = Astro.props;
+
+const rows = [
+  { kanal: "Amazon DE",   wert: "67 %", balken: 85, engpass: false, note: "stabil" },
+  { kanal: "Otto",        wert: "8 %",  balken: 42, engpass: true,  note: "unter Potenzial" },
+  { kanal: "Kaufland",    wert: "3 %",  balken: 22, engpass: false, note: "Sortiment zu klein" },
+  { kanal: "PPC-Anteil",  wert: "41 %", balken: 78, engpass: true,  note: "zu abhängig" },
+  { kanal: "Organisch",   wert: "12 %", balken: 28, engpass: true,  note: "Engpass" },
+];
+---
+
+<div class="analyse-wrap" data-analyse-wrap data-pin-controlled={pinControlled ? "true" : "false"}>
+  <div class="analyse-canvas" data-analyse-canvas>
+
+    {/* Layer 1: geblurrte Basis, immer sichtbar */}
+    <div class="dashboard dashboard--blur" aria-hidden="true">
+      <div class="dashboard-head">
+        <span class="dashboard-label">Marktplatz-Analyse</span>
+        <span class="dashboard-period">Q1 2026</span>
+      </div>
+      <ul class="dashboard-rows">
+        {rows.map((row) => (
+          <li class="dashboard-row">
+            <div class="row-main">
+              <span class="row-kanal">{row.kanal}</span>
+              <span class="row-bar">
+                <span class="row-bar-fill" style={`width: ${row.balken}%`}></span>
+              </span>
+              <span class="row-wert">{row.wert}</span>
+              {row.engpass && <span class="row-marker">Engpass</span>}
+            </div>
+            <span class="row-note">{row.note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Layer 2: scharfe Version, via clip-path auf den Lupen-Kreis beschnitten */}
+    <div class="dashboard dashboard--sharp">
+      <div class="dashboard-head">
+        <span class="dashboard-label">Marktplatz-Analyse</span>
+        <span class="dashboard-period">Q1 2026</span>
+      </div>
+      <ul class="dashboard-rows">
+        {rows.map((row) => (
+          <li class="dashboard-row">
+            <div class="row-main">
+              <span class="row-kanal">{row.kanal}</span>
+              <span class="row-bar">
+                <span class="row-bar-fill" style={`width: ${row.balken}%`}></span>
+              </span>
+              <span class="row-wert">{row.wert}</span>
+              {row.engpass && <span class="row-marker">Engpass</span>}
+            </div>
+            <span class="row-note">{row.note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Lupe */}
+    <div class="magnifier" data-magnifier aria-hidden="true">
+      <div class="magnifier-glass"></div>
+      <div class="magnifier-handle"></div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .analyse-wrap {
+    width: 100%;
+  }
+
+  .analyse-canvas {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(107, 175, 150, 0.04) 0%, transparent 60%),
+      rgba(255, 255, 255, 0.008);
+    /* shared position + radius variables for magnifier and clip */
+    --px: 18%;
+    --py: 22%;
+    --r: 0px;
+  }
+
+  .dashboard {
+    position: absolute;
+    inset: 0;
+    padding: 2rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashboard--blur {
+    filter: blur(7px);
+    opacity: 0.55;
+  }
+
+  .dashboard--sharp {
+    -webkit-mask-image: radial-gradient(
+      circle at var(--px) var(--py),
+      #000 calc(var(--r) - 14px),
+      transparent var(--r)
+    );
+    mask-image: radial-gradient(
+      circle at var(--px) var(--py),
+      #000 calc(var(--r) - 14px),
+      transparent var(--r)
+    );
+    will-change: mask-image;
+  }
+
+  .dashboard-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .dashboard-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(107, 175, 150, 0.9);
+  }
+
+  .dashboard-period {
+    font-size: 0.75rem;
+    color: rgba(153, 153, 153, 0.85);
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dashboard-rows {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    flex: 1;
+  }
+
+  .dashboard-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .row-main {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr 3.25rem auto;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .row-kanal {
+    font-size: 0.9375rem;
+    color: #efefef;
+    font-weight: 400;
+  }
+
+  .row-bar {
+    position: relative;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .row-bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 3px;
+  }
+
+  .row-wert {
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+    color: #c8c8c8;
+    text-align: right;
+  }
+
+  .row-marker {
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.1875rem 0.5rem;
+    border-radius: 0.25rem;
+    background: rgba(239, 68, 68, 0.12);
+    color: #f47570;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .row-note {
+    font-size: 0.75rem;
+    color: rgba(153, 153, 153, 0.7);
+    padding-left: calc(6.5rem + 0.875rem);
+  }
+
+  /* ─── Lupe ─── */
+  .magnifier {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: var(--px);
+    top: var(--py);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity, left, top;
+    z-index: 2;
+  }
+
+  .magnifier-glass {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(107, 175, 150, 0.7);
+    box-shadow: 0 0 30px rgba(107, 175, 150, 0.2);
+  }
+
+  /* Handle: startet exakt am Kreis-Edge bei 45° (cos(45°) · 70 ≈ 49.5px vom Zentrum) */
+  .magnifier-handle {
+    position: absolute;
+    left: calc(50% + 49.5px);
+    top: calc(50% + 49.5px);
+    width: 74px;
+    height: 4px;
+    background: rgba(107, 175, 150, 0.75);
+    border-radius: 2px;
+    transform: rotate(45deg);
+    transform-origin: 0 50%;
+  }
+
+  /* Connector: kleiner Knubbel an der Verbindung Glas/Griff, kaschiert die Kante */
+  .magnifier-handle::before {
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: rgba(107, 175, 150, 0.75);
+    transform: translateY(-50%);
+  }
+
+  /* Engpass-Marker: leichter Puls nach dem Reveal. Opacity-only, GPU-billig. */
+  @keyframes marker-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.58; }
+  }
+  .row-marker.is-pulsing {
+    animation: marker-pulse 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 1024px) {
+    .analyse-canvas { height: 470px; }
+    .dashboard { padding: 1.75rem 1.75rem; }
+    .dashboard-rows { gap: 0.95rem; }
+  }
+
+  @media (max-width: 640px) {
+    .analyse-canvas { height: 430px; }
+    .dashboard { padding: 1.5rem 1.25rem; }
+    .dashboard-rows { gap: 0.85rem; }
+    .row-main { grid-template-columns: 5.25rem 1fr 2.75rem auto; gap: 0.625rem; }
+    .row-kanal { font-size: 0.875rem; }
+    .row-wert { font-size: 0.8125rem; }
+    .row-note { padding-left: calc(5.25rem + 0.625rem); font-size: 0.6875rem; }
+    .magnifier { width: 110px; height: 110px; }
+    /* Mobile: Glas 110x110, Radius 55, Edge bei 45° ≈ 38.9px */
+    .magnifier-handle {
+      left: calc(50% + 39px);
+      top: calc(50% + 39px);
+      width: 58px;
+      height: 3px;
+    }
+    .magnifier-handle::before {
+      width: 8px;
+      height: 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dashboard--blur { display: none; }
+    .dashboard--sharp {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .magnifier { display: none; }
+    .row-marker.is-pulsing { animation: none; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAnalyseVisual(): void {
+    const wrap = document.querySelector<HTMLElement>("[data-analyse-wrap]");
+    if (!wrap) return;
+
+    const canvas = wrap.querySelector<HTMLElement>("[data-analyse-canvas]");
+    const magnifier = wrap.querySelector<HTMLElement>("[data-magnifier]");
+    if (!canvas || !magnifier) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // initial state
+    canvas.style.setProperty("--px", "18%");
+    canvas.style.setProperty("--py", "22%");
+    canvas.style.setProperty("--r", "0px");
+    gsap.set(magnifier, { opacity: 0 });
+
+    if (reduced) return;
+
+    let played = false;
+
+    function playReveal(): void {
+      if (played) {
+        // Schon einmal gelaufen: direkt auf Endzustand springen
+        canvas!.style.setProperty("--r", "1800px");
+        gsap.set(magnifier!, { opacity: 0 });
+        const markers = wrap!.querySelectorAll<HTMLElement>(".dashboard--sharp .row-marker");
+        markers.forEach((m) => m.classList.add("is-pulsing"));
+        return;
+      }
+      played = true;
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          const markers = wrap!.querySelectorAll<HTMLElement>(".dashboard--sharp .row-marker");
+          markers.forEach((m) => m.classList.add("is-pulsing"));
+        },
+      });
+      const state = { px: 18, py: 22, r: 0 };
+
+      // Phase 1: Lupe erscheint
+      tl.to(state, {
+        r: 70,
+        duration: 0.45,
+        ease: "power2.out",
+        onUpdate: () => canvas!.style.setProperty("--r", `${state.r}px`),
+      }, 0);
+      tl.to(magnifier!, { opacity: 1, duration: 0.4, ease: "power2.out" }, 0);
+
+      // Phase 2: Diagonal wandern
+      tl.to(state, {
+        px: 82,
+        py: 82,
+        duration: 2.7,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          canvas!.style.setProperty("--px", `${state.px}%`);
+          canvas!.style.setProperty("--py", `${state.py}%`);
+        },
+      }, 0.5);
+
+      // Phase 3: Mask expandiert, Lupe fadet
+      tl.to(state, {
+        r: 1800,
+        duration: 1.3,
+        ease: "power3.inOut",
+        onUpdate: () => canvas!.style.setProperty("--r", `${state.r}px`),
+      }, ">+=0.15");
+      tl.to(magnifier!, { opacity: 0, duration: 0.7, ease: "power2.in" }, "<+=0.2");
+    }
+
+    // Im Pin-Layout steuert die Section die Aktivierung via Event (nur Desktop).
+    // Auf Mobile oder im Standalone-Modus triggert ScrollTrigger lokal.
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    const usesPin = wrap.dataset.pinControlled === "true" && isDesktop;
+
+    const ctx = gsap.context(() => {
+      if (usesPin) {
+        wrap.addEventListener("activate-visual", playReveal);
+      } else {
+        ScrollTrigger.create({
+          trigger: canvas,
+          start: "top 80%",
+          once: true,
+          onEnter: playReveal,
+        });
+      }
+    }, wrap);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initAnalyseVisual();
+  document.addEventListener("astro:after-swap", initAnalyseVisual);
+</script>

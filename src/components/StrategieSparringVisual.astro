@@ -1,0 +1,296 @@
+---
+// StrategieSparringVisual — Pong-Metapher für Sparring
+// Zwei Paddles, Ball fliegt diagonal hin und her, wechselndes Icon beim Hit.
+// Das "Sparring" wird wörtlich: Themen werden zwischen Kunde und Telos
+// zugespielt. Paddles folgen dem Ball mit kleiner Vorlauf-Bewegung.
+// Loop, pausiert wenn Visual aus dem Viewport scrollt.
+
+import { Lightbulb, Globe, PenLine, Store, TrendingUp, Target } from "@lucide/astro";
+
+interface Props {
+  pinControlled?: boolean;
+}
+const { pinControlled = false } = Astro.props;
+
+const icons = [Lightbulb, Globe, PenLine, Store, TrendingUp, Target];
+---
+
+<div class="sparring-wrap" data-sparring-wrap data-pin-controlled={pinControlled ? "true" : "false"}>
+  <div class="sparring-canvas" data-sparring-canvas>
+
+    {/* Gestrichelte Mittellinie, klassisches Pong-Detail */}
+    <div class="pong-middle" aria-hidden="true"></div>
+
+    {/* Paddles */}
+    <div class="pong-paddle pong-paddle--left" data-pong-paddle-left aria-hidden="true"></div>
+    <div class="pong-paddle pong-paddle--right" data-pong-paddle-right aria-hidden="true"></div>
+
+    {/* Ball mit Icon-Stack (alle gestapelt, nur eins is-active) */}
+    <div class="pong-ball" data-pong-ball aria-hidden="true">
+      {icons.map((Icon, i) => (
+        <Icon class={`ball-icon${i === 0 ? " is-active" : ""}`} size={26} strokeWidth={1.8} />
+      ))}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .sparring-wrap {
+    width: 100%;
+  }
+
+  .sparring-canvas {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(107, 175, 150, 0.035) 0%, transparent 65%),
+      rgba(255, 255, 255, 0.008);
+  }
+
+  /* Gestrichelte Mittellinie */
+  .pong-middle {
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    bottom: 6%;
+    width: 1px;
+    transform: translateX(-50%);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0,
+      rgba(255, 255, 255, 0.15) 8px,
+      transparent 8px,
+      transparent 18px
+    );
+    background-size: 100% 18px;
+    pointer-events: none;
+  }
+
+  /* Paddles */
+  .pong-paddle {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 72px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 2px;
+    will-change: transform;
+    transition: background-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .pong-paddle--left  { left: 44px; }
+  .pong-paddle--right { right: 44px; }
+
+  .pong-paddle.is-hit {
+    background: rgba(107, 175, 150, 1);
+    box-shadow: 0 0 14px rgba(107, 175, 150, 0.55);
+  }
+
+  /* Ball */
+  .pong-ball {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 22px rgba(107, 175, 150, 0.28);
+    will-change: transform;
+  }
+
+  .ball-icon {
+    position: absolute;
+    color: #0a0a0a;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+  .ball-icon.is-active {
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .sparring-canvas { height: 470px; }
+    .pong-paddle { height: 64px; }
+    .pong-ball { width: 50px; height: 50px; }
+    .pong-paddle--left  { left: 36px; }
+    .pong-paddle--right { right: 36px; }
+  }
+
+  @media (max-width: 640px) {
+    .sparring-canvas { height: 430px; }
+    .pong-paddle { height: 54px; width: 3px; }
+    .pong-ball { width: 44px; height: 44px; }
+    .pong-paddle--left  { left: 24px; }
+    .pong-paddle--right { right: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* Static state: ball in middle, icon 0 visible */
+    .pong-ball { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .pong-paddle { top: 50%; transform: translateY(-50%); }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initSparring(): void {
+    const wrap = document.querySelector<HTMLElement>("[data-sparring-wrap]");
+    if (!wrap) return;
+
+    const canvas = wrap.querySelector<HTMLElement>("[data-sparring-canvas]");
+    const ball = wrap.querySelector<HTMLElement>("[data-pong-ball]");
+    const leftPaddle = wrap.querySelector<HTMLElement>("[data-pong-paddle-left]");
+    const rightPaddle = wrap.querySelector<HTMLElement>("[data-pong-paddle-right]");
+    const ballIcons = Array.from(wrap.querySelectorAll<HTMLElement>(".ball-icon"));
+
+    if (!canvas || !ball || !leftPaddle || !rightPaddle || ballIcons.length === 0) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    // State
+    let isPlaying = false;
+    let iconIdx = 0;
+    let atLeft = true;
+    let dims = { w: 0, h: 0, leftX: 0, rightX: 0, ballR: 28 };
+
+    function readDims(): void {
+      const rect = canvas!.getBoundingClientRect();
+      const isSm  = window.innerWidth < 640;
+      const isMd  = window.innerWidth < 1024;
+      const paddleOffset = isSm ? 24 : isMd ? 36 : 44;
+      const paddleWidth  = isSm ? 3 : 4;
+      const ballR = isSm ? 22 : isMd ? 25 : 28;
+      dims = {
+        w: rect.width,
+        h: rect.height,
+        leftX:  paddleOffset + paddleWidth + ballR + 2,
+        rightX: rect.width - paddleOffset - paddleWidth - ballR - 2,
+        ballR,
+      };
+    }
+
+    function randomY(): number {
+      const pad = 70;
+      return pad + Math.random() * (dims.h - pad * 2);
+    }
+
+    function setInitial(): void {
+      readDims();
+      const midY = dims.h / 2;
+      gsap.set(ball, { xPercent: -50, yPercent: -50, x: dims.leftX, y: midY });
+      gsap.set(leftPaddle, { yPercent: -50, y: midY });
+      gsap.set(rightPaddle, { yPercent: -50, y: midY });
+      iconIdx = 0;
+      atLeft = true;
+      ballIcons.forEach((el, i) => el.classList.toggle("is-active", i === iconIdx));
+    }
+
+    function nextBounce(): void {
+      if (!isPlaying) return;
+
+      const goingRight = atLeft;
+      const targetX = goingRight ? dims.rightX : dims.leftX;
+      const targetY = randomY();
+      const destPaddle = goingRight ? rightPaddle! : leftPaddle!;
+
+      // Destination paddle zieht vor und fängt den Ball ab
+      gsap.to(destPaddle, {
+        y: targetY,
+        duration: 1.35,
+        ease: "power2.inOut",
+      });
+
+      // Ball fliegt zum Paddel
+      gsap.to(ball, {
+        x: targetX,
+        y: targetY,
+        duration: 1.7,
+        ease: "none",
+        onComplete: () => {
+          if (!isPlaying) return;
+
+          // Icon wechseln
+          ballIcons[iconIdx].classList.remove("is-active");
+          iconIdx = (iconIdx + 1) % ballIcons.length;
+          ballIcons[iconIdx].classList.add("is-active");
+
+          // Paddle-Flash
+          destPaddle.classList.add("is-hit");
+          gsap.delayedCall(0.22, () => destPaddle.classList.remove("is-hit"));
+
+          atLeft = !atLeft;
+          nextBounce();
+        },
+      });
+    }
+
+    function play(): void {
+      if (isPlaying) return;
+      isPlaying = true;
+      nextBounce();
+    }
+
+    function pause(): void {
+      if (!isPlaying) return;
+      isPlaying = false;
+      gsap.killTweensOf([ball, leftPaddle, rightPaddle]);
+    }
+
+    setInitial();
+
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    const usesPin = wrap.dataset.pinControlled === "true" && isDesktop;
+
+    const ctx = gsap.context(() => {
+      if (usesPin) {
+        wrap.addEventListener("activate-visual", play);
+        wrap.addEventListener("deactivate-visual", pause);
+      } else {
+        ScrollTrigger.create({
+          trigger: canvas,
+          start: "top 90%",
+          end: "bottom 10%",
+          onEnter: play,
+          onEnterBack: play,
+          onLeave: pause,
+          onLeaveBack: pause,
+        });
+      }
+    }, wrap);
+
+    let resizeTimer: number | null = null;
+    const onResize = () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        const wasPlaying = isPlaying;
+        pause();
+        setInitial();
+        if (wasPlaying) play();
+      }, 180);
+    };
+    window.addEventListener("resize", onResize);
+
+    document.addEventListener("astro:before-swap", () => {
+      pause();
+      window.removeEventListener("resize", onResize);
+      ctx.revert();
+    }, { once: true });
+  }
+
+  initSparring();
+  document.addEventListener("astro:after-swap", initSparring);
+</script>

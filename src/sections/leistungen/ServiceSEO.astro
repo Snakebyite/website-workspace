@@ -32,22 +32,22 @@ const steps = [
 <section id="organische-sichtbarkeit" class="scroll-mt-24 pt-32 md:pt-48 pb-20 md:pb-32" data-service-seo>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <!-- Pin-Wrapper: Header + Desktop Timeline werden gemeinsam gepinnt -->
+    <!-- Header (nicht gepinnt, scrollt weg bevor Timeline pinnt) -->
+    <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-seo-overline>
+      Organische Sichtbarkeit
+    </p>
+    <h2 class="max-w-4xl">
+      Organische Käufe haben die höchste Marge. Alles, was du organisch liegen lässt, zahlst du in PPC nach.
+    </h2>
+    <p class="mt-6 md:mt-8 max-w-3xl text-text-secondary text-lg leading-relaxed" data-seo-lead>
+      Wer organisch nicht sichtbar ist, zahlt bei Amazon doppelt. Einmal für jeden PPC-Klick und ein zweites Mal, wenn Besucher auf einem Listing landen, das sie nicht überzeugt. Mit der <span class="text-accent-text font-medium">Rank Lift Organic</span> Methode bauen wir in vier Schritten das Listing, das beides kann: ranken und verkaufen.
+    </p>
+
+    <!-- Pin-Wrapper: nur Timeline + Text + Mockups werden gepinnt -->
     <div data-seo-pin>
 
-      <!-- Header -->
-      <p class="font-body text-sm font-medium uppercase tracking-[0.08em] text-accent-text mb-4" data-seo-overline>
-        Organische Sichtbarkeit
-      </p>
-      <h2 class="max-w-4xl">
-        Organische Käufe haben die höchste Marge. Alles, was du organisch liegen lässt, zahlst du in PPC nach.
-      </h2>
-      <p class="mt-6 md:mt-8 max-w-3xl text-text-secondary text-lg leading-relaxed" data-seo-lead>
-        Wer organisch nicht sichtbar ist, zahlt bei Amazon doppelt. Einmal für jeden PPC-Klick und ein zweites Mal, wenn Besucher auf einem Listing landen, das sie nicht überzeugt. Mit der <span class="text-accent-text font-medium">Rank Lift Organic</span> Methode bauen wir in vier Schritten das Listing, das beides kann: ranken und verkaufen.
-      </p>
-
       <!-- ─────────────────── DESKTOP: Timeline ─────────────────── -->
-      <div class="hidden md:block mt-14 lg:mt-20" data-seo-desktop>
+      <div class="hidden md:block mt-10 lg:mt-14" data-seo-desktop>
 
         <!-- Timeline -->
         <div class="relative" data-seo-timeline>
@@ -94,7 +94,7 @@ const steps = [
 
         <!-- Central text area -->
         <div
-          class="relative mt-12 lg:mt-14 min-h-[220px] max-w-3xl mx-auto px-4"
+          class="relative mt-12 lg:mt-14 min-h-[180px] max-w-3xl mx-auto px-4"
           data-seo-text-area
         >
           {steps.map((step, i) => (
@@ -116,7 +116,7 @@ const steps = [
         </div>
 
         <!-- Before/After listing comparison — static, shows final result -->
-        <div class="mt-8 lg:mt-10 max-w-[1040px] mx-auto" data-seo-mockups>
+        <div class="mt-4 lg:mt-6 max-w-[1040px] mx-auto" data-seo-mockups>
           <div class="grid grid-cols-[1fr_auto_1fr] gap-x-5 lg:gap-x-7 gap-y-3 items-stretch">
             <!-- Labels row -->
             <p class="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-text-muted text-center self-end">

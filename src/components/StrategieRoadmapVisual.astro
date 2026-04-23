@@ -1,0 +1,311 @@
+---
+// StrategieRoadmapVisual — Visual für Step 02 "Roadmap"
+// Narrativ: Serielle Priorisierung, eins nach dem anderen.
+// Drei Stationen mit 01/02/03 als Roadmap-Struktur. Beim Scroll-In läuft
+// einmal eine Sequenz ab: 01 aktiv → fadet in "seen" Zustand + Linie zeichnet →
+// 02 aktiv → fadet → Linie → 03 aktiv. Am Ende bleibt 03 im Fokus,
+// 01 und 02 sind gedimmt aber mit Icon + Label sichtbar.
+
+import { Store, Globe, PenLine } from "@lucide/astro";
+
+interface Props {
+  pinControlled?: boolean;
+}
+const { pinControlled = false } = Astro.props;
+
+const stations = [
+  { Icon: Store,   label: "Neuer Marktplatz" },
+  { Icon: Globe,   label: "Internationalisierung" },
+  { Icon: PenLine, label: "Amazon SEO" },
+];
+---
+
+<div class="roadmap-wrap" data-roadmap-wrap data-pin-controlled={pinControlled ? "true" : "false"}>
+  <div class="roadmap-canvas" data-roadmap-canvas>
+
+    {/* Verbindungslinien zwischen den Stationen, starten und enden am Kreis-Rand */}
+    <div class="roadmap-segment" data-segment="0" aria-hidden="true"></div>
+    <div class="roadmap-segment" data-segment="1" aria-hidden="true"></div>
+
+    {/* Stationen mit Nummer über der Bubble */}
+    {stations.map((station, i) => {
+      const Icon = station.Icon;
+      return (
+        <div class="station" data-station-index={i}>
+          <div class="station-circle">
+            <span class="station-number">{String(i + 1).padStart(2, "0")}</span>
+            <span class="station-ring" aria-hidden="true"></span>
+            <Icon class="station-icon" size={24} strokeWidth={1.6} />
+          </div>
+          <p class="station-label">{station.label}</p>
+        </div>
+      );
+    })}
+
+  </div>
+</div>
+
+<style>
+  .roadmap-wrap {
+    width: 100%;
+  }
+
+  .roadmap-canvas {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(107, 175, 150, 0.04) 0%, transparent 60%),
+      rgba(255, 255, 255, 0.008);
+    /* Circle size als Variable — Segmente rechnen darauf */
+    --circle-size: 68px;
+  }
+
+  /* ─── Verbindungslinien ─── */
+  .roadmap-segment {
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    background: rgba(107, 175, 150, 0.55);
+    box-shadow: 0 0 6px rgba(107, 175, 150, 0.3);
+    transform-origin: left center;
+    transform: scaleX(0);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Start am rechten Kreis-Rand von Station N, Ende am linken Rand von Station N+1 */
+  .roadmap-segment[data-segment="0"] {
+    left: calc(25% + var(--circle-size) / 2);
+    width: calc(25% - var(--circle-size));
+  }
+  .roadmap-segment[data-segment="1"] {
+    left: calc(50% + var(--circle-size) / 2);
+    width: calc(25% - var(--circle-size));
+  }
+
+  /* ─── Station ─── */
+  .station {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .station[data-station-index="0"] { left: 25%; }
+  .station[data-station-index="1"] { left: 50%; }
+  .station[data-station-index="2"] { left: 75%; }
+
+  .station-circle {
+    position: relative;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border-radius: 9999px;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.55s ease, background-color 0.55s ease;
+  }
+
+  /* Nummer oberhalb der Bubble, immer sichtbar */
+  .station-number {
+    position: absolute;
+    bottom: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body, system-ui);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-variant-numeric: tabular-nums;
+    color: rgba(153, 153, 153, 0.5);
+    transition: color 0.55s ease;
+    white-space: nowrap;
+  }
+
+  .station-ring {
+    position: absolute;
+    inset: -7px;
+    border-radius: 9999px;
+    border: 1px solid rgba(76, 175, 130, 0);
+    box-shadow: 0 0 0 rgba(76, 175, 130, 0);
+    transition: border-color 0.55s ease, box-shadow 0.55s ease;
+    pointer-events: none;
+  }
+
+  .station-icon {
+    color: rgba(107, 175, 150, 1);
+    opacity: 0;
+    transition: opacity 0.55s ease;
+  }
+
+  .station-label {
+    position: absolute;
+    top: calc(100% + 1.1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: rgba(239, 239, 239, 1);
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.55s ease;
+  }
+
+  /* Active State: volle Helligkeit */
+  .station.is-active .station-circle {
+    border-color: rgba(107, 175, 150, 0.7);
+    background: rgba(107, 175, 150, 0.08);
+  }
+  .station.is-active .station-ring {
+    border-color: rgba(76, 175, 130, 0.25);
+    box-shadow: 0 0 20px rgba(76, 175, 130, 0.32);
+  }
+  .station.is-active .station-number { color: rgba(107, 175, 150, 0.95); }
+  .station.is-active .station-icon   { opacity: 1; }
+  .station.is-active .station-label  { opacity: 1; }
+
+  /* Seen State: durchlaufen, Icon + Label sichtbar aber gedimmt */
+  .station.is-seen .station-circle {
+    border-color: rgba(107, 175, 150, 0.22);
+    background: rgba(107, 175, 150, 0.02);
+  }
+  .station.is-seen .station-number { color: rgba(153, 153, 153, 0.7); }
+  .station.is-seen .station-icon   { opacity: 0.45; }
+  .station.is-seen .station-label  { opacity: 0.5; }
+
+  /* Pulse: dezent auf den Ring der finalen aktiven Station */
+  @keyframes bubble-pulse {
+    0%, 100% {
+      border-color: rgba(76, 175, 130, 0.2);
+      box-shadow: 0 0 18px rgba(76, 175, 130, 0.24);
+    }
+    50% {
+      border-color: rgba(76, 175, 130, 0.45);
+      box-shadow: 0 0 30px rgba(76, 175, 130, 0.5);
+    }
+  }
+  .station.is-pulsing.is-active .station-ring {
+    animation: bubble-pulse 2.4s ease-in-out infinite;
+  }
+
+  @media (max-width: 1024px) {
+    .roadmap-canvas { height: 470px; --circle-size: 60px; }
+    .station-label { font-size: 0.8125rem; top: calc(100% + 0.9rem); }
+  }
+
+  @media (max-width: 640px) {
+    .roadmap-canvas { height: 430px; --circle-size: 52px; }
+    .station-label {
+      font-size: 0.75rem;
+      max-width: 100px;
+      white-space: normal;
+      top: calc(100% + 0.7rem);
+    }
+    .station-number {
+      font-size: 0.6875rem;
+      bottom: calc(100% + 0.6rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .roadmap-segment { transform: scaleX(1); }
+    .station .station-icon,
+    .station .station-label { opacity: 1; }
+    .station .station-circle {
+      border-color: rgba(107, 175, 150, 0.4);
+    }
+    .station .station-number { color: rgba(153, 153, 153, 0.8); }
+    .station.is-pulsing.is-active .station-ring { animation: none; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initRoadmap(): void {
+    const wrap = document.querySelector<HTMLElement>("[data-roadmap-wrap]");
+    if (!wrap) return;
+
+    const canvas = wrap.querySelector<HTMLElement>("[data-roadmap-canvas]");
+    const stations = wrap.querySelectorAll<HTMLElement>(".station");
+    const segments = wrap.querySelectorAll<HTMLElement>(".roadmap-segment");
+    if (!canvas || stations.length !== 3 || segments.length !== 2) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    gsap.set(segments, { scaleX: 0 });
+
+    let played = false;
+
+    function playSequence(): void {
+      if (played) {
+        // Bereits gelaufen: direkt Endzustand zeigen
+        stations[0].classList.remove("is-active");
+        stations[1].classList.remove("is-active");
+        stations[0].classList.add("is-seen");
+        stations[1].classList.add("is-seen");
+        stations[2].classList.add("is-active", "is-pulsing");
+        gsap.set(segments, { scaleX: 1 });
+        return;
+      }
+      played = true;
+
+      const tl = gsap.timeline();
+
+      tl.call(() => stations[0].classList.add("is-active"));
+      tl.to({}, { duration: 2.0 });
+
+      tl.call(() => {
+        stations[0].classList.remove("is-active");
+        stations[0].classList.add("is-seen");
+      });
+      tl.to({}, { duration: 0.4 });
+      tl.to(segments[0], { scaleX: 1, duration: 0.9, ease: "power2.inOut" });
+      tl.call(() => stations[1].classList.add("is-active"), [], "-=0.2");
+      tl.to({}, { duration: 2.0 });
+
+      tl.call(() => {
+        stations[1].classList.remove("is-active");
+        stations[1].classList.add("is-seen");
+      });
+      tl.to({}, { duration: 0.4 });
+      tl.to(segments[1], { scaleX: 1, duration: 0.9, ease: "power2.inOut" });
+      tl.call(() => stations[2].classList.add("is-active"), [], "-=0.2");
+
+      tl.to({}, { duration: 0.8 });
+      tl.call(() => stations[2].classList.add("is-pulsing"));
+    }
+
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    const usesPin = wrap.dataset.pinControlled === "true" && isDesktop;
+
+    const ctx = gsap.context(() => {
+      if (usesPin) {
+        wrap.addEventListener("activate-visual", playSequence);
+      } else {
+        ScrollTrigger.create({
+          trigger: canvas,
+          start: "top 80%",
+          once: true,
+          onEnter: playSequence,
+        });
+      }
+    }, wrap);
+
+    document.addEventListener("astro:before-swap", () => ctx.revert(), { once: true });
+  }
+
+  initRoadmap();
+  document.addEventListener("astro:after-swap", initRoadmap);
+</script>
