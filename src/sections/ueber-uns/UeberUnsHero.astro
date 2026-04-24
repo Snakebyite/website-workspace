@@ -87,8 +87,8 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
       data-ueber-hero-story
     >
 
-      <div class="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
-        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
+      <div class="story-col md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
+        <span class="story-col-overline block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
           01 · Wie wir uns fanden
         </span>
         <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
@@ -96,8 +96,8 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
         </p>
       </div>
 
-      <div class="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
-        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
+      <div class="story-col md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
+        <span class="story-col-overline block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
           02 · Warum wir Telos gegründet haben
         </span>
         <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
@@ -105,8 +105,8 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
         </p>
       </div>
 
-      <div class="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
-        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
+      <div class="story-col md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
+        <span class="story-col-overline block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
           03 · Wo wir heute stehen
         </span>
         <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
@@ -181,3 +181,28 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
     }
   }
 </script>
+
+<style>
+  /* Story-Spalten: Accent-Bar unter Overline wächst beim Hover der Spalte. */
+  .story-col-overline {
+    position: relative;
+    padding-bottom: 0.625rem;
+  }
+
+  .story-col-overline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 1.5rem;
+    border-radius: 9999px;
+    background-color: rgba(76, 175, 130, 0.35);
+    transition: width 0.4s ease-out, background-color 0.3s ease;
+  }
+
+  .story-col:hover .story-col-overline::after {
+    width: 3rem;
+    background-color: rgba(76, 175, 130, 1);
+  }
+</style>

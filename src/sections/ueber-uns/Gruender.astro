@@ -11,22 +11,22 @@ const kevinLinkedIn = "#";
 const lucaLinkedIn = "#";
 ---
 
-<section class="py-10 md:py-14" data-gruender>
+<section class="pt-24 md:pt-40 pb-10 md:pb-14" data-gruender>
   <div class="mx-auto max-w-5xl px-4 md:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 items-stretch">
 
       <!-- Kevin -->
-      <article class="rounded-2xl overflow-hidden bg-surface flex flex-col" data-gruender-card>
+      <article class="gruender-card rounded-2xl overflow-hidden bg-surface border border-white/5 flex flex-col" data-gruender-card>
         <div class="relative h-[340px] md:h-[400px] shrink-0 overflow-hidden" data-gruender-photo>
           <Image
             src={kevinPhoto}
             alt="Kevin, Co-Founder von Telos"
             widths={[400, 600, 800]}
             sizes="(max-width: 768px) 100vw, 40vw"
-            class="w-full h-full object-cover object-[center_25%]"
+            class="gruender-photo-img w-full h-full object-cover object-[center_25%]"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+          <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6 pointer-events-none">
             <h2 class="font-serif text-2xl md:text-3xl tracking-[-0.02em] text-text-primary">
               Kevin
             </h2>
@@ -47,26 +47,28 @@ const lucaLinkedIn = "#";
             href={kevinLinkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-auto pt-4 inline-flex items-center gap-2 text-sm text-accent-text hover:underline underline-offset-4 transition-colors self-start"
+            class="gruender-link group mt-auto pt-4 inline-flex items-center gap-3 text-sm text-accent-text transition-colors self-start"
           >
-            Finde mich auf LinkedIn
-            <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
+            <span class="block h-4 w-[2px] shrink-0 rounded-full bg-accent-text/60 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+            <span>Finde mich auf LinkedIn</span>
+            <ArrowUpRight class="gruender-link-arrow w-4 h-4 transition-transform duration-300 ease-out" aria-hidden="true" />
           </a>
         </div>
       </article>
 
       <!-- Luca -->
-      <article class="rounded-2xl overflow-hidden bg-surface flex flex-col" data-gruender-card>
+      <article class="gruender-card rounded-2xl overflow-hidden bg-surface border border-white/5 flex flex-col" data-gruender-card>
         <div class="relative h-[340px] md:h-[400px] shrink-0 overflow-hidden" data-gruender-photo>
           <Image
             src={lucaPhoto}
             alt="Luca, Co-Founder von Telos"
             widths={[400, 600, 800, 1000]}
             sizes="(max-width: 768px) 100vw, 40vw"
-            class="w-full h-full object-cover object-[center_39%] scale-[1.2] origin-top"
+            class="gruender-photo-img w-full h-full object-cover object-[center_39%]"
+            style="--base-scale: 1.2; transform-origin: top;"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+          <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6 pointer-events-none">
             <h2 class="font-serif text-2xl md:text-3xl tracking-[-0.02em] text-text-primary">
               Luca
             </h2>
@@ -87,10 +89,11 @@ const lucaLinkedIn = "#";
             href={lucaLinkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-auto pt-4 inline-flex items-center gap-2 text-sm text-accent-text hover:underline underline-offset-4 transition-colors self-start"
+            class="gruender-link group mt-auto pt-4 inline-flex items-center gap-3 text-sm text-accent-text transition-colors self-start"
           >
-            Finde mich auf LinkedIn
-            <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
+            <span class="block h-4 w-[2px] shrink-0 rounded-full bg-accent-text/60 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+            <span>Finde mich auf LinkedIn</span>
+            <ArrowUpRight class="gruender-link-arrow w-4 h-4 transition-transform duration-300 ease-out" aria-hidden="true" />
           </a>
         </div>
       </article>
@@ -124,3 +127,32 @@ const lucaLinkedIn = "#";
     });
   }
 </script>
+
+<style>
+  /* Card: dezenter Border-Glow + Lift beim Hover, analog zu den Bento-Cards auf /leistungen. */
+  .gruender-card {
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .gruender-card:hover {
+    border-color: rgba(76, 175, 130, 0.25);
+    background-color: rgba(76, 175, 130, 0.03);
+    transform: translateY(-3px);
+  }
+
+  /* Portrait: subtiler Zoom beim Hover. --base-scale erlaubt Luca-Foto dauerhaft hochzoomen. */
+  .gruender-photo-img {
+    transform: scale(var(--base-scale, 1));
+    transition: transform 0.6s ease-out;
+    will-change: transform;
+  }
+
+  .gruender-card:hover .gruender-photo-img {
+    transform: scale(calc(var(--base-scale, 1) * 1.04));
+  }
+
+  /* LinkedIn-Pfeil rutscht nach rechts-oben, wenn der Link gehovered wird. */
+  .gruender-link:hover .gruender-link-arrow {
+    transform: translate(2px, -2px);
+  }
+</style>
