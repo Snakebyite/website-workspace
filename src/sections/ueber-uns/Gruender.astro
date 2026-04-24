@@ -3,12 +3,11 @@
 // Kevin links, Luca rechts (Kevin-first als Erstkontakt im Sales-Call)
 import { Image } from "astro:assets";
 import { ArrowUpRight } from "@lucide/astro";
-import kevinPhoto from "../../assets/kevin-ueber-uns.jpg";
-import lucaPhoto from "../../assets/luca-ueber-uns.jpeg";
+import kevinPhoto from "../../assets/ueber-uns/kevin-alleine-lachend-2773x4160.jpeg";
+import lucaPhoto from "../../assets/ueber-uns/luca-konzentriert-1280x1920.jpeg";
 
-// TODO: echte LinkedIn-URLs einsetzen
-const kevinLinkedIn = "#";
-const lucaLinkedIn = "#";
+const kevinLinkedIn = "https://www.linkedin.com/in/kevin-flursch%C3%BCtz/";
+const lucaLinkedIn = "https://www.linkedin.com/in/luca-slangen/";
 ---
 
 <section class="pt-24 md:pt-40 pb-10 md:pb-14" data-gruender>
@@ -64,8 +63,8 @@ const lucaLinkedIn = "#";
             alt="Luca, Co-Founder von Telos"
             widths={[400, 600, 800, 1000]}
             sizes="(max-width: 768px) 100vw, 40vw"
-            class="gruender-photo-img w-full h-full object-cover object-[center_39%]"
-            style="--base-scale: 1.2; transform-origin: top;"
+            class="gruender-photo-img w-full h-full object-cover object-[center_50%]"
+            style="--base-scale: 1.2; transform-origin: right top;"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent pointer-events-none"></div>
           <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6 pointer-events-none">

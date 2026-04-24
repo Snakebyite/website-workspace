@@ -128,6 +128,70 @@ const fullTitle = `${title} | KFL Consulting`;
         lenis.raf(time * 1000);
       });
       gsap.ticker.lagSmoothing(0);
-    </script>
+
+      // Anchor scroll: place the section's first heading just below the fixed nav,
+      // so the eyebrow + H2 sit at the top instead of mid-screen.
+      // Lenis internally subtracts the target's scroll-margin-top AND the root's
+      // scroll-padding-top before applying the offset — we add both back so the
+      // math lands firstContent exactly at desiredViewportY.
+      const computeAnchorOffset = (target: HTMLElement): number => {
+        const nav = document.querySelector("header");
+        const navHeight = nav ? nav.getBoundingClientRect().height : 96;
+        const gap = 24;
+        const desiredViewportY = navHeight + gap;
+
+        const targetStyle = getComputedStyle(target);
+        const scrollMargin = parseFloat(targetStyle.scrollMarginTop) || 0;
+        const rootStyle = getComputedStyle(document.documentElement);
+        const scrollPadding = parseFloat(rootStyle.scrollPaddingTop) || 0;
+        const lenisBias = scrollMargin + scrollPadding;
+
+        // First "content" element inside the section: eyebrow (uppercase p), H1 or H2.
+        const firstContent = target.querySelector<HTMLElement>(
+          "p[class*='uppercase'], h1, h2"
+        );
+        if (!firstContent) return lenisBias - desiredViewportY;
+
+        const sectionTop = target.getBoundingClientRect().top;
+        const contentTop = firstContent.getBoundingClientRect().top;
+        const contentOffsetFromSection = contentTop - sectionTop;
+
+        // Lenis offset: positive = land deeper than the element's natural top.
+        return contentOffsetFromSection + lenisBias - desiredViewportY;
+      };
+
+      document.addEventListener("click", (e: MouseEvent) => {
+        const link = (e.target as HTMLElement | null)?.closest(
+          "a[href*='#']"
+        ) as HTMLAnchorElement | null;
+        if (!link) return;
+
+        const url = new URL(link.href, window.location.href);
+        if (url.pathname !== window.location.pathname || !url.hash) return;
+
+        const id = decodeURIComponent(url.hash.slice(1));
+        if (!id) return;
+        const targetEl = document.getElementById(id);
+        if (!targetEl) return;
+
+        e.preventDefault();
+        lenis.scrollTo(targetEl, { offset: computeAnchorOffset(targetEl) });
+        history.pushState(null, "", url.hash);
+      });
+
+      // Deep-link on load (e.g. /leistungen#marktplatz-strategie)
+      if (window.location.hash) {
+        const id = decodeURIComponent(window.location.hash.slice(1));
+        const targetEl = document.getElementById(id);
+        if (targetEl) {
+          requestAnimationFrame(() => {
+            lenis.scrollTo(targetEl, {
+              offset: computeAnchorOffset(targetEl),
+              immediate: true,
+            });
+          });
+        }
+      }
+</script>
   </body>
 </html>

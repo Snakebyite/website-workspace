@@ -12,7 +12,7 @@ Durch Vertrauen, Kompetenz und Information — nicht durch Druck oder Sales-Spra
 Telos als greifbare, wiedererkennbare Marke etablie ren. In Zeiten von KI ist Brand der Differentiator.
 
 ### Conversion-Ziel
-Besucher bucht einen Termin über **eigenes Booking-Tool** (Custom-Built, kein Calendly). Einbindung (Embed vs. externer Link) noch offen — TODO klären.
+Besucher bucht einen Termin über **Calendly** (Popup-Widget via Button-CTA). Kein Inline-Iframe-Embed, da Calendly auf weißem Hintergrund rendert und den Dark-Mode der Seite bricht.
 
 ### Besucherprofil
 - Die allermeisten Besucher hatten bereits einen Touchpoint mit Telos (E-Mail, LinkedIn, Meta Ad, Empfehlung)

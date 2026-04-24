@@ -14,12 +14,15 @@
         Kostenlos und unverbindlich. Wir schauen gemeinsam, wo bei dir das größte Potenzial liegt.
       </p>
 
-      <a
-        href="/kontakt"
-        class="inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200 mt-8"
-      >
-        Kostenloses Erstgespräch
-      </a>
+      <div class="relative mt-8" data-cta-button>
+        <span class="cta-glow" aria-hidden="true"></span>
+        <a
+          href="/kontakt"
+          class="relative inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+        >
+          Kostenloses Erstgespräch
+        </a>
+      </div>
     </div>
 
     <!-- Trust Badges -->
@@ -73,6 +76,50 @@
   </div>
 </section>
 
+<style>
+  .cta-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.28) 0%,
+      rgba(76, 175, 130, 0.12) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    animation: cta-glow-pulse 6s ease-in-out infinite;
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  [data-cta-button]:hover .cta-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow {
+      animation: none;
+    }
+  }
+</style>
+
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -82,7 +129,7 @@
   if (section) {
     const h2 = section.querySelector("h2");
     const subtext = section.querySelector("p");
-    const ctaLink = section.querySelector("a");
+    const ctaLink = section.querySelector("[data-cta-button]");
     const badges = section.querySelector("[data-trust-badges]");
 
     if (h2) {

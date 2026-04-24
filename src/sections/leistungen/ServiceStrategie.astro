@@ -7,6 +7,10 @@
 import StrategieAnalyseVisual from "../../components/StrategieAnalyseVisual.astro";
 import StrategieRoadmapVisual from "../../components/StrategieRoadmapVisual.astro";
 import StrategieSparringVisual from "../../components/StrategieSparringVisual.astro";
+import { ArrowRight } from "@lucide/astro";
+
+const calendlyUrl =
+  "https://calendly.com/kflconsulting/kennenlernen?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0a0a&text_color=efefef&primary_color=4caf82";
 ---
 
 <section id="marktplatz-strategie" class="scroll-mt-24 py-20 md:py-32" data-service-strategie>
@@ -81,6 +85,21 @@ import StrategieSparringVisual from "../../components/StrategieSparringVisual.as
       </div>
     </div>
 
+    <div class="mt-14 md:mt-20 flex justify-center" data-strategie-cta>
+      <a
+        href={calendlyUrl}
+        target="_blank"
+        rel="noopener"
+        data-calendly-trigger
+        class="group inline-flex items-center gap-2 text-accent-text font-medium transition-colors duration-200 hover:text-text-primary"
+      >
+        <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">
+          Deine Marktplatzstrategie erarbeiten
+        </span>
+        <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -152,6 +171,16 @@ import StrategieSparringVisual from "../../components/StrategieSparringVisual.as
     const section = document.querySelector<HTMLElement>("[data-service-strategie]");
     if (!section) return;
 
+    const ctaTrigger = section.querySelector<HTMLAnchorElement>("[data-strategie-cta] [data-calendly-trigger]");
+    if (ctaTrigger) {
+      ctaTrigger.addEventListener("click", (e) => {
+        const w = window as typeof window & { Calendly?: { initPopupWidget: (o: { url: string }) => void } };
+        if (!w.Calendly) return;
+        e.preventDefault();
+        w.Calendly.initPopupWidget({ url: ctaTrigger.href });
+      });
+    }
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ctx = gsap.context(() => {
@@ -201,6 +230,15 @@ import StrategieSparringVisual from "../../components/StrategieSparringVisual.as
         gsap.to(lead, {
           opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
           scrollTrigger: { trigger: lead, start: "top 85%", once: true },
+        });
+      }
+
+      const ctaWrap = section.querySelector<HTMLElement>("[data-strategie-cta]");
+      if (ctaWrap) {
+        gsap.set(ctaWrap, { opacity: 0, y: 15 });
+        gsap.to(ctaWrap, {
+          opacity: 1, y: 0, duration: 0.5, ease: "power2.out",
+          scrollTrigger: { trigger: ctaWrap, start: "top 90%", once: true },
         });
       }
 

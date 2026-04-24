@@ -1,83 +1,121 @@
 ---
-// UeberUnsBooking — Inline-Embed des Booking-Tools am Ende der Über-uns-Seite.
-// Ersetzt UeberUnsCTA: der Besucher soll ohne Page-Wechsel direkt buchen können.
+// UeberUnsBooking — CTA am Ende der Über-uns-Seite.
+// Zentriertes, reduziertes Layout: die Gründer-Cards drüber tragen das "people game"
+// schon visuell, der CTA bleibt bewusst ruhig und fokussiert auf den Klick.
+// Öffnet Calendly als Popup; ohne JS fällt der Link auf die Scheduling-URL in neuem Tab.
 
-const bookingUrl =
-  import.meta.env.PUBLIC_BOOKING_URL ??
-  (import.meta.env.DEV
-    ? "http://localhost:3100"
-    : "https://booking.kfl-consulting.com");
+const calendlyUrl =
+  "https://calendly.com/kflconsulting/kennenlernen?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0a0a&text_color=efefef&primary_color=4caf82";
 ---
 
 <section
-  class="py-16 md:py-24"
+  class="py-20 md:py-32"
   aria-label="Termin buchen"
   data-ueber-booking
 >
   <div class="mx-auto max-w-7xl px-4 md:px-8">
-    <div class="max-w-2xl mb-10 md:mb-14">
-      <h2>Der nächste Schritt ist ein unverbindliches Gespräch.</h2>
+    <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
+      <h2>Jetzt persönlich kennenlernen.</h2>
       <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-6">
-        Wir schauen uns deine größten Engpässe an und sagen dir ehrlich, wo die Hebel liegen.
+        30 Minuten per Zoom. Du erzählst, wo du stehst; wir sagen ehrlich,
+        ob und wo wir einen Hebel sehen.
       </p>
-    </div>
 
-    <div
-      class="relative rounded-card overflow-hidden border border-white/5 bg-surface/30 booking-frame"
-      data-booking-frame
-    >
-      <iframe
-        src={bookingUrl}
-        title="KFL Consulting — Termin buchen"
-        class="w-full block border-0"
-        loading="lazy"
-        allow="clipboard-write"
-        data-booking-iframe
-      ></iframe>
+      <div
+        class="relative mt-10 flex flex-col items-center gap-3"
+        data-booking-cta
+      >
+        <span class="cta-glow" aria-hidden="true"></span>
 
-      <noscript>
-        <div class="p-10 text-center text-text-secondary">
-          Für die Terminbuchung bitte JavaScript aktivieren oder direkt auf
-          <a href={bookingUrl} class="text-accent-text underline">
-            {bookingUrl}
-          </a>
-          buchen.
-        </div>
-      </noscript>
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener"
+          data-calendly-trigger
+          class="relative inline-block bg-accent hover:bg-accent-hover text-background font-medium px-8 py-4 rounded-button tracking-[0.01em] leading-none transition-colors duration-200"
+        >
+          Termin buchen
+        </a>
+        <span class="relative text-text-muted text-sm">
+          kostenlos & unverbindlich
+        </span>
+      </div>
     </div>
   </div>
 </section>
 
+<link
+  is:inline
+  rel="stylesheet"
+  href="https://assets.calendly.com/assets/external/widget.css"
+/>
+<script
+  is:inline
+  async
+  src="https://assets.calendly.com/assets/external/widget.js"></script>
+
 <style>
-  /* Responsive fallback height: overridden by postMessage once iframe posts its height */
-  .booking-frame iframe {
-    height: 900px;
+  .cta-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.28) 0%,
+      rgba(76, 175, 130, 0.12) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    animation: cta-glow-pulse 6s ease-in-out infinite;
+    transition: opacity 400ms ease, transform 400ms ease;
   }
-  @media (max-width: 1023px) {
-    .booking-frame iframe {
-      height: 1600px;
+
+  [data-booking-cta]:hover .cta-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow {
+      animation: none;
     }
   }
 </style>
 
 <script>
-  // Dynamic iframe height: booking-tool posts its content height, we apply it here.
-  // Breakpoints fall back via CSS min-height if postMessage doesn't arrive.
-  const iframe = document.querySelector<HTMLIFrameElement>("[data-booking-iframe]");
+  interface CalendlyAPI {
+    initPopupWidget: (options: { url: string }) => void;
+  }
+  const w = window as typeof window & { Calendly?: CalendlyAPI };
 
-  window.addEventListener("message", (e) => {
-    if (
-      e.data &&
-      e.data.type === "kfl-booking-height" &&
-      typeof e.data.height === "number" &&
-      iframe
-    ) {
-      // 24px buffer against rounding / scrollbar jitter
-      iframe.style.height = `${e.data.height}px`;
-    }
-  });
+  const trigger = document.querySelector<HTMLAnchorElement>(
+    "[data-calendly-trigger]",
+  );
+  if (trigger) {
+    trigger.addEventListener("click", (e) => {
+      if (!w.Calendly) return; // Fallback: Link öffnet in neuem Tab
+      e.preventDefault();
+      w.Calendly.initPopupWidget({ url: trigger.href });
+    });
+  }
 
-  // Entrance animation for headline + subtext (match site rhythm)
+  // Entrance animation — match site rhythm
   import("gsap").then(({ gsap }) => {
     Promise.all([
       import("gsap/ScrollTrigger"),
@@ -90,7 +128,7 @@ const bookingUrl =
 
       const h2 = section.querySelector("h2");
       const subtext = section.querySelector("p");
-      const frame = section.querySelector("[data-booking-frame]");
+      const cta = section.querySelector("[data-booking-cta]");
 
       if (h2) {
         const split = new SplitText(h2, { type: "words" });
@@ -116,14 +154,14 @@ const bookingUrl =
         });
       }
 
-      if (frame) {
-        gsap.set(frame, { opacity: 0, y: 30 });
-        gsap.to(frame, {
+      if (cta) {
+        gsap.set(cta, { opacity: 0, y: 20 });
+        gsap.to(cta, {
           opacity: 1,
           y: 0,
-          duration: 0.7,
+          duration: 0.6,
           ease: "power2.out",
-          scrollTrigger: { trigger: frame, start: "top 85%", once: true },
+          scrollTrigger: { trigger: cta, start: "top 85%", once: true },
         });
       }
     });
