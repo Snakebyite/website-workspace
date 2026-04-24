@@ -1,56 +1,117 @@
 ---
-// Über-uns Hero — Headline oben, darunter Split: Gründungsstory links, Bild rechts.
+// Über-uns Hero — Wide-Photo-Layout, komplett im ersten Viewport.
+// Struktur: Headline oben, breites Foto mittig, Lead-Satz, Story 3-spaltig.
 import { Image } from "astro:assets";
 import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4160x2773.jpeg";
 ---
 
-<section class="-mt-36 md:-mt-48 pt-36 md:pt-44 pb-12 md:pb-16" data-ueber-hero>
-  <div class="mx-auto max-w-7xl px-4 md:px-8">
+<section
+  class="-mt-36 md:-mt-48 pt-24 md:pt-28 pb-8 md:pb-10 min-h-dvh flex flex-col"
+  data-ueber-hero
+>
+  <div class="mx-auto max-w-7xl px-4 md:px-8 w-full flex-1 flex flex-col">
 
-    <!-- Single asymmetric split: all text left, image right -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+    <!-- Headline-Block -->
+    <div class="max-w-4xl">
+      <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text mb-3" data-ueber-hero-overline>
+        Über uns
+      </span>
 
-      <!-- Left: Overline + H1 + Subline + Story -->
-      <div class="lg:col-span-6 order-2 lg:order-1">
-        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text mb-4" data-ueber-hero-overline>
-          Über uns
-        </span>
+      <h1 class="text-4xl sm:text-5xl md:text-[3.25rem] leading-[1.05] tracking-normal" data-ueber-hero-h1>
+        Warum es uns gibt.
+      </h1>
+    </div>
 
-        <h1 class="text-4xl sm:text-5xl md:text-[3.75rem] leading-[1.05] tracking-normal" data-ueber-hero-h1>
-          Warum es uns gibt.
-        </h1>
-
-        <p class="mt-5 md:mt-6 text-lg md:text-xl text-text-secondary leading-relaxed" data-ueber-hero-sub>
-          Wir haben zu viele Brands gesehen, die bei Agenturen nur eine Kundennummer waren.
-        </p>
-
-        <div class="mt-6 md:mt-8 space-y-4" data-ueber-hero-story>
-          <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-            Wir haben uns im Master kennengelernt. Kevin war zu dem Zeitpunkt bereits seit Jahren als Freelancer im E-Commerce unterwegs und hat einen Partner gesucht, um das Ganze zu skalieren und auf ein neues Level zu bringen. Schnell haben wir gemerkt, wie gut sich unsere Stärken ergänzen, und Telos gegründet.
-          </p>
-          <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-            Aus Kevins Erfahrung im Feld wussten wir früh: Die meisten Agenturen und Freelancer arbeiten anders, als wir es für richtig halten. Diese Chance haben wir genutzt und sind seit 2024 im E-Commerce unterwegs, mit der gleichen Energie und Passion wie am ersten Tag.
-          </p>
-        </div>
-      </div>
-
-      <!-- Right: Image mit Accent-Glow und Drop-Shadow -->
-      <div class="lg:col-span-6 order-1 lg:order-2 lg:pt-8" data-ueber-hero-image>
+    <!-- Wide Hero-Photo (gesplittet: links Luca, rechts Kevin)
+         Justier-Parameter in --img-y-luca / --img-y-kevin (0% oben, 100% unten)
+         und --split-gap (sichtbare Trennung zwischen den Hälften, 0 = nahtlos). -->
+    <div
+      class="mt-5 md:mt-6"
+      data-ueber-hero-image
+      style="--img-y-luca: 0%; --img-y-kevin: 17%; --split-gap: 0px;"
+    >
+      <div
+        class="relative rounded-2xl"
+        style="box-shadow: 0 0 180px 20px rgba(76, 175, 130, 0.18);"
+      >
         <div
-          class="relative lg:h-full rounded-2xl"
-          style="box-shadow: 0 0 160px 20px rgba(76, 175, 130, 0.22);"
+          class="flex rounded-2xl overflow-hidden h-[34vh] md:h-[44vh] min-h-[240px] max-h-[520px]"
+          data-ueber-hero-image-inner
+          style="gap: var(--split-gap);"
         >
-          <div class="rounded-2xl overflow-hidden lg:h-full" data-ueber-hero-image-inner>
-            <Image
-              src={heroBild}
-              alt="Luca und Kevin, Mitgründer von Telos"
-              widths={[500, 750, 1000, 1280]}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              class="w-full h-auto lg:h-full lg:object-cover block"
-              loading="eager"
-            />
+          <!-- Linke Hälfte: Luca -->
+          <div class="relative flex-1 overflow-hidden">
+            <div class="absolute inset-y-0 left-0 w-[200%] h-full">
+              <Image
+                src={heroBild}
+                alt="Luca, Mitgründer von Telos"
+                widths={[800, 1280, 1600, 2000]}
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                class="w-full h-full object-cover block"
+                style="object-position: 0% var(--img-y-luca);"
+                loading="eager"
+              />
+            </div>
+          </div>
+
+          <!-- Rechte Hälfte: Kevin -->
+          <div class="relative flex-1 overflow-hidden">
+            <div class="absolute inset-y-0 right-0 w-[200%] h-full">
+              <Image
+                src={heroBild}
+                alt="Kevin, Mitgründer von Telos"
+                widths={[800, 1280, 1600, 2000]}
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                class="w-full h-full object-cover block"
+                style="object-position: 100% var(--img-y-kevin);"
+                loading="eager"
+              />
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Lead-Satz -->
+    <p
+      class="mt-6 md:mt-8 max-w-4xl text-xl md:text-2xl leading-[1.3] tracking-[-0.01em] text-text-primary"
+      data-ueber-hero-lead
+    >
+      Wir haben zu viele Brands gesehen, die bei Agenturen nur eine Kundennummer waren.
+    </p>
+
+    <!-- Story-Block: 3 Spalten, Overlines + Bodies jeweils auf gleicher Höhe via subgrid.
+         mt-auto drückt den Block an den unteren Viewport-Rand. -->
+    <div
+      class="mt-auto pt-8 md:pt-12 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_1fr] gap-x-6 md:gap-x-12 gap-y-2"
+      data-ueber-hero-story
+    >
+
+      <div class="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
+        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
+          01 · Wie wir uns fanden
+        </span>
+        <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
+          Wir haben uns im Master kennengelernt. Kevin war bereits seit Jahren als Freelancer im E-Commerce unterwegs und hat einen Partner gesucht, um das Ganze zu skalieren. Schnell haben wir gemerkt, wie gut sich unsere Stärken ergänzen.
+        </p>
+      </div>
+
+      <div class="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
+        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
+          02 · Warum wir Telos gegründet haben
+        </span>
+        <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
+          Aus Kevins Erfahrung im Feld wussten wir früh: Die meisten Agenturen und Freelancer arbeiten anders, als wir es für richtig halten. Diese Chance haben wir genutzt und Telos gegründet.
+        </p>
+      </div>
+
+      <div class="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
+        <span class="block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
+          03 · Wo wir heute stehen
+        </span>
+        <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
+          Seit 2024 sind wir im E-Commerce unterwegs, mit der gleichen Energie und Passion wie am ersten Tag. Unser Anspruch bleibt: jede Brand, die wir begleiten, merkt den Unterschied.
+        </p>
       </div>
 
     </div>
@@ -67,15 +128,15 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
   if (section) {
     const overline = section.querySelector("[data-ueber-hero-overline]");
     const h1 = section.querySelector("[data-ueber-hero-h1]");
-    const sub = section.querySelector("[data-ueber-hero-sub]");
-    const story = section.querySelectorAll("[data-ueber-hero-story] p");
     const image = section.querySelector("[data-ueber-hero-image-inner]");
+    const lead = section.querySelector("[data-ueber-hero-lead]");
+    const storyCols = section.querySelectorAll("[data-ueber-hero-story-col]");
 
-    // Intro timeline — Overline, H1, Subline
-    const introTl = gsap.timeline({ delay: 0.2 });
+    // Intro timeline — alles Above-the-fold kommt choreografiert beim Laden rein.
+    const introTl = gsap.timeline({ delay: 0.15 });
 
     if (overline) {
-      gsap.set(overline, { opacity: 0, y: 15 });
+      gsap.set(overline, { opacity: 0, y: 12 });
       introTl.to(overline, {
         opacity: 1,
         y: 0,
@@ -91,50 +152,32 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
         opacity: 1,
         y: 0,
         duration: 0.6,
-        stagger: 0.1,
+        stagger: 0.08,
         ease: "power2.out",
       }, "-=0.2");
     }
 
-    if (sub) {
-      gsap.set(sub, { opacity: 0, y: 15 });
-      introTl.to(sub, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }, "-=0.2");
-    }
-
-    // Split block — scroll-triggered reveal
     if (image) {
       gsap.set(image, { clipPath: "inset(0 100% 0 0)" });
-      gsap.to(image, {
+      introTl.to(image, {
         clipPath: "inset(0 0% 0 0)",
-        duration: 1,
+        duration: 0.9,
         ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: image,
-          start: "top 80%",
-          once: true,
-        },
-      });
+      }, "-=0.3");
     }
 
-    story.forEach((p, i) => {
-      gsap.set(p, { opacity: 0, y: 20 });
-      gsap.to(p, {
+    const belowEls: Element[] = [];
+    if (lead) belowEls.push(lead);
+    storyCols.forEach((col) => belowEls.push(col));
+    if (belowEls.length) {
+      gsap.set(belowEls, { opacity: 0, y: 18 });
+      introTl.to(belowEls, {
         opacity: 1,
         y: 0,
         duration: 0.6,
-        delay: 0.1 * i,
+        stagger: 0.06,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: p,
-          start: "top 85%",
-          once: true,
-        },
-      });
-    });
+      }, "-=0.4");
+    }
   }
 </script>
