@@ -1,0 +1,540 @@
+---
+// FundamentVisual — Klassischer Tempel-Schnitt als Haus-Metapher.
+// Drei Säulen (Sichtbarkeit, Strategie, Anbindungen) tragen Entablement + Giebel.
+// Details: Stufen-Sockel (Stylobat), Säulenbasis, Kapitell, Kannelierung,
+// Bänderung im Entablement, Cornice im Giebel, Bemaßung, Corner-Marks,
+// Blueprint-Raster im Canvas-Hintergrund.
+// Ablauf: Sockel → Säulen nacheinander → Entablement → Giebel → First-Pulse.
+---
+
+<div class="fundament-visual w-full" aria-hidden="true" data-fundament>
+
+  {/* ═══════════ DESKTOP ═══════════ */}
+  <div class="hidden lg:block">
+    <div class="fund-canvas">
+      <svg
+        class="fund-svg"
+        viewBox="0 0 900 420"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs>
+          <filter id="fund-soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.5" />
+          </filter>
+        </defs>
+
+        {/* Corner-Marks (Blueprint-Kornerkreuze) */}
+        <g data-fund-corners opacity="0.3">
+          <path d="M 30 30 L 58 30 M 30 30 L 30 58" stroke="rgba(107,175,150,0.5)" stroke-width="0.75" stroke-linecap="round"/>
+          <path d="M 870 30 L 842 30 M 870 30 L 870 58" stroke="rgba(107,175,150,0.5)" stroke-width="0.75" stroke-linecap="round"/>
+          <path d="M 30 390 L 58 390 M 30 390 L 30 362" stroke="rgba(107,175,150,0.5)" stroke-width="0.75" stroke-linecap="round"/>
+          <path d="M 870 390 L 842 390 M 870 390 L 870 362" stroke="rgba(107,175,150,0.5)" stroke-width="0.75" stroke-linecap="round"/>
+        </g>
+
+        {/* ═══ STYLOBAT (Stufen-Sockel) ═══ */}
+        <g data-fund-base style="opacity:0">
+          {/* Grundlinie — gepunkteter Hintergrund */}
+          <line x1="40" y1="350" x2="860" y2="350" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="1 5"/>
+          {/* Grundlinie — aktiv */}
+          <line x1="120" y1="350" x2="780" y2="350" stroke="rgba(107,175,150,0.55)" stroke-width="1" stroke-linecap="round"/>
+          {/* 3 Stufen, von unten nach oben schmaler */}
+          <rect x="160" y="344" width="580" height="4" fill="rgba(107,175,150,0.05)" stroke="rgba(107,175,150,0.45)" stroke-width="0.75"/>
+          <rect x="180" y="340" width="540" height="4" fill="rgba(107,175,150,0.05)" stroke="rgba(107,175,150,0.5)" stroke-width="0.75"/>
+          <rect x="200" y="336" width="500" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+        </g>
+
+        {/* ═══ SÄULE 01 — SICHTBARKEIT ═══ */}
+        <g data-fund-pillar>
+          <text class="fund-number" x="250" y="370" text-anchor="middle" style="opacity:0">01</text>
+
+          {/* Kapitell (zwei Ebenen: Abakus + Echinus) */}
+          <g class="fund-cap" style="opacity:0">
+            <rect x="226" y="156" width="48" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="0.75"/>
+            <rect x="230" y="159" width="40" height="7" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+          </g>
+
+          {/* Säulenschaft — zeichnet sich nach oben */}
+          <path
+            data-fund-pillar-path
+            d="M 235 328 L 235 166 L 265 166 L 265 328"
+            fill="rgba(107,175,150,0.04)"
+            stroke="rgba(107,175,150,0.6)"
+            stroke-width="1"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+
+          {/* Kannelierung — drei feine Vertikalen */}
+          <g class="fund-flutes" style="opacity:0">
+            <line x1="242" y1="170" x2="242" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+            <line x1="250" y1="170" x2="250" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+            <line x1="258" y1="170" x2="258" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+          </g>
+
+          {/* Säulenbasis (zwei Ebenen: Torus + Plinthe) */}
+          <g class="fund-colbase" style="opacity:0">
+            <rect x="230" y="328" width="40" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+            <rect x="226" y="332" width="48" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.5)" stroke-width="0.75"/>
+          </g>
+
+          <text class="fund-label" x="250" y="383" text-anchor="middle" style="opacity:0">Sichtbarkeit</text>
+        </g>
+
+        {/* ═══ SÄULE 02 — STRATEGIE ═══ */}
+        <g data-fund-pillar>
+          <text class="fund-number" x="450" y="370" text-anchor="middle" style="opacity:0">02</text>
+
+          <g class="fund-cap" style="opacity:0">
+            <rect x="426" y="156" width="48" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="0.75"/>
+            <rect x="430" y="159" width="40" height="7" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+          </g>
+
+          <path
+            data-fund-pillar-path
+            d="M 435 328 L 435 166 L 465 166 L 465 328"
+            fill="rgba(107,175,150,0.04)"
+            stroke="rgba(107,175,150,0.6)"
+            stroke-width="1"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+
+          <g class="fund-flutes" style="opacity:0">
+            <line x1="442" y1="170" x2="442" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+            <line x1="450" y1="170" x2="450" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+            <line x1="458" y1="170" x2="458" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+          </g>
+
+          <g class="fund-colbase" style="opacity:0">
+            <rect x="430" y="328" width="40" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+            <rect x="426" y="332" width="48" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.5)" stroke-width="0.75"/>
+          </g>
+
+          <text class="fund-label" x="450" y="383" text-anchor="middle" style="opacity:0">Strategie</text>
+        </g>
+
+        {/* ═══ SÄULE 03 — ANBINDUNGEN ═══ */}
+        <g data-fund-pillar>
+          <text class="fund-number" x="650" y="370" text-anchor="middle" style="opacity:0">03</text>
+
+          <g class="fund-cap" style="opacity:0">
+            <rect x="626" y="156" width="48" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="0.75"/>
+            <rect x="630" y="159" width="40" height="7" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+          </g>
+
+          <path
+            data-fund-pillar-path
+            d="M 635 328 L 635 166 L 665 166 L 665 328"
+            fill="rgba(107,175,150,0.04)"
+            stroke="rgba(107,175,150,0.6)"
+            stroke-width="1"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+
+          <g class="fund-flutes" style="opacity:0">
+            <line x1="642" y1="170" x2="642" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+            <line x1="650" y1="170" x2="650" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+            <line x1="658" y1="170" x2="658" y2="324" stroke="rgba(107,175,150,0.28)" stroke-width="0.5"/>
+          </g>
+
+          <g class="fund-colbase" style="opacity:0">
+            <rect x="630" y="328" width="40" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+            <rect x="626" y="332" width="48" height="4" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.5)" stroke-width="0.75"/>
+          </g>
+
+          <text class="fund-label" x="650" y="383" text-anchor="middle" style="opacity:0">Anbindungen</text>
+        </g>
+
+        {/* ═══ ENTABLEMENT (Architrav, Fries, Kranzgesims) ═══ */}
+        <g data-fund-entablature>
+          {/* Glow-Backdrop */}
+          <rect
+            data-fund-glow-ent
+            x="204" y="140" width="492" height="20" rx="0.5"
+            fill="none"
+            stroke="rgba(76,175,130,0.5)"
+            stroke-width="2.5"
+            filter="url(#fund-soft-glow)"
+            style="opacity:0"
+          />
+          {/* Hauptkörper */}
+          <rect
+            data-fund-lintel
+            x="204" y="140" width="492" height="20" rx="0.5"
+            fill="rgba(107,175,150,0.06)"
+            stroke="rgba(107,175,150,0.6)"
+            stroke-width="1"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+          {/* Bänderung — Architrav-Fries-Kranz */}
+          <g class="fund-ent-bands" style="opacity:0">
+            <line x1="208" y1="147" x2="692" y2="147" stroke="rgba(107,175,150,0.4)" stroke-width="0.5"/>
+            <line x1="208" y1="154" x2="692" y2="154" stroke="rgba(107,175,150,0.4)" stroke-width="0.5"/>
+          </g>
+        </g>
+
+        {/* ═══ GIEBEL ═══ */}
+        <g data-fund-pediment>
+          {/* Glow-Backdrop */}
+          <g data-fund-glow-ped style="opacity:0">
+            <path d="M 204 140 L 450 50" fill="none" stroke="rgba(76,175,130,0.5)" stroke-width="2.5" stroke-linecap="round" filter="url(#fund-soft-glow)"/>
+            <path d="M 696 140 L 450 50" fill="none" stroke="rgba(76,175,130,0.5)" stroke-width="2.5" stroke-linecap="round" filter="url(#fund-soft-glow)"/>
+          </g>
+          {/* Äußere Dachflanken */}
+          <path
+            data-fund-roof-left
+            d="M 204 140 L 450 50"
+            fill="none"
+            stroke="rgba(107,175,150,0.65)"
+            stroke-width="1"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+          <path
+            data-fund-roof-right
+            d="M 696 140 L 450 50"
+            fill="none"
+            stroke="rgba(107,175,150,0.65)"
+            stroke-width="1"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+          {/* Innerer Cornice — schmaler Giebel parallel */}
+          <path
+            data-fund-cornice-left
+            d="M 228 140 L 450 67"
+            fill="none"
+            stroke="rgba(107,175,150,0.35)"
+            stroke-width="0.5"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+          <path
+            data-fund-cornice-right
+            d="M 672 140 L 450 67"
+            fill="none"
+            stroke="rgba(107,175,150,0.35)"
+            stroke-width="0.5"
+            stroke-linecap="round"
+            pathLength="1"
+            style="stroke-dasharray:1; stroke-dashoffset:1;"
+          />
+
+          {/* Tympanon-Inschrift */}
+          <text
+            data-fund-pediment-text
+            class="fund-pediment-text"
+            x="450" y="118"
+            text-anchor="middle"
+            style="opacity:0"
+          >MARKTPLÄTZE</text>
+        </g>
+
+        {/* ═══ FIRST / AKROTER ═══ */}
+        <g data-fund-apex style="opacity:0">
+          <circle
+            data-fund-pulse
+            cx="450" cy="50" r="14"
+            fill="none"
+            stroke="rgba(76,175,130,0.55)"
+            stroke-width="1"
+            style="opacity:0;"
+          />
+          <circle cx="450" cy="50" r="14" fill="rgba(76,175,130,0.08)" stroke="rgba(76,175,130,0.4)" stroke-width="1"/>
+          <circle cx="450" cy="50" r="5" fill="#4CAF82"/>
+        </g>
+
+        {/* ═══ BEMAßUNG (unten, nach Abschluss) ═══ */}
+        <g data-fund-dimension style="opacity:0">
+          <line x1="160" y1="402" x2="740" y2="402" stroke="rgba(107,175,150,0.3)" stroke-width="0.5"/>
+          <line x1="160" y1="398" x2="160" y2="406" stroke="rgba(107,175,150,0.4)" stroke-width="0.5"/>
+          <line x1="740" y1="398" x2="740" y2="406" stroke="rgba(107,175,150,0.4)" stroke-width="0.5"/>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  {/* ═══════════ MOBILE ═══════════ */}
+  <div class="lg:hidden">
+    <div class="fund-canvas">
+      <svg
+        class="fund-svg"
+        viewBox="0 0 320 270"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        {/* Sockel */}
+        <line x1="20" y1="222" x2="300" y2="222" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="1 5"/>
+        <line x1="40" y1="222" x2="280" y2="222" stroke="rgba(107,175,150,0.55)" stroke-width="1" stroke-linecap="round"/>
+        <rect x="56" y="216" width="208" height="3" fill="rgba(107,175,150,0.05)" stroke="rgba(107,175,150,0.45)" stroke-width="0.75"/>
+        <rect x="64" y="213" width="192" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+
+        {/* Säulen (mit Basis + Kapitell) */}
+        <g>
+          <rect x="74" y="110" width="16" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="0.75"/>
+          <path d="M 76 113 L 76 209 L 88 209 L 88 113" fill="rgba(107,175,150,0.04)" stroke="rgba(107,175,150,0.6)" stroke-width="1" stroke-linecap="round"/>
+          <rect x="74" y="209" width="16" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+        </g>
+        <g>
+          <rect x="154" y="110" width="16" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="0.75"/>
+          <path d="M 156 113 L 156 209 L 168 209 L 168 113" fill="rgba(107,175,150,0.04)" stroke="rgba(107,175,150,0.6)" stroke-width="1" stroke-linecap="round"/>
+          <rect x="154" y="209" width="16" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+        </g>
+        <g>
+          <rect x="230" y="110" width="16" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="0.75"/>
+          <path d="M 232 113 L 232 209 L 244 209 L 244 113" fill="rgba(107,175,150,0.04)" stroke="rgba(107,175,150,0.6)" stroke-width="1" stroke-linecap="round"/>
+          <rect x="230" y="209" width="16" height="3" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.55)" stroke-width="0.75"/>
+        </g>
+
+        {/* Entablement + Bänderung */}
+        <rect x="60" y="96" width="200" height="14" rx="0.5" fill="rgba(107,175,150,0.06)" stroke="rgba(107,175,150,0.6)" stroke-width="1"/>
+        <line x1="64" y1="101" x2="256" y2="101" stroke="rgba(107,175,150,0.4)" stroke-width="0.5"/>
+        <line x1="64" y1="106" x2="256" y2="106" stroke="rgba(107,175,150,0.4)" stroke-width="0.5"/>
+
+        {/* Giebel */}
+        <path d="M 60 96 L 160 36" fill="none" stroke="rgba(107,175,150,0.65)" stroke-width="1" stroke-linecap="round"/>
+        <path d="M 260 96 L 160 36" fill="none" stroke="rgba(107,175,150,0.65)" stroke-width="1" stroke-linecap="round"/>
+        <path d="M 76 96 L 160 46" fill="none" stroke="rgba(107,175,150,0.35)" stroke-width="0.5" stroke-linecap="round"/>
+        <path d="M 244 96 L 160 46" fill="none" stroke="rgba(107,175,150,0.35)" stroke-width="0.5" stroke-linecap="round"/>
+
+        {/* Tympanon-Inschrift */}
+        <text class="fund-pediment-text fund-pediment-text--mobile" x="160" y="80" text-anchor="middle">MARKTPLÄTZE</text>
+
+        {/* First */}
+        <circle cx="160" cy="36" r="9" fill="rgba(76,175,130,0.08)" stroke="rgba(76,175,130,0.4)" stroke-width="1"/>
+        <circle cx="160" cy="36" r="3.5" fill="#4CAF82"/>
+
+        {/* Nummern und Labels als HTML darunter */}
+      </svg>
+
+      <div class="mt-5 grid grid-cols-3 gap-2 text-center">
+        <div class="mobile-item">
+          <span class="mobile-num">01</span>
+          <span class="mobile-label">Sichtbarkeit</span>
+        </div>
+        <div class="mobile-item">
+          <span class="mobile-num">02</span>
+          <span class="mobile-label">Strategie</span>
+        </div>
+        <div class="mobile-item">
+          <span class="mobile-num">03</span>
+          <span class="mobile-label">Anbindungen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* ═══ Canvas ═══ */
+  .fund-canvas {
+    position: relative;
+    width: 100%;
+  }
+
+  .fund-svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+  }
+
+  /* ═══ SVG-Typo ═══ */
+  .fund-number {
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    fill: rgba(107, 175, 150, 0.7);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fund-label {
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    fill: rgba(239, 239, 239, 0.72);
+  }
+
+  .fund-pediment-text {
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    fill: rgba(239, 239, 239, 0.78);
+  }
+
+  .fund-pediment-text--mobile {
+    font-size: 7px;
+    letter-spacing: 0.2em;
+  }
+
+  /* ═══ Mobile Labels ═══ */
+  .mobile-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mobile-num {
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: rgba(107, 175, 150, 0.7);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mobile-label {
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.72);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initFundamentVisual(): void {
+    const root = document.querySelector<HTMLElement>("[data-fundament]");
+    if (!root) return;
+
+    const base = root.querySelector<SVGGElement>("[data-fund-base]");
+    const pillars = root.querySelectorAll<SVGGElement>("[data-fund-pillar]");
+    const lintel = root.querySelector<SVGRectElement>("[data-fund-lintel]");
+    const glowEnt = root.querySelector<SVGRectElement>("[data-fund-glow-ent]");
+    const entBands = root.querySelector<SVGGElement>(".fund-ent-bands");
+    const roofLeft = root.querySelector<SVGPathElement>("[data-fund-roof-left]");
+    const roofRight = root.querySelector<SVGPathElement>("[data-fund-roof-right]");
+    const corniceLeft = root.querySelector<SVGPathElement>("[data-fund-cornice-left]");
+    const corniceRight = root.querySelector<SVGPathElement>("[data-fund-cornice-right]");
+    const glowPed = root.querySelector<SVGGElement>("[data-fund-glow-ped]");
+    const pedimentText = root.querySelector<SVGTextElement>("[data-fund-pediment-text]");
+    const apex = root.querySelector<SVGGElement>("[data-fund-apex]");
+    const pulse = root.querySelector<SVGCircleElement>("[data-fund-pulse]");
+    const dimension = root.querySelector<SVGGElement>("[data-fund-dimension]");
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduced) {
+      root.querySelectorAll<SVGElement>(
+        "[data-fund-pillar-path], [data-fund-lintel], [data-fund-roof-left], [data-fund-roof-right], [data-fund-cornice-left], [data-fund-cornice-right]"
+      ).forEach((el) => gsap.set(el, { strokeDashoffset: 0 }));
+      root.querySelectorAll<SVGElement>(
+        "[data-fund-base], [data-fund-pillar], [data-fund-apex], [data-fund-dimension], .fund-cap, .fund-flutes, .fund-colbase, .fund-ent-bands"
+      ).forEach((el) => gsap.set(el, { opacity: 1 }));
+      root.querySelectorAll<SVGTextElement>(".fund-number, .fund-label, .fund-pediment-text").forEach((el) => gsap.set(el, { opacity: 1 }));
+      if (glowEnt) gsap.set(glowEnt, { opacity: 0.6 });
+      if (glowPed) gsap.set(glowPed, { opacity: 0.6 });
+      return;
+    }
+
+    const tl = gsap.timeline({ delay: 1.8, defaults: { ease: "power3.inOut" } });
+
+    // Sockel
+    if (base) {
+      tl.to(base, { opacity: 1, duration: 0.9, ease: "power2.out" }, 0);
+    }
+
+    // Säulen — jeweils komplett mit allen Details
+    pillars.forEach((pillar, i) => {
+      const path = pillar.querySelector<SVGPathElement>("[data-fund-pillar-path]");
+      const number = pillar.querySelector<SVGTextElement>(".fund-number");
+      const cap = pillar.querySelector<SVGGElement>(".fund-cap");
+      const flutes = pillar.querySelector<SVGGElement>(".fund-flutes");
+      const colBase = pillar.querySelector<SVGGElement>(".fund-colbase");
+      const label = pillar.querySelector<SVGTextElement>(".fund-label");
+      const at = 0.7 + i * 0.75;
+
+      if (colBase) tl.to(colBase, { opacity: 1, duration: 0.4, ease: "power2.out" }, at);
+      if (path) tl.to(path, { strokeDashoffset: 0, duration: 0.8 }, at + 0.05);
+      if (flutes) tl.to(flutes, { opacity: 1, duration: 0.5, ease: "power2.out" }, at + 0.35);
+      if (cap) tl.to(cap, { opacity: 1, duration: 0.4, ease: "power2.out" }, at + 0.55);
+      if (number) tl.to(number, { opacity: 1, duration: 0.4, ease: "power2.out" }, at + 0.7);
+      if (label) tl.to(label, { opacity: 1, duration: 0.45, ease: "power2.out" }, at + 0.78);
+    });
+
+    // Entablement
+    if (lintel) tl.to(lintel, { strokeDashoffset: 0, duration: 0.85 }, "+=0.25");
+    if (entBands) tl.to(entBands, { opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.3");
+    if (glowEnt) tl.to(glowEnt, { opacity: 0.6, duration: 0.8, ease: "power2.out" }, "-=0.4");
+
+    // Giebel — äußere Flanken
+    if (roofLeft && roofRight) {
+      tl.to([roofLeft, roofRight], { strokeDashoffset: 0, duration: 1.05, ease: "power3.out" }, "+=0.2");
+    }
+
+    // Cornice (innere Flanken)
+    if (corniceLeft && corniceRight) {
+      tl.to([corniceLeft, corniceRight], { strokeDashoffset: 0, duration: 0.9, ease: "power3.out" }, "-=0.55");
+    }
+
+    // Giebel-Glow
+    if (glowPed) tl.to(glowPed, { opacity: 0.55, duration: 0.8, ease: "power2.out" }, "-=0.5");
+
+    // Tympanon-Inschrift
+    if (pedimentText) tl.to(pedimentText, { opacity: 1, duration: 0.7, ease: "power2.out" }, "-=0.4");
+
+    // First
+    if (apex) {
+      tl.fromTo(
+        apex,
+        { opacity: 0, scale: 0.35, svgOrigin: "450 50" },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2.2)" },
+        "-=0.15"
+      );
+    }
+
+    // Bemaßung
+    if (dimension) {
+      tl.to(dimension, { opacity: 1, duration: 0.7, ease: "power2.out" }, "+=0.3");
+    }
+
+    // First-Pulse-Ring (Loop)
+    if (pulse) {
+      const pulseLoop = gsap.timeline({ repeat: -1, repeatDelay: 0.6, delay: 7.2 });
+      pulseLoop.set(pulse, { attr: { r: 14 }, opacity: 0.6 });
+      pulseLoop.to(pulse, {
+        attr: { r: 30 },
+        opacity: 0,
+        duration: 1.8,
+        ease: "sine.out",
+      });
+
+      document.addEventListener(
+        "astro:before-swap",
+        () => { pulseLoop.kill(); },
+        { once: true }
+      );
+    }
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => { tl.kill(); },
+      { once: true }
+    );
+  }
+
+  initFundamentVisual();
+  document.addEventListener("astro:after-swap", initFundamentVisual);
+</script>
