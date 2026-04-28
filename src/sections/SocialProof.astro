@@ -132,16 +132,19 @@ const caseStudies = [
         <p class="text-text-primary text-lg md:text-xl leading-relaxed" data-cta-subline>
           Wenn du einschätzen willst, ob das auch für deine Marke funktioniert, lass uns sprechen.
         </p>
-        <a
-          href={calendlyUrl}
-          target="_blank"
-          rel="noopener"
-          data-calendly-trigger
-          class="group inline-flex items-center gap-2 text-accent-text font-medium mt-6 transition-colors duration-200 hover:text-text-primary"
-        >
-          <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">Kurzes Gespräch vereinbaren</span>
-          <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-        </a>
+        <div class="relative mt-6" data-cta-button>
+          <span class="cta-glow" aria-hidden="true"></span>
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener"
+            data-calendly-trigger
+            class="group relative inline-flex items-center gap-2 text-accent-text font-medium transition-colors duration-200 hover:text-text-primary"
+          >
+            <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">Kurzes Gespräch vereinbaren</span>
+            <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </a>
+        </div>
       </div>
     </div>
 
@@ -157,6 +160,50 @@ const caseStudies = [
   is:inline
   async
   src="https://assets.calendly.com/assets/external/widget.js"></script>
+
+<style>
+  .cta-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 320px;
+    height: 320px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.22) 0%,
+      rgba(76, 175, 130, 0.1) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    animation: cta-glow-pulse 6s ease-in-out infinite;
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  [data-cta-button]:hover .cta-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 0.95;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow {
+      animation: none;
+    }
+  }
+</style>
 
 <script>
   // Calendly Popup — gleicher Mechanismus wie auf /ueber-uns
@@ -250,7 +297,7 @@ const caseStudies = [
     // CTA area — subline + link fade
     if (ctaArea) {
       const ctaSubline = ctaArea.querySelector<HTMLElement>("[data-cta-subline]");
-      const ctaButton = ctaArea.querySelector<HTMLElement>("a");
+      const ctaButton = ctaArea.querySelector<HTMLElement>("[data-cta-button]");
 
       const fadeItems = [ctaSubline, ctaButton].filter(Boolean) as Element[];
       if (fadeItems.length) {

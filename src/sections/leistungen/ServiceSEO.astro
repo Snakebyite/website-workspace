@@ -18,7 +18,7 @@ const steps = [
   {
     title: "Positionierung",
     teaser: "Die Strategie, bevor das Listing kommt.",
-    body: `Deep Dive in die Kategorien: <strong class="text-text-primary font-medium">USPs</strong>, <strong class="text-text-primary font-medium">Differenzierungsmerkmale</strong>, <strong class="text-text-primary font-medium">Reviews</strong> aus Kunden- und Wettbewerbsperspektive. Daraus leiten wir ab, wie deine Marke und dein Produkt auf Amazon auftreten müssen, damit die echten Stärken sichtbar werden.`,
+    body: `Deep Dive in die Kategorien: <strong class="text-text-primary font-medium">USPs</strong>, <strong class="text-text-primary font-medium">Differenzierungsmerkmale</strong>, <strong class="text-text-primary font-medium">Reviews</strong> aus Kunden- und Wettbewerbsperspektive. Daraus leiten wir ein spezifisches Zielgruppenverständnis ab und wie deine Marke und dein Produkt auf Amazon auftreten müssen, damit die echten Stärken sichtbar werden.`,
   },
   {
     title: "Keyword-Architektur",
@@ -41,7 +41,7 @@ const steps = [
       Organische Sichtbarkeit
     </p>
     <h2 class="max-w-4xl">
-      Organische Käufe haben die höchste Marge. Alles, was du organisch liegen lässt, zahlst du in PPC nach.
+      Organische Käufe haben die beste Marge. Alles, was du organisch liegen lässt, zahlst du in PPC nach.
     </h2>
     <p class="mt-6 md:mt-8 max-w-3xl text-text-secondary text-lg leading-relaxed" data-seo-lead>
       Wer organisch nicht sichtbar ist, zahlt bei Amazon doppelt. Einmal für jeden PPC-Klick und ein zweites Mal, wenn Besucher auf einem Listing landen, das sie nicht überzeugt. Mit der <span class="text-accent-text font-medium">Rank Lift Organic</span> Methode bauen wir in vier Schritten das Listing, das beides kann: ranken und verkaufen.
@@ -200,24 +200,70 @@ const steps = [
     </div>
 
     <div class="mt-14 md:mt-20 flex justify-center" data-seo-cta>
-      <a
-        href={calendlyUrl}
-        target="_blank"
-        rel="noopener"
-        data-calendly-trigger
-        class="group inline-flex items-center gap-2 text-accent-text font-medium transition-colors duration-200 hover:text-text-primary"
-      >
-        <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">
-          Deine organische Sichtbarkeit optimieren
-        </span>
-        <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-      </a>
+      <div class="relative inline-flex" data-seo-cta-button>
+        <span class="cta-glow" aria-hidden="true"></span>
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener"
+          data-calendly-trigger
+          class="group relative inline-flex items-center gap-2 text-accent-text font-medium transition-colors duration-200 hover:text-text-primary"
+        >
+          <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">
+            Deine organische Sichtbarkeit optimieren
+          </span>
+          <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+        </a>
+      </div>
     </div>
 
   </div>
 </section>
 
 <style>
+  /* ─── CTA Glow ─── */
+  .cta-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.28) 0%,
+      rgba(76, 175, 130, 0.12) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    animation: cta-glow-pulse 6s ease-in-out infinite;
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  [data-seo-cta-button]:hover .cta-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow {
+      animation: none;
+    }
+  }
+
   /* ─── Timeline Segments ─── */
   .seo-seg-bg,
   .seo-seg-fill {

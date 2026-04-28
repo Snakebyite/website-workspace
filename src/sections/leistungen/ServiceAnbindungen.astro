@@ -100,18 +100,21 @@ const methode = [
     </div>
 
     <div class="mt-14 md:mt-20 flex justify-center" data-anbindungen-cta>
-      <a
-        href={calendlyUrl}
-        target="_blank"
-        rel="noopener"
-        data-calendly-trigger
-        class="group inline-flex items-center gap-2 text-accent-text font-medium transition-colors duration-200 hover:text-text-primary"
-      >
-        <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">
-          Deine Marktplätze anbinden
-        </span>
-        <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-      </a>
+      <div class="relative inline-flex" data-anbindungen-cta-button>
+        <span class="cta-glow" aria-hidden="true"></span>
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener"
+          data-calendly-trigger
+          class="group relative inline-flex items-center gap-2 text-accent-text font-medium transition-colors duration-200 hover:text-text-primary"
+        >
+          <span class="border-b border-transparent group-hover:border-current transition-colors duration-200">
+            Deine Marktplätze anbinden
+          </span>
+          <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+        </a>
+      </div>
     </div>
 
   </div>
@@ -194,3 +197,47 @@ const methode = [
   initAnbindungen();
   document.addEventListener("astro:after-swap", initAnbindungen);
 </script>
+
+<style>
+  .cta-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.28) 0%,
+      rgba(76, 175, 130, 0.12) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    animation: cta-glow-pulse 6s ease-in-out infinite;
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  [data-anbindungen-cta-button]:hover .cta-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow {
+      animation: none;
+    }
+  }
+</style>

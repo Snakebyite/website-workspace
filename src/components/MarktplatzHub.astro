@@ -4,6 +4,7 @@
 // simuliert eine Channable-Produktfeed-Ansicht mit Multi-Marketplace-Sync-Status.
 import { Store } from "@lucide/astro";
 import channableLogo from "../assets/leistungen/tools/channable.png";
+import miraklLogo from "../assets/leistungen/tools/mirakl.png";
 import amazonLogo from "../assets/leistungen/marketplaces/amazon.png";
 import ottoLogo from "../assets/leistungen/marketplaces/otto.png";
 import kauflandLogo from "../assets/leistungen/marketplaces/kaufland.png";
@@ -33,7 +34,8 @@ const rows = [
     <div class="cp-header">
       <div class="cp-brand">
         <img src={channableLogo.src} alt="Channable" class="cp-brand-logo" />
-        <span class="cp-brand-name">Feed-Hub</span>
+        <span class="cp-brand-divider"></span>
+        <img src={miraklLogo.src} alt="Mirakl" class="cp-brand-logo cp-brand-logo-mirakl" />
       </div>
       <div class="cp-live">
         <span class="cp-live-dot"></span>
@@ -62,7 +64,7 @@ const rows = [
     {/* ═══ FEED TABLE ═══ */}
     <div class="cp-feed">
       <div class="cp-feed-head">
-        <div class="cp-col-product">Produkt</div>
+        <div class="cp-col-product">Produkte</div>
         <div class="cp-col-channels">
           {marketplaces.map((mp) => (
             <div class="cp-col-ch">
@@ -168,12 +170,11 @@ const rows = [
     opacity: 0.95;
   }
 
-  .cp-brand-name {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(239, 239, 239, 0.95);
-    letter-spacing: -0.01em;
+  .cp-brand-divider {
+    width: 1px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.12);
+    flex-shrink: 0;
   }
 
   .cp-live {
@@ -382,6 +383,12 @@ const rows = [
     align-items: center;
     gap: 12px;
     min-width: 0;
+  }
+
+  .cp-feed-head .cp-col-product {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: rgba(220, 220, 220, 0.85);
   }
 
   .cp-thumb {

@@ -160,6 +160,22 @@ const fullTitle = `${title} | KFL Consulting`;
         return contentOffsetFromSection + lenisBias - desiredViewportY;
       };
 
+      // Skip entrance fade-ins inside the destination section so the user lands
+      // on a settled layout instead of seeing text/H2-words finish mid-arrival.
+      // Only touches ScrollTriggers flagged `once: true` — scrubbed timelines
+      // (Pin-Animations) are untouched.
+      const completeEntranceAnimations = (target: HTMLElement) => {
+        ScrollTrigger.getAll().forEach((st) => {
+          if (!st.vars.once) return;
+          const trigger = st.trigger;
+          if (!(trigger instanceof Element)) return;
+          if (trigger === target || target.contains(trigger)) {
+            st.animation?.progress(1);
+            st.kill();
+          }
+        });
+      };
+
       document.addEventListener("click", (e: MouseEvent) => {
         const link = (e.target as HTMLElement | null)?.closest(
           "a[href*='#']"
@@ -175,6 +191,7 @@ const fullTitle = `${title} | KFL Consulting`;
         if (!targetEl) return;
 
         e.preventDefault();
+        completeEntranceAnimations(targetEl);
         lenis.scrollTo(targetEl, { offset: computeAnchorOffset(targetEl) });
         history.pushState(null, "", url.hash);
       });
@@ -185,6 +202,7 @@ const fullTitle = `${title} | KFL Consulting`;
         const targetEl = document.getElementById(id);
         if (targetEl) {
           requestAnimationFrame(() => {
+            completeEntranceAnimations(targetEl);
             lenis.scrollTo(targetEl, {
               offset: computeAnchorOffset(targetEl),
               immediate: true,
