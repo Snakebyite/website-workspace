@@ -1,17 +1,17 @@
 ---
 // Testimonials Section — Homepage
 // Job: Bestätigung durch echte Kundenstimmen. Atempause zwischen Trust und CTA.
-// Layout: Links ausgerichtete Pyramide — gleicher Startpunkt, abnehmende max-width.
+// Layout: Zitat oben, Footer mit rechteckigem Avatar links + Name/Rolle (2 Zeilen) rechts.
 // Alle Quotes in Satoshi (font-body) — matched mit Problem/Lösungsansatz-Copy in SocialProof.
 // Density: NIEDRIG — das Zitat ist das Visual.
 // Background: default (#0A0A0A)
 
 const testimonials = [
   {
-    quote: '„Ihr habt uns wirklich entscheidend nach vorne gebracht. Und das sage ich nicht, weil ich es sagen muss, sondern weil ich es sagen will."',
-    name: 'Jan Sibbersen',
-    role: 'CEO & Gründer, sailfish',
-    photo: '/testimonials/jan-sibbersen.png',
+    quote: '„Wir arbeiten mit Kevin und seinem Team nun seit knapp 18 Monaten zusammen und ich kann meine wärmste Empfehlung aussprechen. Durch unsere Zusammenarbeit konnten wir unseren Absatz auf den Marktplätzen verdoppeln und dabei unseren Produkt, Bestellungs und Bestandspflegeprozess halbieren. Was ein grandioser Deal."',
+    name: 'Matthias Buchkärt',
+    role: 'Co-Gründer, Pack & Smooch',
+    photo: '/testimonials/matthias-buchkaert.png',
   },
   {
     quote: '„Während mein Umsatz um 14,1% zulegen konnte, hat sich mein Gewinn um 68,4% gesteigert. Dass die Agentur hält, was sie beim Thema organisches Wachstum verspricht, steht außer Frage."',
@@ -20,16 +20,16 @@ const testimonials = [
     photo: '/testimonials/stefanie-eusemann.png',
   },
   {
+    quote: '„Ihr habt uns wirklich entscheidend nach vorne gebracht. Und das sage ich nicht, weil ich es sagen muss, sondern weil ich es sagen will."',
+    name: 'Jan Sibbersen',
+    role: 'CEO & Gründer, sailfish',
+    photo: '/testimonials/jan-sibbersen.png',
+  },
+  {
     quote: '„Absoluter Profi, was Amazon angeht.\n100% Empfehlung."',
     name: 'Marius Klein',
     role: 'CEO & Gründer, Arider',
     photo: '/testimonials/marius-klein.png',
-  },
-  {
-    quote: '„Wir arbeiten mit Kevin und seinem Team nun seit knapp 18 Monaten zusammen und ich kann meine wärmste Empfehlung aussprechen. Durch unsere Zusammenarbeit konnten wir unseren Absatz auf den Marktplätzen verdoppeln und dabei unseren Produkt, Bestellungs und Bestandspflegeprozess halbieren. Was ein grandioser Deal."',
-    name: 'Matthias Buchkärt',
-    role: 'Co-Gründer, Pack & Smooch',
-    photo: '/testimonials/matthias-buchkaert.png',
   },
 ];
 ---
@@ -40,22 +40,22 @@ const testimonials = [
     <h2 class="max-w-2xl mb-12 md:mb-16">Echte Kundenstimmen.</h2>
 
     {testimonials.map((t, i) => (
-      <blockquote class:list={["max-w-4xl", i > 0 && "mt-12 md:mt-16"]}>
-        <p class="font-body font-normal text-xl md:text-2xl leading-relaxed text-text-primary whitespace-pre-line">
+      <blockquote class:list={["max-w-3xl", i > 0 && "mt-10 md:mt-14"]}>
+        <p class="font-body font-normal text-lg md:text-xl leading-relaxed text-text-primary whitespace-pre-line">
           {t.quote}
         </p>
-        <footer class="mt-6 flex items-center gap-3">
+        <footer class="mt-5 flex items-center gap-3">
           <img
             src={t.photo}
             alt={t.name}
-            width="80"
-            height="80"
+            width="128"
+            height="128"
             loading="lazy"
-            class="w-11 h-11 md:w-12 md:h-12 rounded-lg object-cover bg-surface shrink-0"
+            class="w-12 h-12 md:w-14 md:h-14 rounded-lg object-cover bg-surface shrink-0"
           />
           <div class="leading-tight">
-            <span class="font-body text-sm text-text-secondary">{t.name}</span>
-            <span class="font-body text-sm text-text-muted"> &middot; {t.role}</span>
+            <div class="font-body text-sm text-text-secondary">{t.name}</div>
+            <div class="font-body text-sm text-text-muted mt-0.5">{t.role}</div>
           </div>
         </footer>
       </blockquote>
@@ -68,9 +68,12 @@ const testimonials = [
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+  gsap.registerPlugin(ScrollTrigger);
+
   const section = document.querySelector("[data-testimonials]");
   if (section) {
     const quotes = section.querySelectorAll("blockquote");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     quotes.forEach((quote) => {
       const text = quote.querySelector("p");
@@ -98,5 +101,27 @@ const testimonials = [
           ease: "power2.out",
         }, "-=0.3");
     });
+
+    if (!prefersReducedMotion) {
+      gsap.set(quotes, { opacity: 0.35, transformOrigin: "left center" });
+
+      quotes.forEach((quote) => {
+        ScrollTrigger.create({
+          trigger: quote,
+          start: "center 75%",
+          end: "center 25%",
+          onToggle: (self) => {
+            gsap.to(quote, {
+              opacity: self.isActive ? 1 : 0.35,
+              scale: self.isActive ? 1.02 : 1,
+              duration: 0.5,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
+
+      ScrollTrigger.refresh();
+    }
   }
 </script>

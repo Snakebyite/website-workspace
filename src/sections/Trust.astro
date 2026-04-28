@@ -12,17 +12,19 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
 <section class="py-20 md:py-32" data-trust>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start lg:items-stretch">
 
-      <!-- Left: Foto — 4:5 Portrait -->
-      <div class="lg:col-span-5">
-        <div class="rounded-2xl overflow-hidden" data-trust-photo>
+      <!-- Left: Foto — auf Desktop ausgerichtet zwischen Body-Text-Top und Stats-Bottom -->
+      <div class="lg:col-span-5 lg:flex lg:flex-col lg:min-h-0">
+        <!-- Spacer (Desktop): spiegelt H2-Höhe + Spacing der rechten Spalte, damit das Bild bei der Body-Text-Oberkante startet -->
+        <h2 aria-hidden="true" class="hidden lg:block invisible whitespace-nowrap mb-8 md:mb-10">Warum es uns gibt.</h2>
+        <div class="rounded-2xl overflow-hidden lg:flex-1 lg:min-h-0 lg:relative" data-trust-photo>
           <Image
             src={duoPhoto}
             alt="Luca und Kevin, Gründer von KFL Consulting"
             widths={[480, 720, 960, 1280]}
             sizes="(max-width: 1024px) 100vw, 42vw"
-            class="w-full h-auto object-cover aspect-[4/5]"
+            class="w-full h-auto object-cover aspect-[4/5] lg:absolute lg:inset-0 lg:h-full lg:w-full lg:aspect-auto"
           />
         </div>
       </div>
@@ -79,7 +81,7 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
 
   const section = document.querySelector("[data-trust]");
   if (section) {
-    const h2 = section.querySelector("h2");
+    const h2 = section.querySelector("h2:not([aria-hidden])");
     const photo = section.querySelector("[data-trust-photo]");
     const paragraphs = section.querySelectorAll("p.text-lg");
     const ctaLink = section.querySelector('a[href="/ueber-uns"]');

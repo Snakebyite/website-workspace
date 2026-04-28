@@ -16,111 +16,169 @@
     <!-- Content grid: Dashboard left, Pain Points right — top & bottom aligned -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
 
-      <!-- Left: Dashboard Visual -->
+      <!-- Left: Cluster Visual -->
       <div class="lg:col-span-5 hidden lg:block" data-problem-visual>
-        <div class="relative rounded-2xl border border-white/5 bg-surface p-8 md:p-10 overflow-hidden h-full flex flex-col justify-between">
-          <!-- Subtle glow -->
-          <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(239,68,68,0.04)_0%,transparent_70%)] pointer-events-none"></div>
+        <div class="relative h-[600px] w-full">
 
-          <!-- Metric 1: Rising ACoS -->
-          <div class="relative" data-pv-metric="1">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">ACoS</span>
-              <span class="text-[13px] font-medium text-red-400/70">38,4 %</span>
+          <!-- Card: ACoS Mini-Chart (front-left) -->
+          <div
+            class="pv-card absolute rounded-2xl border border-white/5 bg-surface p-5"
+            style="top: 8px; left: -8px; width: 280px; transform: rotate(-3deg); z-index: 30;"
+            data-pv-card="acos"
+          >
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-medium tracking-[0.12em] uppercase text-text-muted">ACoS · 30 Tage</span>
+              <span class="text-[11px] font-medium text-red-400/80">38,4 %</span>
             </div>
-            <div class="h-[56px] w-full">
-              <svg class="w-full h-full" viewBox="0 0 320 56" fill="none" preserveAspectRatio="none">
+            <div class="h-[60px] w-full mt-2">
+              <svg class="w-full h-full" viewBox="0 0 220 60" fill="none" preserveAspectRatio="none">
                 <path
                   class="pv-area"
-                  d="M0 46 C40 44, 60 40, 100 36 C140 30, 170 28, 200 22 C230 16, 260 12, 320 6 L320 56 L0 56 Z"
-                  fill="rgba(239,68,68,0.06)"
+                  d="M0 50 C30 48, 50 44, 80 38 C110 32, 140 28, 170 18 C195 10, 210 6, 220 4 L220 60 L0 60 Z"
+                  fill="rgba(239,68,68,0.07)"
                   style="opacity:0;"
                 />
                 <path
                   class="pv-line"
-                  d="M0 46 C40 44, 60 40, 100 36 C140 30, 170 28, 200 22 C230 16, 260 12, 320 6"
-                  stroke="rgba(239,68,68,0.35)"
+                  d="M0 50 C30 48, 50 44, 80 38 C110 32, 140 28, 170 18 C195 10, 210 6, 220 4"
+                  stroke="rgba(239,68,68,0.55)"
                   stroke-width="1.5"
                   fill="none"
-                  style="opacity:0;"
                 />
-                <circle class="pv-dot" cx="320" cy="6" r="3.5" fill="rgba(239,68,68,0.6)" style="opacity:0;" />
+                <circle class="pv-dot" cx="220" cy="4" r="3" fill="rgba(239,68,68,0.8)" style="opacity:0;" />
               </svg>
             </div>
-          </div>
-
-          <!-- Divider -->
-          <div class="h-px bg-white/5 my-7"></div>
-
-          <!-- Metric 2: Platform friction — blocked accounts, rejected listings, rules -->
-          <div class="relative" data-pv-metric="2">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">Plattform-Status</span>
-              <span class="text-[13px] font-medium text-red-400/70">Kritisch</span>
-            </div>
-            <div class="space-y-2.5">
-              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
-                <svg class="w-3.5 h-3.5 text-red-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Account-Status</span>
-                <span class="text-[11px] text-red-400/70 shrink-0">Unter Review</span>
-              </div>
-              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
-                <svg class="w-3.5 h-3.5 text-red-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Flat-File abgelehnt</span>
-                <span class="text-[11px] text-red-400/70 shrink-0">47 Fehler</span>
-              </div>
-              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
-                <svg class="w-3.5 h-3.5 text-amber-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Support-Ticket</span>
-                <span class="text-[11px] text-amber-400/70 shrink-0">14 Tage offen</span>
-              </div>
-              <div class="pv-alert flex items-center gap-3" style="opacity:0;">
-                <svg class="w-3.5 h-3.5 text-amber-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                <span class="text-[12px] text-text-muted flex-1 min-w-0 truncate">Richtlinien-Update</span>
-                <span class="text-[11px] text-amber-400/70 shrink-0">3 neu/Monat</span>
-              </div>
+            <div class="mt-1 flex items-center justify-between text-[10px]">
+              <span class="text-text-muted">vs. Vormonat</span>
+              <span class="text-red-400/70 font-medium">+9,2 pp</span>
             </div>
           </div>
 
-          <!-- Divider -->
-          <div class="h-px bg-white/5 my-7"></div>
-
-          <!-- Metric 3: SEO backlog — internal resources missing -->
-          <div class="relative" data-pv-metric="3">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-[13px] font-medium tracking-wider uppercase text-text-muted">SEO-Aufgaben</span>
-              <span class="text-[13px] font-medium text-amber-400/70">Nicht gestartet</span>
+          <!-- Card: Support Ticket (top-right) -->
+          <div
+            class="pv-card absolute rounded-2xl border border-white/5 bg-surface p-5"
+            style="top: 24px; right: -16px; width: 272px; transform: rotate(2.5deg); z-index: 20;"
+            data-pv-card="ticket"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-medium tracking-[0.12em] uppercase text-text-muted">Ticket #4729</span>
+              <span class="pv-tag-pulse text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded-[3px] bg-red-500/[0.08] text-red-400/80 border border-red-500/15">Ohne Antwort</span>
             </div>
-            <div class="space-y-2.5">
-              <div class="pv-task flex items-center gap-3" style="opacity:0;">
-                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
-                <span class="text-[12px] text-text-muted flex-1">Keyword-Recherche</span>
-                <span class="text-[11px] text-amber-400/60">offen</span>
-              </div>
-              <div class="pv-task flex items-center gap-3" style="opacity:0;">
-                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
-                <span class="text-[12px] text-text-muted flex-1">Listings</span>
-                <span class="text-[11px] text-amber-400/60">offen</span>
-              </div>
-              <div class="pv-task flex items-center gap-3" style="opacity:0;">
-                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
-                <span class="text-[12px] text-text-muted flex-1">Content</span>
-                <span class="text-[11px] text-amber-400/60">offen</span>
-              </div>
-              <div class="pv-task flex items-center gap-3" style="opacity:0;">
-                <span class="w-3.5 h-3.5 rounded-[3px] border border-amber-400/30 bg-amber-400/[0.04] shrink-0"></span>
-                <span class="text-[12px] text-text-muted flex-1">Monitoring</span>
-                <span class="text-[11px] text-amber-400/60">offen</span>
-              </div>
+            <div class="pb-3 mb-3 border-b border-white/[0.04]">
+              <div class="text-[11px] font-medium text-text-primary/85">Amazon Seller Central</div>
+              <div class="text-[9px] text-text-muted mt-0.5">no-reply@amazon.com</div>
             </div>
-            <div class="mt-5 flex items-center gap-3">
-              <span class="text-[12px] text-text-muted/70 shrink-0">Interne Kapazität</span>
-              <div class="h-1.5 flex-1 rounded-full bg-white/5 overflow-hidden">
-                <div class="pv-capacity h-full rounded-full bg-red-400/50" style="width:0%;"></div>
-              </div>
-              <span class="text-[11px] text-red-400/70 shrink-0">14 % frei</span>
+            <div class="text-[12px] text-text-primary/85 font-medium leading-snug">
+              Re: Account Health Review
+            </div>
+            <div class="mt-3 space-y-1.5">
+              <div class="h-1.5 rounded-full bg-white/[0.06]" style="width: 100%;"></div>
+              <div class="h-1.5 rounded-full bg-white/[0.06]" style="width: 88%;"></div>
+              <div class="h-1.5 rounded-full bg-white/[0.06]" style="width: 72%;"></div>
+              <div class="h-1.5 rounded-full bg-white/[0.06]" style="width: 56%;"></div>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-white/[0.04] flex items-center justify-between text-[10px]">
+              <span class="text-text-muted">Geöffnet vor</span>
+              <span class="text-text-secondary font-medium">14 Tagen</span>
             </div>
           </div>
+
+          <!-- Card: Keyword-Recherche Backlog (back-center, biggest) -->
+          <div
+            class="pv-card absolute rounded-2xl border border-white/5 bg-surface p-5"
+            style="top: 220px; left: 18px; width: 308px; transform: rotate(-1deg); z-index: 10;"
+            data-pv-card="keywords"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-medium tracking-[0.12em] uppercase text-text-muted">Keyword-Recherche</span>
+              <span class="text-[10px] font-medium text-text-secondary">127 offen</span>
+            </div>
+            <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 text-[9px] uppercase tracking-wider text-text-muted/70 pb-1.5 border-b border-white/[0.04]">
+              <span>Keyword</span>
+              <span>SV</span>
+              <span class="w-12 text-right">KD</span>
+            </div>
+            <div class="mt-2 space-y-1.5">
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">ergonomischer bürostuhl</span>
+                <span class="text-text-secondary tabular-nums">22.000</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">68</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">schreibtischstuhl höhenverstellbar</span>
+                <span class="text-text-secondary tabular-nums">14.500</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">54</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">bürostuhl rückenfreundlich</span>
+                <span class="text-text-secondary tabular-nums">9.800</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">47</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">stuhl ergonomisch test</span>
+                <span class="text-text-secondary tabular-nums">8.100</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">39</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">gaming stuhl ergonomisch</span>
+                <span class="text-text-secondary tabular-nums">6.700</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">52</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">bürostuhl 150 kg belastbar</span>
+                <span class="text-text-secondary tabular-nums">4.200</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">31</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px]">
+                <span class="text-text-secondary truncate">drehstuhl höhenverstellbar</span>
+                <span class="text-text-secondary tabular-nums">3.900</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">28</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px] opacity-60">
+                <span class="text-text-muted truncate">netzstuhl atmungsaktiv</span>
+                <span class="text-text-muted tabular-nums">2.800</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">24</span>
+              </div>
+              <div class="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-[11px] opacity-40">
+                <span class="text-text-muted truncate">chefsessel mit lordosenstütze</span>
+                <span class="text-text-muted tabular-nums">2.100</span>
+                <span class="w-12 text-right text-text-muted tabular-nums">19</span>
+              </div>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-white/[0.04] text-[10px] text-text-muted text-center">
+              + 118 weitere unbearbeitet
+            </div>
+          </div>
+
+          <!-- Card: Flat-File Validation (front-right, smallest) -->
+          <div
+            class="pv-card absolute rounded-2xl border border-white/5 bg-surface p-5"
+            style="bottom: 56px; right: -8px; width: 232px; transform: rotate(2deg); z-index: 25;"
+            data-pv-card="listing"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-medium tracking-[0.12em] uppercase text-text-muted">Flat-File · Upload</span>
+              <span class="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded-[3px] bg-red-500/[0.08] text-red-400/80 border border-red-500/15">Abgelehnt</span>
+            </div>
+            <div class="text-[12px] text-text-primary/85 font-medium leading-snug">
+              47 Fehler in Validierung
+            </div>
+            <div class="mt-3 space-y-1 font-mono">
+              <div class="text-[10px] text-text-muted truncate">
+                <span class="text-red-400/70">row 12:</span> missing parent_sku
+              </div>
+              <div class="text-[10px] text-text-muted truncate">
+                <span class="text-red-400/70">row 28:</span> invalid ASIN format
+              </div>
+              <div class="text-[10px] text-text-muted truncate opacity-70">
+                <span class="text-red-400/60">row 41:</span> bullet exceeds 500
+              </div>
+              <div class="text-[10px] text-text-muted truncate opacity-50">
+                <span class="text-red-400/50">row 53:</span> duplicate offer
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -128,21 +186,36 @@
       <div class="lg:col-span-6 lg:col-start-7 flex flex-col gap-10 lg:gap-12">
         <div class="flex gap-5">
           <span class="shrink-0 w-10 text-text-primary text-lg font-semibold tracking-wide mt-1.5">01</span>
-          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Dein ACoS steigt, die <span class="text-accent-text font-medium">Marge schrumpft.</span> Organisch rankst du kaum, also musst du mehr Geld in PPC stecken, wenn du mehr Umsatz willst.
-          </p>
+          <div class="flex-1">
+            <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-primary leading-snug">
+              Dein ACoS steigt, die Marge schrumpft.
+            </h3>
+            <p class="text-base md:text-lg text-text-secondary leading-relaxed mt-3">
+              Organisch rankst du kaum, also musst du <span class="text-accent-text font-medium">mehr Geld in PPC stecken</span>, wenn du mehr Umsatz willst.
+            </p>
+          </div>
         </div>
         <div class="flex gap-5">
           <span class="shrink-0 w-10 text-text-primary text-lg font-semibold tracking-wide mt-1.5">02</span>
-          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            Gesperrte Accounts ohne Vorwarnung, ständig neue Regeln, abgelehnte Listings, Support-Tickets ohne Antwort. Amazon legt dir <span class="text-accent-text font-medium">Steine in den Weg</span> und kostet Nerven, aber du weißt: An der Plattform kommst du nicht vorbei.
-          </p>
+          <div class="flex-1">
+            <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-primary leading-snug">
+              Marktplätze und gute Listings sind aufwendig, dafür fehlt dir als Gründer die Zeit.
+            </h3>
+            <p class="text-base md:text-lg text-text-secondary leading-relaxed mt-3">
+              Keyword-Recherche, Content, Bilder, Monitoring sind eigene Disziplinen. Sich neben dem Tagesgeschäft einzuarbeiten, kostet <span class="text-accent-text font-medium">Ressourcen, die intern selten frei sind.</span>
+            </p>
+          </div>
         </div>
         <div class="flex gap-5">
           <span class="shrink-0 w-10 text-text-primary text-lg font-semibold tracking-wide mt-1.5">03</span>
-          <p class="text-xl md:text-2xl text-text-secondary leading-relaxed">
-            SEO auf Amazon ist ein eigenes Handwerk: Keyword-Recherche, Listings, Content, Monitoring. Sich neben dem Tagesgeschäft einzuarbeiten, kostet <span class="text-accent-text font-medium">Ressourcen, die intern selten frei sind.</span>
-          </p>
+          <div class="flex-1">
+            <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-primary leading-snug">
+              Amazon legt dir Steine in den Weg.
+            </h3>
+            <p class="text-base md:text-lg text-text-secondary leading-relaxed mt-3">
+              Gesperrte Accounts ohne Vorwarnung, ständig neue Regeln, abgelehnte Listings, Support-Tickets ohne Antwort. Aber <span class="text-accent-text font-medium">an der Plattform kommst du nicht vorbei.</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -168,8 +241,6 @@
       section.querySelectorAll("[style*='opacity:0']").forEach(el => {
         (el as HTMLElement).style.opacity = "1";
       });
-      const cap = section.querySelector<HTMLElement>(".pv-capacity");
-      if (cap) cap.style.width = "86%";
       return;
     }
 
@@ -197,54 +268,83 @@
         });
       });
 
-      // ── Dashboard Visual animation ──
+      // ── Cluster Visual animation ──
       const visual = section.querySelector<HTMLElement>("[data-problem-visual]");
       if (!visual) return;
 
-      gsap.set(visual, { opacity: 0, y: 20, scale: 0.95 });
+      const cards = visual.querySelectorAll<HTMLElement>(".pv-card");
+      // Capture each card's authored rotation so we can stagger from a flat state.
+      const cardRotations = Array.from(cards).map(card => {
+        const t = card.style.transform;
+        const m = t.match(/rotate\(([-\d.]+)deg\)/);
+        return m ? parseFloat(m[1]) : 0;
+      });
+
+      gsap.set(cards, { opacity: 0, y: 24, scale: 0.94, rotation: 0 });
 
       const tl = gsap.timeline({
         defaults: { ease: "power2.out" },
         scrollTrigger: { trigger: visual, start: "top 80%", once: true },
       });
 
-      tl.to(visual, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "back.out(1.4)" });
+      cards.forEach((card, i) => {
+        tl.to(card, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: cardRotations[i],
+          duration: 0.7,
+          ease: "back.out(1.2)",
+        }, i * 0.12);
+      });
 
-      const line = visual.querySelector(".pv-line");
-      const area = visual.querySelector(".pv-area");
-      const dot = visual.querySelector(".pv-dot");
+      // ACoS line draws on
+      const line = visual.querySelector<SVGPathElement>(".pv-line");
+      const area = visual.querySelector<SVGPathElement>(".pv-area");
+      const dot = visual.querySelector<SVGCircleElement>(".pv-dot");
 
       if (line) {
-        const lineEl = line as SVGPathElement;
-        const length = lineEl.getTotalLength();
-        gsap.set(lineEl, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
-        tl.to(lineEl, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, "-=0.2");
+        const length = line.getTotalLength();
+        gsap.set(line, { strokeDasharray: length, strokeDashoffset: length });
+        tl.to(line, { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, 0.3);
       }
-      if (area) tl.to(area, { opacity: 1, duration: 0.6 }, "-=0.6");
+      if (area) tl.to(area, { opacity: 1, duration: 0.6 }, "-=0.5");
       if (dot) tl.to(dot, { opacity: 1, duration: 0.3, ease: "back.out(2)" }, "-=0.2");
 
-      const alerts = visual.querySelectorAll<HTMLElement>(".pv-alert");
-      gsap.set(alerts, { x: -8 });
-      tl.to(alerts, { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" }, "-=0.3");
-
-      const tasks = visual.querySelectorAll<HTMLElement>(".pv-task");
-      gsap.set(tasks, { x: -8 });
-      tl.to(tasks, { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" }, "-=0.3");
-
-      const capacity = visual.querySelector<HTMLElement>(".pv-capacity");
-      if (capacity) {
-        tl.to(capacity, { width: "86%", duration: 0.9, ease: "power2.out" }, "-=0.2");
+      // Subtle pulse on the "Ohne Antwort" tag
+      const tag = visual.querySelector<HTMLElement>(".pv-tag-pulse");
+      if (tag) {
+        gsap.to(tag, {
+          opacity: 0.55,
+          duration: 1.4,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+          delay: 2.0,
+        });
       }
 
-      gsap.to(dot, {
-        scale: 1.4,
-        opacity: 0.3,
-        duration: 1.5,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-        delay: 2.5,
-        transformOrigin: "center center",
+      // Hover lift — Card scales up and pops above siblings
+      cards.forEach((card) => {
+        const baseZ = card.style.zIndex;
+        card.addEventListener("mouseenter", () => {
+          card.style.zIndex = "100";
+          gsap.to(card, {
+            scale: 1.06,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            scale: 1,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+            onComplete: () => { card.style.zIndex = baseZ; },
+          });
+        });
       });
 
     }, section);
