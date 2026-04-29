@@ -138,32 +138,81 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <!-- 9. Cookies -->
+      <!-- 9. Cookies und Cookie-Einwilligung -->
       <div>
-        <h2>9. Cookies</h2>
+        <h2>9. Cookies und Cookie-Einwilligung</h2>
         <p>
-          Unsere Internetseiten verwenden sogenannte "Cookies". Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert. Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese selbst löschen oder eine automatische Löschung durch Ihren Webbrowser erfolgt.
+          Unsere Internetseiten verwenden Cookies und vergleichbare Wiedererkennungstechnologien (z.&nbsp;B. Local Storage). Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden und dort keinen Schaden anrichten. Manche Cookies werden nach Ende Ihres Besuchs automatisch gelöscht (Session-Cookies), andere bleiben gespeichert, bis Sie diese löschen oder die Speicherdauer abläuft (permanente Cookies).
         </p>
         <p class="mt-2">
-          Cookies, die zur Durchführung des elektronischen Kommunikationsvorgangs, zur Bereitstellung bestimmter von Ihnen erwünschter Funktionen oder zur Optimierung der Website erforderlich sind (technisch notwendige Cookies), werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO und § 25 Abs. 2 TDDDG gespeichert. Der Websitebetreiber hat ein berechtigtes Interesse an der Speicherung von technisch notwendigen Cookies zur technisch fehlerfreien und optimierten Bereitstellung seiner Dienste.
+          Cookies, die zur Durchführung des elektronischen Kommunikationsvorgangs, zur Bereitstellung bestimmter von Ihnen erwünschter Funktionen oder zur Optimierung der Website erforderlich sind (technisch notwendige Cookies), werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO und § 25 Abs. 2 TDDDG gespeichert. Alle anderen Cookies werden nur mit Ihrer Einwilligung gesetzt (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG). Diese Einwilligung können Sie jederzeit für die Zukunft widerrufen.
         </p>
-        <p class="mt-2">
-          Sofern eine Einwilligung zur Speicherung von Cookies und vergleichbaren Wiedererkennungstechnologien abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage dieser Einwilligung (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG). Die Einwilligung ist jederzeit widerrufbar.
-        </p>
-        <p class="mt-2">
-          Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
-        </p>
+
         <h3 class="mt-4">Cookie-Kategorien</h3>
-        <p>Wir unterscheiden folgende Cookie-Kategorien:</p>
+        <p>Wir unterscheiden folgende Kategorien:</p>
         <ul class="mt-2">
-          <li><strong class="text-text-primary">Notwendige Cookies:</strong> Für Grundfunktionen der Website und zum Speichern Ihrer Cookie-Einstellungen erforderlich.</li>
-          <li><strong class="text-text-primary">Marketing-Cookies:</strong> Werden nach Ihrer Einwilligung gesetzt, um personalisierte Werbung auszuspielen und die Wirksamkeit von Werbemaßnahmen zu messen (z.&nbsp;B. Meta Pixel).</li>
+          <li><strong class="text-text-primary">Notwendig:</strong> Erforderlich für den Betrieb der Website, etwa um Ihre Cookie-Einstellungen zu speichern und Sicherheitsfunktionen bereitzustellen. Diese Cookies werden ohne Einwilligung gesetzt.</li>
+          <li><strong class="text-text-primary">Präferenzen:</strong> Ermöglichen es der Website, sich an Informationen zu erinnern, die das Verhalten oder Aussehen der Website beeinflussen, z.&nbsp;B. eine bevorzugte Sprache oder Region.</li>
+          <li><strong class="text-text-primary">Statistiken:</strong> Helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem Informationen anonym gesammelt und gemeldet werden. Wir nutzen hierfür Google Analytics 4 (siehe Abschnitt 13).</li>
+          <li><strong class="text-text-primary">Marketing:</strong> Werden eingesetzt, um die Wirksamkeit unserer Werbemaßnahmen zu messen und Besuchern relevante Inhalte auszuspielen. Wir nutzen hierfür den Meta Pixel (siehe Abschnitt 12).</li>
         </ul>
+
+        <h3 class="mt-4">Einwilligung erteilen, anpassen oder widerrufen</h3>
+        <p>
+          Beim ersten Besuch unserer Website werden Sie über ein Cookie-Banner informiert und können entscheiden, welche Kategorien Sie zulassen möchten. Sie können Ihre Einwilligung jederzeit anpassen oder vollständig widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.
+        </p>
+        <p class="mt-4">
+          <button
+            type="button"
+            onclick="if(window.Cookiebot){Cookiebot.renew();}"
+            class="inline-block bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-3 rounded-button transition-colors duration-200 cursor-pointer"
+          >
+            Cookie-Einstellungen ändern
+          </button>
+        </p>
+        <p class="mt-4">
+          Alternativ können Sie das Setzen von Cookies in den Einstellungen Ihres Browsers verhindern oder bereits gespeicherte Cookies löschen. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+        </p>
+
+        <h3 class="mt-4">Übersicht der eingesetzten Cookies</h3>
+        <p>
+          Die folgende Übersicht wird automatisch durch unser Consent-Management-Tool Cookiebot erzeugt und beim regelmäßigen Scan unserer Website aktualisiert. Sie zeigt alle Cookies und ähnlichen Technologien, die auf dieser Website eingesetzt werden, einschließlich Anbieter, Zweck und Speicherdauer.
+        </p>
+        <div class="mt-4 [&_*]:!text-text-secondary [&_a]:!text-accent-text [&_th]:!text-text-primary">
+          <script id="CookieDeclaration" src="https://consent.cookiebot.com/1d803fba-7ce8-44b4-a0a1-cd93eb5261fa/cd.js" type="text/javascript" async></script>
+        </div>
       </div>
 
-      <!-- 10. Tracking-Parameter -->
+      <!-- 10. Consent-Management mit Cookiebot -->
       <div>
-        <h2>10. Tracking-Parameter</h2>
+        <h2>10. Consent-Management mit Cookiebot</h2>
+        <p>
+          Zur Einholung, Verwaltung und rechtssicheren Dokumentation Ihrer Cookie-Einwilligungen setzen wir das Consent-Management-Tool Cookiebot ein. Anbieter ist die Cybot A/S, Havnegade 39, 1058 Kopenhagen K, Dänemark (nachfolgend "Cookiebot").
+        </p>
+        <p class="mt-2">
+          Beim Aufruf unserer Website wird das Cookiebot-Banner geladen und Ihre Einwilligung beziehungsweise Ihr Widerspruch zu bestimmten Cookie-Kategorien wird erfasst. Hierbei werden folgende Daten verarbeitet:
+        </p>
+        <ul class="mt-2">
+          <li>Ihre IP-Adresse (in anonymisierter Form)</li>
+          <li>Datum und Uhrzeit Ihrer Einwilligung</li>
+          <li>Informationen zu Ihrem Browser und Endgerät</li>
+          <li>ein anonymisierter, zufällig generierter Schlüssel zur Identifikation der Einwilligung</li>
+          <li>Ihr Einwilligungsstatus, der als Nachweis im Sinne von Art. 7 Abs. 1 DSGVO dient</li>
+        </ul>
+        <p class="mt-2">
+          Cookiebot speichert hierzu ein technisch notwendiges Cookie ("CookieConsent") in Ihrem Browser. Dieses Cookie hat eine Speicherdauer von 12 Monaten. Anschließend werden Sie erneut um Ihre Einwilligung gebeten.
+        </p>
+        <p class="mt-2">
+          Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit Art. 7 Abs. 1 DSGVO sowie § 25 Abs. 2 Nr. 2 TDDDG. Wir sind gesetzlich verpflichtet, eingeholte Einwilligungen nachweisen zu können. Mit Cookiebot haben wir einen Vertrag über Auftragsverarbeitung gemäß Art. 28 DSGVO geschlossen.
+        </p>
+        <p class="mt-2">
+          Weitere Informationen zur Datenverarbeitung durch Cookiebot finden Sie in der Datenschutzerklärung von Cybot: <a href="https://www.cookiebot.com/de/privacy-policy/" target="_blank" rel="noopener noreferrer">https://www.cookiebot.com/de/privacy-policy/</a>.
+        </p>
+      </div>
+
+      <!-- 11. Tracking-Parameter -->
+      <div>
+        <h2>11. Tracking-Parameter</h2>
         <p>
           Beim Besuch unserer Website können URL-Parameter wie UTM-Parameter, fbclid (Facebook Click-ID) oder andere Tracking-Parameter übermittelt werden. Diese Parameter werden verwendet, um die Herkunft Ihres Besuchs nachzuvollziehen und den Erfolg unserer Marketingmaßnahmen zu messen.
         </p>
@@ -172,9 +221,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <!-- 11. Meta Pixel -->
+      <!-- 12. Meta Pixel -->
       <div>
-        <h2>11. Meta Pixel (ehemals Facebook Pixel)</h2>
+        <h2>12. Meta Pixel (ehemals Facebook Pixel)</h2>
         <p>
           Diese Website nutzt zur Konversionsmessung den Besucheraktions-Pixel von Meta. Anbieter ist die Meta Platforms Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland. Die erfassten Daten werden laut Meta jedoch auch in die USA und in andere Drittländer übertragen.
         </p>
@@ -206,9 +255,42 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <!-- 12. Kontaktaufnahme -->
+      <!-- 13. Google Analytics 4 -->
       <div>
-        <h2>12. Kontaktaufnahme</h2>
+        <h2>13. Google Analytics 4</h2>
+        <p>
+          Diese Website nutzt Google Analytics 4 (GA4), einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland (nachfolgend "Google"). Google Analytics ermöglicht es uns, das Nutzerverhalten auf unserer Website auszuwerten und unser Angebot kontinuierlich zu verbessern.
+        </p>
+        <p class="mt-2">
+          Google Analytics verwendet Cookies und ähnliche Technologien, um Informationen über die Nutzung unserer Website zu erheben. Hierzu zählen unter anderem:
+        </p>
+        <ul class="mt-2">
+          <li>besuchte Seiten und Verweildauer</li>
+          <li>Klick- und Scrollverhalten</li>
+          <li>Geräteinformationen (Browser, Betriebssystem, Bildschirmauflösung)</li>
+          <li>ungefähre geografische Herkunft (IP-basiert, gekürzt)</li>
+          <li>Referrer-URL</li>
+        </ul>
+        <p class="mt-2">
+          Google Analytics 4 erfasst standardmäßig keine vollständigen IP-Adressen mehr. IP-Adressen werden vor jeder Verarbeitung gekürzt, sodass kein Personenbezug hergestellt werden kann. Eine Verknüpfung der erhobenen Daten mit anderen Daten von Google findet auf unserer Website nicht statt. Die Aufbewahrungsdauer der Nutzerdaten ist in unserer GA4-Property auf 14 Monate begrenzt.
+        </p>
+        <p class="mt-2">
+          Die Nutzung von Google Analytics erfolgt ausschließlich auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Ihre Einwilligung können Sie jederzeit über das Cookie-Banner oder den Button "Cookie-Einstellungen ändern" im Abschnitt 9 widerrufen.
+        </p>
+        <p class="mt-2">
+          Google verarbeitet Daten auch in den USA. Die Übermittlung in die USA erfolgt auf Grundlage des EU-US Data Privacy Framework, dem Google zertifiziert beigetreten ist (siehe <a href="https://www.dataprivacyframework.gov/list" target="_blank" rel="noopener noreferrer">www.dataprivacyframework.gov</a>). Ergänzend gelten die Standardvertragsklauseln der EU-Kommission.
+        </p>
+        <p class="mt-2">
+          Mit Google haben wir einen Vertrag über Auftragsverarbeitung gemäß Art. 28 DSGVO geschlossen.
+        </p>
+        <p class="mt-2">
+          Weitere Informationen zum Umgang mit Nutzerdaten bei Google Analytics finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>.
+        </p>
+      </div>
+
+      <!-- 14. Kontaktaufnahme -->
+      <div>
+        <h2>14. Kontaktaufnahme</h2>
         <p>
           Wenn Sie uns per E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus der Anfrage inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
         </p>
@@ -220,33 +302,54 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <!-- 13. Booking-Tool -->
+      <!-- 15. Calendly -->
       <div>
-        <h2>13. Booking-Tool (Terminbuchung)</h2>
+        <h2>15. Terminbuchung mit Calendly</h2>
         <p>
-          Wir bieten Ihnen die Möglichkeit, über ein eigenes Booking-Tool Termine mit uns zu buchen. Das Tool wird auf Servern der Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Deutschland gehostet.
+          Für die Vereinbarung von Terminen nutzen wir den Online-Terminplanungsdienst Calendly. Anbieter ist die Calendly LLC, 271 17th St NW, 10th Floor, Atlanta, GA 30363, USA (nachfolgend "Calendly").
         </p>
         <p class="mt-2">
-          Bei der Terminbuchung werden folgende Daten erhoben:
+          Calendly ist auf unserer Website als Popup-Widget eingebunden und wird erst geladen, wenn Sie aktiv den Button zur Terminbuchung anklicken. Bis zu diesem Zeitpunkt werden keine Daten an Calendly übermittelt und keine Cookies durch Calendly gesetzt.
+        </p>
+        <p class="mt-2">
+          Sobald Sie das Buchungsfenster öffnen und einen Termin buchen, verarbeitet Calendly insbesondere folgende Daten:
         </p>
         <ul class="mt-2">
           <li>Name</li>
           <li>E-Mail-Adresse</li>
-          <li>Ggf. weitere Angaben, die Sie im Buchungsformular machen</li>
+          <li>gewählter Termin (Datum, Uhrzeit, Zeitzone)</li>
+          <li>ggf. Telefonnummer sowie weitere Angaben, die Sie im Buchungsformular machen</li>
+          <li>technische Daten wie IP-Adresse, Browsertyp, Betriebssystem und Referrer-URL</li>
+          <li>Cookies und ähnliche Technologien, die Calendly zur Bereitstellung des Widgets setzt</li>
         </ul>
         <p class="mt-2">
-          Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO zur Durchführung vorvertraglicher Maßnahmen. Ihre Daten werden ausschließlich zur Terminvereinbarung und -abwicklung verwendet und nach Wegfall des Zwecks gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.
+          Die Verarbeitung Ihrer Buchungsdaten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO zur Durchführung vorvertraglicher Maßnahmen. Für die durch Calendly gesetzten Cookies und vergleichbaren Technologien ist zusätzlich Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG erforderlich. Diese Einwilligung können Sie jederzeit für die Zukunft widerrufen.
+        </p>
+        <p class="mt-2">
+          Calendly verarbeitet Daten auch in den USA. Die Übermittlung in die USA erfolgt auf Grundlage des EU-US Data Privacy Framework, dem Calendly zertifiziert beigetreten ist (siehe <a href="https://www.dataprivacyframework.gov/list" target="_blank" rel="noopener noreferrer">www.dataprivacyframework.gov</a>). Ergänzend gelten die Standardvertragsklauseln der EU-Kommission.
+        </p>
+        <p class="mt-2">
+          Mit Calendly haben wir einen Vertrag über Auftragsverarbeitung gemäß Art. 28 DSGVO geschlossen.
+        </p>
+        <p class="mt-2">
+          Die im Rahmen Ihrer Terminbuchung erhobenen Daten werden im Anschluss an unser CRM-System Close übertragen, um Ihre Anfrage dort zur Vorbereitung des Termins und zur weiteren Bearbeitung zu erfassen. Details zur Verarbeitung in Close finden Sie in Abschnitt 16.
+        </p>
+        <p class="mt-2">
+          Weitere Informationen zum Umgang mit Nutzerdaten bei Calendly finden Sie in der Datenschutzerklärung von Calendly: <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer">https://calendly.com/privacy</a>.
         </p>
       </div>
 
-      <!-- 14. Close CRM -->
+      <!-- 16. Close CRM -->
       <div>
-        <h2>14. CRM-System (Close)</h2>
+        <h2>16. CRM-System (Close)</h2>
         <p>
           Wir nutzen Close als Customer-Relationship-Management-System (CRM) zur Verwaltung unserer Kundenbeziehungen. Anbieter ist Elastic Inc., P.O. Box 495, Stony Brook, NY 11790, USA (nachfolgend "Close").
         </p>
         <p class="mt-2">
-          Wenn Sie uns kontaktieren oder einen Termin buchen, werden Ihre Kontaktdaten (z.&nbsp;B. Name, E-Mail-Adresse, Kommunikationsinhalte) in Close gespeichert und zur Bearbeitung Ihres Anliegens sowie zur Pflege der Geschäftsbeziehung verwendet.
+          Wenn Sie uns per E-Mail kontaktieren oder über Calendly einen Termin buchen, werden Ihre Kontaktdaten (Name, E-Mail-Adresse, ggf. Telefonnummer, Termin-Details und Kommunikationsinhalte) in Close gespeichert. Die Übertragung der über Calendly erhobenen Buchungsdaten an Close erfolgt automatisiert über eine Schnittstelle.
+        </p>
+        <p class="mt-2">
+          Diese Daten werden zur Vorbereitung und Durchführung des Termins, zur Bearbeitung Ihres Anliegens sowie zur Pflege der Geschäftsbeziehung verwendet.
         </p>
         <p class="mt-2">
           Die Nutzung von Close erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung und vorvertragliche Maßnahmen) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer effizienten Kundenverwaltung).
@@ -259,17 +362,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <!-- 15. Datenspeicherung -->
+      <!-- 17. Speicherdauer -->
       <div>
-        <h2>15. Speicherdauer</h2>
+        <h2>17. Speicherdauer</h2>
         <p>
           Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z.&nbsp;B. steuer- oder handelsrechtliche Aufbewahrungsfristen). Im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.
         </p>
       </div>
 
-      <!-- 16. Aktualität -->
+      <!-- 18. Aktualität -->
       <div>
-        <h2>16. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+        <h2>18. Aktualität und Änderung dieser Datenschutzerklärung</h2>
         <p>
           Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026. Durch die Weiterentwicklung unserer Website und Angebote oder aufgrund geänderter gesetzlicher beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern.
         </p>

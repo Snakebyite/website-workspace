@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 
 export default defineConfig({
-  site: 'https://kfl-consulting.com',
+  site: 'https://kfl-consulting.de',
   integrations: [sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],

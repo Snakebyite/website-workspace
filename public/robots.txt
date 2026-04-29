@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://kfl-consulting.com/sitemap.xml
+Sitemap: https://kfl-consulting.de/sitemap-index.xml

@@ -5,8 +5,9 @@ const navLinks = [
   { label: "Leistungen", href: "/leistungen" },
   { label: "Über uns", href: "/ueber-uns" },
   { label: "Referenzen", href: "/#referenzen" },
-  { label: "Kontakt", href: "/kontakt" },
 ];
+
+const bookingUrl = "https://calendly.com/kflconsulting/kennenlernen";
 
 const currentPath = Astro.url.pathname;
 ---
@@ -38,7 +39,9 @@ const currentPath = Astro.url.pathname;
 
       <!-- Desktop CTA — isolated right -->
       <a
-        href="/kontakt"
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         class="hidden md:inline-block bg-accent hover:bg-accent-hover text-background font-medium text-sm px-6 py-3 rounded-button transition-colors duration-200"
       >
         Termin buchen
@@ -78,7 +81,9 @@ const currentPath = Astro.url.pathname;
             </a>
           ))}
           <a
-            href="/kontakt"
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             class="bg-accent hover:bg-accent-hover text-background font-medium text-base px-6 py-3 rounded-button transition-colors duration-200 text-center mt-4"
           >
             Termin buchen
