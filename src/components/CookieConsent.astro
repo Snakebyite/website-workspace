@@ -1,13 +1,4 @@
 ---
-/**
- * Cookie Consent + Tracking Scripts
- *
- * Cookiebot (Auto-Blocking Mode):
- * - Must be the FIRST script in <head>
- * - Automatically detects and blocks GA4 & Meta Pixel until consent is given
- *
- */
-
 const GA_MEASUREMENT_ID = "G-SLVB4EXG5C";
 const META_PIXEL_ID = "1267793908896085";
 ---
@@ -17,17 +8,18 @@ const META_PIXEL_ID = "1267793908896085";
   id="Cookiebot"
   src="https://consent.cookiebot.com/uc.js"
   data-cbid="1d803fba-7ce8-44b4-a0a1-cd93eb5261fa"
-  data-blockingmode="auto"
+  data-blockingmode="manual"
   type="text/javascript"
 ></script>
 
-<!-- Google Analytics (GA4) — auto-blocked by Cookiebot until statistics consent -->
+<!-- Google Analytics 4 — loaded only after statistics consent -->
 <script
-  type="text/javascript"
+  type="text/plain"
+  data-cookieconsent="statistics"
   src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
   async
 ></script>
-<script type="text/javascript" define:vars={{ GA_MEASUREMENT_ID }}>
+<script type="text/plain" data-cookieconsent="statistics" define:vars={{ GA_MEASUREMENT_ID }}>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
@@ -36,8 +28,8 @@ const META_PIXEL_ID = "1267793908896085";
   gtag("config", GA_MEASUREMENT_ID);
 </script>
 
-<!-- Meta Pixel — auto-blocked by Cookiebot until marketing consent -->
-<script type="text/javascript" define:vars={{ META_PIXEL_ID }}>
+<!-- Meta Pixel — loaded only after marketing consent -->
+<script type="text/plain" data-cookieconsent="marketing" define:vars={{ META_PIXEL_ID }}>
   !(function (f, b, e, v, n, t, s) {
     if (f.fbq) return;
     n = f.fbq = function () {
@@ -62,12 +54,19 @@ const META_PIXEL_ID = "1267793908896085";
   fbq("init", META_PIXEL_ID);
   fbq("track", "PageView");
 </script>
-<noscript>
-  <img
-    height="1"
-    width="1"
-    style="display:none"
-    src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-    alt=""
-  />
-</noscript>
+
+<!-- Calendly-Click → Meta Pixel Lead-Event (self-gated: fbq exists only after marketing consent) -->
+<script>
+  document.addEventListener(
+    "click",
+    (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      const link = target.closest('a[href*="calendly.com"]');
+      if (link && window.fbq) {
+        window.fbq("track", "Lead");
+      }
+    },
+    { passive: true }
+  );
+</script>
