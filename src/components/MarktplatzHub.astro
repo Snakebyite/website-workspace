@@ -5,17 +5,10 @@
 import { Store } from "@lucide/astro";
 import channableLogo from "../assets/leistungen/tools/channable.png";
 import miraklLogo from "../assets/leistungen/tools/mirakl.png";
-import amazonLogo from "../assets/leistungen/marketplaces/amazon.png";
-import ottoLogo from "../assets/leistungen/marketplaces/otto.png";
-import kauflandLogo from "../assets/leistungen/marketplaces/kaufland.png";
-import ebayLogo from "../assets/leistungen/marketplaces/ebay.png";
 
-const marketplaces = [
-  { name: "Amazon", logo: amazonLogo },
-  { name: "Otto", logo: ottoLogo },
-  { name: "Kaufland", logo: kauflandLogo },
-  { name: "eBay", logo: ebayLogo },
-];
+// Vier Kanäle als abstrakte Slots — Marktplatz-Namen wurden entfernt,
+// die Sync-Dots tragen die Multi-Channel-Aussage allein.
+const channelSlots = [0, 1, 2, 3];
 
 // Product rows: varied bar widths + last-sync-seconds für organisches Feeling
 const rows = [
@@ -65,13 +58,7 @@ const rows = [
     <div class="cp-feed">
       <div class="cp-feed-head">
         <div class="cp-col-product">Produkte</div>
-        <div class="cp-col-channels">
-          {marketplaces.map((mp) => (
-            <div class="cp-col-ch">
-              <img src={mp.logo.src} alt={mp.name} class="cp-mono" />
-            </div>
-          ))}
-        </div>
+        <div class="cp-col-channels cp-col-channels-head">Kanäle</div>
         <div class="cp-col-sync">Sync</div>
       </div>
 
@@ -86,7 +73,7 @@ const rows = [
               </div>
             </div>
             <div class="cp-col-channels">
-              {marketplaces.map(() => (
+              {channelSlots.map(() => (
                 <div class="cp-col-ch">
                   <span class="cp-dot" data-dot></span>
                 </div>
@@ -298,11 +285,6 @@ const rows = [
     flex-shrink: 0;
   }
 
-  /* Logos: opazitätsreduziert, ohne Filter (PNGs sind bereits weiß-auf-dark) */
-  .cp-mono {
-    opacity: 0.8;
-  }
-
   /* ═══ FEED TABLE ═══ */
   .cp-feed {
     padding: 18px 0;
@@ -327,32 +309,24 @@ const rows = [
     display: flex;
     gap: 14px;
     align-items: center;
+    justify-content: center;
   }
 
   .cp-col-ch {
-    width: 110px;
+    width: 22px;
     height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* Header-Zeile: größere Höhe für Logos — Body-Rows bleiben kompakt */
-  .cp-feed-head .cp-col-ch {
-    height: 96px;
-  }
-
-  .cp-col-ch img {
-    height: 68px;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    opacity: 0.8;
-  }
-
-  /* Kaufland-Logo hat viel Whitespace im PNG — extra Boost für visuelle Balance */
-  .cp-feed-head .cp-col-channels .cp-col-ch:nth-child(3) img {
-    height: 90px;
+  /* Header-Label "Kanäle": gleiche Typo wie "Produkte" / "Sync",
+     mit Mindestbreite damit es bündig über den 4 Dots sitzt. */
+  .cp-col-channels-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 130px;
   }
 
   .cp-col-sync {
@@ -520,26 +494,16 @@ const rows = [
       display: none;
     }
 
+    /* Mobile: Kanäle-Spalte komplett ausblenden — die Dots-Reihe wirkt
+       in schmaler Breite gequetscht. Header bleibt: Produkte + Sync. */
     .cp-col-channels {
-      gap: 8px;
+      display: none;
     }
 
-    .cp-col-ch {
-      width: 70px;
-      height: 16px;
-    }
-
-    .cp-feed-head .cp-col-ch {
-      height: 28px;
-    }
-
-    .cp-col-ch img {
-      height: 26px;
-    }
-
-    .cp-dot {
-      width: 7px;
-      height: 7px;
+    .cp-feed-head,
+    .cp-row {
+      grid-template-columns: 1fr auto;
+      gap: 16px;
     }
 
     .cp-footer {

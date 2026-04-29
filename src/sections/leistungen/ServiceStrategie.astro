@@ -123,6 +123,20 @@ const calendlyUrl =
     gap: 1.5rem;
   }
 
+  /* Auf Mobile alle drei Visuals (Analyse, Roadmap, Sparring) komplett
+     ausblenden. Die Step-Texte links erzählen die Story allein, ohne
+     Animations-Risiken auf Phones. Desktop bleibt unberührt. */
+  @media (max-width: 1023px) {
+    [data-strategie-visual-stack] {
+      display: none;
+    }
+    /* Auf Mobile gibt es kein "aktiver Step / inaktiver Step"-Konzept
+       (kein Pin, kein Visual-Wechsel) — alle Steps gleich hell anzeigen. */
+    [data-strategie-steps] .step {
+      opacity: 1;
+    }
+  }
+
   @media (min-width: 1024px) {
     [data-strategie-visual-stack] {
       position: relative;

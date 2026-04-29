@@ -290,10 +290,16 @@ const stations = [
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
     const usesPin = wrap.dataset.pinControlled === "true" && isDesktop;
 
+    // Wenn die Canvas display:none ist (z.B. Roadmap-Visual auf Mobile in
+    // ServiceStrategie ausgeblendet), keinen ScrollTrigger erzeugen — sonst
+    // feuert der Trigger sofort (rect 0,0,0,0 liegt "über" allen Start-Points)
+    // und stört unter Umständen Nachbar-Trigger.
+    const isVisible = canvas.offsetParent !== null;
+
     const ctx = gsap.context(() => {
       if (usesPin) {
         wrap.addEventListener("activate-visual", playSequence);
-      } else {
+      } else if (isVisible) {
         ScrollTrigger.create({
           trigger: canvas,
           start: "top 80%",

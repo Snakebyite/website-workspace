@@ -164,13 +164,17 @@ const fullTitle = `${title} | KFL Consulting`;
       // on a settled layout instead of seeing text/H2-words finish mid-arrival.
       // Only touches ScrollTriggers flagged `once: true` — scrubbed timelines
       // (Pin-Animations) are untouched.
+      // Callback-only triggers (kein .animation, z.B. Magnifier-Reveal) bleiben
+      // ungekillt, damit ihr onEnter beim Scroll noch feuern kann — sonst hängen
+      // sie im Initial-State fest (z.B. Lupe nie sichtbar, Sharp-Layer maskiert).
       const completeEntranceAnimations = (target: HTMLElement) => {
         ScrollTrigger.getAll().forEach((st) => {
           if (!st.vars.once) return;
+          if (!st.animation) return;
           const trigger = st.trigger;
           if (!(trigger instanceof Element)) return;
           if (trigger === target || target.contains(trigger)) {
-            st.animation?.progress(1);
+            st.animation.progress(1);
             st.kill();
           }
         });
