@@ -23,30 +23,32 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
     </div>
 
     <!-- Wide Hero-Photo (gesplittet: links Luca, rechts Kevin)
-         Justier-Parameter in --img-y-luca / --img-y-kevin (0% oben, 100% unten)
-         und --split-gap (sichtbare Trennung zwischen den Hälften, 0 = nahtlos). -->
+         Justier-Parameter --img-y-luca / --img-y-kevin (0% oben, 100% unten)
+         und --split-gap. Werte mobile vs. desktop im <style>-Block unten. -->
     <div
       class="mt-5 md:mt-6"
       data-ueber-hero-image
-      style="--img-y-luca: 0%; --img-y-kevin: 17%; --split-gap: 0px;"
     >
       <div
         class="relative rounded-2xl"
         style="box-shadow: 0 0 160px 8px rgba(76, 175, 130, 0.10);"
       >
         <div
-          class="flex rounded-2xl overflow-hidden h-[34vh] md:h-[44vh] min-h-[240px] max-h-[520px]"
+          class="flex rounded-2xl overflow-hidden h-[28vh] md:h-[44vh] min-h-[200px] md:min-h-[240px] max-h-[520px]"
           data-ueber-hero-image-inner
           style="gap: var(--split-gap);"
         >
           <!-- Linke Hälfte: Luca -->
           <div class="relative flex-1 overflow-hidden">
-            <div class="absolute inset-y-0 left-0 w-[200%] h-full">
+            <div
+              class="absolute inset-y-0 w-[260%] md:w-[200%] h-full"
+              style="left: calc(0% - var(--img-x-luca));"
+            >
               <Image
                 src={heroBild}
                 alt="Luca, Mitgründer von Telos"
                 widths={[800, 1280, 1600, 2000]}
-                sizes="(max-width: 1280px) 100vw, 1280px"
+                sizes="(max-width: 767px) 130vw, (max-width: 1280px) 100vw, 1280px"
                 class="w-full h-full object-cover block"
                 style="object-position: 0% var(--img-y-luca);"
                 loading="eager"
@@ -56,12 +58,15 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
 
           <!-- Rechte Hälfte: Kevin -->
           <div class="relative flex-1 overflow-hidden">
-            <div class="absolute inset-y-0 right-0 w-[200%] h-full">
+            <div
+              class="absolute inset-y-0 w-[260%] md:w-[200%] h-full"
+              style="right: calc(0% - var(--img-x-kevin));"
+            >
               <Image
                 src={heroBild}
                 alt="Kevin, Mitgründer von Telos"
                 widths={[800, 1280, 1600, 2000]}
-                sizes="(max-width: 1280px) 100vw, 1280px"
+                sizes="(max-width: 767px) 130vw, (max-width: 1280px) 100vw, 1280px"
                 class="w-full h-full object-cover block"
                 style="object-position: 100% var(--img-y-kevin);"
                 loading="eager"
@@ -83,13 +88,13 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
     <!-- Story-Block: 3 Spalten, Overlines + Bodies jeweils auf gleicher Höhe via subgrid.
          mt-auto drückt den Block an den unteren Viewport-Rand. -->
     <div
-      class="mt-auto pt-8 md:pt-12 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_1fr] gap-x-6 md:gap-x-12 gap-y-2"
+      class="mt-auto pt-8 md:pt-12 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_1fr] gap-x-6 md:gap-x-12 gap-y-8 md:gap-y-2"
       data-ueber-hero-story
     >
 
       <div class="story-col md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-3" data-ueber-hero-story-col>
         <span class="story-col-overline block text-xs font-medium tracking-[0.08em] uppercase text-accent-text">
-          01 · Wie wir uns fanden
+          01 · Wie wir uns kennengelernt haben
         </span>
         <p class="text-[15px] md:text-base text-text-secondary leading-relaxed">
           Wir haben uns im Master kennengelernt. Kevin war bereits seit Jahren als Freelancer im E-Commerce unterwegs und hat einen Partner gesucht, um das Ganze zu skalieren. Schnell haben wir gemerkt, wie gut sich unsere Stärken ergänzen.
@@ -183,6 +188,28 @@ import heroBild from "../../assets/ueber-uns/gleiches-bild-wie-hero-startseite-4
 </script>
 
 <style>
+  /* Hero-Bild: vertikale Justierung der beiden Hälften.
+     Mobile: Inner-Container ist breiter (w-260%) → vertikaler Crop möglich,
+     daher braucht Kevin einen stärkeren Y-Shift, damit die Köpfe gleich hoch
+     sitzen. Desktop-Werte unverändert. */
+  [data-ueber-hero-image] {
+    --img-y-luca: 0%;
+    --img-y-kevin: 33%;
+    --img-x-luca: 30%;
+    --img-x-kevin: 35%;
+    --split-gap: 0px;
+  }
+
+  @media (min-width: 768px) {
+    [data-ueber-hero-image] {
+      --img-y-luca: 0%;
+      --img-y-kevin: 17%;
+      --img-x-luca: 0%;
+      --img-x-kevin: 0%;
+      --split-gap: 0px;
+    }
+  }
+
   /* Story-Spalten: Accent-Bar unter Overline wächst beim Hover der Spalte. */
   .story-col-overline {
     position: relative;

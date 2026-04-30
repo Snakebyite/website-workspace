@@ -6,7 +6,7 @@ import StaatlichBadge from "../../components/StaatlichBadge.astro";
 import FundamentVisual from "../../components/FundamentVisual.astro";
 ---
 
-<section class="-mt-36 md:-mt-48 pt-36 md:pt-44 pb-12 md:pb-16" data-leistungen-hero>
+<section class="-mt-36 md:-mt-48 pt-28 md:pt-44 pb-12 md:pb-16" data-leistungen-hero>
   <div class="mx-auto max-w-7xl px-4 md:px-8">
 
     <!-- Centered Text Block -->
@@ -15,13 +15,13 @@ import FundamentVisual from "../../components/FundamentVisual.astro";
         Skalieren funktioniert nur, wenn die <span class="text-accent-text">Basis</span> sitzt.
       </h1>
 
-      <p class="mx-auto mt-8 max-w-2xl text-text-secondary text-lg md:text-xl leading-relaxed" data-hero-sub>
+      <p class="mx-auto mt-8 max-w-2xl text-text-secondary text-base md:text-xl leading-relaxed" data-hero-sub>
         Sichtbarkeit, Strategie, Anbindungen. Wer diese drei Bausteine überspringt, verbrennt spätestens im Wachstum Geld in PPC, ohne die erhofften Renditen zu sehen.
       </p>
     </div>
 
     <!-- Fundament-Visual, zentriert -->
-    <div class="mx-auto mt-10 md:mt-16 max-w-4xl" data-hero-visual>
+    <div class="mx-auto mt-4 md:mt-6 max-w-4xl" data-hero-visual>
       <FundamentVisual />
     </div>
 
@@ -34,43 +34,84 @@ import FundamentVisual from "../../components/FundamentVisual.astro";
         <span class="block text-xl md:text-2xl font-bold tracking-tight text-text-primary" data-count="30000" data-count-suffix="+" data-count-separator=".">0</span>
         <span class="block text-xs md:text-sm text-text-muted mt-1">Produkte gelistet</span>
       </div>
-      <div class="text-center">
+      <div class="text-center order-3 md:order-none">
         <span class="block text-xl md:text-2xl font-bold tracking-tight text-text-primary" data-count="5000" data-count-suffix="+" data-count-separator=".">0</span>
         <span class="block text-xs md:text-sm text-text-muted mt-1">Listings optimiert</span>
       </div>
-      <div class="text-center">
+      <div class="text-center order-2 md:order-none">
         <span class="block text-xl md:text-2xl font-bold tracking-tight text-text-primary" data-count="140" data-count-suffix="+">0</span>
         <span class="block text-xs md:text-sm text-text-muted mt-1">Marktplatz-Setups</span>
       </div>
     </div>
 
-    <!-- Anchor-Row — zentriert -->
-    <nav class="mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 md:gap-x-12" aria-label="Leistungen" data-hero-anchors>
-      <a
-        href="#organische-sichtbarkeit"
-        class="anchor-link group inline-flex items-center gap-3.5 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
-      >
-        <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
-        <span>Organische Sichtbarkeit</span>
-      </a>
-      <a
-        href="#marktplatz-strategie"
-        class="anchor-link group inline-flex items-center gap-3.5 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
-      >
-        <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
-        <span>Marktplatz-Strategie</span>
-      </a>
-      <a
-        href="#marktplatz-anbindungen"
-        class="anchor-link group inline-flex items-center gap-3.5 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
-      >
-        <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
-        <span>Marktplatz-Anbindungen</span>
-      </a>
-    </nav>
+    <!-- Anchor-Row — zentriert (Desktop) / Kachel mit Tap-Cards + Glow (Mobile) -->
+    <div class="relative md:static mt-44 md:mt-16">
+      <span class="hero-anchors-glow md:hidden" aria-hidden="true"></span>
+    <div class="rounded-2xl border border-white/10 bg-surface overflow-hidden md:bg-transparent md:border-0 md:rounded-none md:overflow-visible">
+      <nav class="flex flex-col divide-y divide-white/10 md:flex-row md:flex-wrap md:divide-y-0 md:items-center md:justify-center md:gap-x-12 md:gap-y-5" aria-label="Leistungen" data-hero-anchors>
+        <a
+          href="#organische-sichtbarkeit"
+          class="anchor-link group flex md:inline-flex items-center gap-3.5 px-5 md:px-0 py-4 md:py-0 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
+        >
+          <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+          <span>Organische Sichtbarkeit</span>
+          <svg class="ml-auto h-5 w-5 text-text-muted md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a
+          href="#marktplatz-strategie"
+          class="anchor-link group flex md:inline-flex items-center gap-3.5 px-5 md:px-0 py-4 md:py-0 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
+        >
+          <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+          <span>Marktplatz-Strategie</span>
+          <svg class="ml-auto h-5 w-5 text-text-muted md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a
+          href="#marktplatz-anbindungen"
+          class="anchor-link group flex md:inline-flex items-center gap-3.5 px-5 md:px-0 py-4 md:py-0 font-body text-[1.125rem] md:text-[1.375rem] font-medium leading-tight text-text-primary transition-colors duration-200 hover:text-accent-text"
+        >
+          <span class="anchor-bar block h-5 md:h-6 w-[2px] shrink-0 rounded-full bg-accent-text/70 transition-colors duration-300 ease-out group-hover:bg-accent-text" aria-hidden="true"></span>
+          <span>Marktplatz-Anbindungen</span>
+          <svg class="ml-auto h-5 w-5 text-text-muted md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </nav>
+    </div>
+    </div>
 
   </div>
 </section>
+
+<style>
+  .hero-anchors-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.28) 0%,
+      rgba(76, 175, 130, 0.12) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    animation: hero-anchors-glow-pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes hero-anchors-glow-pulse {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-anchors-glow {
+      animation: none;
+    }
+  }
+</style>
 
 <script>
   import { gsap } from "gsap";

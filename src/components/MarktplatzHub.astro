@@ -500,6 +500,26 @@ const rows = [
       display: none;
     }
 
+    /* Mobile: nur 3 Produktzeilen zeigen, die letzten zwei ausblenden. */
+    .cp-row[data-row="3"],
+    .cp-row[data-row="4"] {
+      display: none;
+    }
+
+    /* Mobile: Live-Indikator weg, Logos auf volle Breite verteilen. */
+    .cp-live {
+      display: none;
+    }
+
+    .cp-brand {
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .cp-brand-divider {
+      display: none;
+    }
+
     .cp-feed-head,
     .cp-row {
       grid-template-columns: 1fr auto;

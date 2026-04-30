@@ -7,15 +7,21 @@ import Trust from "../sections/Trust.astro";
 import SocialProof from "../sections/SocialProof.astro";
 import Testimonials from "../sections/Testimonials.astro";
 import CTA from "../sections/CTA.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 ---
 
 <BaseLayout title="Home">
   <div class="grid-bg">
     <Hero />
+    <SectionDivider />
     <Problem />
+    <SectionDivider />
     <Leistungen />
+    <SectionDivider />
     <SocialProof />
+    <SectionDivider />
     <Trust />
+    <SectionDivider />
     <Testimonials />
     <CTA />
   </div>

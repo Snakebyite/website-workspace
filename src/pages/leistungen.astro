@@ -6,6 +6,7 @@ import ServiceStrategie from "../sections/leistungen/ServiceStrategie.astro";
 import ServiceAnbindungen from "../sections/leistungen/ServiceAnbindungen.astro";
 import WeitereLeistungen from "../sections/leistungen/WeitereLeistungen.astro";
 import LeistungenCTA from "../sections/leistungen/LeistungenCTA.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 ---
 
 <BaseLayout
@@ -14,10 +15,12 @@ import LeistungenCTA from "../sections/leistungen/LeistungenCTA.astro";
 >
   <div class="grid-bg">
     <LeistungenHero />
-
     <ServiceSEO />
+    <SectionDivider />
     <ServiceAnbindungen />
+    <SectionDivider />
     <ServiceStrategie />
+    <SectionDivider />
     <WeitereLeistungen />
     <LeistungenCTA />
   </div>

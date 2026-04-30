@@ -18,13 +18,14 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
       <div class="lg:col-span-5 lg:flex lg:flex-col lg:min-h-0">
         <!-- Spacer (Desktop): spiegelt H2-Höhe + Spacing der rechten Spalte, damit das Bild bei der Body-Text-Oberkante startet -->
         <h2 aria-hidden="true" class="hidden lg:block invisible whitespace-nowrap mb-8 md:mb-10">Warum es uns gibt.</h2>
+        <h2 class="lg:hidden mb-6">Warum es uns gibt.</h2>
         <div class="rounded-2xl overflow-hidden lg:flex-1 lg:min-h-0 lg:relative" data-trust-photo>
           <Image
             src={duoPhoto}
             alt="Luca und Kevin, Gründer von KFL Consulting"
             widths={[480, 720, 960, 1280]}
             sizes="(max-width: 1024px) 100vw, 42vw"
-            class="w-full h-auto object-cover aspect-[4/5] lg:absolute lg:inset-0 lg:h-full lg:w-full lg:aspect-auto"
+            class="w-full h-auto object-cover object-top aspect-square lg:absolute lg:inset-0 lg:h-full lg:w-full lg:aspect-auto lg:object-center"
           />
         </div>
       </div>
@@ -32,13 +33,13 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
       <!-- Right: Content-Stack -->
       <div class="lg:col-span-7">
 
-        <h2 class="max-w-2xl">Warum es uns gibt.</h2>
+        <h2 class="hidden lg:block max-w-2xl">Warum es uns gibt.</h2>
 
-        <div class="mt-8 md:mt-10 space-y-5">
-          <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+        <div class="mt-0 lg:mt-10 space-y-5">
+          <p class="text-base md:text-xl text-text-secondary leading-relaxed" data-trust-p>
             Wir sind Luca und Kevin, Gründer von KFL Consulting. Kennengelernt haben wir uns im Master Innovationsmanagement. Luca kommt aus der Industrie, von Mercedes, Allianz und Porsche. Seit dem Master ist er tief in KI und Automatisierung und baut die Systeme, mit denen wir Arbeit auf Marktplätzen skalieren, die sonst manuell liegen bleibt. Kevin beschäftigt sich seit über sieben Jahren mit digitalen Marktplätzen und hat Bachelor- und Masterarbeit zum Amazon-Algorithmus geschrieben.
           </p>
-          <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+          <p class="text-base md:text-xl text-text-secondary leading-relaxed" data-trust-p>
             Wir haben zu viele Brands gesehen, die auf Marktplätzen Potenzial liegen lassen. Nicht, weil die Produkte schlecht sind, sondern weil Full-Service-Agenturen nach Schema X abarbeiten, statt den eigentlichen Hebel anzusetzen. Wir arbeiten als <span class="text-accent-text">Best Interest Advisor</span>: reindenken, Engpässe identifizieren und dort ansetzen, wo der größte Hebel liegt.
           </p>
         </div>
@@ -51,20 +52,22 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
         </a>
 
         <!-- Stats + Badge — kompakte Zeile -->
-        <div class="mt-10 md:mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 md:gap-x-10 md:gap-y-6" data-trust-stats>
-          <div>
+        <div class="mt-10 md:mt-12 grid grid-cols-3 gap-y-6 items-center md:flex md:flex-wrap md:gap-x-10 md:gap-y-6" data-trust-stats>
+          <div class="text-center md:text-left">
             <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">80+</span>
             <span class="font-body block text-sm text-text-muted mt-1">Marken</span>
           </div>
-          <div>
+          <div class="text-center md:text-left">
             <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">5.000+</span>
             <span class="font-body block text-sm text-text-muted mt-1">Listings</span>
           </div>
-          <div>
+          <div class="text-center md:text-left">
             <span class="font-body block text-2xl md:text-3xl font-bold tracking-tight text-text-primary">140+</span>
             <span class="font-body block text-sm text-text-muted mt-1">Marktplatz-Setups</span>
           </div>
-          <StaatlichBadge />
+          <div class="col-span-3 flex justify-center md:block">
+            <StaatlichBadge />
+          </div>
         </div>
 
       </div>
@@ -81,9 +84,9 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
 
   const section = document.querySelector("[data-trust]");
   if (section) {
-    const h2 = section.querySelector("h2:not([aria-hidden])");
+    const h2s = section.querySelectorAll("h2:not([aria-hidden])");
     const photo = section.querySelector("[data-trust-photo]");
-    const paragraphs = section.querySelectorAll("p.text-lg");
+    const paragraphs = section.querySelectorAll("[data-trust-p]");
     const ctaLink = section.querySelector('a[href="/ueber-uns"]');
     const statsRow = section.querySelector("[data-trust-stats]");
     const statItems = statsRow?.children;
@@ -103,8 +106,9 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
       });
     }
 
-    // H2 SplitText reveal
-    if (h2) {
+    // H2 SplitText reveal — nur auf den sichtbaren H2 (Mobile vs Desktop) anwenden
+    h2s.forEach((h2) => {
+      if (!(h2 as HTMLElement).offsetParent) return;
       const split = new SplitText(h2, { type: "words" });
       gsap.set(split.words, { opacity: 0, y: 20 });
 
@@ -120,7 +124,7 @@ import StaatlichBadge from '../components/StaatlichBadge.astro';
           once: true,
         },
       });
-    }
+    });
 
     // Paragraphs fade-in
     paragraphs.forEach((p, i) => {

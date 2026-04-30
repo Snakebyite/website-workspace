@@ -3,9 +3,11 @@
 // Split layout: H1 left (7col), Photo + floating data chips right (5col)
 import HeroVisual from "../components/HeroVisual.astro";
 import LogoBand from "./LogoBand.astro";
+import { Image } from "astro:assets";
+import heroPhoto from "../assets/kevin-luca-hero.webp";
 ---
 
-<section class="min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col relative overflow-hidden" data-hero>
+<section class="-mt-12 lg:mt-0 min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col relative overflow-hidden" data-hero>
   <!-- Radial glow behind headline -->
   <div
     class="absolute top-1/3 left-[30%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
@@ -32,46 +34,58 @@ import LogoBand from "./LogoBand.astro";
             <br class="hidden sm:block" />
             digitalen Marktplätzen.
           </h1>
+          <!-- Mobile-only photo: Luca & Kevin (between H1 and subline, hidden on lg+) -->
+          <div class="lg:hidden mt-10 mx-auto max-w-[260px]" data-hero-photo-mobile>
+            <Image
+              src={heroPhoto}
+              alt="Luca und Kevin, Gründer von KFL Consulting"
+              widths={[400, 600]}
+              sizes="(max-width: 1023px) 260px, 0"
+              class="hero-photo-mobile w-full h-auto select-none"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
           <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-8 max-w-lg" data-hero-sub>
             Marktplatzwachstum planbar machen. Datenbasiert entscheiden. Organische Sichtbarkeit gezielt ausbauen. Mit den richtigen Prozessen auf 7-stellige Umsätze skalieren.
           </p>
-          <div class="mt-8 sm:w-fit" data-hero-cta-group>
+          <div class="mt-8 max-w-[340px] sm:max-w-none sm:w-fit" data-hero-cta-group>
             <!-- Trust Badges -->
             <div class="grid grid-cols-2 gap-4" data-hero-badges>
               <!-- Google 5.0 Badge -->
-              <a href="https://www.google.com/search?sca_esv=ca9c119048fe3647&rlz=1C5AJCO_enDE1206DE1206&sxsrf=ANbL-n7IsVAf5P06RwqoueitFQUi6XzBHw:1775942145149&q=kfl+consulting&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZNvtIaICfLfHaYlEovs20SPM-O8fJVtQDVXsdd0RsZ-AHLQqdJszHi7vx7CLfKYwjw6gYk%3D&uds=ALYpb_mM1P_6lpjjfowRxWEKPgkkfj-V__IA0i1mwLAXDlTAC5MZ0BlXfID3RXFrnCKiq3YTe0Grw1hf9WhGu7dTwv0YoO-D9D7NsmTCGFEEZjPd-7CJqW8&sa=X&ved=2ahUKEwjA58-F3OaTAxVXIBAIHQRlFmoQ3PALegQIKBAF&biw=1468&bih=828&dpr=2" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-surface rounded-xl px-5 py-3.5 border border-white/5 transition-colors duration-200 hover:border-white/10">
-                <svg viewBox="0 0 24 24" class="w-7 h-7 shrink-0" aria-hidden="true">
+              <a href="https://www.google.com/search?sca_esv=ca9c119048fe3647&rlz=1C5AJCO_enDE1206DE1206&sxsrf=ANbL-n7IsVAf5P06RwqoueitFQUi6XzBHw:1775942145149&q=kfl+consulting&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZNvtIaICfLfHaYlEovs20SPM-O8fJVtQDVXsdd0RsZ-AHLQqdJszHi7vx7CLfKYwjw6gYk%3D&uds=ALYpb_mM1P_6lpjjfowRxWEKPgkkfj-V__IA0i1mwLAXDlTAC5MZ0BlXfID3RXFrnCKiq3YTe0Grw1hf9WhGu7dTwv0YoO-D9D7NsmTCGFEEZjPd-7CJqW8&sa=X&ved=2ahUKEwjA58-F3OaTAxVXIBAIHQRlFmoQ3PALegQIKBAF&biw=1468&bih=828&dpr=2" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 sm:gap-3 bg-surface rounded-xl px-3.5 py-3 sm:px-5 sm:py-3.5 border border-white/5 transition-colors duration-200 hover:border-white/10">
+                <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-7 sm:h-7 shrink-0" aria-hidden="true">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
                   <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                 </svg>
                 <div class="flex flex-col">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-text-primary font-bold text-lg leading-none">5.0</span>
+                  <div class="flex items-center gap-1 sm:gap-1.5">
+                    <span class="text-text-primary font-bold text-base sm:text-lg leading-none">5.0</span>
                     <div class="flex gap-0.5" aria-label="5 von 5 Sternen">
                       {Array.from({ length: 5 }).map(() => (
-                        <svg viewBox="0 0 20 20" class="w-3.5 h-3.5 text-amber-400 fill-current" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 fill-current" aria-hidden="true">
                           <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.7l5.34-.78L10 1z"/>
                         </svg>
                       ))}
                     </div>
                   </div>
-                  <span class="text-text-muted text-xs mt-0.5">Google Bewertungen</span>
+                  <span class="text-text-muted text-xs mt-0.5">Google</span>
                 </div>
               </a>
               <!-- ProvenExpert Badge -->
-              <a href="https://www.provenexpert.com/de-de/kfl-consulting/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-surface rounded-xl px-5 py-3.5 border border-white/5 transition-colors duration-200 hover:border-white/10">
-                <svg viewBox="0 0 40 40" class="w-7 h-7 shrink-0" aria-hidden="true">
+              <a href="https://www.provenexpert.com/de-de/kfl-consulting/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 sm:gap-3 bg-surface rounded-xl px-3.5 py-3 sm:px-5 sm:py-3.5 border border-white/5 transition-colors duration-200 hover:border-white/10">
+                <svg viewBox="0 0 40 40" class="w-6 h-6 sm:w-7 sm:h-7 shrink-0" aria-hidden="true">
                   <circle cx="20" cy="20" r="20" fill="#C5A94B"/>
                   <path d="M12 20.5l5.5 5L28 15" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
                 <div class="flex flex-col">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-text-primary font-bold text-lg leading-none">5.0</span>
+                  <div class="flex items-center gap-1 sm:gap-1.5">
+                    <span class="text-text-primary font-bold text-base sm:text-lg leading-none">5.0</span>
                     <div class="flex gap-0.5" aria-label="5 von 5 Sternen">
                       {Array.from({ length: 5 }).map(() => (
-                        <svg viewBox="0 0 20 20" class="w-3.5 h-3.5 text-amber-400 fill-current" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 fill-current" aria-hidden="true">
                           <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.7l5.34-.78L10 1z"/>
                         </svg>
                       ))}
@@ -158,6 +172,13 @@ import LogoBand from "./LogoBand.astro";
     </div>
 </section>
 
+<style>
+  .hero-photo-mobile {
+    mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+  }
+</style>
+
 <script>
   import { gsap } from "gsap";
   import { SplitText } from "gsap/SplitText";
@@ -182,6 +203,18 @@ import LogoBand from "./LogoBand.astro";
         stagger: 0.08,
         ease: "power2.out",
       });
+    }
+
+    // Mobile-only photo fade-in (after H1, before subline)
+    const photoMobile = section.querySelector("[data-hero-photo-mobile]");
+    if (photoMobile) {
+      gsap.set(photoMobile, { opacity: 0, y: 20 });
+      tl.to(photoMobile, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power2.out",
+      }, "-=0.3");
     }
 
     // Subline fade-in

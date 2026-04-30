@@ -184,9 +184,13 @@
 
       <!-- Right: Pain statements -->
       <div class="lg:col-span-6 lg:col-start-7 flex flex-col gap-10 lg:gap-12">
-        <div class="flex gap-5">
+        <div class="flex gap-5" data-pain-item>
           <span class="shrink-0 w-10 text-text-primary text-lg font-semibold tracking-wide mt-1.5">01</span>
           <div class="flex-1">
+            <span class="pain-chip lg:hidden inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-[4px] bg-red-500/[0.08] text-red-400/90 border border-red-500/15 mb-3">
+              <span class="pain-chip-dot inline-block w-1.5 h-1.5 rounded-full bg-red-400/90"></span>
+              ACoS · 38,4 % <span aria-hidden="true">↑</span>
+            </span>
             <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-primary leading-snug">
               Dein ACoS steigt, die Marge schrumpft.
             </h3>
@@ -195,9 +199,13 @@
             </p>
           </div>
         </div>
-        <div class="flex gap-5">
+        <div class="flex gap-5" data-pain-item>
           <span class="shrink-0 w-10 text-text-primary text-lg font-semibold tracking-wide mt-1.5">02</span>
           <div class="flex-1">
+            <span class="pain-chip lg:hidden inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-[4px] bg-red-500/[0.08] text-red-400/90 border border-red-500/15 mb-3">
+              <span class="pain-chip-dot inline-block w-1.5 h-1.5 rounded-full bg-red-400/90"></span>
+              Keyword-Abdeckung · 12 %
+            </span>
             <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-primary leading-snug">
               Marktplätze und gute Listings sind aufwendig, dafür fehlt dir als Gründer die Zeit.
             </h3>
@@ -206,9 +214,13 @@
             </p>
           </div>
         </div>
-        <div class="flex gap-5">
+        <div class="flex gap-5" data-pain-item>
           <span class="shrink-0 w-10 text-text-primary text-lg font-semibold tracking-wide mt-1.5">03</span>
           <div class="flex-1">
+            <span class="pain-chip lg:hidden inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-[4px] bg-red-500/[0.08] text-red-400/90 border border-red-500/15 mb-3">
+              <span class="pain-chip-dot inline-block w-1.5 h-1.5 rounded-full bg-red-400/90"></span>
+              Account Health · low
+            </span>
             <h3 class="font-body text-xl md:text-2xl font-medium tracking-[-0.01em] text-text-primary leading-snug">
               Amazon legt dir Steine in den Weg.
             </h3>
@@ -355,3 +367,22 @@
   initProblemSection();
   document.addEventListener("astro:after-swap", initProblemSection);
 </script>
+
+<style>
+  /* Mobile-only: Pain-Chip-Dot pulsiert dezent als "Live-Warnsignal".
+     Desktop bleibt komplett unverändert (Chips sind eh hidden via lg:hidden). */
+  @media (max-width: 1023px) {
+    .pain-chip-dot {
+      animation: pain-chip-pulse 2.4s ease-in-out infinite;
+    }
+  }
+
+  @keyframes pain-chip-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.85); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pain-chip-dot { animation: none; }
+  }
+</style>
