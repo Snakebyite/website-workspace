@@ -5,6 +5,7 @@ import HeroVisual from "../components/HeroVisual.astro";
 import LogoBand from "./LogoBand.astro";
 import { Image } from "astro:assets";
 import heroPhoto from "../assets/kevin-luca-hero.webp";
+import { Store, Search } from "@lucide/astro";
 ---
 
 <section class="-mt-12 lg:mt-0 min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col relative overflow-hidden" data-hero>
@@ -35,16 +36,45 @@ import heroPhoto from "../assets/kevin-luca-hero.webp";
             digitalen Marktplätzen.
           </h1>
           <!-- Mobile-only photo: Luca & Kevin (between H1 and subline, hidden on lg+) -->
-          <div class="lg:hidden mt-10 mx-auto max-w-[260px]" data-hero-photo-mobile>
-            <Image
-              src={heroPhoto}
-              alt="Luca und Kevin, Gründer von KFL Consulting"
-              widths={[400, 600]}
-              sizes="(max-width: 1023px) 260px, 0"
-              class="hero-photo-mobile w-full h-auto select-none"
-              loading="eager"
-              decoding="async"
-            />
+          <div class="lg:hidden mt-10 mx-auto w-full max-w-[340px] relative" data-hero-photo-mobile>
+            <!-- Mini Rank Panel: centered behind photo, peeks through silhouette gaps -->
+            <div class="hero-mobile-panel absolute z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px]" aria-hidden="true">
+              <div class="hero-mobile-panel__search">
+                <Search size={14} strokeWidth={2} class="shrink-0 text-white/45" />
+                <div class="hero-mobile-panel__query"></div>
+                <div class="hero-mobile-panel__sep"></div>
+                <Store size={14} strokeWidth={1.8} class="shrink-0 text-white/55" />
+              </div>
+              <div class="hero-mobile-panel__stack">
+                <div class="hero-mobile-panel__row is-hero">
+                  <div class="hero-mobile-panel__thumb">1</div>
+                  <div class="hero-mobile-panel__bars">
+                    <div class="hero-mobile-panel__bar bar-title"></div>
+                    <div class="hero-mobile-panel__bar bar-meta"></div>
+                  </div>
+                </div>
+                <div class="hero-mobile-panel__row">
+                  <div class="hero-mobile-panel__thumb"></div>
+                  <div class="hero-mobile-panel__bars">
+                    <div class="hero-mobile-panel__bar bar-title"></div>
+                    <div class="hero-mobile-panel__bar bar-meta"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo (z-10, on top) -->
+            <div class="relative z-10 mx-auto max-w-[260px]">
+              <Image
+                src={heroPhoto}
+                alt="Luca und Kevin, Gründer von KFL Consulting"
+                widths={[400, 600]}
+                sizes="(max-width: 1023px) 260px, 0"
+                class="hero-photo-mobile w-full h-auto select-none"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
           </div>
           <p class="text-text-secondary text-lg md:text-xl leading-relaxed mt-8 max-w-lg" data-hero-sub>
             Marktplatzwachstum planbar machen. Datenbasiert entscheiden. Organische Sichtbarkeit gezielt ausbauen. Mit den richtigen Prozessen auf 7-stellige Umsätze skalieren.
@@ -96,12 +126,13 @@ import heroPhoto from "../assets/kevin-luca-hero.webp";
               </a>
             </div>
             <!-- Termin buchen — primary CTA -->
-            <div class="grid grid-cols-2 gap-4 mt-6" data-hero-buttons>
+            <div class="relative mt-6" data-hero-buttons>
+              <span class="hero-cta-glow" aria-hidden="true"></span>
               <a
                 href="https://calendly.com/kflconsulting/kennenlernen"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex items-center justify-center bg-accent hover:bg-accent-hover text-background font-medium px-6 py-4 rounded-button tracking-[0.01em] leading-tight transition-colors duration-200 text-center"
+                class="relative flex items-center justify-center bg-accent hover:bg-accent-hover text-background font-medium px-6 py-5 text-lg rounded-button tracking-[0.01em] leading-tight transition-colors duration-200 text-center"
               >
                 Termin buchen
               </a>
@@ -176,6 +207,142 @@ import heroPhoto from "../assets/kevin-luca-hero.webp";
   .hero-photo-mobile {
     mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+  }
+
+  /* Mobile-only Hero Mini Rank Panel (zitiert Desktop Rank-Panel) */
+  .hero-mobile-panel {
+    padding: 8px;
+    background: rgba(14, 14, 14, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    box-shadow:
+      0 16px 36px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+
+  .hero-mobile-panel__search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 10px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+  }
+  .hero-mobile-panel__query {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.22);
+    max-width: 65%;
+  }
+  .hero-mobile-panel__sep {
+    width: 1px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .hero-mobile-panel__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-mobile-panel__row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 9px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+  }
+  .hero-mobile-panel__row.is-hero {
+    background: rgba(76, 175, 130, 0.12);
+    border-color: rgba(76, 175, 130, 0.4);
+  }
+
+  .hero-mobile-panel__thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: transparent;
+  }
+  .hero-mobile-panel__row.is-hero .hero-mobile-panel__thumb {
+    background: linear-gradient(135deg, rgba(76, 175, 130, 0.5), rgba(76, 175, 130, 0.18));
+    color: #EFEFEF;
+  }
+
+  .hero-mobile-panel__bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-mobile-panel__bar {
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .hero-mobile-panel__bar.bar-title { width: 85%; }
+  .hero-mobile-panel__bar.bar-meta { width: 55%; background: rgba(255, 255, 255, 0.07); }
+  .hero-mobile-panel__row.is-hero .hero-mobile-panel__bar.bar-title { background: rgba(76, 175, 130, 0.65); }
+  .hero-mobile-panel__row.is-hero .hero-mobile-panel__bar.bar-meta { background: rgba(76, 175, 130, 0.32); }
+
+  .hero-cta-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 175, 130, 0.28) 0%,
+      rgba(76, 175, 130, 0.12) 35%,
+      rgba(76, 175, 130, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    animation: hero-cta-glow-pulse 6s ease-in-out infinite;
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  [data-hero-buttons]:hover .hero-cta-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  @keyframes hero-cta-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cta-glow {
+      animation: none;
+    }
   }
 </style>
 
