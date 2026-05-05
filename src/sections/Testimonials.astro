@@ -105,20 +105,71 @@ const testimonials = [
     if (!prefersReducedMotion) {
       gsap.set(quotes, { opacity: 0.35, transformOrigin: "left center" });
 
-      quotes.forEach((quote) => {
-        ScrollTrigger.create({
-          trigger: quote,
-          start: "center 75%",
-          end: "center 25%",
-          onToggle: (self) => {
-            gsap.to(quote, {
-              opacity: self.isActive ? 1 : 0.35,
-              scale: self.isActive ? 1.02 : 1,
-              duration: 0.5,
-              ease: "power2.out",
-            });
-          },
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        const triggers = Array.from(quotes).map((quote) =>
+          ScrollTrigger.create({
+            trigger: quote,
+            start: "center 75%",
+            end: "center 25%",
+            onToggle: (self) => {
+              gsap.to(quote, {
+                opacity: self.isActive ? 1 : 0.35,
+                scale: self.isActive ? 1.02 : 1,
+                duration: 0.5,
+                ease: "power2.out",
+              });
+            },
+          })
+        );
+        return () => triggers.forEach((t) => t.kill());
+      });
+
+      mm.add("(max-width: 767px)", () => {
+        let activeQuote = null;
+
+        const updateActive = () => {
+          const viewportCenter = window.innerHeight / 2;
+          let closest = null;
+          let minDistance = Infinity;
+
+          quotes.forEach((quote) => {
+            const rect = quote.getBoundingClientRect();
+            if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+            const center = rect.top + rect.height / 2;
+            const distance = Math.abs(center - viewportCenter);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closest = quote;
+            }
+          });
+
+          if (closest === activeQuote) return;
+
+          if (activeQuote) {
+            gsap.to(activeQuote, { opacity: 0.35, duration: 0.4, ease: "power2.out" });
+          }
+          if (closest) {
+            gsap.to(closest, { opacity: 1, duration: 0.4, ease: "power2.out" });
+          }
+          activeQuote = closest;
+        };
+
+        const trigger = ScrollTrigger.create({
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: updateActive,
+          onRefresh: updateActive,
         });
+
+        updateActive();
+
+        return () => {
+          trigger.kill();
+          gsap.to(quotes, { opacity: 0.35, duration: 0 });
+        };
       });
 
       ScrollTrigger.refresh();
